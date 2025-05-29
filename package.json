@@ -1,0 +1,51 @@
+{
+  "name": "zapzinho-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/server.js",
+  "engines": {
+    "node": "18.18.0"
+  },
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "lint": "eslint src --ext .ts --fix",
+    "seeds": "npx tsx prisma/seeds.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "build": "tsup src --out-dir build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@prisma/client": "^6.1.0",
+    "@rocketseat/eslint-config": "2.1.0",
+    "@types/bcrypt": "5.0.2",
+    "@types/jsonwebtoken": "9.0.5",
+    "@types/node": "20.10.3",
+    "@types/uuid": "9.0.7",
+    "@types/validator": "13.11.7",
+    "eslint": "8.55.0",
+    "prisma": "^6.1.0",
+    "tsup": "^8.0.2",
+    "tsx": "4.6.2",
+    "typescript": "5.3.3",
+    "vite-tsconfig-paths": "4.2.1",
+    "vitest": "1.0.1",
+    "vitest-tsconfig-paths": "3.4.1"
+  },
+  "dependencies": {
+    "@fastify/cors": "8.4.2",
+    "@fastify/jwt": "7.2.4",
+    "bcrypt": "^5.1.1",
+    "dotenv": "16.3.1",
+    "fastify": "4.24.3",
+    "jsonwebtoken": "9.0.2",
+    "node-cache": "^5.1.2",
+    "uuid": "9.0.1",
+    "validator": "13.11.0",
+    "zod": "3.22.4"
+  }
+}

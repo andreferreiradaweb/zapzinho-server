@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  passwordHash String
+  phoneNumber  String?
+  isActive     Boolean
+  domain       String?
+  Role         Role
+  Plan         Plan
+  createdAt    DateTime  @default(now())
+  Company      Company[]
+}
+
+model Company {
+  id             String    @id @default(uuid())
+  name           String
+  email          String
+  phoneNumber    String
+  whatsappNumber String?
+  createdAt      DateTime  @default(now())
+  document       String?
+  creci          String?
+  street         String
+  neighbour      String
+  city           String
+  uf             String
+  cep            String
+  complement     String
+  number         String
+  user           User      @relation(fields: [userId], references: [id])
+  userId         String
+  House          Product[]
+  Leads          Lead[]
+}
+
+enum Role {
+  COLABORADOR
+  GERENTE
+  ADMINISTRADOR
+  CLIENTE
+}
+
+enum Plan {
+  PADRAO
+  EXPERT
+  VIP
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  title       String
+  description String?
+  code        String?
+  price       String
+  condition   String?
+  photos      String[]
+  Company     Company  @relation(fields: [companyId], references: [id])
+  companyId   String
+  Leads       Lead[]
+}
+
+model Lead {
+  id        String     @id @default(uuid())
+  nome      String
+  email     String
+  telefone  String
+  message   String?
+  Company   Company    @relation(fields: [companyId], references: [id])
+  Product   Product?   @relation(fields: [productId], references: [id])
+  productId String?
+  Status    LeadStatus
+  companyId String
+  createdAt DateTime   @default(now())
+}
+
+enum LeadStatus {
+  NOVO_INTERESSE
+  CONTATO_FEITO
+  NEGOCIACAO
+  VENDIDO
+  NAO_INTERESSADO
+}

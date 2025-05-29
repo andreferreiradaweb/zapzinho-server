@@ -1,0 +1,5 @@
+export const HOUSE_REGISTRATION_LIMIT = {
+  PADRAO: 50,
+  VIP: 100,
+  EXPERT: 500,
+}
