@@ -10,7 +10,7 @@ const updatedLeadBodySchema = z.object({
   nome: z.string().optional(),
   email: z.string().email().optional(),
   telefone: z.string().optional(),
-  houseId: z.string().nullable(),
+  productId: z.string().nullable(),
   message: z.string().optional(),
 })
 
@@ -21,7 +21,7 @@ export async function UpdateLeadController(
   try {
     const { sub } = request.user
     const validatedBody = updatedLeadBodySchema.parse(request.body)
-    const { nome, email, telefone, Status, id, houseId, message } = validatedBody
+    const { nome, email, telefone, Status, id, productId, message } = validatedBody
 
     const updateLeadUseCase = UpdateLeadFactory()
     const updatedLead = await updateLeadUseCase.execute({
@@ -31,7 +31,7 @@ export async function UpdateLeadController(
       nome,
       email,
       telefone,
-      houseId,
+      productId,
       message,
     })
 

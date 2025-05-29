@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { handleSpecificError } from '@/helpers/handleSpecificError'
-import { LeadType, LeadStatus } from '@prisma/client'
+import { LeadStatus } from '@prisma/client'
 import { ListLeadsFactory } from '@/factory/lead/list-leads'
 
 interface ListLeadsRequestQuery {
@@ -8,7 +8,6 @@ interface ListLeadsRequestQuery {
   limit?: number
   search?: string
   status?: LeadStatus
-  type?: LeadType
   startDate?: string
   endDate?: string
 }
@@ -20,7 +19,7 @@ export async function ListLeadsController(
   reply: FastifyReply,
 ) {
   const { sub } = request.user
-  const { page, limit, search, status, type, startDate, endDate } = request.query
+  const { page, limit, search, status, startDate, endDate } = request.query
   try {
     const listLeadsUseCase = ListLeadsFactory()
     const leads = await listLeadsUseCase.execute({
@@ -29,7 +28,6 @@ export async function ListLeadsController(
       limit,
       search,
       status,
-      type,
       startDate,
       endDate,
     })

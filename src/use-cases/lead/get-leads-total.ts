@@ -1,4 +1,4 @@
-import { Lead, LeadType, LeadStatus } from '@prisma/client'
+import { LeadStatus } from '@prisma/client'
 
 import { CompanyRepository } from '@/repositories/company'
 import { ResourceNotFound } from '../../error/resource-not-found'
@@ -10,7 +10,6 @@ import { LeadRepository } from '@/repositories/lead'
 interface ListLeadsUseCaseRequest {
     userId: string
     status?: LeadStatus
-    type?: LeadType
     startDate?: string
     endDate?: string
 }
@@ -29,7 +28,6 @@ export class ListLeadsUseCase {
     async execute({
         userId,
         status,
-        type,
         startDate,
         endDate,
     }: ListLeadsUseCaseRequest): Promise<ListLeadsUseCaseResponse> {
@@ -54,7 +52,6 @@ export class ListLeadsUseCase {
             findedCompany[0].id,
             '',
             status,
-            type,
             startDate,
             endDate,
         )

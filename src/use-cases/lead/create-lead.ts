@@ -1,10 +1,10 @@
-import { Lead, LeadType, LeadStatus } from '@prisma/client'
+import { Lead, LeadStatus } from '@prisma/client'
 import { LeadRepository } from '@/repositories/lead'
 import { ResourceNotFound } from '../../error/resource-not-found'
 import { CompanyRepository } from '@/repositories/company'
 import { WaitAMoment } from '@/error/wait-a-moment'
 import NodeCache from 'node-cache'
-import { HouseRepository } from '@/repositories/product'
+import { ProductRepository } from '@/repositories/product'
 import { env } from '@/config/validatedEnv'
 import { notifyLeadToN8N } from '@/services/notifyLeadN8N'
 
@@ -16,9 +16,8 @@ interface CreateLeadUseCaseRequest {
   telefone: string
   message: string
   Status: LeadStatus
-  Type: LeadType
   userId: string
-  houseId?: string
+  productId?: string
   ip: string
 }
 
@@ -30,7 +29,7 @@ export class CreateLeadUseCase {
   constructor(
     private leadRepository: LeadRepository,
     private companyRepository: CompanyRepository,
-    private houseRepository: HouseRepository
+    private productRepository: ProductRepository
   ) { }
 
   async execute({
@@ -39,8 +38,7 @@ export class CreateLeadUseCase {
     telefone,
     message,
     Status,
-    Type,
-    houseId,
+    productId,
     userId,
     ip,
   }: CreateLeadUseCaseRequest): Promise<CreateLeadUseCaseResponse> {
@@ -60,14 +58,14 @@ export class CreateLeadUseCase {
       throw new ResourceNotFound()
     }
 
-    const findedHouse = await this.houseRepository.findHouseById(houseId || '')
+    const findedProduct = await this.productRepository.findProductById(productId || '')
 
     notifyLeadToN8N({
       leadName: nome,
       leadPhone: telefone,
       leadMessage: message,
       companyZapNumber: findedCompany[0].whatsappNumber || '',
-      interest: findedHouse?.title ?? Type,
+      interest: findedProduct?.title ?? '',
       webhookUrl: env.N8N_WEBHOOK_LEAD_NOTIFY,
     })
 
@@ -77,8 +75,7 @@ export class CreateLeadUseCase {
       telefone,
       message,
       Status,
-      Type,
-      houseId,
+      productId,
       companyId: findedCompany[0].id,
     })
 
