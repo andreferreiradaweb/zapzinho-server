@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { Plan, Role } from '@/lib/prisma'
+import { CustomerType, Role } from '@/lib/prisma'
 import { MakeUpdateUseCase } from '@/factory/user/make-update'
 import { handleSpecificError } from '@/helpers/handleSpecificError'
 
@@ -14,12 +14,11 @@ export async function updateUserController(
     password: z.string().min(6).optional(),
     phoneNumber: z.string().default(''),
     isActive: z.boolean(),
-    domain: z.string().optional(),
     role: z.nativeEnum(Role),
-    plan: z.nativeEnum(Plan),
+    customerType: z.nativeEnum(CustomerType).optional(),
   })
 
-  const { email, password, isActive, role, plan, phoneNumber, id, domain } =
+  const { email, password, isActive, role, customerType, phoneNumber, id } =
     updateBodySchema.parse(request.body)
 
   try {
@@ -29,10 +28,9 @@ export async function updateUserController(
       email,
       password,
       isActive,
-      domain,
       role,
-      plan,
       phoneNumber,
+      customerType,
     })
     return reply.status(201).send(user)
   } catch (error) {

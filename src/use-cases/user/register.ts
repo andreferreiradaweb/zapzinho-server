@@ -1,4 +1,4 @@
-import { Role, User } from '@/lib/prisma'
+import { CustomerType, Role, User } from '@/lib/prisma'
 import { hash } from 'bcrypt'
 import { UserAlreadyExistsError } from '../../error/user-already-exists-error'
 import { UserRepository } from '@/repositories/user'
@@ -10,7 +10,7 @@ interface RegisterUserUseCaseRequest {
   password: string
   role: Role
   isActive: boolean
-  domain: string
+  customerType?: CustomerType
 }
 
 interface RegisterUserUseCaseResponse {
@@ -28,7 +28,7 @@ export class RegisterUserUseCase {
     password,
     role,
     isActive,
-    domain,
+    customerType,
   }: RegisterUserUseCaseRequest): Promise<RegisterUserUseCaseResponse> {
     const userWithSameUsername =
       await this.userRepository.findUserByEmail(email)
@@ -47,8 +47,8 @@ export class RegisterUserUseCase {
       passwordHash: hashedPassword,
       Role: role,
       isActive,
-      domain,
       id: newUserId,
+      CustomerType: customerType ?? CustomerType.B2C,
     })
 
     const user: Omit<User, 'passwordHash'> = {
@@ -58,7 +58,7 @@ export class RegisterUserUseCase {
       isActive,
       id: newUserId,
       createdAt: newDate,
-      domain,
+      CustomerType: customerType ?? CustomerType.B2C,
     }
 
     return { user }

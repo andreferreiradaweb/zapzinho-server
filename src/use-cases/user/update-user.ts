@@ -1,4 +1,4 @@
-import { Role, User } from '@/lib/prisma'
+import { CustomerType, Role, User } from '@/lib/prisma'
 import { hash } from 'bcrypt'
 import { UserRepository } from '@/repositories/user'
 import { ResourceNotFound } from '@/error/resource-not-found'
@@ -11,7 +11,7 @@ interface UpdateUserUseCaseRequest {
   password?: string
   role: Role
   isActive: boolean
-  domain?: string
+  customerType?: CustomerType
 }
 
 interface UpdateUserUseCaseResponse {
@@ -28,7 +28,7 @@ export class UpdateUserUseCase {
     id,
     phoneNumber,
     email,
-    domain,
+    customerType,
   }: UpdateUserUseCaseRequest): Promise<UpdateUserUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(id)
 
@@ -58,7 +58,7 @@ export class UpdateUserUseCase {
       Role: role,
       passwordHash: hashedPassword,
       isActive,
-      domain,
+      CustomerType: customerType || findedUser.CustomerType,
     })
 
     return { user }

@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { MakeRegisterUseCase } from '@/factory/user/make-register'
-import { Plan, Role } from '@/lib/prisma'
+import { Role } from '@/lib/prisma'
 import { handleSpecificError } from '@/helpers/handleSpecificError'
 
 export async function registerUserController(
@@ -16,12 +16,10 @@ export async function registerUserController(
       .min(6)
       .regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$/),
     isActive: z.boolean(),
-    domain: z.string(),
     role: z.nativeEnum(Role),
-    plan: z.nativeEnum(Plan),
   })
 
-  const { email, password, isActive, role, plan, phoneNumber, domain } =
+  const { email, password, isActive, role, phoneNumber } =
     registerBodySchema.parse(request.body)
 
   try {
@@ -30,9 +28,7 @@ export async function registerUserController(
       email,
       password,
       isActive,
-      domain,
       role,
-      plan,
       phoneNumber,
     })
     return reply.status(201).send()

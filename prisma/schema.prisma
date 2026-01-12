@@ -13,7 +13,6 @@ model User {
   passwordHash String
   phoneNumber  String?
   isActive     Boolean
-  domain       String?
   Role         Role
   CustomerType CustomerType
   createdAt    DateTime  @default(now())
