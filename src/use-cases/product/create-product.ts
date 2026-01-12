@@ -1,12 +1,7 @@
-import { Product } from '@prisma/client'
-import { CompanyRepository } from '@/repositories/company'
-import { ResourceNotFound } from '../../error/resource-not-found'
+import { Product } from '@/lib/prisma'
 import { ProductRepository } from '@/repositories/product'
 import { UserRepository } from '@/repositories/user'
 import { UserNotFound } from '../../error/user-not-found'
-import { InvalidCredentialsError } from '../../error/invalid-credentials-error'
-import { MaxRegistrationLimitReached } from '@/error/max-registration'
-import { getHouseRegisterLimitByPlan } from '@/helpers/getCarRegistrationLimit'
 import { InactiveUser } from '@/error/inactive-user'
 
 interface CreateProductUseCaseRequest {
@@ -17,7 +12,6 @@ interface CreateProductUseCaseRequest {
   price: string
   condition?: string
   photos: string[]
-  companyId: string
   userId: string
 }
 
@@ -30,7 +24,6 @@ interface CreateProductUseCaseResponse {
 export class CreateProductUseCase {
   constructor(
     private productRepository: ProductRepository,
-    private companyRepository: CompanyRepository,
     private userRepository: UserRepository,
   ) { }
 
@@ -42,7 +35,6 @@ export class CreateProductUseCase {
     price,
     condition,
     photos,
-    companyId,
     userId,
   }: CreateProductUseCaseRequest): Promise<CreateProductUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
@@ -55,23 +47,6 @@ export class CreateProductUseCase {
       throw new InactiveUser()
     }
 
-    const findedCompany =
-      await this.companyRepository.findCompanyById(companyId)
-
-    if (!findedCompany) {
-      throw new ResourceNotFound()
-    }
-
-    if (findedCompany.userId !== userId) {
-      throw new InvalidCredentialsError()
-    }
-
-    const products = await this.productRepository.findManyByCompanyId(companyId)
-
-    if (products.length === getHouseRegisterLimitByPlan(findedUser.Plan)) {
-      throw new MaxRegistrationLimitReached()
-    }
-
     const product = await this.productRepository.create({
       id,
       title,
@@ -80,7 +55,7 @@ export class CreateProductUseCase {
       price,
       condition,
       photos,
-      companyId,
+      userId,
     })
 
     return { product }

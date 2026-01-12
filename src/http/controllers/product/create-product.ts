@@ -15,7 +15,6 @@ export async function CreateProductController(
     price: z.string(),
     condition: z.string().optional(),
     photos: z.array(z.string()),
-    companyId: z.string(),
   })
 
   const {
@@ -26,7 +25,6 @@ export async function CreateProductController(
     price,
     condition,
     photos,
-    companyId,
   } = createProductBodySchema.parse(request.body)
 
   try {
@@ -42,7 +40,6 @@ export async function CreateProductController(
       price,
       condition,
       photos,
-      companyId,
       userId: sub,
     })
 

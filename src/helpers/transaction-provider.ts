@@ -1,6 +1,6 @@
 // transaction-provider.ts
 
-import { Prisma } from '@prisma/client'
+import { Prisma } from '../../generated/prisma/client'
 
 export interface TransactionProvider {
   runTransaction(

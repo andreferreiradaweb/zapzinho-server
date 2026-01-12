@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { handleSpecificError } from '@/helpers/handleSpecificError'
 import { ListUsersFactory } from '@/factory/user/make-list-users'
-import { Plan, Role } from '@prisma/client'
+import { Plan, Role } from '@/lib/prisma'
 
 interface ListUsersRequestQuery {
   page?: number

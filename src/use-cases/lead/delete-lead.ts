@@ -1,8 +1,8 @@
-import { Lead } from '@prisma/client'
+import { Lead } from '@/lib/prisma'
 import { LeadRepository } from '@/repositories/lead'
 import { ResourceNotFound } from '../../error/resource-not-found'
 import { InvalidCredentialsError } from '../../error/invalid-credentials-error'
-import { CompanyRepository } from '@/repositories/company'
+import { UserRepository } from '@/repositories/user'
 
 interface DeleteLeadUseCaseRequest {
   userId: string
@@ -16,18 +16,18 @@ interface DeleteLeadUseCaseResponse {
 export class DeleteLeadUseCase {
   constructor(
     private leadRepository: LeadRepository,
-    private companyRepository: CompanyRepository,
+    private userRepository: UserRepository,
   ) {}
 
   async execute({
     userId,
     leadId,
   }: DeleteLeadUseCaseRequest): Promise<DeleteLeadUseCaseResponse> {
-    const findedCompany =
-      await this.companyRepository.listCompaniesByUserId(userId)
+    const findedUser =
+      await this.userRepository.findUserById(userId)
 
-    if (!findedCompany) {
-      throw new ResourceNotFound()
+    if (!findedUser) {
+      throw new InvalidCredentialsError()
     }
 
     const foundLead = await this.leadRepository.findLeadById(leadId)
@@ -36,7 +36,7 @@ export class DeleteLeadUseCase {
       throw new ResourceNotFound()
     }
 
-    if (foundLead.companyId !== findedCompany[0].id) {
+    if (foundLead.userId !== findedUser.id) {
       throw new InvalidCredentialsError()
     }
 

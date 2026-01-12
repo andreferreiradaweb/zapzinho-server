@@ -1,4 +1,4 @@
-import { Product } from '@prisma/client'
+import { Product } from '@/lib/prisma'
 import { ProductRepository } from '@/repositories/product'
 import { UserNotFound } from '../../error/user-not-found'
 import { UserRepository } from '@/repositories/user'

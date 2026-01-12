@@ -1,16 +1,16 @@
-import { PrismaCompanyRepository } from '@/repositories/prisma/company'
-import { PrismaHouseRepository } from '@/repositories/prisma/product'
+import { PrismaProductRepository } from '@/repositories/prisma/product'
 import { PrismaLeadRepository } from '@/repositories/prisma/lead'
 import { CreateLeadUseCase } from '@/use-cases/lead/create-lead'
+import { PrismaUserRepository } from '@/repositories/prisma/user'
 
 export function CreateLeadFactory() {
   const prismaLeadRepository = new PrismaLeadRepository()
-  const prismaCompanyRepository = new PrismaCompanyRepository()
-  const prismaHouseRepository = new PrismaHouseRepository()
+  const prismaProductRepository = new PrismaProductRepository()
+  const prismaUserRepository = new PrismaUserRepository()
   const createLeadUseCase = new CreateLeadUseCase(
     prismaLeadRepository,
-    prismaCompanyRepository,
-    prismaHouseRepository
+    prismaProductRepository,
+    prismaUserRepository
   )
   return createLeadUseCase
 }

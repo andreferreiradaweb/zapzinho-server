@@ -12,7 +12,7 @@ export async function DeleteProductController(
     const deleteProductUseCase = DeleteProductFactory()
     const deletedProduct = await deleteProductUseCase.execute({
       userId: sub,
-      productId: id,
+      id,
     })
     return reply.status(204).send(deletedProduct)
   } catch (error) {

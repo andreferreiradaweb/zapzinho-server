@@ -8,14 +8,13 @@ export async function UpdateProductController(
   reply: FastifyReply,
 ) {
   const updateProductBodySchema = z.object({
-    id: z.string().optional(),
+    id: z.string(),
     title: z.string(),
     description: z.string().optional(),
     code: z.string().optional(),
     price: z.string(),
     condition: z.string().optional(),
     photos: z.array(z.string()),
-    companyId: z.string(),
   })
 
   const {
@@ -26,7 +25,6 @@ export async function UpdateProductController(
     price,
     condition,
     photos,
-    companyId,
   } = updateProductBodySchema.parse(request.body)
   try {
     const { sub } = request.user
@@ -39,7 +37,6 @@ export async function UpdateProductController(
       price,
       condition,
       photos,
-      companyId,
       userId: sub,
     })
     return reply.status(204).send(updatedProduct)

@@ -1,5 +1,4 @@
-import { Product } from '@prisma/client'
-import { CompanyRepository } from '@/repositories/company'
+import { Product } from '@/lib/prisma'
 import { ResourceNotFound } from '../../error/resource-not-found'
 import { ProductRepository } from '@/repositories/product'
 import { UserRepository } from '@/repositories/user'
@@ -8,14 +7,13 @@ import { InvalidCredentialsError } from '../../error/invalid-credentials-error'
 import { InactiveUser } from '@/error/inactive-user'
 
 interface UpdateProductUseCaseRequest {
-  id?: string
+  id: string
   title: string
   description?: string
   code?: string
   price: string
   condition?: string
   photos: string[]
-  companyId: string
   userId: string
 }
 
@@ -26,7 +24,6 @@ interface UpdateProductUseCaseResponse {
 export class UpdateProductUseCase {
   constructor(
     private productRepository: ProductRepository,
-    private companyRepository: CompanyRepository,
     private userRepository: UserRepository,
   ) { }
 
@@ -38,7 +35,6 @@ export class UpdateProductUseCase {
     price,
     condition,
     photos,
-    companyId,
     userId,
   }: UpdateProductUseCaseRequest): Promise<UpdateProductUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
@@ -51,14 +47,13 @@ export class UpdateProductUseCase {
       throw new InactiveUser()
     }
 
-    const findedCompany =
-      await this.companyRepository.findCompanyById(companyId)
+    const findedProduct = await this.productRepository.findProductById(id)
 
-    if (!findedCompany) {
+    if (!findedProduct) {
       throw new ResourceNotFound()
     }
-
-    if (findedCompany.userId !== userId) {
+    
+    if (findedProduct.userId !== userId) {
       throw new InvalidCredentialsError()
     }
 
@@ -70,7 +65,7 @@ export class UpdateProductUseCase {
       price,
       condition,
       photos,
-      companyId,
+      userId,
       createdAt: new Date(),
     })
 

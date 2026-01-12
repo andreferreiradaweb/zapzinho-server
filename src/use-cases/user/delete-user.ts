@@ -1,11 +1,8 @@
-import { Prisma, User } from '@prisma/client'
-import { CompanyRepository } from '@/repositories/company'
+import { Prisma, Role, User } from '@/lib/prisma'
 import { UserRepository } from '@/repositories/user'
 import { UserNotFound } from '../../error/user-not-found'
-import { ResourceNotFound } from '../../error/resource-not-found'
 import { InvalidCredentialsError } from '../../error/invalid-credentials-error'
 
-import { RecordsFoundError } from '@/error/records-found-error'
 import { LeadRepository } from '@/repositories/lead'
 import { TransactionProvider } from '@/helpers/transaction-provider'
 import { ProductRepository } from '@/repositories/product'
@@ -21,7 +18,6 @@ interface DeleteUserUseCaseResponse {
 export class DeleteUserUseCase {
   constructor(
     private userRepository: UserRepository,
-    private companyRepository: CompanyRepository,
     private productRepository: ProductRepository,
     private leadRepository: LeadRepository,
     private transactionProvider: TransactionProvider,
@@ -35,40 +31,20 @@ export class DeleteUserUseCase {
       throw new UserNotFound()
     }
 
-    const findedCompany = await this.companyRepository.listCompaniesByUserId(
-      findedUser.id,
-    )
-
-    if (!findedCompany) {
-      throw new ResourceNotFound()
-    }
-
-    if (findedCompany[0].userId !== findedUser.id) {
+    if (findedUser.Role !== Role.ADMIN) {
       throw new InvalidCredentialsError()
     }
 
-    const products = await this.productRepository.findManyByCompanyId(
-      findedCompany[0].id,
-    )
-
-    if (products.length > 0) {
-      throw new RecordsFoundError()
-    }
-
-    const leads = await this.leadRepository.findManyByCompanyId(
-      findedCompany[0].id,
-    )
-
-
-
     await this.transactionProvider.runTransaction(async () => {
-      if (leads.length > 0) {
-        for (const lead of leads) {
+      if (findedUser.Leads.length > 0) {
+        for (const lead of findedUser.Leads) {
           await this.leadRepository.delete(lead.id)
         }
       }
-      for (const company of findedCompany) {
-        await this.companyRepository.delete(company.id)
+      if (findedUser.Products.length > 0) {
+        for (const product of findedUser.Products) {
+          await this.productRepository.delete(product.id)
+        }
       }
       await this.userRepository.delete(findedUser.id)
     }, Prisma.TransactionIsolationLevel.Serializable)

@@ -1,4 +1,4 @@
-import { Plan, Prisma, Role } from '@prisma/client'
+import { Prisma, Role } from '@/lib/prisma'
 import { UserRepository } from '../user'
 import { prisma } from '@/lib/prisma'
 
@@ -19,26 +19,6 @@ export class PrismaUserRepository implements UserRepository {
               mode: 'insensitive',
             },
           },
-          {
-            Company: {
-              some: {
-                document: {
-                  contains: search,
-                  mode: 'insensitive',
-                },
-              },
-            },
-          },
-          {
-            Company: {
-              some: {
-                name: {
-                  contains: search,
-                  mode: 'insensitive',
-                },
-              },
-            },
-          },
         ],
       },
     })
@@ -49,7 +29,6 @@ export class PrismaUserRepository implements UserRepository {
     offset: number,
     limit: number,
     search: string,
-    plan: Plan,
     role: Role,
   ) {
     const users = await prisma.user.findMany({
@@ -67,43 +46,13 @@ export class PrismaUserRepository implements UserRepository {
               mode: 'insensitive',
             },
           },
-          {
-            Company: {
-              some: {
-                document: {
-                  contains: search,
-                  mode: 'insensitive',
-                },
-              },
-            },
-          },
-          {
-            Company: {
-              some: {
-                name: {
-                  contains: search,
-                  mode: 'insensitive',
-                },
-              },
-            },
-          },
         ],
-        Plan: {
-          equals: plan,
-        },
         Role: {
           equals: role,
         },
       },
       orderBy: {
         createdAt: 'desc',
-      },
-      include: {
-        Company: {
-          include: {
-            House: true,
-          },
-        },
       },
       skip: Number(offset),
       take: Number(limit),
@@ -115,6 +64,10 @@ export class PrismaUserRepository implements UserRepository {
     const user = await prisma.user.findUnique({
       where: {
         id,
+      },
+      include: {
+        Leads: true,
+        Products: true,
       },
     })
 

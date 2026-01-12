@@ -1,10 +1,10 @@
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -15,44 +15,20 @@ model User {
   isActive     Boolean
   domain       String?
   Role         Role
-  Plan         Plan
+  CustomerType CustomerType
   createdAt    DateTime  @default(now())
-  Company      Company[]
-}
-
-model Company {
-  id             String    @id @default(uuid())
-  name           String
-  email          String
-  phoneNumber    String
-  whatsappNumber String?
-  createdAt      DateTime  @default(now())
-  document       String?
-  creci          String?
-  street         String
-  neighbour      String
-  city           String
-  uf             String
-  cep            String
-  complement     String
-  number         String
-  user           User      @relation(fields: [userId], references: [id])
-  userId         String
-  House          Product[]
-  Leads          Lead[]
+  Products     Product[]
+  Leads        Lead[]
 }
 
 enum Role {
-  COLABORADOR
-  GERENTE
-  ADMINISTRADOR
-  CLIENTE
+  ADMIN
+  CLIENT
 }
 
-enum Plan {
-  PADRAO
-  EXPERT
-  VIP
+enum CustomerType {
+  B2C
+  B2B 
 }
 
 model Product {
@@ -64,8 +40,8 @@ model Product {
   price       String
   condition   String?
   photos      String[]
-  Company     Company  @relation(fields: [companyId], references: [id])
-  companyId   String
+  User        User     @relation(fields: [userId], references: [id])
+  userId      String
   Leads       Lead[]
 }
 
@@ -75,11 +51,12 @@ model Lead {
   email     String
   telefone  String
   message   String?
-  Company   Company    @relation(fields: [companyId], references: [id])
-  Product   Product?   @relation(fields: [productId], references: [id])
-  productId String?
+  Product   Product    @relation(fields: [productId], references: [id])
+  productId String
+  User        User     @relation(fields: [userId], references: [id])
+  userId      String
   Status    LeadStatus
-  companyId String
+  Option    LeadOption
   createdAt DateTime   @default(now())
 }
 
@@ -89,4 +66,9 @@ enum LeadStatus {
   NEGOCIACAO
   VENDIDO
   NAO_INTERESSADO
+}
+
+enum LeadOption {
+  ATEMDIMENTO_IA
+  ATENDIMENTO_HUMANO
 }

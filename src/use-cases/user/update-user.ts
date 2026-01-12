@@ -1,4 +1,4 @@
-import { Plan, Role, User } from '@prisma/client'
+import { Role, User } from '@/lib/prisma'
 import { hash } from 'bcrypt'
 import { UserRepository } from '@/repositories/user'
 import { ResourceNotFound } from '@/error/resource-not-found'
@@ -10,7 +10,6 @@ interface UpdateUserUseCaseRequest {
   phoneNumber: string
   password?: string
   role: Role
-  plan: Plan
   isActive: boolean
   domain?: string
 }
@@ -25,7 +24,6 @@ export class UpdateUserUseCase {
   async execute({
     password,
     role,
-    plan,
     isActive,
     id,
     phoneNumber,
@@ -58,7 +56,6 @@ export class UpdateUserUseCase {
       phoneNumber,
       email: email || findedUser.email,
       Role: role,
-      Plan: plan,
       passwordHash: hashedPassword,
       isActive,
       domain,

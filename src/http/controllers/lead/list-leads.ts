@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { handleSpecificError } from '@/helpers/handleSpecificError'
-import { LeadStatus } from '@prisma/client'
+import { LeadStatus } from '@/lib/prisma'
 import { ListLeadsFactory } from '@/factory/lead/list-leads'
 
 interface ListLeadsRequestQuery {

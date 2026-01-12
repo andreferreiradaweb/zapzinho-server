@@ -1,23 +1,24 @@
-import { Prisma, Product } from '@prisma/client'
+import { Prisma, Product } from '@/lib/prisma'
 import { prisma } from '@/lib/prisma'
 import { ProductRepository } from '../product'
 
 export class PrismaProductRepository implements ProductRepository {
-  async findManyByCompanyId(companyId: string) {
-    const products = await prisma.product.findMany({
+  async findProductById(id: string) {
+    const product = await prisma.product.findUnique({
       where: {
-        companyId,
+        id: id,
       },
       include: {
         Leads: true,
       },
     })
-
-    return products || null
+  
+    return product || null
   }
-  async countByCompanyId(companyId: string, search: string,) {
+
+  async countByUserId(userId: string, search: string,) {
     const where: Prisma.ProductWhereInput = {
-      companyId,
+      userId,
       AND: [
         {
           OR: [
@@ -37,19 +38,14 @@ export class PrismaProductRepository implements ProductRepository {
     return count
   }
 
-  async delete(productId: string) {
-    const product = await prisma.product.delete({ where: { id: productId } })
-    return product
-  }
-
-  async filterManyByCompanyId(
-    companyId: string,
+  async filterManyByUserId(
+    userId: string,
     offset: number,
     limit: number,
     search: string,
   ) {
     const where: Prisma.ProductWhereInput = {
-      companyId,
+      userId,
       AND: [
         {
           OR: [
@@ -75,18 +71,7 @@ export class PrismaProductRepository implements ProductRepository {
     return products || [];
   }
 
-  async findProductById(id: string) {
-    const product = await prisma.product.findUnique({
-      where: {
-        id: id,
-      },
-      include: {
-        Leads: true,
-      },
-    })
-
-    return product || null
-  }
+  
 
   async create(data: Prisma.ProductUncheckedCreateInput) {
     const product = await prisma.product.create({ data })
@@ -100,6 +85,11 @@ export class PrismaProductRepository implements ProductRepository {
       },
       data,
     })
+    return product
+  }
+
+  async delete(productId: string) {
+    const product = await prisma.product.delete({ where: { id: productId } })
     return product
   }
 }

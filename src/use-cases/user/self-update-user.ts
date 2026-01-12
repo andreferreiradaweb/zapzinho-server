@@ -2,7 +2,7 @@ import { hash, compare } from 'bcrypt'
 import { UserRepository } from '@/repositories/user'
 import { ResourceNotFound } from '@/error/resource-not-found'
 import { InvalidCredentialsError } from '@/error/invalid-credentials-error'
-import { Plan, Role } from '@prisma/client'
+import { User } from '@/lib/prisma'
 
 interface SelfUpdateUserUseCaseRequest {
   id: string
@@ -11,18 +11,8 @@ interface SelfUpdateUserUseCaseRequest {
   newPassword?: string
 }
 
-type User = {
-  email: string
-  phoneNumber?: string
-  isActive: boolean
-  Role: Role
-  Plan: Plan
-  domain: string | null
-  createdAt: Date
-}
-
 interface SelfUpdateUserUseCaseResponse {
-  user: User
+  user: Omit<User, 'id' | 'passwordHash'>
 }
 
 export class SelfUpdateUserUseCase {
@@ -62,25 +52,23 @@ export class SelfUpdateUserUseCase {
       hashedPassword = findedUser.passwordHash
     }
 
-    const { Plan, Role, createdAt, email, isActive, domain } =
+    const { Role, createdAt, email, isActive, domain } =
       await this.userRepository.update({
         id,
         phoneNumber,
         email: findedUser.email,
         Role: findedUser.Role,
-        Plan: findedUser.Plan,
         passwordHash: hashedPassword,
         isActive: findedUser.isActive,
         domain: findedUser.domain,
       })
 
     const newUser = {
-      Plan,
+      phoneNumber: phoneNumber || findedUser.phoneNumber,
       Role,
       createdAt,
       email,
       isActive,
-      phoneNumber,
       domain,
     }
 

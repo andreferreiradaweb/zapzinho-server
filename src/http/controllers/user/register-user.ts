@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { MakeRegisterUseCase } from '@/factory/user/make-register'
-import { Plan, Role } from '@prisma/client'
+import { Plan, Role } from '@/lib/prisma'
 import { handleSpecificError } from '@/helpers/handleSpecificError'
 
 export async function registerUserController(

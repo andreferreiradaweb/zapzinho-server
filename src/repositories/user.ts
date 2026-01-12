@@ -1,12 +1,5 @@
-import { House, Company, Plan, Prisma, Role, User } from '@prisma/client'
-
-interface CompanyWithHouse extends Company {
-  House: House[]
-}
-
-interface UserWithCompany extends User {
-  Company: CompanyWithHouse[]
-}
+import { Lead, Prisma, Role, User } from '@/lib/prisma'
+import { Product } from 'generated/prisma/browser'
 
 interface UserSerialized {
   id: string
@@ -16,17 +9,21 @@ interface UserSerialized {
   domain: string | null
 }
 
+export interface UserWithLeadsAndProducts extends User {
+  Leads: Lead[]
+  Products: Product[]
+}
+
 export interface UserRepository {
-  findUserById(id: string): Promise<User | null>
+  findUserById(id: string): Promise<UserWithLeadsAndProducts | null>
   findUserByEmail(email: string): Promise<User | null>
   countUsers(search: string): Promise<number>
   filterUsers(
     offset: number,
     limit: number,
     search: string,
-    plan?: Plan,
     role?: Role,
-  ): Promise<UserWithCompany[]>
+  ): Promise<User[]>
   create(data: Prisma.UserUncheckedCreateInput): Promise<UserSerialized>
   update(data: Prisma.UserUncheckedCreateInput): Promise<User>
   delete(id: string): Promise<User>

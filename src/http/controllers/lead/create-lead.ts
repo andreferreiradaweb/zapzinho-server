@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { handleSpecificError } from '@/helpers/handleSpecificError'
-import { LeadStatus } from '@prisma/client'
+import { LeadStatus } from '@/lib/prisma'
 import { CreateLeadFactory } from '@/factory/lead/create-lead'
 
 const createLeadBodySchema = z.object({

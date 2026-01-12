@@ -1,5 +1,5 @@
 import { InvalidCredentialsError } from '@/error/invalid-credentials-error'
-import { Role } from '@prisma/client'
+import { Role } from '@/lib/prisma'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function verifyAdmin(
@@ -8,7 +8,7 @@ export async function verifyAdmin(
 ) {
   try {
     const { userRole } = request.user
-    if (userRole !== Role.ADMINISTRADOR) {
+    if (userRole !== Role.ADMIN) {
       throw new InvalidCredentialsError()
     }
   } catch (error) {

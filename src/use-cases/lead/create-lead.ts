@@ -1,12 +1,12 @@
-import { Lead, LeadStatus } from '@prisma/client'
+import { Lead, LeadOption, LeadStatus } from '@/lib/prisma'
 import { LeadRepository } from '@/repositories/lead'
 import { ResourceNotFound } from '../../error/resource-not-found'
-import { CompanyRepository } from '@/repositories/company'
 import { WaitAMoment } from '@/error/wait-a-moment'
 import NodeCache from 'node-cache'
 import { ProductRepository } from '@/repositories/product'
 import { env } from '@/config/validatedEnv'
 import { notifyLeadToN8N } from '@/services/notifyLeadN8N'
+import { UserRepository } from '@/repositories/user'
 
 const cache = new NodeCache()
 
@@ -16,8 +16,9 @@ interface CreateLeadUseCaseRequest {
   telefone: string
   message: string
   Status: LeadStatus
+  Option: LeadOption
   userId: string
-  productId?: string
+  productId: string
   ip: string
 }
 
@@ -28,8 +29,8 @@ interface CreateLeadUseCaseResponse {
 export class CreateLeadUseCase {
   constructor(
     private leadRepository: LeadRepository,
-    private companyRepository: CompanyRepository,
-    private productRepository: ProductRepository
+    private productRepository: ProductRepository,
+    private userRepository: UserRepository,
   ) { }
 
   async execute({
@@ -38,6 +39,7 @@ export class CreateLeadUseCase {
     telefone,
     message,
     Status,
+    Option,
     productId,
     userId,
     ip,
@@ -52,9 +54,9 @@ export class CreateLeadUseCase {
     cache.set(ip, ip, 30)
     cache.set(email, email, 30)
 
-    const findedCompany =
-      await this.companyRepository.listCompaniesByUserId(userId)
-    if (!findedCompany) {
+    const findedUser =
+      await this.userRepository.findUserById(userId)
+    if (!findedUser) {
       throw new ResourceNotFound()
     }
 
@@ -64,7 +66,7 @@ export class CreateLeadUseCase {
       leadName: nome,
       leadPhone: telefone,
       leadMessage: message,
-      companyZapNumber: findedCompany[0].whatsappNumber || '',
+      phoneNumber: findedUser.phoneNumber || '',
       interest: findedProduct?.title ?? '',
       webhookUrl: env.N8N_WEBHOOK_LEAD_NOTIFY,
     })
@@ -75,8 +77,9 @@ export class CreateLeadUseCase {
       telefone,
       message,
       Status,
+      Option,
       productId,
-      companyId: findedCompany[0].id,
+      userId: findedUser.id,
     })
 
     return { lead }

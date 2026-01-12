@@ -1,29 +1,26 @@
-import { Prisma, Lead, LeadStatus, House, LeadType } from '@prisma/client'
+import { Prisma, Lead, LeadStatus, LeadOption } from '@/lib/prisma'
 
-export interface LeadWithHouse extends Lead {
-  House: House
-}
+
 export interface LeadRepository {
   findLeadById(leadId: string): Promise<Lead | null>
-  findManyByCompanyId(companyId: string): Promise<LeadWithHouse[] | []>
-  filterManyByCompanyId(
-    companyId: string,
-    offset: number,
-    limit: number,
-    search: string,
-    leadStatus?: LeadStatus,
-    type?: LeadType,
-    startDate?: string,
-    endDate?: string,
-  ): Promise<LeadWithHouse[] | []>
-  countByCompanyId(
-    companyId: string,
+  countByUserId(
+    userId: string,
     search: string,
     status?: LeadStatus,
-    type?: LeadType,
+    option?: LeadOption,
     startDate?: string,
     endDate?: string,
   ): Promise<number>
+  filterManyByUserId(
+    userId: string,
+    offset: number,
+    limit: number,
+    search: string,
+    status?: LeadStatus,
+    option?: LeadOption,
+    startDate?: string,
+    endDate?: string,
+  ): Promise<Lead[]>
   delete(id: string): Promise<Lead>
   create(data: Prisma.LeadUncheckedCreateInput): Promise<Lead>
   update(data: Prisma.LeadUncheckedUpdateInput): Promise<Lead>

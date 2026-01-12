@@ -1,6 +1,10 @@
-import { Prisma, LeadStatus, House, LeadType, Lead } from '@prisma/client'
-import { LeadRepository, LeadWithHouse } from '../lead'
+import { Prisma, LeadStatus, Product, Lead, LeadOption } from '@/lib/prisma'
+import { LeadRepository } from '../lead'
 import { prisma } from '@/lib/prisma'
+
+interface LeadWithProduct extends Lead {
+  Product: Product
+}
 
 export class PrismaLeadRepository implements LeadRepository {
   async findLeadById(leadId: string) {
@@ -11,31 +15,28 @@ export class PrismaLeadRepository implements LeadRepository {
     })
   }
 
-  async findManyByCompanyId(companyId: string) {
+  async findManyByUserId(userId: string) {
     const leads = await prisma.lead.findMany({
       where: {
-        companyId,
-      },
-      include: {
-        House: true,
+        userId,
       },
     })
 
-    return leads as LeadWithHouse[]
+    return leads
   }
 
-  async filterManyByCompanyId(
-    companyId: string,
+  async filterManyByUserId(
+    userId: string,
     offset: number,
     limit: number,
     search: string,
     status?: LeadStatus,
-    type?: LeadType,
+    option?: LeadOption,
     startDate?: string,
     endDate?: string,
   ) {
     const where: Prisma.LeadWhereInput = {
-      companyId,
+      userId,
     }
 
     if (status) {
@@ -44,14 +45,14 @@ export class PrismaLeadRepository implements LeadRepository {
       }
     }
 
-    if (type) {
-      where.Type = {
-        equals: type,
+    if (option) {
+      where.Option = {
+        equals: option,
       }
     }
 
     if (search) {
-      where.houseId = {
+      where.userId = {
         equals: search,
       }
     }
@@ -68,26 +69,26 @@ export class PrismaLeadRepository implements LeadRepository {
       skip: offset,
       take: Number(limit),
       include: {
-        House: true,
+        Product: true,
       },
       orderBy: {
         createdAt: 'desc',
       },
     })
 
-    return leads as LeadWithHouse[]
+    return leads as LeadWithProduct[]
   }
 
-  async countByCompanyId(
-    companyId: string,
+  async countByUserId(
+    userId: string,
     search: string,
     status: LeadStatus,
-    type: LeadType,
+    option: LeadOption,
     startDate?: string,
     endDate?: string,
   ) {
     const where: Prisma.LeadWhereInput = {
-      companyId,
+      userId,
     }
 
     if (status) {
@@ -96,14 +97,14 @@ export class PrismaLeadRepository implements LeadRepository {
       }
     }
 
-    if (type) {
-      where.Type = {
-        equals: type,
+    if (option) {
+      where.Option = {
+        equals: option,
       }
     }
 
     if (search) {
-      where.houseId = {
+      where.userId = {
         equals: search,
       }
     }

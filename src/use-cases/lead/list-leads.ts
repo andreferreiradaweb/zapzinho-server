@@ -1,10 +1,6 @@
-import { Lead, LeadStatus } from '@prisma/client'
-
-import { CompanyRepository } from '@/repositories/company'
-import { ResourceNotFound } from '../../error/resource-not-found'
+import { Lead, LeadOption, LeadStatus, Product } from '@/lib/prisma'
 import { UserNotFound } from '../../error/user-not-found'
 import { UserRepository } from '@/repositories/user'
-import { InvalidCredentialsError } from '../../error/invalid-credentials-error'
 import { LeadRepository } from '@/repositories/lead'
 
 interface ListLeadsUseCaseRequest {
@@ -13,33 +9,21 @@ interface ListLeadsUseCaseRequest {
   limit?: number
   search?: string
   status?: LeadStatus
+  option?: LeadOption
   startDate?: string
   endDate?: string
-}
-
-type House = {
-  id: string
-  title: string
-  address: string
-  city: string
-  photos: string[]
-}
-
-export interface LeadWithHouse extends Lead {
-  House: House
 }
 
 interface ListLeadsUseCaseResponse {
   totalItems: number
   currentPage: number
   itemsPerPage: number
-  leads: LeadWithHouse[] | []
+  leads: Lead[] | []
 }
 
 export class ListLeadsUseCase {
   constructor(
     private leadRepository: LeadRepository,
-    private companyRepository: CompanyRepository,
     private userRepository: UserRepository,
   ) { }
 
@@ -49,6 +33,7 @@ export class ListLeadsUseCase {
     limit = 10,
     search = '',
     status,
+    option,
     startDate,
     endDate,
   }: ListLeadsUseCaseRequest): Promise<ListLeadsUseCaseResponse> {
@@ -58,33 +43,24 @@ export class ListLeadsUseCase {
       throw new UserNotFound()
     }
 
-    const findedCompany =
-      await this.companyRepository.listCompaniesByUserId(userId)
-
-    if (!findedCompany) {
-      throw new ResourceNotFound()
-    }
-
-    if (findedCompany[0].userId !== userId) {
-      throw new InvalidCredentialsError()
-    }
-
-    const totalItems = await this.leadRepository.countByCompanyId(
-      findedCompany[0].id,
+    const totalItems = await this.leadRepository.countByUserId(
+      findedUser.id,
       search,
       status,
+      option,
       startDate,
       endDate,
     )
 
     const offset = (page - 1) * limit
 
-    const leads = await this.leadRepository.filterManyByCompanyId(
-      findedCompany[0].id,
+    const leads = await this.leadRepository.filterManyByUserId(
+      findedUser.id,
       offset,
       limit,
       search,
       status,
+      option,
       startDate,
       endDate,
     )

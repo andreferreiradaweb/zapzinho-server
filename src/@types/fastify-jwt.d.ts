@@ -1,5 +1,5 @@
 import '@fastify/jwt'
-import { Role } from '@prisma/client'
+import { Role } from '@/lib/prisma'
 
 declare module '@fastify/jwt' {
   export interface FastifyJWT {

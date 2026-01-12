@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from '@prisma/client'
+import { PrismaClient, Prisma } from '@/lib/prisma'
 import { TransactionProvider } from '../transaction-provider'
 
 export class PrismaTransactionProvider implements TransactionProvider {

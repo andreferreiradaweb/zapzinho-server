@@ -1,8 +1,8 @@
-import { Lead, LeadStatus } from '@prisma/client'
+import { Lead, LeadStatus } from '@/lib/prisma'
 import { LeadRepository } from '@/repositories/lead'
 import { ResourceNotFound } from '../../error/resource-not-found'
-import { CompanyRepository } from '@/repositories/company'
 import { InvalidCredentialsError } from '@/error/invalid-credentials-error'
+import { UserRepository } from '@/repositories/user'
 
 interface UpdateLeadUseCaseRequest {
   id: string
@@ -11,7 +11,7 @@ interface UpdateLeadUseCaseRequest {
   nome?: string
   email?: string
   telefone?: string
-  productId: string | null
+  productId: string
   message?: string
 }
 
@@ -22,7 +22,7 @@ interface UpdateLeadUseCaseResponse {
 export class UpdateLeadUseCase {
   constructor(
     private leadRepository: LeadRepository,
-    private companyRepository: CompanyRepository,
+    private userRepository: UserRepository,
   ) { }
 
   async execute({
@@ -35,10 +35,9 @@ export class UpdateLeadUseCase {
     Status,
     message,
   }: UpdateLeadUseCaseRequest): Promise<UpdateLeadUseCaseResponse> {
-    const findedCompany =
-      await this.companyRepository.listCompaniesByUserId(userId)
+    const findedUser = await this.userRepository.findUserById(userId)
 
-    if (!findedCompany) {
+    if (!findedUser) {
       throw new ResourceNotFound()
     }
 
@@ -48,7 +47,7 @@ export class UpdateLeadUseCase {
       throw new ResourceNotFound()
     }
 
-    if (foundLead.companyId !== findedCompany[0].id) {
+    if (foundLead.userId !== findedUser.id) {
       throw new InvalidCredentialsError()
     }
 

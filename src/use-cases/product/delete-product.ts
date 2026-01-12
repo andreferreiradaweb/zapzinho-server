@@ -1,15 +1,15 @@
-import { Product } from '@prisma/client'
-import { CompanyRepository } from '@/repositories/company'
+import { Product } from '@/lib/prisma'
 import { UserRepository } from '@/repositories/user'
 import { UserNotFound } from '../../error/user-not-found'
 import { ResourceNotFound } from '../../error/resource-not-found'
 import { InvalidCredentialsError } from '../../error/invalid-credentials-error'
 
 import { ProductRepository } from '@/repositories/product'
+import { InactiveUser } from '@/error/inactive-user'
 
 interface DeleteProductUseCaseRequest {
+  id: string
   userId: string
-  productId: string
 }
 
 interface DeleteProductUseCaseResponse {
@@ -20,30 +20,33 @@ export class DeleteProductUseCase {
   constructor(
     private productRepository: ProductRepository,
     private userRepository: UserRepository,
-    private companyRepository: CompanyRepository,
   ) { }
 
   async execute({
+    id,
     userId,
-    productId,
   }: DeleteProductUseCaseRequest): Promise<DeleteProductUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
+    
     if (!findedUser) {
       throw new UserNotFound()
     }
-    const findedCompany =
-      await this.companyRepository.listCompaniesByUserId(userId)
-    const findedProduct = await this.productRepository.findProductById(productId)
 
-    if (!findedCompany || !findedProduct) {
+    if (!findedUser.isActive) {
+          throw new InactiveUser()
+        }
+    
+    const findedProduct = await this.productRepository.findProductById(id)
+
+    if (!findedProduct) {
       throw new ResourceNotFound()
     }
-
-    if (findedCompany[0].userId !== userId) {
+    
+    if (findedProduct.userId !== userId) {
       throw new InvalidCredentialsError()
     }
 
-    const product = await this.productRepository.delete(productId)
+    const product = await this.productRepository.delete(id)
 
     return { product }
   }

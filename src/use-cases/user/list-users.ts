@@ -1,4 +1,4 @@
-import { Company, Plan, Role, House } from '@prisma/client'
+import { Role, User } from '@/lib/prisma'
 
 import { UserRepository } from '@/repositories/user'
 
@@ -6,34 +6,14 @@ interface ListUsersUseCaseRequest {
   page?: number
   limit?: number
   search?: string
-  plan?: Plan
   role?: Role
-}
-
-type User = {
-  id: string
-  email: string
-  phoneNumber: string | null
-  isActive: boolean
-  domain: string | null
-  Role: Role
-  Plan: Plan
-  createdAt: Date
-}
-
-interface CompanyWithHouse extends Company {
-  House: House[]
-}
-
-interface UserWithCompany extends User {
-  Company: CompanyWithHouse[]
 }
 
 interface ListUsersUseCaseResponse {
   totalItems: number
   currentPage: number
   itemsPerPage: number
-  users: UserWithCompany[] | []
+  users: Omit<User, 'passwordHash'>[] | []
 }
 
 export class ListUsersUseCase {
@@ -43,7 +23,6 @@ export class ListUsersUseCase {
     page = 1,
     limit = 10,
     search = '',
-    plan,
     role,
   }: ListUsersUseCaseRequest): Promise<ListUsersUseCaseResponse> {
     const totalItems = await this.userRepository.countUsers(search)
@@ -54,7 +33,6 @@ export class ListUsersUseCase {
       offset,
       limit,
       search,
-      plan,
       role,
     )
 

@@ -1,6 +1,6 @@
 import { UserRepository } from '@/repositories/user'
 import { UserNotFound } from '../../error/user-not-found'
-import { Plan, Role } from '@prisma/client'
+import { Role } from '@/lib/prisma'
 
 interface GetOneUserUseCaseRequest {
   userId: string
@@ -13,7 +13,6 @@ type User = {
   isActive: boolean
   domain: string | null
   Role: Role
-  Plan: Plan
   createdAt: Date
 }
 
@@ -35,7 +34,6 @@ export class GetOneUserUseCase {
 
     const newUser = {
       id: findedUser.id,
-      Plan: findedUser.Plan,
       Role: findedUser.Role,
       createdAt: findedUser.createdAt,
       email: findedUser.email,

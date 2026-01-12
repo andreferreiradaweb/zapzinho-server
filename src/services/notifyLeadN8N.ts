@@ -2,7 +2,7 @@ interface NotifyLeadParams {
     leadName: string
     leadPhone: string
     leadMessage: string
-    companyZapNumber: string
+    phoneNumber: string
     interest: string
     webhookUrl: string
 }
@@ -11,7 +11,7 @@ export async function notifyLeadToN8N({
     leadName,
     leadPhone,
     leadMessage,
-    companyZapNumber,
+    phoneNumber,
     interest,
     webhookUrl,
 }: NotifyLeadParams): Promise<void> {
@@ -23,7 +23,7 @@ export async function notifyLeadToN8N({
                 leadName,
                 leadPhone,
                 leadMessage,
-                companyZapNumber,
+                phoneNumber,
                 interest,
             }),
         })

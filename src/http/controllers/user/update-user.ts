@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { Plan, Role } from '@prisma/client'
+import { Plan, Role } from '@/lib/prisma'
 import { MakeUpdateUseCase } from '@/factory/user/make-update'
 import { handleSpecificError } from '@/helpers/handleSpecificError'
 

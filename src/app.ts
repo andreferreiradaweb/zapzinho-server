@@ -4,7 +4,6 @@ import fastifyCors from '@fastify/cors'
 import { ZodError } from 'zod'
 import { env } from './config/validatedEnv'
 import { usersRoutes } from './http/controllers/user/routes'
-import { companyRoutes } from './http/controllers/company/routes'
 import { productRoutes } from './http/controllers/product/routes'
 import { leadRoutes } from './http/controllers/lead/routes'
 
@@ -24,7 +23,6 @@ app.register(fastifyJwt, {
 })
 
 app.register(usersRoutes)
-app.register(companyRoutes)
 app.register(productRoutes)
 app.register(leadRoutes)
 
