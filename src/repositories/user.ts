@@ -6,7 +6,6 @@ interface UserSerialized {
   email: string
   phoneNumber: string | null
   isActive: boolean
-  domain: string | null
 }
 
 export interface UserWithLeadsAndProducts extends User {

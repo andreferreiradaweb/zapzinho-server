@@ -35,12 +35,6 @@ export class PrismaUserRepository implements UserRepository {
       where: {
         OR: [
           {
-            domain: {
-              contains: search,
-              mode: 'insensitive',
-            },
-          },
-          {
             phoneNumber: {
               contains: search,
               mode: 'insensitive',
@@ -95,7 +89,7 @@ export class PrismaUserRepository implements UserRepository {
   }
 
   async create(data: Prisma.UserUncheckedCreateInput) {
-    const { email, id, phoneNumber, isActive, domain } =
+    const { email, id, phoneNumber, isActive } =
       await prisma.user.create({
         data,
       })
@@ -104,7 +98,6 @@ export class PrismaUserRepository implements UserRepository {
       id,
       phoneNumber,
       isActive,
-      domain,
     }
   }
 
