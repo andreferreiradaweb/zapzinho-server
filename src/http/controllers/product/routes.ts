@@ -4,6 +4,7 @@ import { UpdateProductController } from './update-product'
 import { CreateProductController } from './create-product'
 import { ListProductsController } from './list-products'
 import { DeleteProductController } from './delete-product'
+import { ListProductsForOptionsController } from './lsit-products-for-options'
 
 export async function productRoutes(app: FastifyInstance) {
   app.post('/products', { onRequest: [verifyJwt] }, CreateProductController)
@@ -12,6 +13,11 @@ export async function productRoutes(app: FastifyInstance) {
     '/products',
     { onRequest: [verifyJwt] },
     ListProductsController as RouteHandlerMethod,
+  )
+  app.get(
+    '/products-for-options',
+    { onRequest: [verifyJwt] },
+    ListProductsForOptionsController as RouteHandlerMethod,
   )
   app.delete('/products/:id', { onRequest: [verifyJwt] }, DeleteProductController)
 }

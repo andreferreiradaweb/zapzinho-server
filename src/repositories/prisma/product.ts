@@ -1,8 +1,20 @@
-import { Prisma, Product } from '@/lib/prisma'
+import { Prisma } from '@/lib/prisma'
 import { prisma } from '@/lib/prisma'
 import { ProductRepository } from '../product'
 
 export class PrismaProductRepository implements ProductRepository {
+  async getAllProductsForOptions(userId: string) {
+    return prisma.product.findMany({
+      where: {
+        userId,
+      },
+      select: {
+        id: true,
+        title: true,
+      },
+    })
+  }
+
   async findProductById(id: string) {
     const product = await prisma.product.findUnique({
       where: {

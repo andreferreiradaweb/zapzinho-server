@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { handleSpecificError } from '@/helpers/handleSpecificError'
-import { LeadStatus } from '@/lib/prisma'
+import { LeadOption, LeadStatus } from '@/lib/prisma'
 import { CreateLeadFactory } from '@/factory/lead/create-lead'
 
 const createLeadBodySchema = z.object({
@@ -10,7 +10,8 @@ const createLeadBodySchema = z.object({
   telefone: z.string(),
   message: z.string(),
   Status: z.nativeEnum(LeadStatus),
-  productId: z.string().optional(),
+  Option: z.nativeEnum(LeadOption),
+  productId: z.string(),
   userId: z.string(),
 })
 
@@ -21,7 +22,7 @@ export async function CreateLeadController(
   try {
     const { ip } = request
     const validatedBody = createLeadBodySchema.parse(request.body)
-    const { nome, email, telefone, message, Status, productId, userId } =
+    const { nome, email, telefone, message, Status, Option, productId, userId } =
       validatedBody
 
     const createLeadUseCase = CreateLeadFactory()
@@ -34,6 +35,7 @@ export async function CreateLeadController(
       productId,
       userId,
       ip,
+      Option
     })
 
     return reply.status(201).send(createdLead)

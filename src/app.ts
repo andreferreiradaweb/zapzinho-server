@@ -23,8 +23,8 @@ app.register(fastifyJwt, {
 })
 
 app.register(usersRoutes)
-app.register(productRoutes)
 app.register(leadRoutes)
+app.register(productRoutes)
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
