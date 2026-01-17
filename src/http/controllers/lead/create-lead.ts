@@ -11,8 +11,9 @@ const createLeadBodySchema = z.object({
   message: z.string(),
   Status: z.nativeEnum(LeadStatus),
   Option: z.nativeEnum(LeadOption),
-  productId: z.string(),
-  userId: z.string(),
+  id: z.string().uuid().optional(),
+  createdAt: z.string().optional(),
+  productId: z.string().uuid(),
 })
 
 export async function CreateLeadController(
@@ -20,10 +21,12 @@ export async function CreateLeadController(
   reply: FastifyReply,
 ) {
   try {
-    const { ip } = request
+    const { sub } = request.user
     const validatedBody = createLeadBodySchema.parse(request.body)
-    const { nome, email, telefone, message, Status, Option, productId, userId } =
+    const { nome, email, telefone, message, Status, productId, Option, id, createdAt } =
       validatedBody
+
+    const createdAtDate = createdAt ? new Date(createdAt) : new Date()
 
     const createLeadUseCase = CreateLeadFactory()
     const createdLead = await createLeadUseCase.execute({
@@ -32,10 +35,11 @@ export async function CreateLeadController(
       telefone,
       message,
       Status,
+      userId: sub,
+      id,
+      createdAt: createdAtDate,
+      Option,
       productId,
-      userId,
-      ip,
-      Option
     })
 
     return reply.status(201).send(createdLead)

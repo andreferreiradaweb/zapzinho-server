@@ -1,26 +1,28 @@
 import { Lead, LeadOption, LeadStatus } from '@/lib/prisma'
 import { LeadRepository } from '@/repositories/lead'
 import { ResourceNotFound } from '../../error/resource-not-found'
+import NodeCache from 'node-cache'
 import { UserRepository } from '@/repositories/user'
 
-interface CreateLeadUseCaseRequest {
-  nome: string
-  email: string
-  telefone: string
-  message: string
+const cache = new NodeCache()
+
+interface CreateLeadForLpUseCaseRequest {
+  id: string
   Status: LeadStatus
   Option: LeadOption
   userId: string
-  id?: string
-  createdAt?: Date
-  productId: string
+  nome?: string
+  email?: string
+  telefone?: string
+  productId?: string
+  message?: string
 }
 
-interface CreateLeadUseCaseResponse {
+interface CreateLeadForLpUseCaseResponse {
   lead: Lead
 }
 
-export class CreateLeadForAdminUseCase {
+export class CreateLeadForLpUseCase {
   constructor(
     private leadRepository: LeadRepository,
     private userRepository: UserRepository,
@@ -32,29 +34,25 @@ export class CreateLeadForAdminUseCase {
     telefone,
     message,
     Status,
-    userId,
-    id,
-    createdAt,
+    Option,
     productId,
-    Option
-  }: CreateLeadUseCaseRequest): Promise<CreateLeadUseCaseResponse> {
+    userId,
+  }: CreateLeadForLpUseCaseRequest): Promise<CreateLeadForLpUseCaseResponse> {
     const findedUser =
       await this.userRepository.findUserById(userId)
     if (!findedUser) {
       throw new ResourceNotFound()
     }
 
-    const lead = await this.leadRepository.create({
+    const lead = await this.leadRepository.update({
       nome,
       email,
       telefone,
       message,
       Status,
-      userId: findedUser.id,
-      id,
-      createdAt,
+      Option,
       productId,
-      Option
+      userId: findedUser.id,
     })
 
     return { lead }

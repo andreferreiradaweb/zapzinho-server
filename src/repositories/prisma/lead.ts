@@ -52,7 +52,7 @@ export class PrismaLeadRepository implements LeadRepository {
     }
 
     if (search) {
-      where.userId = {
+      where.productId = {
         equals: search,
       }
     }
@@ -104,7 +104,7 @@ export class PrismaLeadRepository implements LeadRepository {
     }
 
     if (search) {
-      where.userId = {
+      where.productId = {
         equals: search,
       }
     }
