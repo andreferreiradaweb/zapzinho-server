@@ -47,11 +47,11 @@ model Product {
 model Lead {
   id        String     @id @default(uuid())
   nome      String
-  email     String
   telefone  String
+  email     String?
   message   String?
-  Product   Product    @relation(fields: [productId], references: [id])
-  productId String
+  Product   Product?   @relation(fields: [productId], references: [id])
+  productId String?
   User        User     @relation(fields: [userId], references: [id])
   userId      String
   Status    LeadStatus

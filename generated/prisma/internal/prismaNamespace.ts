@@ -699,8 +699,8 @@ export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeo
 export const LeadScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
-  email: 'email',
   telefone: 'telefone',
+  email: 'email',
   message: 'message',
   productId: 'productId',
   userId: 'userId',

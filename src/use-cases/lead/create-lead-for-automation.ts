@@ -1,20 +1,17 @@
 import { Lead, LeadOption, LeadStatus } from '@/lib/prisma'
 import { LeadRepository } from '@/repositories/lead'
 import { ResourceNotFound } from '../../error/resource-not-found'
-import { ProductRepository } from '@/repositories/product'
-import { env } from '@/config/validatedEnv'
-import { notifyLeadToN8N } from '@/services/notifyLeadN8N'
 import { UserRepository } from '@/repositories/user'
 
 interface CreateLeadForAutomationUseCaseRequest {
   nome: string
-  email: string
+  email?: string
   telefone: string
   message: string
   Status: LeadStatus
   Option: LeadOption
   userId: string
-  productId: string
+  productId?: string
 }
 
 interface CreateLeadForAutomationUseCaseResponse {
@@ -24,7 +21,6 @@ interface CreateLeadForAutomationUseCaseResponse {
 export class CreateLeadForAutomationUseCase {
   constructor(
     private leadRepository: LeadRepository,
-    private productRepository: ProductRepository,
     private userRepository: UserRepository,
   ) { }
 
@@ -43,17 +39,6 @@ export class CreateLeadForAutomationUseCase {
     if (!findedUser) {
       throw new ResourceNotFound()
     }
-
-    const findedProduct = await this.productRepository.findProductById(productId || '')
-
-    notifyLeadToN8N({
-      leadName: nome,
-      leadPhone: telefone,
-      leadMessage: message,
-      phoneNumber: findedUser.phoneNumber || '',
-      interest: findedProduct?.title ?? '',
-      webhookUrl: env.N8N_WEBHOOK_LEAD_NOTIFY,
-    })
 
     const lead = await this.leadRepository.create({
       nome,

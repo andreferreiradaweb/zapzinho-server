@@ -5,6 +5,7 @@ import { verifyJwt } from '@/http/middlewares/verify-jwt'
 import { UpdateLeadController } from './update-lead'
 import { DeleteLeadController } from './delete-lead'
 import { CreateLeadController } from './create-lead'
+import { CreateLeadForAutomationController } from './create-lead-for-automation'
 
 export async function leadRoutes(app: FastifyInstance) {
   app.post(
@@ -20,4 +21,5 @@ export async function leadRoutes(app: FastifyInstance) {
   app.put('/lead', { onRequest: [verifyJwt] }, UpdateLeadController)
   app.delete('/lead/:id', { onRequest: [verifyJwt] }, DeleteLeadController)
   app.post('/lp/lead', CreateLeadForLpController)
+  app.post('/automation/lead', CreateLeadForAutomationController)
 }
