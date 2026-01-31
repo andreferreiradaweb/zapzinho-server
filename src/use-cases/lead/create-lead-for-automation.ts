@@ -16,6 +16,7 @@ interface CreateLeadForAutomationUseCaseRequest {
 
 interface CreateLeadForAutomationUseCaseResponse {
   lead: Lead
+  isNew?: boolean
 }
 
 export class CreateLeadForAutomationUseCase {
@@ -40,6 +41,15 @@ export class CreateLeadForAutomationUseCase {
       throw new ResourceNotFound()
     }
 
+    const existLead = await this.leadRepository.findLeadWhereUserByNumber(
+      userId,
+      telefone,
+    )
+
+    if (existLead) {
+      return { lead: existLead }
+    }
+
     const lead = await this.leadRepository.create({
       nome,
       email,
@@ -51,6 +61,6 @@ export class CreateLeadForAutomationUseCase {
       userId: findedUser.id,
     })
 
-    return { lead }
+    return { lead, isNew: existLead ? false : true }
   }
 }

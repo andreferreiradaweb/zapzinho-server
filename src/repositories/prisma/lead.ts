@@ -7,6 +7,15 @@ interface LeadWithProduct extends Lead {
 }
 
 export class PrismaLeadRepository implements LeadRepository {
+  async findLeadWhereUserByNumber(userId: string, number: string) {
+    return prisma.lead.findFirst({
+      where: {
+        userId,
+        telefone: number,
+      },
+    })
+  }
+
   async findLeadById(leadId: string) {
     return prisma.lead.findUnique({
       where: {
