@@ -6,7 +6,6 @@ import { UserRepository } from '@/repositories/user'
 interface GetOneProductUseCaseRequest {
   productId: string
   userId: string
-  ip: string
 }
 
 interface GetOneProductUseCaseResponse {
