@@ -7,8 +7,13 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'),
   PORT: z.coerce.number().default(3333),
   PASSWORD_ADMIN: z.string(),
-  N8N_WEBHOOK_LEAD_NOTIFY: z.string(),
-  ADMIN_EMAIL: z.string().default('andreferreiradaweb@gmail.com'),
+  ADMIN_EMAIL: z.string().default('admin@example.com'),
+  // W-API (WhatsApp)
+  WAPI_BASE_URL: z.string().default('https://api.w-api.app/v1'),
+  WAPI_TOKEN: z.string().default(''),
+  WAPI_INSTANCE_ID: z.string().default(''),
+  WAPI_DELAY_MS: z.coerce.number().default(1500),
+  WAPI_WEBHOOK_SECRET: z.string().default(''),
 })
 
 const _env = envSchema.safeParse(process.env)

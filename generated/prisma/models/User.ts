@@ -32,6 +32,8 @@ export type UserMinAggregateOutputType = {
   isActive: boolean | null
   Role: $Enums.Role | null
   CustomerType: $Enums.CustomerType | null
+  trialExpiresAt: Date | null
+  onboardingMessageSentAt: Date | null
   createdAt: Date | null
 }
 
@@ -43,6 +45,8 @@ export type UserMaxAggregateOutputType = {
   isActive: boolean | null
   Role: $Enums.Role | null
   CustomerType: $Enums.CustomerType | null
+  trialExpiresAt: Date | null
+  onboardingMessageSentAt: Date | null
   createdAt: Date | null
 }
 
@@ -54,6 +58,8 @@ export type UserCountAggregateOutputType = {
   isActive: number
   Role: number
   CustomerType: number
+  trialExpiresAt: number
+  onboardingMessageSentAt: number
   createdAt: number
   _all: number
 }
@@ -67,6 +73,8 @@ export type UserMinAggregateInputType = {
   isActive?: true
   Role?: true
   CustomerType?: true
+  trialExpiresAt?: true
+  onboardingMessageSentAt?: true
   createdAt?: true
 }
 
@@ -78,6 +86,8 @@ export type UserMaxAggregateInputType = {
   isActive?: true
   Role?: true
   CustomerType?: true
+  trialExpiresAt?: true
+  onboardingMessageSentAt?: true
   createdAt?: true
 }
 
@@ -89,6 +99,8 @@ export type UserCountAggregateInputType = {
   isActive?: true
   Role?: true
   CustomerType?: true
+  trialExpiresAt?: true
+  onboardingMessageSentAt?: true
   createdAt?: true
   _all?: true
 }
@@ -173,6 +185,8 @@ export type UserGroupByOutputType = {
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
+  trialExpiresAt: Date | null
+  onboardingMessageSentAt: Date | null
   createdAt: Date
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
@@ -205,9 +219,15 @@ export type UserWhereInput = {
   isActive?: Prisma.BoolFilter<"User"> | boolean
   Role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFilter<"User"> | $Enums.CustomerType
+  trialExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  onboardingMessageSentAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   Products?: Prisma.ProductListRelationFilter
   Leads?: Prisma.LeadListRelationFilter
+  Contacts?: Prisma.ContactListRelationFilter
+  MessageTemplates?: Prisma.MessageTemplateListRelationFilter
+  Broadcasts?: Prisma.BroadcastListRelationFilter
+  MessageLogs?: Prisma.MessageLogListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -218,9 +238,15 @@ export type UserOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
+  trialExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  onboardingMessageSentAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   Products?: Prisma.ProductOrderByRelationAggregateInput
   Leads?: Prisma.LeadOrderByRelationAggregateInput
+  Contacts?: Prisma.ContactOrderByRelationAggregateInput
+  MessageTemplates?: Prisma.MessageTemplateOrderByRelationAggregateInput
+  Broadcasts?: Prisma.BroadcastOrderByRelationAggregateInput
+  MessageLogs?: Prisma.MessageLogOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -234,9 +260,15 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"User"> | boolean
   Role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFilter<"User"> | $Enums.CustomerType
+  trialExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  onboardingMessageSentAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   Products?: Prisma.ProductListRelationFilter
   Leads?: Prisma.LeadListRelationFilter
+  Contacts?: Prisma.ContactListRelationFilter
+  MessageTemplates?: Prisma.MessageTemplateListRelationFilter
+  Broadcasts?: Prisma.BroadcastListRelationFilter
+  MessageLogs?: Prisma.MessageLogListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -247,6 +279,8 @@ export type UserOrderByWithAggregationInput = {
   isActive?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
+  trialExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  onboardingMessageSentAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -264,6 +298,8 @@ export type UserScalarWhereWithAggregatesInput = {
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   Role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeWithAggregatesFilter<"User"> | $Enums.CustomerType
+  trialExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  onboardingMessageSentAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
@@ -275,9 +311,15 @@ export type UserCreateInput = {
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  Contacts?: Prisma.ContactCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -288,9 +330,15 @@ export type UserUncheckedCreateInput = {
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -301,9 +349,15 @@ export type UserUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  Contacts?: Prisma.ContactUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -314,9 +368,15 @@ export type UserUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  Contacts?: Prisma.ContactUncheckedUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -327,6 +387,8 @@ export type UserCreateManyInput = {
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -338,6 +400,8 @@ export type UserUpdateManyMutationInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -349,6 +413,8 @@ export type UserUncheckedUpdateManyInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -360,6 +426,8 @@ export type UserCountOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
+  trialExpiresAt?: Prisma.SortOrder
+  onboardingMessageSentAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -371,6 +439,8 @@ export type UserMaxOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
+  trialExpiresAt?: Prisma.SortOrder
+  onboardingMessageSentAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -382,6 +452,8 @@ export type UserMinOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
+  trialExpiresAt?: Prisma.SortOrder
+  onboardingMessageSentAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -408,6 +480,10 @@ export type EnumRoleFieldUpdateOperationsInput = {
 
 export type EnumCustomerTypeFieldUpdateOperationsInput = {
   set?: $Enums.CustomerType
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -442,6 +518,62 @@ export type UserUpdateOneRequiredWithoutLeadsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutLeadsInput, Prisma.UserUpdateWithoutLeadsInput>, Prisma.UserUncheckedUpdateWithoutLeadsInput>
 }
 
+export type UserCreateNestedOneWithoutContactsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutContactsInput, Prisma.UserUncheckedCreateWithoutContactsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutContactsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutContactsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutContactsInput, Prisma.UserUncheckedCreateWithoutContactsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutContactsInput
+  upsert?: Prisma.UserUpsertWithoutContactsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutContactsInput, Prisma.UserUpdateWithoutContactsInput>, Prisma.UserUncheckedUpdateWithoutContactsInput>
+}
+
+export type UserCreateNestedOneWithoutMessageTemplatesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMessageTemplatesInput, Prisma.UserUncheckedCreateWithoutMessageTemplatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMessageTemplatesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMessageTemplatesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMessageTemplatesInput, Prisma.UserUncheckedCreateWithoutMessageTemplatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMessageTemplatesInput
+  upsert?: Prisma.UserUpsertWithoutMessageTemplatesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMessageTemplatesInput, Prisma.UserUpdateWithoutMessageTemplatesInput>, Prisma.UserUncheckedUpdateWithoutMessageTemplatesInput>
+}
+
+export type UserCreateNestedOneWithoutBroadcastsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBroadcastsInput, Prisma.UserUncheckedCreateWithoutBroadcastsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBroadcastsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutBroadcastsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBroadcastsInput, Prisma.UserUncheckedCreateWithoutBroadcastsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBroadcastsInput
+  upsert?: Prisma.UserUpsertWithoutBroadcastsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBroadcastsInput, Prisma.UserUpdateWithoutBroadcastsInput>, Prisma.UserUncheckedUpdateWithoutBroadcastsInput>
+}
+
+export type UserCreateNestedOneWithoutMessageLogsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMessageLogsInput, Prisma.UserUncheckedCreateWithoutMessageLogsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMessageLogsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMessageLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMessageLogsInput, Prisma.UserUncheckedCreateWithoutMessageLogsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMessageLogsInput
+  upsert?: Prisma.UserUpsertWithoutMessageLogsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMessageLogsInput, Prisma.UserUpdateWithoutMessageLogsInput>, Prisma.UserUncheckedUpdateWithoutMessageLogsInput>
+}
+
 export type UserCreateWithoutProductsInput = {
   id?: string
   email: string
@@ -450,8 +582,14 @@ export type UserCreateWithoutProductsInput = {
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
   createdAt?: Date | string
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  Contacts?: Prisma.ContactCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProductsInput = {
@@ -462,8 +600,14 @@ export type UserUncheckedCreateWithoutProductsInput = {
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
   createdAt?: Date | string
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProductsInput = {
@@ -490,8 +634,14 @@ export type UserUpdateWithoutProductsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  Contacts?: Prisma.ContactUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProductsInput = {
@@ -502,8 +652,14 @@ export type UserUncheckedUpdateWithoutProductsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  Contacts?: Prisma.ContactUncheckedUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLeadsInput = {
@@ -514,8 +670,14 @@ export type UserCreateWithoutLeadsInput = {
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
+  Contacts?: Prisma.ContactCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLeadsInput = {
@@ -526,8 +688,14 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
+  Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLeadsInput = {
@@ -554,8 +722,14 @@ export type UserUpdateWithoutLeadsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
+  Contacts?: Prisma.ContactUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeadsInput = {
@@ -566,8 +740,366 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
+  Contacts?: Prisma.ContactUncheckedUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutContactsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  phoneNumber?: string | null
+  isActive: boolean
+  Role: $Enums.Role
+  CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
+  createdAt?: Date | string
+  Products?: Prisma.ProductCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutContactsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  phoneNumber?: string | null
+  isActive: boolean
+  Role: $Enums.Role
+  CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
+  createdAt?: Date | string
+  Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutContactsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutContactsInput, Prisma.UserUncheckedCreateWithoutContactsInput>
+}
+
+export type UserUpsertWithoutContactsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutContactsInput, Prisma.UserUncheckedUpdateWithoutContactsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutContactsInput, Prisma.UserUncheckedCreateWithoutContactsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutContactsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutContactsInput, Prisma.UserUncheckedUpdateWithoutContactsInput>
+}
+
+export type UserUpdateWithoutContactsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutContactsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutMessageTemplatesInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  phoneNumber?: string | null
+  isActive: boolean
+  Role: $Enums.Role
+  CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
+  createdAt?: Date | string
+  Products?: Prisma.ProductCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  Contacts?: Prisma.ContactCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutMessageTemplatesInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  phoneNumber?: string | null
+  isActive: boolean
+  Role: $Enums.Role
+  CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
+  createdAt?: Date | string
+  Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutMessageTemplatesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMessageTemplatesInput, Prisma.UserUncheckedCreateWithoutMessageTemplatesInput>
+}
+
+export type UserUpsertWithoutMessageTemplatesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMessageTemplatesInput, Prisma.UserUncheckedUpdateWithoutMessageTemplatesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMessageTemplatesInput, Prisma.UserUncheckedCreateWithoutMessageTemplatesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMessageTemplatesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMessageTemplatesInput, Prisma.UserUncheckedUpdateWithoutMessageTemplatesInput>
+}
+
+export type UserUpdateWithoutMessageTemplatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  Contacts?: Prisma.ContactUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMessageTemplatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  Contacts?: Prisma.ContactUncheckedUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutBroadcastsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  phoneNumber?: string | null
+  isActive: boolean
+  Role: $Enums.Role
+  CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
+  createdAt?: Date | string
+  Products?: Prisma.ProductCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  Contacts?: Prisma.ContactCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutBroadcastsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  phoneNumber?: string | null
+  isActive: boolean
+  Role: $Enums.Role
+  CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
+  createdAt?: Date | string
+  Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutBroadcastsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBroadcastsInput, Prisma.UserUncheckedCreateWithoutBroadcastsInput>
+}
+
+export type UserUpsertWithoutBroadcastsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBroadcastsInput, Prisma.UserUncheckedUpdateWithoutBroadcastsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBroadcastsInput, Prisma.UserUncheckedCreateWithoutBroadcastsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBroadcastsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBroadcastsInput, Prisma.UserUncheckedUpdateWithoutBroadcastsInput>
+}
+
+export type UserUpdateWithoutBroadcastsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  Contacts?: Prisma.ContactUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBroadcastsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  Contacts?: Prisma.ContactUncheckedUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutMessageLogsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  phoneNumber?: string | null
+  isActive: boolean
+  Role: $Enums.Role
+  CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
+  createdAt?: Date | string
+  Products?: Prisma.ProductCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  Contacts?: Prisma.ContactCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutMessageLogsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  phoneNumber?: string | null
+  isActive: boolean
+  Role: $Enums.Role
+  CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
+  createdAt?: Date | string
+  Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutMessageLogsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMessageLogsInput, Prisma.UserUncheckedCreateWithoutMessageLogsInput>
+}
+
+export type UserUpsertWithoutMessageLogsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMessageLogsInput, Prisma.UserUncheckedUpdateWithoutMessageLogsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMessageLogsInput, Prisma.UserUncheckedCreateWithoutMessageLogsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMessageLogsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMessageLogsInput, Prisma.UserUncheckedUpdateWithoutMessageLogsInput>
+}
+
+export type UserUpdateWithoutMessageLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  Contacts?: Prisma.ContactUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMessageLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  Contacts?: Prisma.ContactUncheckedUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -578,11 +1110,19 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
 export type UserCountOutputType = {
   Products: number
   Leads: number
+  Contacts: number
+  MessageTemplates: number
+  Broadcasts: number
+  MessageLogs: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Products?: boolean | UserCountOutputTypeCountProductsArgs
   Leads?: boolean | UserCountOutputTypeCountLeadsArgs
+  Contacts?: boolean | UserCountOutputTypeCountContactsArgs
+  MessageTemplates?: boolean | UserCountOutputTypeCountMessageTemplatesArgs
+  Broadcasts?: boolean | UserCountOutputTypeCountBroadcastsArgs
+  MessageLogs?: boolean | UserCountOutputTypeCountMessageLogsArgs
 }
 
 /**
@@ -609,6 +1149,34 @@ export type UserCountOutputTypeCountLeadsArgs<ExtArgs extends runtime.Types.Exte
   where?: Prisma.LeadWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountContactsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContactWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMessageTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageTemplateWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBroadcastsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BroadcastWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMessageLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageLogWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -618,9 +1186,15 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   isActive?: boolean
   Role?: boolean
   CustomerType?: boolean
+  trialExpiresAt?: boolean
+  onboardingMessageSentAt?: boolean
   createdAt?: boolean
   Products?: boolean | Prisma.User$ProductsArgs<ExtArgs>
   Leads?: boolean | Prisma.User$LeadsArgs<ExtArgs>
+  Contacts?: boolean | Prisma.User$ContactsArgs<ExtArgs>
+  MessageTemplates?: boolean | Prisma.User$MessageTemplatesArgs<ExtArgs>
+  Broadcasts?: boolean | Prisma.User$BroadcastsArgs<ExtArgs>
+  MessageLogs?: boolean | Prisma.User$MessageLogsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -632,6 +1206,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isActive?: boolean
   Role?: boolean
   CustomerType?: boolean
+  trialExpiresAt?: boolean
+  onboardingMessageSentAt?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -643,6 +1219,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isActive?: boolean
   Role?: boolean
   CustomerType?: boolean
+  trialExpiresAt?: boolean
+  onboardingMessageSentAt?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -654,13 +1232,19 @@ export type UserSelectScalar = {
   isActive?: boolean
   Role?: boolean
   CustomerType?: boolean
+  trialExpiresAt?: boolean
+  onboardingMessageSentAt?: boolean
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "phoneNumber" | "isActive" | "Role" | "CustomerType" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "phoneNumber" | "isActive" | "Role" | "CustomerType" | "trialExpiresAt" | "onboardingMessageSentAt" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Products?: boolean | Prisma.User$ProductsArgs<ExtArgs>
   Leads?: boolean | Prisma.User$LeadsArgs<ExtArgs>
+  Contacts?: boolean | Prisma.User$ContactsArgs<ExtArgs>
+  MessageTemplates?: boolean | Prisma.User$MessageTemplatesArgs<ExtArgs>
+  Broadcasts?: boolean | Prisma.User$BroadcastsArgs<ExtArgs>
+  MessageLogs?: boolean | Prisma.User$MessageLogsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -671,6 +1255,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     Products: Prisma.$ProductPayload<ExtArgs>[]
     Leads: Prisma.$LeadPayload<ExtArgs>[]
+    Contacts: Prisma.$ContactPayload<ExtArgs>[]
+    MessageTemplates: Prisma.$MessageTemplatePayload<ExtArgs>[]
+    Broadcasts: Prisma.$BroadcastPayload<ExtArgs>[]
+    MessageLogs: Prisma.$MessageLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -680,6 +1268,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     isActive: boolean
     Role: $Enums.Role
     CustomerType: $Enums.CustomerType
+    trialExpiresAt: Date | null
+    onboardingMessageSentAt: Date | null
     createdAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -1077,6 +1667,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   Products<T extends Prisma.User$ProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Leads<T extends Prisma.User$LeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$LeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Contacts<T extends Prisma.User$ContactsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ContactsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  MessageTemplates<T extends Prisma.User$MessageTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$MessageTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Broadcasts<T extends Prisma.User$BroadcastsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$BroadcastsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  MessageLogs<T extends Prisma.User$MessageLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$MessageLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1113,6 +1707,8 @@ export interface UserFieldRefs {
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
   readonly Role: Prisma.FieldRef<"User", 'Role'>
   readonly CustomerType: Prisma.FieldRef<"User", 'CustomerType'>
+  readonly trialExpiresAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly onboardingMessageSentAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
@@ -1547,6 +2143,102 @@ export type User$LeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.LeadScalarFieldEnum | Prisma.LeadScalarFieldEnum[]
+}
+
+/**
+ * User.Contacts
+ */
+export type User$ContactsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Contact
+   */
+  select?: Prisma.ContactSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Contact
+   */
+  omit?: Prisma.ContactOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactInclude<ExtArgs> | null
+  where?: Prisma.ContactWhereInput
+  orderBy?: Prisma.ContactOrderByWithRelationInput | Prisma.ContactOrderByWithRelationInput[]
+  cursor?: Prisma.ContactWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ContactScalarFieldEnum | Prisma.ContactScalarFieldEnum[]
+}
+
+/**
+ * User.MessageTemplates
+ */
+export type User$MessageTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MessageTemplate
+   */
+  select?: Prisma.MessageTemplateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MessageTemplate
+   */
+  omit?: Prisma.MessageTemplateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageTemplateInclude<ExtArgs> | null
+  where?: Prisma.MessageTemplateWhereInput
+  orderBy?: Prisma.MessageTemplateOrderByWithRelationInput | Prisma.MessageTemplateOrderByWithRelationInput[]
+  cursor?: Prisma.MessageTemplateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MessageTemplateScalarFieldEnum | Prisma.MessageTemplateScalarFieldEnum[]
+}
+
+/**
+ * User.Broadcasts
+ */
+export type User$BroadcastsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Broadcast
+   */
+  select?: Prisma.BroadcastSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Broadcast
+   */
+  omit?: Prisma.BroadcastOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BroadcastInclude<ExtArgs> | null
+  where?: Prisma.BroadcastWhereInput
+  orderBy?: Prisma.BroadcastOrderByWithRelationInput | Prisma.BroadcastOrderByWithRelationInput[]
+  cursor?: Prisma.BroadcastWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BroadcastScalarFieldEnum | Prisma.BroadcastScalarFieldEnum[]
+}
+
+/**
+ * User.MessageLogs
+ */
+export type User$MessageLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MessageLog
+   */
+  select?: Prisma.MessageLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MessageLog
+   */
+  omit?: Prisma.MessageLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageLogInclude<ExtArgs> | null
+  where?: Prisma.MessageLogWhereInput
+  orderBy?: Prisma.MessageLogOrderByWithRelationInput | Prisma.MessageLogOrderByWithRelationInput[]
+  cursor?: Prisma.MessageLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MessageLogScalarFieldEnum | Prisma.MessageLogScalarFieldEnum[]
 }
 
 /**

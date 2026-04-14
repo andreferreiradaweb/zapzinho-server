@@ -42,3 +42,64 @@ export const LeadOption = {
 } as const
 
 export type LeadOption = (typeof LeadOption)[keyof typeof LeadOption]
+
+
+export const BroadcastStatus = {
+  DRAFT: 'DRAFT',
+  SCHEDULED: 'SCHEDULED',
+  SENDING: 'SENDING',
+  SENT: 'SENT',
+  FAILED: 'FAILED'
+} as const
+
+export type BroadcastStatus = (typeof BroadcastStatus)[keyof typeof BroadcastStatus]
+
+
+export const MessageStatus = {
+  PENDING: 'PENDING',
+  SENT: 'SENT',
+  FAILED: 'FAILED'
+} as const
+
+export type MessageStatus = (typeof MessageStatus)[keyof typeof MessageStatus]
+
+
+export const MessageType = {
+  ONBOARDING: 'ONBOARDING',
+  REACTIVATION: 'REACTIVATION',
+  TRIAL_EXPIRY: 'TRIAL_EXPIRY',
+  NPS: 'NPS',
+  BROADCAST: 'BROADCAST',
+  MANUAL: 'MANUAL'
+} as const
+
+export type MessageType = (typeof MessageType)[keyof typeof MessageType]
+
+
+export const OrderStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  SHIPPED: 'SHIPPED',
+  DELIVERED: 'DELIVERED',
+  CANCELED: 'CANCELED'
+} as const
+
+export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
+export const PaymentMethod = {
+  PIX: 'PIX',
+  CARTAO: 'CARTAO',
+  BOLETO: 'BOLETO'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const PaymentStatus = {
+  PENDENTE: 'PENDENTE',
+  APROVADO: 'APROVADO',
+  RECUSADO: 'RECUSADO'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]

@@ -53,7 +53,17 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Product: 'Product',
-  Lead: 'Lead'
+  Lead: 'Lead',
+  Contact: 'Contact',
+  MessageTemplate: 'MessageTemplate',
+  Broadcast: 'Broadcast',
+  BroadcastContact: 'BroadcastContact',
+  MessageLog: 'MessageLog',
+  Customer: 'Customer',
+  Address: 'Address',
+  Order: 'Order',
+  OrderItem: 'OrderItem',
+  Payment: 'Payment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -80,6 +90,8 @@ export const UserScalarFieldEnum = {
   isActive: 'isActive',
   Role: 'Role',
   CustomerType: 'CustomerType',
+  trialExpiresAt: 'trialExpiresAt',
+  onboardingMessageSentAt: 'onboardingMessageSentAt',
   createdAt: 'createdAt'
 } as const
 
@@ -115,6 +127,140 @@ export const LeadScalarFieldEnum = {
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
+
+
+export const ContactScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  tags: 'tags',
+  notes: 'notes',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+} as const
+
+export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
+
+
+export const MessageTemplateScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  content: 'content',
+  category: 'category',
+  createdAt: 'createdAt'
+} as const
+
+export type MessageTemplateScalarFieldEnum = (typeof MessageTemplateScalarFieldEnum)[keyof typeof MessageTemplateScalarFieldEnum]
+
+
+export const BroadcastScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  templateId: 'templateId',
+  name: 'name',
+  message: 'message',
+  status: 'status',
+  scheduledAt: 'scheduledAt',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  totalSent: 'totalSent',
+  totalFailed: 'totalFailed',
+  createdAt: 'createdAt'
+} as const
+
+export type BroadcastScalarFieldEnum = (typeof BroadcastScalarFieldEnum)[keyof typeof BroadcastScalarFieldEnum]
+
+
+export const BroadcastContactScalarFieldEnum = {
+  id: 'id',
+  broadcastId: 'broadcastId',
+  contactId: 'contactId',
+  status: 'status',
+  sentAt: 'sentAt',
+  errorMsg: 'errorMsg'
+} as const
+
+export type BroadcastContactScalarFieldEnum = (typeof BroadcastContactScalarFieldEnum)[keyof typeof BroadcastContactScalarFieldEnum]
+
+
+export const MessageLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  contactId: 'contactId',
+  phone: 'phone',
+  message: 'message',
+  type: 'type',
+  status: 'status',
+  sentAt: 'sentAt',
+  errorMsg: 'errorMsg',
+  createdAt: 'createdAt'
+} as const
+
+export type MessageLogScalarFieldEnum = (typeof MessageLogScalarFieldEnum)[keyof typeof MessageLogScalarFieldEnum]
+
+
+export const CustomerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  document: 'document',
+  createdAt: 'createdAt'
+} as const
+
+export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
+
+
+export const AddressScalarFieldEnum = {
+  id: 'id',
+  customerId: 'customerId',
+  street: 'street',
+  number: 'number',
+  city: 'city',
+  state: 'state',
+  zipCode: 'zipCode',
+  complement: 'complement'
+} as const
+
+export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum]
+
+
+export const OrderScalarFieldEnum = {
+  id: 'id',
+  customerId: 'customerId',
+  status: 'status',
+  total: 'total',
+  createdAt: 'createdAt'
+} as const
+
+export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+
+
+export const OrderItemScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  productId: 'productId',
+  price: 'price',
+  quantity: 'quantity'
+} as const
+
+export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]
+
+
+export const PaymentScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  method: 'method',
+  status: 'status',
+  amount: 'amount',
+  provider: 'provider',
+  createdAt: 'createdAt'
+} as const
+
+export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
 
 
 export const SortOrder = {

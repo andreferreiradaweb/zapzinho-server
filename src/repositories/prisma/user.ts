@@ -80,11 +80,15 @@ export class PrismaUserRepository implements UserRepository {
 
   async findUserByEmail(email: string) {
     const user = await prisma.user.findUnique({
-      where: {
-        email,
-      },
+      where: { email },
     })
+    return user || null
+  }
 
+  async findUserByInstanceId(instanceId: string) {
+    const user = await prisma.user.findUnique({
+      where: { wapiInstanceId: instanceId },
+    })
     return user || null
   }
 

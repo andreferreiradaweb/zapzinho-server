@@ -5,7 +5,7 @@ export class PrismaTransactionProvider implements TransactionProvider {
   private prisma: PrismaClient
 
   constructor() {
-    this.prisma = new PrismaClient()
+    this.prisma = new PrismaClient({ adapter: undefined as never })
   }
 
   async runTransaction(

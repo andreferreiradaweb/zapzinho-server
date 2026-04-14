@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.2.0",
   "engineVersion": "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id           String       @id @default(uuid())\n  email        String       @unique\n  passwordHash String\n  phoneNumber  String?\n  isActive     Boolean\n  Role         Role\n  CustomerType CustomerType\n  createdAt    DateTime     @default(now())\n  Products     Product[]\n  Leads        Lead[]\n}\n\nenum Role {\n  ADMIN\n  CLIENT\n}\n\nenum CustomerType {\n  B2C\n  B2B\n}\n\nmodel Product {\n  id          String   @id @default(uuid())\n  createdAt   DateTime @default(now())\n  title       String\n  description String?\n  code        String?\n  price       String\n  condition   String?\n  photos      String[]\n  User        User     @relation(fields: [userId], references: [id])\n  userId      String\n  Leads       Lead[]\n}\n\nmodel Lead {\n  id        String     @id @default(uuid())\n  nome      String\n  telefone  String\n  email     String?\n  message   String?\n  Product   Product?   @relation(fields: [productId], references: [id])\n  productId String?\n  User      User       @relation(fields: [userId], references: [id])\n  userId    String\n  Status    LeadStatus\n  Option    LeadOption\n  createdAt DateTime   @default(now())\n}\n\nenum LeadStatus {\n  NOVO_INTERESSE\n  CONTATO_FEITO\n  NEGOCIACAO\n  VENDIDO\n  NAO_INTERESSADO\n}\n\nenum LeadOption {\n  ATEMDIMENTO_IA\n  ATENDIMENTO_HUMANO\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id                      String            @id @default(uuid())\n  email                   String            @unique\n  passwordHash            String\n  phoneNumber             String?\n  isActive                Boolean\n  Role                    Role\n  CustomerType            CustomerType\n  trialExpiresAt          DateTime?\n  onboardingMessageSentAt DateTime?\n  createdAt               DateTime          @default(now())\n  Products                Product[]\n  Leads                   Lead[]\n  Contacts                Contact[]\n  MessageTemplates        MessageTemplate[]\n  Broadcasts              Broadcast[]\n  MessageLogs             MessageLog[]\n}\n\nenum Role {\n  ADMIN\n  CLIENT\n}\n\nenum CustomerType {\n  B2C\n  B2B\n}\n\nmodel Product {\n  id          String      @id @default(uuid())\n  createdAt   DateTime    @default(now())\n  title       String\n  description String?\n  code        String?\n  price       String\n  condition   String?\n  photos      String[]\n  User        User        @relation(fields: [userId], references: [id])\n  userId      String\n  Leads       Lead[]\n  OrderItems  OrderItem[]\n}\n\nmodel Lead {\n  id        String     @id @default(uuid())\n  nome      String\n  telefone  String\n  email     String?\n  message   String?\n  Product   Product?   @relation(fields: [productId], references: [id])\n  productId String?\n  User      User       @relation(fields: [userId], references: [id])\n  userId    String\n  Status    LeadStatus\n  Option    LeadOption\n  createdAt DateTime   @default(now())\n}\n\nenum LeadStatus {\n  NOVO_INTERESSE\n  CONTATO_FEITO\n  NEGOCIACAO\n  VENDIDO\n  NAO_INTERESSADO\n}\n\nenum LeadOption {\n  ATEMDIMENTO_IA\n  ATENDIMENTO_HUMANO\n}\n\n// CRM Contacts — people to message\nmodel Contact {\n  id                String             @id @default(uuid())\n  userId            String\n  name              String\n  phone             String\n  email             String?\n  tags              String[]\n  notes             String?\n  isActive          Boolean            @default(true)\n  createdAt         DateTime           @default(now())\n  User              User               @relation(fields: [userId], references: [id])\n  BroadcastContacts BroadcastContact[]\n  MessageLogs       MessageLog[]\n}\n\n// Message templates for reuse\nmodel MessageTemplate {\n  id         String      @id @default(uuid())\n  userId     String\n  name       String\n  content    String\n  category   String?\n  createdAt  DateTime    @default(now())\n  User       User        @relation(fields: [userId], references: [id])\n  Broadcasts Broadcast[]\n}\n\n// Broadcast campaigns\nmodel Broadcast {\n  id                String             @id @default(uuid())\n  userId            String\n  templateId        String?\n  name              String\n  message           String\n  status            BroadcastStatus    @default(DRAFT)\n  scheduledAt       DateTime?\n  startedAt         DateTime?\n  finishedAt        DateTime?\n  totalSent         Int                @default(0)\n  totalFailed       Int                @default(0)\n  createdAt         DateTime           @default(now())\n  User              User               @relation(fields: [userId], references: [id])\n  Template          MessageTemplate?   @relation(fields: [templateId], references: [id])\n  BroadcastContacts BroadcastContact[]\n}\n\nenum BroadcastStatus {\n  DRAFT\n  SCHEDULED\n  SENDING\n  SENT\n  FAILED\n}\n\n// Junction: which contacts are in a broadcast + delivery status\nmodel BroadcastContact {\n  id          String        @id @default(uuid())\n  broadcastId String\n  contactId   String\n  status      MessageStatus @default(PENDING)\n  sentAt      DateTime?\n  errorMsg    String?\n  Broadcast   Broadcast     @relation(fields: [broadcastId], references: [id])\n  Contact     Contact       @relation(fields: [contactId], references: [id])\n}\n\n// Full log of every WhatsApp message dispatched by the system\nmodel MessageLog {\n  id        String        @id @default(uuid())\n  userId    String\n  contactId String?\n  phone     String\n  message   String\n  type      MessageType\n  status    MessageStatus @default(PENDING)\n  sentAt    DateTime?\n  errorMsg  String?\n  createdAt DateTime      @default(now())\n  User      User          @relation(fields: [userId], references: [id])\n  Contact   Contact?      @relation(fields: [contactId], references: [id])\n}\n\nenum MessageStatus {\n  PENDING\n  SENT\n  FAILED\n}\n\nenum MessageType {\n  ONBOARDING\n  REACTIVATION\n  TRIAL_EXPIRY\n  NPS\n  BROADCAST\n  MANUAL\n}\n\n// --- E-commerce models (existing) ---\n\nmodel Customer {\n  id        String    @id @default(uuid())\n  name      String\n  email     String    @unique\n  phone     String?\n  document  String?\n  createdAt DateTime  @default(now())\n  Orders    Order[]\n  Addresses Address[]\n}\n\nmodel Address {\n  id         String   @id @default(uuid())\n  customerId String\n  street     String\n  number     String\n  city       String\n  state      String\n  zipCode    String\n  complement String?\n  Customer   Customer @relation(fields: [customerId], references: [id])\n}\n\nmodel Order {\n  id         String      @id @default(uuid())\n  customerId String\n  status     OrderStatus\n  total      Float\n  createdAt  DateTime    @default(now())\n  OrderItems OrderItem[]\n  Payment    Payment?\n  Customer   Customer    @relation(fields: [customerId], references: [id])\n}\n\nmodel OrderItem {\n  id        String  @id @default(uuid())\n  orderId   String\n  productId String\n  price     Float\n  quantity  Int\n  Order     Order   @relation(fields: [orderId], references: [id])\n  Product   Product @relation(fields: [productId], references: [id])\n}\n\nenum OrderStatus {\n  PENDING\n  PAID\n  SHIPPED\n  DELIVERED\n  CANCELED\n}\n\nmodel Payment {\n  id        String        @id @default(uuid())\n  orderId   String        @unique\n  method    PaymentMethod\n  status    PaymentStatus\n  amount    Float\n  provider  String\n  createdAt DateTime      @default(now())\n  Order     Order         @relation(fields: [orderId], references: [id])\n}\n\nenum PaymentMethod {\n  PIX\n  CARTAO\n  BOLETO\n}\n\nenum PaymentStatus {\n  PENDENTE\n  APROVADO\n  RECUSADO\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"passwordHash\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phoneNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"Role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"CustomerType\",\"kind\":\"enum\",\"type\":\"CustomerType\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"Products\",\"kind\":\"object\",\"type\":\"Product\",\"relationName\":\"ProductToUser\"},{\"name\":\"Leads\",\"kind\":\"object\",\"type\":\"Lead\",\"relationName\":\"LeadToUser\"}],\"dbName\":null},\"Product\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"code\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"condition\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"photos\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"User\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ProductToUser\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"Leads\",\"kind\":\"object\",\"type\":\"Lead\",\"relationName\":\"LeadToProduct\"}],\"dbName\":null},\"Lead\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"telefone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"Product\",\"kind\":\"object\",\"type\":\"Product\",\"relationName\":\"LeadToProduct\"},{\"name\":\"productId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"User\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"LeadToUser\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"Status\",\"kind\":\"enum\",\"type\":\"LeadStatus\"},{\"name\":\"Option\",\"kind\":\"enum\",\"type\":\"LeadOption\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"passwordHash\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phoneNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"Role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"CustomerType\",\"kind\":\"enum\",\"type\":\"CustomerType\"},{\"name\":\"trialExpiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"onboardingMessageSentAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"Products\",\"kind\":\"object\",\"type\":\"Product\",\"relationName\":\"ProductToUser\"},{\"name\":\"Leads\",\"kind\":\"object\",\"type\":\"Lead\",\"relationName\":\"LeadToUser\"},{\"name\":\"Contacts\",\"kind\":\"object\",\"type\":\"Contact\",\"relationName\":\"ContactToUser\"},{\"name\":\"MessageTemplates\",\"kind\":\"object\",\"type\":\"MessageTemplate\",\"relationName\":\"MessageTemplateToUser\"},{\"name\":\"Broadcasts\",\"kind\":\"object\",\"type\":\"Broadcast\",\"relationName\":\"BroadcastToUser\"},{\"name\":\"MessageLogs\",\"kind\":\"object\",\"type\":\"MessageLog\",\"relationName\":\"MessageLogToUser\"}],\"dbName\":null},\"Product\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"code\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"condition\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"photos\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"User\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ProductToUser\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"Leads\",\"kind\":\"object\",\"type\":\"Lead\",\"relationName\":\"LeadToProduct\"},{\"name\":\"OrderItems\",\"kind\":\"object\",\"type\":\"OrderItem\",\"relationName\":\"OrderItemToProduct\"}],\"dbName\":null},\"Lead\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"telefone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"Product\",\"kind\":\"object\",\"type\":\"Product\",\"relationName\":\"LeadToProduct\"},{\"name\":\"productId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"User\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"LeadToUser\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"Status\",\"kind\":\"enum\",\"type\":\"LeadStatus\"},{\"name\":\"Option\",\"kind\":\"enum\",\"type\":\"LeadOption\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Contact\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tags\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"User\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ContactToUser\"},{\"name\":\"BroadcastContacts\",\"kind\":\"object\",\"type\":\"BroadcastContact\",\"relationName\":\"BroadcastContactToContact\"},{\"name\":\"MessageLogs\",\"kind\":\"object\",\"type\":\"MessageLog\",\"relationName\":\"ContactToMessageLog\"}],\"dbName\":null},\"MessageTemplate\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"User\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"MessageTemplateToUser\"},{\"name\":\"Broadcasts\",\"kind\":\"object\",\"type\":\"Broadcast\",\"relationName\":\"BroadcastToMessageTemplate\"}],\"dbName\":null},\"Broadcast\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"templateId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"BroadcastStatus\"},{\"name\":\"scheduledAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"startedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"finishedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"totalSent\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"totalFailed\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"User\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"BroadcastToUser\"},{\"name\":\"Template\",\"kind\":\"object\",\"type\":\"MessageTemplate\",\"relationName\":\"BroadcastToMessageTemplate\"},{\"name\":\"BroadcastContacts\",\"kind\":\"object\",\"type\":\"BroadcastContact\",\"relationName\":\"BroadcastToBroadcastContact\"}],\"dbName\":null},\"BroadcastContact\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"broadcastId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contactId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"MessageStatus\"},{\"name\":\"sentAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"errorMsg\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"Broadcast\",\"kind\":\"object\",\"type\":\"Broadcast\",\"relationName\":\"BroadcastToBroadcastContact\"},{\"name\":\"Contact\",\"kind\":\"object\",\"type\":\"Contact\",\"relationName\":\"BroadcastContactToContact\"}],\"dbName\":null},\"MessageLog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contactId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"MessageType\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"MessageStatus\"},{\"name\":\"sentAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"errorMsg\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"User\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"MessageLogToUser\"},{\"name\":\"Contact\",\"kind\":\"object\",\"type\":\"Contact\",\"relationName\":\"ContactToMessageLog\"}],\"dbName\":null},\"Customer\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"document\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"Orders\",\"kind\":\"object\",\"type\":\"Order\",\"relationName\":\"CustomerToOrder\"},{\"name\":\"Addresses\",\"kind\":\"object\",\"type\":\"Address\",\"relationName\":\"AddressToCustomer\"}],\"dbName\":null},\"Address\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"customerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"street\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"number\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"city\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"state\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"zipCode\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"complement\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"Customer\",\"kind\":\"object\",\"type\":\"Customer\",\"relationName\":\"AddressToCustomer\"}],\"dbName\":null},\"Order\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"customerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"OrderStatus\"},{\"name\":\"total\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"OrderItems\",\"kind\":\"object\",\"type\":\"OrderItem\",\"relationName\":\"OrderToOrderItem\"},{\"name\":\"Payment\",\"kind\":\"object\",\"type\":\"Payment\",\"relationName\":\"OrderToPayment\"},{\"name\":\"Customer\",\"kind\":\"object\",\"type\":\"Customer\",\"relationName\":\"CustomerToOrder\"}],\"dbName\":null},\"OrderItem\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"orderId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"productId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"quantity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"Order\",\"kind\":\"object\",\"type\":\"Order\",\"relationName\":\"OrderToOrderItem\"},{\"name\":\"Product\",\"kind\":\"object\",\"type\":\"Product\",\"relationName\":\"OrderItemToProduct\"}],\"dbName\":null},\"Payment\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"orderId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"method\",\"kind\":\"enum\",\"type\":\"PaymentMethod\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"PaymentStatus\"},{\"name\":\"amount\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"provider\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"Order\",\"kind\":\"object\",\"type\":\"Order\",\"relationName\":\"OrderToPayment\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -203,6 +203,106 @@ export interface PrismaClient<
     * ```
     */
   get lead(): Prisma.LeadDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.contact`: Exposes CRUD operations for the **Contact** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Contacts
+    * const contacts = await prisma.contact.findMany()
+    * ```
+    */
+  get contact(): Prisma.ContactDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.messageTemplate`: Exposes CRUD operations for the **MessageTemplate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MessageTemplates
+    * const messageTemplates = await prisma.messageTemplate.findMany()
+    * ```
+    */
+  get messageTemplate(): Prisma.MessageTemplateDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.broadcast`: Exposes CRUD operations for the **Broadcast** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Broadcasts
+    * const broadcasts = await prisma.broadcast.findMany()
+    * ```
+    */
+  get broadcast(): Prisma.BroadcastDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.broadcastContact`: Exposes CRUD operations for the **BroadcastContact** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BroadcastContacts
+    * const broadcastContacts = await prisma.broadcastContact.findMany()
+    * ```
+    */
+  get broadcastContact(): Prisma.BroadcastContactDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.messageLog`: Exposes CRUD operations for the **MessageLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MessageLogs
+    * const messageLogs = await prisma.messageLog.findMany()
+    * ```
+    */
+  get messageLog(): Prisma.MessageLogDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.customer`: Exposes CRUD operations for the **Customer** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Customers
+    * const customers = await prisma.customer.findMany()
+    * ```
+    */
+  get customer(): Prisma.CustomerDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.address`: Exposes CRUD operations for the **Address** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Addresses
+    * const addresses = await prisma.address.findMany()
+    * ```
+    */
+  get address(): Prisma.AddressDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.order`: Exposes CRUD operations for the **Order** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Orders
+    * const orders = await prisma.order.findMany()
+    * ```
+    */
+  get order(): Prisma.OrderDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.orderItem`: Exposes CRUD operations for the **OrderItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OrderItems
+    * const orderItems = await prisma.orderItem.findMany()
+    * ```
+    */
+  get orderItem(): Prisma.OrderItemDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.payment`: Exposes CRUD operations for the **Payment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Payments
+    * const payments = await prisma.payment.findMany()
+    * ```
+    */
+  get payment(): Prisma.PaymentDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

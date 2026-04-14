@@ -4,8 +4,6 @@ import { ResourceNotFound } from '../../error/resource-not-found'
 import { WaitAMoment } from '@/error/wait-a-moment'
 import NodeCache from 'node-cache'
 import { ProductRepository } from '@/repositories/product'
-import { env } from '@/config/validatedEnv'
-import { notifyLeadToN8N } from '@/services/notifyLeadN8N'
 import { UserRepository } from '@/repositories/user'
 
 const cache = new NodeCache()
@@ -61,15 +59,6 @@ export class CreateLeadForLpUseCase {
     }
 
     const findedProduct = await this.productRepository.findProductById(productId || '')
-
-    notifyLeadToN8N({
-      leadName: nome,
-      leadPhone: telefone,
-      leadMessage: message,
-      phoneNumber: findedUser.phoneNumber || '',
-      interest: findedProduct?.title ?? '',
-      webhookUrl: env.N8N_WEBHOOK_LEAD_NOTIFY,
-    })
 
     const lead = await this.leadRepository.create({
       nome,

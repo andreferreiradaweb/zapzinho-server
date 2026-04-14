@@ -2,7 +2,6 @@ import { UserRepository } from '@/repositories/user'
 import { InvalidCredentialsError } from '../../error/invalid-credentials-error'
 import { compare } from 'bcrypt'
 import { User } from '@/lib/prisma'
-import { env } from '@/config/validatedEnv'
 
 interface AuthenticateUseCaseRequest {
   email: string
@@ -21,16 +20,14 @@ export class AuthenticateUseCase {
     password,
   }: AuthenticateUseCaseRequest): Promise<AuthenticateUseCaseResponse> {
     const findedUser = await this.userRepository.findUserByEmail(email)
-    const findedUserAdmin = await this.userRepository.findUserByEmail(env.ADMIN_EMAIL)
 
-    if (!findedUser || !findedUserAdmin) {
+    if (!findedUser) {
       throw new InvalidCredentialsError()
     }
 
     const doesPasswordMatches = await compare(password, findedUser.passwordHash)
-    const doesPasswordAdminMatches = await compare(password, findedUserAdmin.passwordHash)
 
-    if (!doesPasswordMatches && !doesPasswordAdminMatches) {
+    if (!doesPasswordMatches) {
       throw new InvalidCredentialsError()
     }
 

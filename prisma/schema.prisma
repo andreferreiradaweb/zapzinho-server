@@ -8,16 +8,22 @@ datasource db {
 }
 
 model User {
-  id           String    @id @default(uuid())
-  email        String    @unique
-  passwordHash String
-  phoneNumber  String?
-  isActive     Boolean
-  Role         Role
-  CustomerType CustomerType
-  createdAt    DateTime  @default(now())
-  Products     Product[]
-  Leads        Lead[]
+  id                       String    @id @default(uuid())
+  email                    String    @unique
+  passwordHash             String
+  phoneNumber              String?
+  isActive                 Boolean
+  Role                     Role
+  CustomerType             CustomerType
+  trialExpiresAt           DateTime?
+  onboardingMessageSentAt  DateTime?
+  wapiInstanceId           String?   @unique
+  createdAt                DateTime  @default(now())
+  Products                 Product[]
+  Leads                    Lead[]
+  MessageTemplates         MessageTemplate[]
+  Broadcasts               Broadcast[]
+  MessageLogs              MessageLog[]
 }
 
 enum Role {
@@ -27,37 +33,39 @@ enum Role {
 
 enum CustomerType {
   B2C
-  B2B 
+  B2B
 }
 
 model Product {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now())
+  id          String      @id @default(uuid())
+  createdAt   DateTime    @default(now())
   title       String
   description String?
   code        String?
   price       String
   condition   String?
   photos      String[]
-  User        User     @relation(fields: [userId], references: [id])
+  User        User        @relation(fields: [userId], references: [id])
   userId      String
   Leads       Lead[]
-  OrderItems       OrderItem[]
+  OrderItems  OrderItem[]
 }
 
 model Lead {
-  id        String     @id @default(uuid())
-  nome      String
-  telefone  String
-  email     String?
-  message   String?
-  Product   Product?   @relation(fields: [productId], references: [id])
-  productId String?
-  User        User     @relation(fields: [userId], references: [id])
-  userId      String
-  Status    LeadStatus
-  Option    LeadOption
-  createdAt DateTime   @default(now())
+  id              String          @id @default(uuid())
+  nome            String
+  telefone        String
+  email           String?
+  message         String?
+  Product         Product?        @relation(fields: [productId], references: [id])
+  productId       String?
+  User            User            @relation(fields: [userId], references: [id])
+  userId          String
+  Status          LeadStatus
+  Option          LeadOption
+  createdAt       DateTime        @default(now())
+  BroadcastLeads  BroadcastLead[]
+  MessageLogs     MessageLog[]
 }
 
 enum LeadStatus {
@@ -73,50 +81,133 @@ enum LeadOption {
   ATENDIMENTO_HUMANO
 }
 
+// Message templates for reuse
+model MessageTemplate {
+  id         String      @id @default(uuid())
+  userId     String
+  name       String
+  content    String
+  category   String?
+  createdAt  DateTime    @default(now())
+  User       User        @relation(fields: [userId], references: [id])
+  Broadcasts Broadcast[]
+}
+
+// Broadcast campaigns
+model Broadcast {
+  id             String          @id @default(uuid())
+  userId         String
+  templateId     String?
+  name           String
+  message        String
+  status         BroadcastStatus @default(DRAFT)
+  scheduledAt    DateTime?
+  startedAt      DateTime?
+  finishedAt     DateTime?
+  totalSent      Int             @default(0)
+  totalFailed    Int             @default(0)
+  createdAt      DateTime        @default(now())
+  User           User            @relation(fields: [userId], references: [id])
+  Template       MessageTemplate? @relation(fields: [templateId], references: [id])
+  BroadcastLeads BroadcastLead[]
+}
+
+enum BroadcastStatus {
+  DRAFT
+  SCHEDULED
+  SENDING
+  SENT
+  FAILED
+}
+
+// Junction: which leads are in a broadcast + delivery status
+model BroadcastLead {
+  id          String        @id @default(uuid())
+  broadcastId String
+  leadId      String
+  status      MessageStatus @default(PENDING)
+  sentAt      DateTime?
+  errorMsg    String?
+  Broadcast   Broadcast     @relation(fields: [broadcastId], references: [id])
+  Lead        Lead          @relation(fields: [leadId], references: [id])
+}
+
+// Full log of every WhatsApp message dispatched by the system
+model MessageLog {
+  id        String        @id @default(uuid())
+  userId    String
+  leadId    String?
+  phone     String
+  message   String
+  type      MessageType
+  status    MessageStatus @default(PENDING)
+  sentAt    DateTime?
+  errorMsg  String?
+  createdAt DateTime      @default(now())
+  User      User          @relation(fields: [userId], references: [id])
+  Lead      Lead?         @relation(fields: [leadId], references: [id])
+}
+
+enum MessageStatus {
+  PENDING
+  SENT
+  FAILED
+}
+
+enum MessageType {
+  ONBOARDING
+  REACTIVATION
+  TRIAL_EXPIRY
+  NPS
+  BROADCAST
+  MANUAL
+}
+
+// --- E-commerce models (existing) ---
+
 model Customer {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   name      String
-  email     String   @unique
+  email     String    @unique
   phone     String?
-  document  String? // CPF ou CNPJ
-  createdAt DateTime @default(now())
+  document  String?
+  createdAt DateTime  @default(now())
   Orders    Order[]
   Addresses Address[]
 }
 
 model Address {
-  id          String   @id @default(uuid())
-  customerId  String
-  street      String
-  number      String
-  city        String
-  state       String
-  zipCode     String
-  complement  String?
-  Customer    Customer @relation(fields: [customerId], references: [id])
+  id         String   @id @default(uuid())
+  customerId String
+  street     String
+  number     String
+  city       String
+  state      String
+  zipCode    String
+  complement String?
+  Customer   Customer @relation(fields: [customerId], references: [id])
 }
 
 model Order {
-  id          String      @id @default(uuid())
-  customerId  String
-  status      OrderStatus
-  total       Float
-  createdAt   DateTime    @default(now())
-  OrderItems       OrderItem[]
-  Payment     Payment?
-  Customer    Customer @relation(fields: [customerId], references: [id])
+  id         String      @id @default(uuid())
+  customerId String
+  status     OrderStatus
+  total      Float
+  createdAt  DateTime    @default(now())
+  OrderItems OrderItem[]
+  Payment    Payment?
+  Customer   Customer    @relation(fields: [customerId], references: [id])
 }
 
 model OrderItem {
   id        String  @id @default(uuid())
-  orderId  String
+  orderId   String
   productId String
-  price    Float
-  quantity Int
+  price     Float
+  quantity  Int
   Order     Order   @relation(fields: [orderId], references: [id])
   Product   Product @relation(fields: [productId], references: [id])
 }
-
 
 enum OrderStatus {
   PENDING
@@ -128,13 +219,13 @@ enum OrderStatus {
 
 model Payment {
   id        String        @id @default(uuid())
-  orderId  String        @unique
-  method   PaymentMethod
-  status   PaymentStatus
-  amount   Float
-  provider String        // ex: Stripe, MercadoPago
-  createdAt DateTime     @default(now())
-  Order    Order @relation(fields: [orderId], references: [id])
+  orderId   String        @unique
+  method    PaymentMethod
+  status    PaymentStatus
+  amount    Float
+  provider  String
+  createdAt DateTime      @default(now())
+  Order     Order         @relation(fields: [orderId], references: [id])
 }
 
 enum PaymentMethod {

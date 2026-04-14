@@ -1,9 +1,13 @@
 import { app } from './app'
 import { env } from './config/validatedEnv'
+import { startCronJobs } from './jobs'
 
 app
   .listen({
     host: '0.0.0.0',
     port: env.PORT,
   })
-  .then(() => console.log('HTTP server running 🚀'))
+  .then(() => {
+    console.log('HTTP server running 🚀')
+    startCronJobs()
+  })

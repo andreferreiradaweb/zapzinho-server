@@ -11,7 +11,6 @@ type User = {
   email: string
   phoneNumber: string | null
   isActive: boolean
-  domain: string | null
   Role: Role
   createdAt: Date
 }
@@ -39,7 +38,6 @@ export class GetOneUserUseCase {
       email: findedUser.email,
       isActive: findedUser.isActive,
       phoneNumber: findedUser.phoneNumber,
-      domain: findedUser.domain || '',
     }
 
     return { user: newUser }

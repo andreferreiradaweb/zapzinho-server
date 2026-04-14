@@ -152,4 +152,14 @@ export class PrismaLeadRepository implements LeadRepository {
       data,
     })
   }
+
+  async findAllForBroadcast(userId: string, productId?: string, status?: LeadStatus) {
+    return prisma.lead.findMany({
+      where: {
+        userId,
+        ...(productId ? { productId } : {}),
+        ...(status ? { Status: status } : {}),
+      },
+    })
+  }
 }

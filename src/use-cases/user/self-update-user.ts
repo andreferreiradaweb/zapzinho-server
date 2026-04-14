@@ -52,7 +52,7 @@ export class SelfUpdateUserUseCase {
       hashedPassword = findedUser.passwordHash
     }
 
-    const { Role, createdAt, email, isActive, CustomerType } =
+    const { Role, createdAt, email, isActive, CustomerType, trialExpiresAt, onboardingMessageSentAt } =
       await this.userRepository.update({
         id,
         phoneNumber,
@@ -70,6 +70,8 @@ export class SelfUpdateUserUseCase {
       email,
       isActive,
       CustomerType,
+      trialExpiresAt,
+      onboardingMessageSentAt,
     }
 
     return { user: newUser }

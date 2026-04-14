@@ -54,3 +54,53 @@ export type Product = Prisma.ProductModel
  * 
  */
 export type Lead = Prisma.LeadModel
+/**
+ * Model Contact
+ * 
+ */
+export type Contact = Prisma.ContactModel
+/**
+ * Model MessageTemplate
+ * 
+ */
+export type MessageTemplate = Prisma.MessageTemplateModel
+/**
+ * Model Broadcast
+ * 
+ */
+export type Broadcast = Prisma.BroadcastModel
+/**
+ * Model BroadcastContact
+ * 
+ */
+export type BroadcastContact = Prisma.BroadcastContactModel
+/**
+ * Model MessageLog
+ * 
+ */
+export type MessageLog = Prisma.MessageLogModel
+/**
+ * Model Customer
+ * 
+ */
+export type Customer = Prisma.CustomerModel
+/**
+ * Model Address
+ * 
+ */
+export type Address = Prisma.AddressModel
+/**
+ * Model Order
+ * 
+ */
+export type Order = Prisma.OrderModel
+/**
+ * Model OrderItem
+ * 
+ */
+export type OrderItem = Prisma.OrderItemModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel

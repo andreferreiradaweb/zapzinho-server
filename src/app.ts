@@ -6,6 +6,9 @@ import { env } from './config/validatedEnv'
 import { usersRoutes } from './http/controllers/user/routes'
 import { productRoutes } from './http/controllers/product/routes'
 import { leadRoutes } from './http/controllers/lead/routes'
+import { messageTemplateRoutes } from './http/controllers/message-template/routes'
+import { broadcastRoutes } from './http/controllers/broadcast/routes'
+import { webhookRoutes } from './http/controllers/webhook/routes'
 
 export const app = fastify()
 
@@ -25,6 +28,9 @@ app.register(fastifyJwt, {
 app.register(usersRoutes)
 app.register(leadRoutes)
 app.register(productRoutes)
+app.register(messageTemplateRoutes)
+app.register(broadcastRoutes)
+app.register(webhookRoutes)
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {

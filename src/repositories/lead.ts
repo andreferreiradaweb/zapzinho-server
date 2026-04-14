@@ -25,4 +25,5 @@ export interface LeadRepository {
   delete(id: string): Promise<Lead>
   create(data: Prisma.LeadUncheckedCreateInput): Promise<Lead>
   update(data: Prisma.LeadUncheckedUpdateInput): Promise<Lead>
+  findAllForBroadcast(userId: string, productId?: string, status?: LeadStatus): Promise<Lead[]>
 }

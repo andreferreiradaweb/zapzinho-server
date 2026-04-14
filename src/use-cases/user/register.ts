@@ -3,6 +3,12 @@ import { hash } from 'bcrypt'
 import { UserAlreadyExistsError } from '../../error/user-already-exists-error'
 import { UserRepository } from '@/repositories/user'
 import { v4 as uuid } from 'uuid'
+import { sendWhatsAppMessage } from '@/services/wapi'
+import { prisma } from '@/lib/prisma'
+
+const ONBOARDING_MESSAGE =
+  'Bem-vindo ao CRM! 🎉 Sua conta foi criada com sucesso. ' +
+  'Acesse o painel para cadastrar seus contatos e começar a usar os disparos em massa.'
 
 interface RegisterUserUseCaseRequest {
   email: string
@@ -59,6 +65,34 @@ export class RegisterUserUseCase {
       id: newUserId,
       createdAt: newDate,
       CustomerType: customerType ?? CustomerType.B2C,
+      trialExpiresAt: null,
+      onboardingMessageSentAt: null,
+    }
+
+    // Send onboarding WhatsApp message if the new user has a phone number
+    if (phoneNumber) {
+      const result = await sendWhatsAppMessage({
+        phone: phoneNumber,
+        message: ONBOARDING_MESSAGE,
+      })
+
+      if (result.success) {
+        await prisma.user.update({
+          where: { id: newUserId },
+          data: { onboardingMessageSentAt: new Date() },
+        })
+        await prisma.messageLog.create({
+          data: {
+            id: uuid(),
+            userId: newUserId,
+            phone: phoneNumber,
+            message: ONBOARDING_MESSAGE,
+            type: 'ONBOARDING',
+            status: 'SENT',
+            sentAt: new Date(),
+          },
+        })
+      }
     }
 
     return { user }
