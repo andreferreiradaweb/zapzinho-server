@@ -278,7 +278,7 @@ export type BroadcastWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Broadcast"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Template?: Prisma.XOR<Prisma.MessageTemplateNullableScalarRelationFilter, Prisma.MessageTemplateWhereInput> | null
-  BroadcastContacts?: Prisma.BroadcastContactListRelationFilter
+  BroadcastLeads?: Prisma.BroadcastLeadListRelationFilter
 }
 
 export type BroadcastOrderByWithRelationInput = {
@@ -296,7 +296,7 @@ export type BroadcastOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   User?: Prisma.UserOrderByWithRelationInput
   Template?: Prisma.MessageTemplateOrderByWithRelationInput
-  BroadcastContacts?: Prisma.BroadcastContactOrderByRelationAggregateInput
+  BroadcastLeads?: Prisma.BroadcastLeadOrderByRelationAggregateInput
 }
 
 export type BroadcastWhereUniqueInput = Prisma.AtLeast<{
@@ -317,7 +317,7 @@ export type BroadcastWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Broadcast"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Template?: Prisma.XOR<Prisma.MessageTemplateNullableScalarRelationFilter, Prisma.MessageTemplateWhereInput> | null
-  BroadcastContacts?: Prisma.BroadcastContactListRelationFilter
+  BroadcastLeads?: Prisma.BroadcastLeadListRelationFilter
 }, "id">
 
 export type BroadcastOrderByWithAggregationInput = {
@@ -371,7 +371,7 @@ export type BroadcastCreateInput = {
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutBroadcastsInput
   Template?: Prisma.MessageTemplateCreateNestedOneWithoutBroadcastsInput
-  BroadcastContacts?: Prisma.BroadcastContactCreateNestedManyWithoutBroadcastInput
+  BroadcastLeads?: Prisma.BroadcastLeadCreateNestedManyWithoutBroadcastInput
 }
 
 export type BroadcastUncheckedCreateInput = {
@@ -387,7 +387,7 @@ export type BroadcastUncheckedCreateInput = {
   totalSent?: number
   totalFailed?: number
   createdAt?: Date | string
-  BroadcastContacts?: Prisma.BroadcastContactUncheckedCreateNestedManyWithoutBroadcastInput
+  BroadcastLeads?: Prisma.BroadcastLeadUncheckedCreateNestedManyWithoutBroadcastInput
 }
 
 export type BroadcastUpdateInput = {
@@ -403,7 +403,7 @@ export type BroadcastUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutBroadcastsNestedInput
   Template?: Prisma.MessageTemplateUpdateOneWithoutBroadcastsNestedInput
-  BroadcastContacts?: Prisma.BroadcastContactUpdateManyWithoutBroadcastNestedInput
+  BroadcastLeads?: Prisma.BroadcastLeadUpdateManyWithoutBroadcastNestedInput
 }
 
 export type BroadcastUncheckedUpdateInput = {
@@ -419,7 +419,7 @@ export type BroadcastUncheckedUpdateInput = {
   totalSent?: Prisma.IntFieldUpdateOperationsInput | number
   totalFailed?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  BroadcastContacts?: Prisma.BroadcastContactUncheckedUpdateManyWithoutBroadcastNestedInput
+  BroadcastLeads?: Prisma.BroadcastLeadUncheckedUpdateManyWithoutBroadcastNestedInput
 }
 
 export type BroadcastCreateManyInput = {
@@ -631,18 +631,18 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type BroadcastCreateNestedOneWithoutBroadcastContactsInput = {
-  create?: Prisma.XOR<Prisma.BroadcastCreateWithoutBroadcastContactsInput, Prisma.BroadcastUncheckedCreateWithoutBroadcastContactsInput>
-  connectOrCreate?: Prisma.BroadcastCreateOrConnectWithoutBroadcastContactsInput
+export type BroadcastCreateNestedOneWithoutBroadcastLeadsInput = {
+  create?: Prisma.XOR<Prisma.BroadcastCreateWithoutBroadcastLeadsInput, Prisma.BroadcastUncheckedCreateWithoutBroadcastLeadsInput>
+  connectOrCreate?: Prisma.BroadcastCreateOrConnectWithoutBroadcastLeadsInput
   connect?: Prisma.BroadcastWhereUniqueInput
 }
 
-export type BroadcastUpdateOneRequiredWithoutBroadcastContactsNestedInput = {
-  create?: Prisma.XOR<Prisma.BroadcastCreateWithoutBroadcastContactsInput, Prisma.BroadcastUncheckedCreateWithoutBroadcastContactsInput>
-  connectOrCreate?: Prisma.BroadcastCreateOrConnectWithoutBroadcastContactsInput
-  upsert?: Prisma.BroadcastUpsertWithoutBroadcastContactsInput
+export type BroadcastUpdateOneRequiredWithoutBroadcastLeadsNestedInput = {
+  create?: Prisma.XOR<Prisma.BroadcastCreateWithoutBroadcastLeadsInput, Prisma.BroadcastUncheckedCreateWithoutBroadcastLeadsInput>
+  connectOrCreate?: Prisma.BroadcastCreateOrConnectWithoutBroadcastLeadsInput
+  upsert?: Prisma.BroadcastUpsertWithoutBroadcastLeadsInput
   connect?: Prisma.BroadcastWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BroadcastUpdateToOneWithWhereWithoutBroadcastContactsInput, Prisma.BroadcastUpdateWithoutBroadcastContactsInput>, Prisma.BroadcastUncheckedUpdateWithoutBroadcastContactsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BroadcastUpdateToOneWithWhereWithoutBroadcastLeadsInput, Prisma.BroadcastUpdateWithoutBroadcastLeadsInput>, Prisma.BroadcastUncheckedUpdateWithoutBroadcastLeadsInput>
 }
 
 export type BroadcastCreateWithoutUserInput = {
@@ -657,7 +657,7 @@ export type BroadcastCreateWithoutUserInput = {
   totalFailed?: number
   createdAt?: Date | string
   Template?: Prisma.MessageTemplateCreateNestedOneWithoutBroadcastsInput
-  BroadcastContacts?: Prisma.BroadcastContactCreateNestedManyWithoutBroadcastInput
+  BroadcastLeads?: Prisma.BroadcastLeadCreateNestedManyWithoutBroadcastInput
 }
 
 export type BroadcastUncheckedCreateWithoutUserInput = {
@@ -672,7 +672,7 @@ export type BroadcastUncheckedCreateWithoutUserInput = {
   totalSent?: number
   totalFailed?: number
   createdAt?: Date | string
-  BroadcastContacts?: Prisma.BroadcastContactUncheckedCreateNestedManyWithoutBroadcastInput
+  BroadcastLeads?: Prisma.BroadcastLeadUncheckedCreateNestedManyWithoutBroadcastInput
 }
 
 export type BroadcastCreateOrConnectWithoutUserInput = {
@@ -731,7 +731,7 @@ export type BroadcastCreateWithoutTemplateInput = {
   totalFailed?: number
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutBroadcastsInput
-  BroadcastContacts?: Prisma.BroadcastContactCreateNestedManyWithoutBroadcastInput
+  BroadcastLeads?: Prisma.BroadcastLeadCreateNestedManyWithoutBroadcastInput
 }
 
 export type BroadcastUncheckedCreateWithoutTemplateInput = {
@@ -746,7 +746,7 @@ export type BroadcastUncheckedCreateWithoutTemplateInput = {
   totalSent?: number
   totalFailed?: number
   createdAt?: Date | string
-  BroadcastContacts?: Prisma.BroadcastContactUncheckedCreateNestedManyWithoutBroadcastInput
+  BroadcastLeads?: Prisma.BroadcastLeadUncheckedCreateNestedManyWithoutBroadcastInput
 }
 
 export type BroadcastCreateOrConnectWithoutTemplateInput = {
@@ -775,7 +775,7 @@ export type BroadcastUpdateManyWithWhereWithoutTemplateInput = {
   data: Prisma.XOR<Prisma.BroadcastUpdateManyMutationInput, Prisma.BroadcastUncheckedUpdateManyWithoutTemplateInput>
 }
 
-export type BroadcastCreateWithoutBroadcastContactsInput = {
+export type BroadcastCreateWithoutBroadcastLeadsInput = {
   id?: string
   name: string
   message: string
@@ -790,7 +790,7 @@ export type BroadcastCreateWithoutBroadcastContactsInput = {
   Template?: Prisma.MessageTemplateCreateNestedOneWithoutBroadcastsInput
 }
 
-export type BroadcastUncheckedCreateWithoutBroadcastContactsInput = {
+export type BroadcastUncheckedCreateWithoutBroadcastLeadsInput = {
   id?: string
   userId: string
   templateId?: string | null
@@ -805,23 +805,23 @@ export type BroadcastUncheckedCreateWithoutBroadcastContactsInput = {
   createdAt?: Date | string
 }
 
-export type BroadcastCreateOrConnectWithoutBroadcastContactsInput = {
+export type BroadcastCreateOrConnectWithoutBroadcastLeadsInput = {
   where: Prisma.BroadcastWhereUniqueInput
-  create: Prisma.XOR<Prisma.BroadcastCreateWithoutBroadcastContactsInput, Prisma.BroadcastUncheckedCreateWithoutBroadcastContactsInput>
+  create: Prisma.XOR<Prisma.BroadcastCreateWithoutBroadcastLeadsInput, Prisma.BroadcastUncheckedCreateWithoutBroadcastLeadsInput>
 }
 
-export type BroadcastUpsertWithoutBroadcastContactsInput = {
-  update: Prisma.XOR<Prisma.BroadcastUpdateWithoutBroadcastContactsInput, Prisma.BroadcastUncheckedUpdateWithoutBroadcastContactsInput>
-  create: Prisma.XOR<Prisma.BroadcastCreateWithoutBroadcastContactsInput, Prisma.BroadcastUncheckedCreateWithoutBroadcastContactsInput>
+export type BroadcastUpsertWithoutBroadcastLeadsInput = {
+  update: Prisma.XOR<Prisma.BroadcastUpdateWithoutBroadcastLeadsInput, Prisma.BroadcastUncheckedUpdateWithoutBroadcastLeadsInput>
+  create: Prisma.XOR<Prisma.BroadcastCreateWithoutBroadcastLeadsInput, Prisma.BroadcastUncheckedCreateWithoutBroadcastLeadsInput>
   where?: Prisma.BroadcastWhereInput
 }
 
-export type BroadcastUpdateToOneWithWhereWithoutBroadcastContactsInput = {
+export type BroadcastUpdateToOneWithWhereWithoutBroadcastLeadsInput = {
   where?: Prisma.BroadcastWhereInput
-  data: Prisma.XOR<Prisma.BroadcastUpdateWithoutBroadcastContactsInput, Prisma.BroadcastUncheckedUpdateWithoutBroadcastContactsInput>
+  data: Prisma.XOR<Prisma.BroadcastUpdateWithoutBroadcastLeadsInput, Prisma.BroadcastUncheckedUpdateWithoutBroadcastLeadsInput>
 }
 
-export type BroadcastUpdateWithoutBroadcastContactsInput = {
+export type BroadcastUpdateWithoutBroadcastLeadsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
@@ -836,7 +836,7 @@ export type BroadcastUpdateWithoutBroadcastContactsInput = {
   Template?: Prisma.MessageTemplateUpdateOneWithoutBroadcastsNestedInput
 }
 
-export type BroadcastUncheckedUpdateWithoutBroadcastContactsInput = {
+export type BroadcastUncheckedUpdateWithoutBroadcastLeadsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -877,7 +877,7 @@ export type BroadcastUpdateWithoutUserInput = {
   totalFailed?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Template?: Prisma.MessageTemplateUpdateOneWithoutBroadcastsNestedInput
-  BroadcastContacts?: Prisma.BroadcastContactUpdateManyWithoutBroadcastNestedInput
+  BroadcastLeads?: Prisma.BroadcastLeadUpdateManyWithoutBroadcastNestedInput
 }
 
 export type BroadcastUncheckedUpdateWithoutUserInput = {
@@ -892,7 +892,7 @@ export type BroadcastUncheckedUpdateWithoutUserInput = {
   totalSent?: Prisma.IntFieldUpdateOperationsInput | number
   totalFailed?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  BroadcastContacts?: Prisma.BroadcastContactUncheckedUpdateManyWithoutBroadcastNestedInput
+  BroadcastLeads?: Prisma.BroadcastLeadUncheckedUpdateManyWithoutBroadcastNestedInput
 }
 
 export type BroadcastUncheckedUpdateManyWithoutUserInput = {
@@ -935,7 +935,7 @@ export type BroadcastUpdateWithoutTemplateInput = {
   totalFailed?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutBroadcastsNestedInput
-  BroadcastContacts?: Prisma.BroadcastContactUpdateManyWithoutBroadcastNestedInput
+  BroadcastLeads?: Prisma.BroadcastLeadUpdateManyWithoutBroadcastNestedInput
 }
 
 export type BroadcastUncheckedUpdateWithoutTemplateInput = {
@@ -950,7 +950,7 @@ export type BroadcastUncheckedUpdateWithoutTemplateInput = {
   totalSent?: Prisma.IntFieldUpdateOperationsInput | number
   totalFailed?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  BroadcastContacts?: Prisma.BroadcastContactUncheckedUpdateManyWithoutBroadcastNestedInput
+  BroadcastLeads?: Prisma.BroadcastLeadUncheckedUpdateManyWithoutBroadcastNestedInput
 }
 
 export type BroadcastUncheckedUpdateManyWithoutTemplateInput = {
@@ -973,11 +973,11 @@ export type BroadcastUncheckedUpdateManyWithoutTemplateInput = {
  */
 
 export type BroadcastCountOutputType = {
-  BroadcastContacts: number
+  BroadcastLeads: number
 }
 
 export type BroadcastCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  BroadcastContacts?: boolean | BroadcastCountOutputTypeCountBroadcastContactsArgs
+  BroadcastLeads?: boolean | BroadcastCountOutputTypeCountBroadcastLeadsArgs
 }
 
 /**
@@ -993,8 +993,8 @@ export type BroadcastCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ex
 /**
  * BroadcastCountOutputType without action
  */
-export type BroadcastCountOutputTypeCountBroadcastContactsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BroadcastContactWhereInput
+export type BroadcastCountOutputTypeCountBroadcastLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BroadcastLeadWhereInput
 }
 
 
@@ -1013,7 +1013,7 @@ export type BroadcastSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Template?: boolean | Prisma.Broadcast$TemplateArgs<ExtArgs>
-  BroadcastContacts?: boolean | Prisma.Broadcast$BroadcastContactsArgs<ExtArgs>
+  BroadcastLeads?: boolean | Prisma.Broadcast$BroadcastLeadsArgs<ExtArgs>
   _count?: boolean | Prisma.BroadcastCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["broadcast"]>
 
@@ -1070,7 +1070,7 @@ export type BroadcastOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type BroadcastInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Template?: boolean | Prisma.Broadcast$TemplateArgs<ExtArgs>
-  BroadcastContacts?: boolean | Prisma.Broadcast$BroadcastContactsArgs<ExtArgs>
+  BroadcastLeads?: boolean | Prisma.Broadcast$BroadcastLeadsArgs<ExtArgs>
   _count?: boolean | Prisma.BroadcastCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BroadcastIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1087,7 +1087,7 @@ export type $BroadcastPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   objects: {
     User: Prisma.$UserPayload<ExtArgs>
     Template: Prisma.$MessageTemplatePayload<ExtArgs> | null
-    BroadcastContacts: Prisma.$BroadcastContactPayload<ExtArgs>[]
+    BroadcastLeads: Prisma.$BroadcastLeadPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1498,7 +1498,7 @@ export interface Prisma__BroadcastClient<T, Null = never, ExtArgs extends runtim
   readonly [Symbol.toStringTag]: "PrismaPromise"
   User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   Template<T extends Prisma.Broadcast$TemplateArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Broadcast$TemplateArgs<ExtArgs>>): Prisma.Prisma__MessageTemplateClient<runtime.Types.Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  BroadcastContacts<T extends Prisma.Broadcast$BroadcastContactsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Broadcast$BroadcastContactsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  BroadcastLeads<T extends Prisma.Broadcast$BroadcastLeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Broadcast$BroadcastLeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastLeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1955,27 +1955,27 @@ export type Broadcast$TemplateArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * Broadcast.BroadcastContacts
+ * Broadcast.BroadcastLeads
  */
-export type Broadcast$BroadcastContactsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Broadcast$BroadcastLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the BroadcastContact
+   * Select specific fields to fetch from the BroadcastLead
    */
-  select?: Prisma.BroadcastContactSelect<ExtArgs> | null
+  select?: Prisma.BroadcastLeadSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the BroadcastContact
+   * Omit specific fields from the BroadcastLead
    */
-  omit?: Prisma.BroadcastContactOmit<ExtArgs> | null
+  omit?: Prisma.BroadcastLeadOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.BroadcastContactInclude<ExtArgs> | null
-  where?: Prisma.BroadcastContactWhereInput
-  orderBy?: Prisma.BroadcastContactOrderByWithRelationInput | Prisma.BroadcastContactOrderByWithRelationInput[]
-  cursor?: Prisma.BroadcastContactWhereUniqueInput
+  include?: Prisma.BroadcastLeadInclude<ExtArgs> | null
+  where?: Prisma.BroadcastLeadWhereInput
+  orderBy?: Prisma.BroadcastLeadOrderByWithRelationInput | Prisma.BroadcastLeadOrderByWithRelationInput[]
+  cursor?: Prisma.BroadcastLeadWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.BroadcastContactScalarFieldEnum | Prisma.BroadcastContactScalarFieldEnum[]
+  distinct?: Prisma.BroadcastLeadScalarFieldEnum | Prisma.BroadcastLeadScalarFieldEnum[]
 }
 
 /**

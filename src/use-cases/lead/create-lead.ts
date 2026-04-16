@@ -2,6 +2,7 @@ import { Lead, LeadOption, LeadStatus } from '@/lib/prisma'
 import { LeadRepository } from '@/repositories/lead'
 import { ResourceNotFound } from '../../error/resource-not-found'
 import { UserRepository } from '@/repositories/user'
+import { UserAlreadyExistsError } from '@/error/user-already-exists-error'
 
 interface CreateLeadUseCaseRequest {
   nome: string
@@ -38,10 +39,15 @@ export class CreateLeadUseCase {
     productId,
     Option
   }: CreateLeadUseCaseRequest): Promise<CreateLeadUseCaseResponse> {
-    const findedUser =
-      await this.userRepository.findUserById(userId)
+    const findedUser = await this.userRepository.findUserById(userId)
     if (!findedUser) {
       throw new ResourceNotFound()
+    }
+
+    const phoneDigits = telefone.replace(/\D/g, '')
+    const existing = await this.leadRepository.findLeadWhereUserByNumber(userId, phoneDigits)
+    if (existing) {
+      throw new UserAlreadyExistsError()
     }
 
     const lead = await this.leadRepository.create({

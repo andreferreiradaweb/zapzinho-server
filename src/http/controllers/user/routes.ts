@@ -8,6 +8,8 @@ import { ListUsersController } from './list-users'
 import { GetOneUserController } from './get-one-user'
 import { SelfUpdateUserController } from './self-update-user'
 import { DeleteUserController } from './delete-user'
+import { GetInstanceQrCodeController } from './get-instance-qrcode'
+import { GetInstanceStatusController } from './get-instance-status'
 
 export async function usersRoutes(app: FastifyInstance) {
   app.post(
@@ -32,6 +34,16 @@ export async function usersRoutes(app: FastifyInstance) {
   )
   app.post('/user/signin', AuthenticateController)
   app.get('/user/:id', { onRequest: [verifyJwt] }, GetOneUserController)
+  app.get(
+    '/user/:id/instance/qrcode',
+    { onRequest: [verifyJwt] },
+    GetInstanceQrCodeController,
+  )
+  app.get(
+    '/user/:id/instance/status',
+    { onRequest: [verifyJwt] },
+    GetInstanceStatusController,
+  )
   app.get(
     '/user',
     { onRequest: [verifyJwt, verifyAdmin] },

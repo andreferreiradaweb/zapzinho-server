@@ -17,9 +17,11 @@ export async function registerUserController(
       .regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$/),
     isActive: z.boolean(),
     role: z.nativeEnum(Role),
+    name: z.string().optional(),
+    address: z.string().optional(),
   })
 
-  const { email, password, isActive, role, phoneNumber } =
+  const { email, password, isActive, role, phoneNumber, name, address } =
     registerBodySchema.parse(request.body)
 
   try {
@@ -30,6 +32,8 @@ export async function registerUserController(
       isActive,
       role,
       phoneNumber,
+      name,
+      address,
     })
     return reply.status(201).send()
   } catch (error) {

@@ -54,10 +54,9 @@ export const ModelName = {
   User: 'User',
   Product: 'Product',
   Lead: 'Lead',
-  Contact: 'Contact',
   MessageTemplate: 'MessageTemplate',
   Broadcast: 'Broadcast',
-  BroadcastContact: 'BroadcastContact',
+  BroadcastLead: 'BroadcastLead',
   MessageLog: 'MessageLog',
   Customer: 'Customer',
   Address: 'Address',
@@ -92,6 +91,7 @@ export const UserScalarFieldEnum = {
   CustomerType: 'CustomerType',
   trialExpiresAt: 'trialExpiresAt',
   onboardingMessageSentAt: 'onboardingMessageSentAt',
+  wapiInstanceId: 'wapiInstanceId',
   createdAt: 'createdAt'
 } as const
 
@@ -123,25 +123,12 @@ export const LeadScalarFieldEnum = {
   userId: 'userId',
   Status: 'Status',
   Option: 'Option',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  lastBroadcastAt: 'lastBroadcastAt',
+  lastClientMessageAt: 'lastClientMessageAt'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
-
-
-export const ContactScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  name: 'name',
-  phone: 'phone',
-  email: 'email',
-  tags: 'tags',
-  notes: 'notes',
-  isActive: 'isActive',
-  createdAt: 'createdAt'
-} as const
-
-export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
 
 
 export const MessageTemplateScalarFieldEnum = {
@@ -174,22 +161,22 @@ export const BroadcastScalarFieldEnum = {
 export type BroadcastScalarFieldEnum = (typeof BroadcastScalarFieldEnum)[keyof typeof BroadcastScalarFieldEnum]
 
 
-export const BroadcastContactScalarFieldEnum = {
+export const BroadcastLeadScalarFieldEnum = {
   id: 'id',
   broadcastId: 'broadcastId',
-  contactId: 'contactId',
+  leadId: 'leadId',
   status: 'status',
   sentAt: 'sentAt',
   errorMsg: 'errorMsg'
 } as const
 
-export type BroadcastContactScalarFieldEnum = (typeof BroadcastContactScalarFieldEnum)[keyof typeof BroadcastContactScalarFieldEnum]
+export type BroadcastLeadScalarFieldEnum = (typeof BroadcastLeadScalarFieldEnum)[keyof typeof BroadcastLeadScalarFieldEnum]
 
 
 export const MessageLogScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  contactId: 'contactId',
+  leadId: 'leadId',
   phone: 'phone',
   message: 'message',
   type: 'type',

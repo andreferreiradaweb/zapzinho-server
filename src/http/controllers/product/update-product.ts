@@ -10,10 +10,10 @@ export async function UpdateProductController(
   const updateProductBodySchema = z.object({
     id: z.string(),
     title: z.string(),
-    description: z.string().optional(),
-    code: z.string().optional(),
-    price: z.string(),
-    condition: z.string().optional(),
+    description: z.string().nullish(),
+    code: z.string().nullish(),
+    price: z.string().nullish(),
+    condition: z.string().nullish(),
     photos: z.array(z.string()),
   })
 
@@ -32,10 +32,10 @@ export async function UpdateProductController(
     const updatedProduct = await updateProductFactory.execute({
       id,
       title,
-      description,
-      code,
-      price,
-      condition,
+      description: description ?? undefined,
+      code: code ?? undefined,
+      price: price ?? undefined,
+      condition: condition ?? undefined,
       photos,
       userId: sub,
     })

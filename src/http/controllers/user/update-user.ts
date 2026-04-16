@@ -16,9 +16,11 @@ export async function updateUserController(
     isActive: z.boolean(),
     role: z.nativeEnum(Role),
     customerType: z.nativeEnum(CustomerType).optional(),
+    name: z.string().optional(),
+    address: z.string().optional(),
   })
 
-  const { email, password, isActive, role, customerType, phoneNumber, id } =
+  const { email, password, isActive, role, customerType, phoneNumber, id, name, address } =
     updateBodySchema.parse(request.body)
 
   try {
@@ -31,6 +33,8 @@ export async function updateUserController(
       role,
       phoneNumber,
       customerType,
+      name,
+      address,
     })
     return reply.status(201).send(user)
   } catch (error) {

@@ -11,6 +11,8 @@ interface CreateBroadcastRequest {
   leadIds?: string[]
   productId?: string
   status?: LeadStatus
+  lastMessageRange?: string
+  lastBroadcastRange?: string
   scheduledAt?: Date
 }
 
@@ -43,6 +45,8 @@ export class CreateBroadcastUseCase {
         data.userId,
         data.productId,
         data.status,
+        data.lastMessageRange,
+        data.lastBroadcastRange,
       )
       leadIds = leads.map((l) => l.id)
     }

@@ -34,6 +34,7 @@ export type UserMinAggregateOutputType = {
   CustomerType: $Enums.CustomerType | null
   trialExpiresAt: Date | null
   onboardingMessageSentAt: Date | null
+  wapiInstanceId: string | null
   createdAt: Date | null
 }
 
@@ -47,6 +48,7 @@ export type UserMaxAggregateOutputType = {
   CustomerType: $Enums.CustomerType | null
   trialExpiresAt: Date | null
   onboardingMessageSentAt: Date | null
+  wapiInstanceId: string | null
   createdAt: Date | null
 }
 
@@ -60,6 +62,7 @@ export type UserCountAggregateOutputType = {
   CustomerType: number
   trialExpiresAt: number
   onboardingMessageSentAt: number
+  wapiInstanceId: number
   createdAt: number
   _all: number
 }
@@ -75,6 +78,7 @@ export type UserMinAggregateInputType = {
   CustomerType?: true
   trialExpiresAt?: true
   onboardingMessageSentAt?: true
+  wapiInstanceId?: true
   createdAt?: true
 }
 
@@ -88,6 +92,7 @@ export type UserMaxAggregateInputType = {
   CustomerType?: true
   trialExpiresAt?: true
   onboardingMessageSentAt?: true
+  wapiInstanceId?: true
   createdAt?: true
 }
 
@@ -101,6 +106,7 @@ export type UserCountAggregateInputType = {
   CustomerType?: true
   trialExpiresAt?: true
   onboardingMessageSentAt?: true
+  wapiInstanceId?: true
   createdAt?: true
   _all?: true
 }
@@ -187,6 +193,7 @@ export type UserGroupByOutputType = {
   CustomerType: $Enums.CustomerType
   trialExpiresAt: Date | null
   onboardingMessageSentAt: Date | null
+  wapiInstanceId: string | null
   createdAt: Date
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
@@ -221,10 +228,10 @@ export type UserWhereInput = {
   CustomerType?: Prisma.EnumCustomerTypeFilter<"User"> | $Enums.CustomerType
   trialExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   onboardingMessageSentAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  wapiInstanceId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   Products?: Prisma.ProductListRelationFilter
   Leads?: Prisma.LeadListRelationFilter
-  Contacts?: Prisma.ContactListRelationFilter
   MessageTemplates?: Prisma.MessageTemplateListRelationFilter
   Broadcasts?: Prisma.BroadcastListRelationFilter
   MessageLogs?: Prisma.MessageLogListRelationFilter
@@ -240,10 +247,10 @@ export type UserOrderByWithRelationInput = {
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   onboardingMessageSentAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  wapiInstanceId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   Products?: Prisma.ProductOrderByRelationAggregateInput
   Leads?: Prisma.LeadOrderByRelationAggregateInput
-  Contacts?: Prisma.ContactOrderByRelationAggregateInput
   MessageTemplates?: Prisma.MessageTemplateOrderByRelationAggregateInput
   Broadcasts?: Prisma.BroadcastOrderByRelationAggregateInput
   MessageLogs?: Prisma.MessageLogOrderByRelationAggregateInput
@@ -252,6 +259,7 @@ export type UserOrderByWithRelationInput = {
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
+  wapiInstanceId?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -265,11 +273,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   Products?: Prisma.ProductListRelationFilter
   Leads?: Prisma.LeadListRelationFilter
-  Contacts?: Prisma.ContactListRelationFilter
   MessageTemplates?: Prisma.MessageTemplateListRelationFilter
   Broadcasts?: Prisma.BroadcastListRelationFilter
   MessageLogs?: Prisma.MessageLogListRelationFilter
-}, "id" | "email">
+}, "id" | "email" | "wapiInstanceId">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -281,6 +288,7 @@ export type UserOrderByWithAggregationInput = {
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   onboardingMessageSentAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  wapiInstanceId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -300,6 +308,7 @@ export type UserScalarWhereWithAggregatesInput = {
   CustomerType?: Prisma.EnumCustomerTypeWithAggregatesFilter<"User"> | $Enums.CustomerType
   trialExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   onboardingMessageSentAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  wapiInstanceId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
@@ -313,10 +322,10 @@ export type UserCreateInput = {
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
-  Contacts?: Prisma.ContactCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
@@ -332,10 +341,10 @@ export type UserUncheckedCreateInput = {
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
-  Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
@@ -351,10 +360,10 @@ export type UserUpdateInput = {
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
-  Contacts?: Prisma.ContactUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
@@ -370,10 +379,10 @@ export type UserUncheckedUpdateInput = {
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
-  Contacts?: Prisma.ContactUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
@@ -389,6 +398,7 @@ export type UserCreateManyInput = {
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
   createdAt?: Date | string
 }
 
@@ -402,6 +412,7 @@ export type UserUpdateManyMutationInput = {
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -415,6 +426,7 @@ export type UserUncheckedUpdateManyInput = {
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -428,6 +440,7 @@ export type UserCountOrderByAggregateInput = {
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrder
   onboardingMessageSentAt?: Prisma.SortOrder
+  wapiInstanceId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -441,6 +454,7 @@ export type UserMaxOrderByAggregateInput = {
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrder
   onboardingMessageSentAt?: Prisma.SortOrder
+  wapiInstanceId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -454,6 +468,7 @@ export type UserMinOrderByAggregateInput = {
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrder
   onboardingMessageSentAt?: Prisma.SortOrder
+  wapiInstanceId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -518,20 +533,6 @@ export type UserUpdateOneRequiredWithoutLeadsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutLeadsInput, Prisma.UserUpdateWithoutLeadsInput>, Prisma.UserUncheckedUpdateWithoutLeadsInput>
 }
 
-export type UserCreateNestedOneWithoutContactsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutContactsInput, Prisma.UserUncheckedCreateWithoutContactsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutContactsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutContactsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutContactsInput, Prisma.UserUncheckedCreateWithoutContactsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutContactsInput
-  upsert?: Prisma.UserUpsertWithoutContactsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutContactsInput, Prisma.UserUpdateWithoutContactsInput>, Prisma.UserUncheckedUpdateWithoutContactsInput>
-}
-
 export type UserCreateNestedOneWithoutMessageTemplatesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutMessageTemplatesInput, Prisma.UserUncheckedCreateWithoutMessageTemplatesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutMessageTemplatesInput
@@ -584,9 +585,9 @@ export type UserCreateWithoutProductsInput = {
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
   createdAt?: Date | string
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
-  Contacts?: Prisma.ContactCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
@@ -602,9 +603,9 @@ export type UserUncheckedCreateWithoutProductsInput = {
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
   createdAt?: Date | string
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
-  Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
@@ -636,9 +637,9 @@ export type UserUpdateWithoutProductsInput = {
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
-  Contacts?: Prisma.ContactUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
@@ -654,9 +655,9 @@ export type UserUncheckedUpdateWithoutProductsInput = {
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
-  Contacts?: Prisma.ContactUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
@@ -672,9 +673,9 @@ export type UserCreateWithoutLeadsInput = {
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
-  Contacts?: Prisma.ContactCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
@@ -690,9 +691,9 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
-  Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
@@ -724,9 +725,9 @@ export type UserUpdateWithoutLeadsInput = {
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
-  Contacts?: Prisma.ContactUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
@@ -742,97 +743,9 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
-  Contacts?: Prisma.ContactUncheckedUpdateManyWithoutUserNestedInput
-  MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
-  Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
-  MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutContactsInput = {
-  id?: string
-  email: string
-  passwordHash: string
-  phoneNumber?: string | null
-  isActive: boolean
-  Role: $Enums.Role
-  CustomerType: $Enums.CustomerType
-  trialExpiresAt?: Date | string | null
-  onboardingMessageSentAt?: Date | string | null
-  createdAt?: Date | string
-  Products?: Prisma.ProductCreateNestedManyWithoutUserInput
-  Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
-  MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
-  Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
-  MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutContactsInput = {
-  id?: string
-  email: string
-  passwordHash: string
-  phoneNumber?: string | null
-  isActive: boolean
-  Role: $Enums.Role
-  CustomerType: $Enums.CustomerType
-  trialExpiresAt?: Date | string | null
-  onboardingMessageSentAt?: Date | string | null
-  createdAt?: Date | string
-  Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
-  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
-  MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
-  Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
-  MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutContactsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutContactsInput, Prisma.UserUncheckedCreateWithoutContactsInput>
-}
-
-export type UserUpsertWithoutContactsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutContactsInput, Prisma.UserUncheckedUpdateWithoutContactsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutContactsInput, Prisma.UserUncheckedCreateWithoutContactsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutContactsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutContactsInput, Prisma.UserUncheckedUpdateWithoutContactsInput>
-}
-
-export type UserUpdateWithoutContactsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
-  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
-  Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
-  MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
-  Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
-  MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutContactsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
-  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
-  Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
@@ -848,10 +761,10 @@ export type UserCreateWithoutMessageTemplatesInput = {
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
-  Contacts?: Prisma.ContactCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
 }
@@ -866,10 +779,10 @@ export type UserUncheckedCreateWithoutMessageTemplatesInput = {
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
-  Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
 }
@@ -900,10 +813,10 @@ export type UserUpdateWithoutMessageTemplatesInput = {
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
-  Contacts?: Prisma.ContactUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
 }
@@ -918,10 +831,10 @@ export type UserUncheckedUpdateWithoutMessageTemplatesInput = {
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
-  Contacts?: Prisma.ContactUncheckedUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -936,10 +849,10 @@ export type UserCreateWithoutBroadcastsInput = {
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
-  Contacts?: Prisma.ContactCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
 }
@@ -954,10 +867,10 @@ export type UserUncheckedCreateWithoutBroadcastsInput = {
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
-  Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
 }
@@ -988,10 +901,10 @@ export type UserUpdateWithoutBroadcastsInput = {
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
-  Contacts?: Prisma.ContactUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
 }
@@ -1006,10 +919,10 @@ export type UserUncheckedUpdateWithoutBroadcastsInput = {
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
-  Contacts?: Prisma.ContactUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1024,10 +937,10 @@ export type UserCreateWithoutMessageLogsInput = {
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
-  Contacts?: Prisma.ContactCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
 }
@@ -1042,10 +955,10 @@ export type UserUncheckedCreateWithoutMessageLogsInput = {
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
-  Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
 }
@@ -1076,10 +989,10 @@ export type UserUpdateWithoutMessageLogsInput = {
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
-  Contacts?: Prisma.ContactUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
 }
@@ -1094,10 +1007,10 @@ export type UserUncheckedUpdateWithoutMessageLogsInput = {
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
-  Contacts?: Prisma.ContactUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1110,7 +1023,6 @@ export type UserUncheckedUpdateWithoutMessageLogsInput = {
 export type UserCountOutputType = {
   Products: number
   Leads: number
-  Contacts: number
   MessageTemplates: number
   Broadcasts: number
   MessageLogs: number
@@ -1119,7 +1031,6 @@ export type UserCountOutputType = {
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Products?: boolean | UserCountOutputTypeCountProductsArgs
   Leads?: boolean | UserCountOutputTypeCountLeadsArgs
-  Contacts?: boolean | UserCountOutputTypeCountContactsArgs
   MessageTemplates?: boolean | UserCountOutputTypeCountMessageTemplatesArgs
   Broadcasts?: boolean | UserCountOutputTypeCountBroadcastsArgs
   MessageLogs?: boolean | UserCountOutputTypeCountMessageLogsArgs
@@ -1147,13 +1058,6 @@ export type UserCountOutputTypeCountProductsArgs<ExtArgs extends runtime.Types.E
  */
 export type UserCountOutputTypeCountLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountContactsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ContactWhereInput
 }
 
 /**
@@ -1188,10 +1092,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   CustomerType?: boolean
   trialExpiresAt?: boolean
   onboardingMessageSentAt?: boolean
+  wapiInstanceId?: boolean
   createdAt?: boolean
   Products?: boolean | Prisma.User$ProductsArgs<ExtArgs>
   Leads?: boolean | Prisma.User$LeadsArgs<ExtArgs>
-  Contacts?: boolean | Prisma.User$ContactsArgs<ExtArgs>
   MessageTemplates?: boolean | Prisma.User$MessageTemplatesArgs<ExtArgs>
   Broadcasts?: boolean | Prisma.User$BroadcastsArgs<ExtArgs>
   MessageLogs?: boolean | Prisma.User$MessageLogsArgs<ExtArgs>
@@ -1208,6 +1112,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   CustomerType?: boolean
   trialExpiresAt?: boolean
   onboardingMessageSentAt?: boolean
+  wapiInstanceId?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -1221,6 +1126,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   CustomerType?: boolean
   trialExpiresAt?: boolean
   onboardingMessageSentAt?: boolean
+  wapiInstanceId?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -1234,14 +1140,14 @@ export type UserSelectScalar = {
   CustomerType?: boolean
   trialExpiresAt?: boolean
   onboardingMessageSentAt?: boolean
+  wapiInstanceId?: boolean
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "phoneNumber" | "isActive" | "Role" | "CustomerType" | "trialExpiresAt" | "onboardingMessageSentAt" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "phoneNumber" | "isActive" | "Role" | "CustomerType" | "trialExpiresAt" | "onboardingMessageSentAt" | "wapiInstanceId" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Products?: boolean | Prisma.User$ProductsArgs<ExtArgs>
   Leads?: boolean | Prisma.User$LeadsArgs<ExtArgs>
-  Contacts?: boolean | Prisma.User$ContactsArgs<ExtArgs>
   MessageTemplates?: boolean | Prisma.User$MessageTemplatesArgs<ExtArgs>
   Broadcasts?: boolean | Prisma.User$BroadcastsArgs<ExtArgs>
   MessageLogs?: boolean | Prisma.User$MessageLogsArgs<ExtArgs>
@@ -1255,7 +1161,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     Products: Prisma.$ProductPayload<ExtArgs>[]
     Leads: Prisma.$LeadPayload<ExtArgs>[]
-    Contacts: Prisma.$ContactPayload<ExtArgs>[]
     MessageTemplates: Prisma.$MessageTemplatePayload<ExtArgs>[]
     Broadcasts: Prisma.$BroadcastPayload<ExtArgs>[]
     MessageLogs: Prisma.$MessageLogPayload<ExtArgs>[]
@@ -1270,6 +1175,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     CustomerType: $Enums.CustomerType
     trialExpiresAt: Date | null
     onboardingMessageSentAt: Date | null
+    wapiInstanceId: string | null
     createdAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -1667,7 +1573,6 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   Products<T extends Prisma.User$ProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Leads<T extends Prisma.User$LeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$LeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Contacts<T extends Prisma.User$ContactsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ContactsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   MessageTemplates<T extends Prisma.User$MessageTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$MessageTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Broadcasts<T extends Prisma.User$BroadcastsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$BroadcastsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   MessageLogs<T extends Prisma.User$MessageLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$MessageLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1709,6 +1614,7 @@ export interface UserFieldRefs {
   readonly CustomerType: Prisma.FieldRef<"User", 'CustomerType'>
   readonly trialExpiresAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly onboardingMessageSentAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly wapiInstanceId: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
@@ -2143,30 +2049,6 @@ export type User$LeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.LeadScalarFieldEnum | Prisma.LeadScalarFieldEnum[]
-}
-
-/**
- * User.Contacts
- */
-export type User$ContactsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Contact
-   */
-  select?: Prisma.ContactSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Contact
-   */
-  omit?: Prisma.ContactOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContactInclude<ExtArgs> | null
-  where?: Prisma.ContactWhereInput
-  orderBy?: Prisma.ContactOrderByWithRelationInput | Prisma.ContactOrderByWithRelationInput[]
-  cursor?: Prisma.ContactWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ContactScalarFieldEnum | Prisma.ContactScalarFieldEnum[]
 }
 
 /**

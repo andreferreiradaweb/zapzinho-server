@@ -55,11 +55,6 @@ export type Product = Prisma.ProductModel
  */
 export type Lead = Prisma.LeadModel
 /**
- * Model Contact
- * 
- */
-export type Contact = Prisma.ContactModel
-/**
  * Model MessageTemplate
  * 
  */
@@ -70,10 +65,10 @@ export type MessageTemplate = Prisma.MessageTemplateModel
  */
 export type Broadcast = Prisma.BroadcastModel
 /**
- * Model BroadcastContact
+ * Model BroadcastLead
  * 
  */
-export type BroadcastContact = Prisma.BroadcastContactModel
+export type BroadcastLead = Prisma.BroadcastLeadModel
 /**
  * Model MessageLog
  * 

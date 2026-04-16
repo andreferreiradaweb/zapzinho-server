@@ -33,7 +33,11 @@ export class HandleIncomingMessageUseCase {
 
     const existing = await this.leadRepository.findLeadWhereUserByNumber(user.id, phone)
     if (existing) {
-      return { lead: existing, created: false }
+      const updated = await this.leadRepository.update({
+        id: existing.id,
+        lastClientMessageAt: new Date(),
+      })
+      return { lead: updated, created: false }
     }
 
     const lead = await this.leadRepository.create({
@@ -46,6 +50,7 @@ export class HandleIncomingMessageUseCase {
       Status: 'NOVO_INTERESSE',
       Option: 'ATENDIMENTO_HUMANO',
       productId: null,
+      lastClientMessageAt: new Date(),
     })
 
     return { lead, created: true }

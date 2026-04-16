@@ -12,6 +12,8 @@ interface UpdateUserUseCaseRequest {
   role: Role
   isActive: boolean
   customerType?: CustomerType
+  name?: string
+  address?: string
 }
 
 interface UpdateUserUseCaseResponse {
@@ -29,6 +31,8 @@ export class UpdateUserUseCase {
     phoneNumber,
     email,
     customerType,
+    name,
+    address,
   }: UpdateUserUseCaseRequest): Promise<UpdateUserUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(id)
 
@@ -59,6 +63,8 @@ export class UpdateUserUseCase {
       passwordHash: hashedPassword,
       isActive,
       CustomerType: customerType || findedUser.CustomerType,
+      name: name ?? findedUser.name,
+      address: address ?? findedUser.address,
     })
 
     return { user }

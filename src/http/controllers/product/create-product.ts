@@ -8,12 +8,12 @@ export async function CreateProductController(
   reply: FastifyReply,
 ) {
   const createProductBodySchema = z.object({
-    id: z.string().optional(),
+    id: z.string().nullish(),
     title: z.string(),
-    description: z.string().optional(),
-    code: z.string().optional(),
-    price: z.string(),
-    condition: z.string().optional(),
+    description: z.string().nullish(),
+    code: z.string().nullish(),
+    price: z.string().nullish(),
+    condition: z.string().nullish(),
     photos: z.array(z.string()),
   })
 
@@ -33,12 +33,12 @@ export async function CreateProductController(
     const createProductUseCase = CreateProductFactory()
 
     const createdProduct = await createProductUseCase.execute({
-      id,
+      id: id ?? undefined,
       title,
-      description,
-      code,
-      price,
-      condition,
+      description: description ?? undefined,
+      code: code ?? undefined,
+      price: price ?? undefined,
+      condition: condition ?? undefined,
       photos,
       userId: sub,
     })

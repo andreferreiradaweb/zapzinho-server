@@ -2,6 +2,46 @@ import { Prisma, LeadStatus, Product, Lead, LeadOption } from '@/lib/prisma'
 import { LeadRepository } from '../lead'
 import { prisma } from '@/lib/prisma'
 
+/**
+ * Exclude leads who already received a broadcast within the given window.
+ * "not sent in last Xh" → lastBroadcastAt IS NULL OR lastBroadcastAt < now - X
+ */
+function buildLastBroadcastFilter(range: string): Prisma.DateTimeNullableFilter {
+  const now = new Date()
+  const map: Record<string, number> = {
+    '6h':  6  * 60 * 60 * 1000,
+    '12h': 12 * 60 * 60 * 1000,
+    '1d':  24 * 60 * 60 * 1000,
+    '3d':  3  * 24 * 60 * 60 * 1000,
+    '1w':  7  * 24 * 60 * 60 * 1000,
+    '2w':  14 * 24 * 60 * 60 * 1000,
+    '1m':  30 * 24 * 60 * 60 * 1000,
+  }
+  const ms = map[range]
+  if (!ms) return {}
+  // only include leads whose last broadcast was BEFORE the cutoff (or never sent)
+  return { lt: new Date(now.getTime() - ms) }
+}
+
+function buildLastMessageFilter(range: string): Prisma.DateTimeNullableFilter {
+  const now = new Date()
+  const map: Record<string, number> = {
+    '1h':    1 * 60 * 60 * 1000,
+    '2h':    2 * 60 * 60 * 1000,
+    '4h':    4 * 60 * 60 * 1000,
+    '8h':    8 * 60 * 60 * 1000,
+    '1d':   24 * 60 * 60 * 1000,
+    '1w':    7 * 24 * 60 * 60 * 1000,
+    '1m':   30 * 24 * 60 * 60 * 1000,
+  }
+  if (range === 'over1m') {
+    return { lt: new Date(now.getTime() - map['1m']) }
+  }
+  const ms = map[range]
+  if (!ms) return {}
+  return { gte: new Date(now.getTime() - ms) }
+}
+
 interface LeadWithProduct extends Lead {
   Product: Product
 }
@@ -43,49 +83,25 @@ export class PrismaLeadRepository implements LeadRepository {
     option?: LeadOption,
     startDate?: string,
     endDate?: string,
+    phone?: string,
   ) {
-    const where: Prisma.LeadWhereInput = {
-      userId,
-    }
+    const where: Prisma.LeadWhereInput = { userId }
 
-    if (status) {
-      where.Status = {
-        equals: status,
-      }
-    }
-
-    if (option) {
-      where.Option = {
-        equals: option,
-      }
-    }
-
-    if (search) {
-      where.productId = {
-        equals: search,
-      }
-    }
-
+    if (status) where.Status = { equals: status }
+    if (option) where.Option = { equals: option }
+    if (search) where.productId = { equals: search }
+    if (phone) where.telefone = { contains: phone.replace(/\D/g, '') }
     if (startDate && endDate) {
-      where.createdAt = {
-        gte: new Date(startDate),
-        lte: new Date(endDate),
-      }
+      where.createdAt = { gte: new Date(startDate), lte: new Date(endDate) }
     }
 
-    const leads = await prisma.lead.findMany({
+    return prisma.lead.findMany({
       where,
       skip: offset,
       take: Number(limit),
-      include: {
-        Product: true,
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
-    })
-
-    return leads as LeadWithProduct[]
+      include: { Product: true },
+      orderBy: { createdAt: 'desc' },
+    }) as Promise<LeadWithProduct[]>
   }
 
   async countByUserId(
@@ -95,47 +111,25 @@ export class PrismaLeadRepository implements LeadRepository {
     option: LeadOption,
     startDate?: string,
     endDate?: string,
+    phone?: string,
   ) {
-    const where: Prisma.LeadWhereInput = {
-      userId,
-    }
+    const where: Prisma.LeadWhereInput = { userId }
 
-    if (status) {
-      where.Status = {
-        equals: status,
-      }
-    }
-
-    if (option) {
-      where.Option = {
-        equals: option,
-      }
-    }
-
-    if (search) {
-      where.productId = {
-        equals: search,
-      }
-    }
-
+    if (status) where.Status = { equals: status }
+    if (option) where.Option = { equals: option }
+    if (search) where.productId = { equals: search }
+    if (phone) where.telefone = { contains: phone.replace(/\D/g, '') }
     if (startDate && endDate) {
-      where.createdAt = {
-        gte: new Date(startDate),
-        lte: new Date(endDate),
-      }
+      where.createdAt = { gte: new Date(startDate), lte: new Date(endDate) }
     }
 
-    return prisma.lead.count({
-      where,
-    })
+    return prisma.lead.count({ where })
   }
 
   async delete(id: string) {
-    return prisma.lead.delete({
-      where: {
-        id,
-      },
-    })
+    await prisma.broadcastLead.deleteMany({ where: { leadId: id } })
+    await prisma.messageLog.updateMany({ where: { leadId: id }, data: { leadId: null } })
+    return prisma.lead.delete({ where: { id } })
   }
 
   async create(data: Prisma.LeadUncheckedCreateInput) {
@@ -153,12 +147,17 @@ export class PrismaLeadRepository implements LeadRepository {
     })
   }
 
-  async findAllForBroadcast(userId: string, productId?: string, status?: LeadStatus) {
+  async findAllForBroadcast(userId: string, productId?: string, status?: LeadStatus, lastMessageRange?: string, lastBroadcastRange?: string) {
+    const lastMessageFilter = lastMessageRange ? buildLastMessageFilter(lastMessageRange) : undefined
+    const lastBroadcastFilter = lastBroadcastRange ? buildLastBroadcastFilter(lastBroadcastRange) : undefined
+
     return prisma.lead.findMany({
       where: {
         userId,
         ...(productId ? { productId } : {}),
         ...(status ? { Status: status } : {}),
+        ...(lastMessageFilter ? { lastClientMessageAt: lastMessageFilter } : {}),
+        ...(lastBroadcastFilter ? { lastBroadcastAt: lastBroadcastFilter } : {}),
       },
     })
   }

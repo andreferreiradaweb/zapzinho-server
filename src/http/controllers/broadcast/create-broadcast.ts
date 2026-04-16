@@ -11,6 +11,8 @@ export async function createBroadcastController(request: FastifyRequest, reply: 
     leadIds: z.array(z.string().uuid()).optional(),
     productId: z.string().uuid().optional(),
     status: z.enum(['NOVO_INTERESSE', 'CONTATO_FEITO', 'NEGOCIACAO', 'VENDIDO', 'NAO_INTERESSADO']).optional(),
+    lastMessageRange: z.enum(['1h','2h','4h','8h','1d','1w','1m','over1m']).optional(),
+    lastBroadcastRange: z.enum(['6h','12h','1d','3d','1w','2w','1m']).optional(),
     scheduledAt: z.string().datetime().optional().transform((v) => v ? new Date(v) : undefined),
   })
   const body = schema.parse(request.body)

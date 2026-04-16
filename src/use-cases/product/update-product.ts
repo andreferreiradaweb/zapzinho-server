@@ -11,7 +11,7 @@ interface UpdateProductUseCaseRequest {
   title: string
   description?: string
   code?: string
-  price: string
+  price?: string
   condition?: string
   photos: string[]
   userId: string

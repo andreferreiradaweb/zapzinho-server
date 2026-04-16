@@ -387,10 +387,9 @@ export const ModelName = {
   User: 'User',
   Product: 'Product',
   Lead: 'Lead',
-  Contact: 'Contact',
   MessageTemplate: 'MessageTemplate',
   Broadcast: 'Broadcast',
-  BroadcastContact: 'BroadcastContact',
+  BroadcastLead: 'BroadcastLead',
   MessageLog: 'MessageLog',
   Customer: 'Customer',
   Address: 'Address',
@@ -412,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "product" | "lead" | "contact" | "messageTemplate" | "broadcast" | "broadcastContact" | "messageLog" | "customer" | "address" | "order" | "orderItem" | "payment"
+    modelProps: "user" | "product" | "lead" | "messageTemplate" | "broadcast" | "broadcastLead" | "messageLog" | "customer" | "address" | "order" | "orderItem" | "payment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -638,80 +637,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Contact: {
-      payload: Prisma.$ContactPayload<ExtArgs>
-      fields: Prisma.ContactFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.ContactFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.ContactFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
-        }
-        findFirst: {
-          args: Prisma.ContactFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.ContactFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
-        }
-        findMany: {
-          args: Prisma.ContactFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>[]
-        }
-        create: {
-          args: Prisma.ContactCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
-        }
-        createMany: {
-          args: Prisma.ContactCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.ContactCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>[]
-        }
-        delete: {
-          args: Prisma.ContactDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
-        }
-        update: {
-          args: Prisma.ContactUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
-        }
-        deleteMany: {
-          args: Prisma.ContactDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.ContactUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.ContactUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>[]
-        }
-        upsert: {
-          args: Prisma.ContactUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
-        }
-        aggregate: {
-          args: Prisma.ContactAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateContact>
-        }
-        groupBy: {
-          args: Prisma.ContactGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ContactGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.ContactCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ContactCountAggregateOutputType> | number
-        }
-      }
-    }
     MessageTemplate: {
       payload: Prisma.$MessageTemplatePayload<ExtArgs>
       fields: Prisma.MessageTemplateFieldRefs
@@ -860,77 +785,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    BroadcastContact: {
-      payload: Prisma.$BroadcastContactPayload<ExtArgs>
-      fields: Prisma.BroadcastContactFieldRefs
+    BroadcastLead: {
+      payload: Prisma.$BroadcastLeadPayload<ExtArgs>
+      fields: Prisma.BroadcastLeadFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.BroadcastContactFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastContactPayload> | null
+          args: Prisma.BroadcastLeadFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastLeadPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.BroadcastContactFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastContactPayload>
+          args: Prisma.BroadcastLeadFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastLeadPayload>
         }
         findFirst: {
-          args: Prisma.BroadcastContactFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastContactPayload> | null
+          args: Prisma.BroadcastLeadFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastLeadPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.BroadcastContactFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastContactPayload>
+          args: Prisma.BroadcastLeadFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastLeadPayload>
         }
         findMany: {
-          args: Prisma.BroadcastContactFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastContactPayload>[]
+          args: Prisma.BroadcastLeadFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastLeadPayload>[]
         }
         create: {
-          args: Prisma.BroadcastContactCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastContactPayload>
+          args: Prisma.BroadcastLeadCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastLeadPayload>
         }
         createMany: {
-          args: Prisma.BroadcastContactCreateManyArgs<ExtArgs>
+          args: Prisma.BroadcastLeadCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.BroadcastContactCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastContactPayload>[]
+          args: Prisma.BroadcastLeadCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastLeadPayload>[]
         }
         delete: {
-          args: Prisma.BroadcastContactDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastContactPayload>
+          args: Prisma.BroadcastLeadDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastLeadPayload>
         }
         update: {
-          args: Prisma.BroadcastContactUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastContactPayload>
+          args: Prisma.BroadcastLeadUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastLeadPayload>
         }
         deleteMany: {
-          args: Prisma.BroadcastContactDeleteManyArgs<ExtArgs>
+          args: Prisma.BroadcastLeadDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.BroadcastContactUpdateManyArgs<ExtArgs>
+          args: Prisma.BroadcastLeadUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.BroadcastContactUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastContactPayload>[]
+          args: Prisma.BroadcastLeadUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastLeadPayload>[]
         }
         upsert: {
-          args: Prisma.BroadcastContactUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastContactPayload>
+          args: Prisma.BroadcastLeadUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastLeadPayload>
         }
         aggregate: {
-          args: Prisma.BroadcastContactAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateBroadcastContact>
+          args: Prisma.BroadcastLeadAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBroadcastLead>
         }
         groupBy: {
-          args: Prisma.BroadcastContactGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.BroadcastContactGroupByOutputType>[]
+          args: Prisma.BroadcastLeadGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BroadcastLeadGroupByOutputType>[]
         }
         count: {
-          args: Prisma.BroadcastContactCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.BroadcastContactCountAggregateOutputType> | number
+          args: Prisma.BroadcastLeadCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BroadcastLeadCountAggregateOutputType> | number
         }
       }
     }
@@ -1427,6 +1352,7 @@ export const UserScalarFieldEnum = {
   CustomerType: 'CustomerType',
   trialExpiresAt: 'trialExpiresAt',
   onboardingMessageSentAt: 'onboardingMessageSentAt',
+  wapiInstanceId: 'wapiInstanceId',
   createdAt: 'createdAt'
 } as const
 
@@ -1458,25 +1384,12 @@ export const LeadScalarFieldEnum = {
   userId: 'userId',
   Status: 'Status',
   Option: 'Option',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  lastBroadcastAt: 'lastBroadcastAt',
+  lastClientMessageAt: 'lastClientMessageAt'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
-
-
-export const ContactScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  name: 'name',
-  phone: 'phone',
-  email: 'email',
-  tags: 'tags',
-  notes: 'notes',
-  isActive: 'isActive',
-  createdAt: 'createdAt'
-} as const
-
-export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
 
 
 export const MessageTemplateScalarFieldEnum = {
@@ -1509,22 +1422,22 @@ export const BroadcastScalarFieldEnum = {
 export type BroadcastScalarFieldEnum = (typeof BroadcastScalarFieldEnum)[keyof typeof BroadcastScalarFieldEnum]
 
 
-export const BroadcastContactScalarFieldEnum = {
+export const BroadcastLeadScalarFieldEnum = {
   id: 'id',
   broadcastId: 'broadcastId',
-  contactId: 'contactId',
+  leadId: 'leadId',
   status: 'status',
   sentAt: 'sentAt',
   errorMsg: 'errorMsg'
 } as const
 
-export type BroadcastContactScalarFieldEnum = (typeof BroadcastContactScalarFieldEnum)[keyof typeof BroadcastContactScalarFieldEnum]
+export type BroadcastLeadScalarFieldEnum = (typeof BroadcastLeadScalarFieldEnum)[keyof typeof BroadcastLeadScalarFieldEnum]
 
 
 export const MessageLogScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  contactId: 'contactId',
+  leadId: 'leadId',
   phone: 'phone',
   message: 'message',
   type: 'type',
@@ -1928,10 +1841,9 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   product?: Prisma.ProductOmit
   lead?: Prisma.LeadOmit
-  contact?: Prisma.ContactOmit
   messageTemplate?: Prisma.MessageTemplateOmit
   broadcast?: Prisma.BroadcastOmit
-  broadcastContact?: Prisma.BroadcastContactOmit
+  broadcastLead?: Prisma.BroadcastLeadOmit
   messageLog?: Prisma.MessageLogOmit
   customer?: Prisma.CustomerOmit
   address?: Prisma.AddressOmit

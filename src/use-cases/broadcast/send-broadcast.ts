@@ -36,6 +36,8 @@ export class SendBroadcastUseCase {
     })
     if (!full) return
 
+    console.log(`[Broadcast] Iniciando envio: id=${full.id} | destinatários=${full.BroadcastLeads.length}`)
+
     for (const bl of full.BroadcastLeads) {
       if (bl.status === 'SENT') continue
 
@@ -50,6 +52,8 @@ export class SendBroadcastUseCase {
         status: 'PENDING',
       })
 
+      console.log(`[Broadcast] Enviando para ${bl.Lead.nome} | telefone=${bl.Lead.telefone}`)
+
       const result = await sendWhatsAppMessage({
         phone: bl.Lead.telefone,
         message: full.message,
@@ -59,15 +63,19 @@ export class SendBroadcastUseCase {
         await this.broadcastRepository.updateLeadStatus(bl.id, 'SENT')
         await this.broadcastRepository.incrementSentCount(full.id, 'totalSent')
         await this.messageLogRepository.markSent(logId)
+        await prisma.lead.update({ where: { id: bl.leadId }, data: { lastBroadcastAt: new Date() } })
+        console.log(`[Broadcast] ✓ Enviado para ${bl.Lead.telefone}`)
       } else {
         await this.broadcastRepository.updateLeadStatus(bl.id, 'FAILED', result.error)
         await this.broadcastRepository.incrementSentCount(full.id, 'totalFailed')
         await this.messageLogRepository.markFailed(logId, result.error ?? 'unknown error')
+        console.error(`[Broadcast] ✗ Falha para ${bl.Lead.telefone}: ${result.error}`)
       }
 
       await wapiDelay()
     }
 
     await this.broadcastRepository.updateStatus(full.id, 'SENT', { finishedAt: new Date() })
+    console.log(`[Broadcast] Concluído: id=${full.id}`)
   }
 }

@@ -17,6 +17,8 @@ interface RegisterUserUseCaseRequest {
   role: Role
   isActive: boolean
   customerType?: CustomerType
+  name?: string
+  address?: string
 }
 
 interface RegisterUserUseCaseResponse {
@@ -35,6 +37,8 @@ export class RegisterUserUseCase {
     role,
     isActive,
     customerType,
+    name,
+    address,
   }: RegisterUserUseCaseRequest): Promise<RegisterUserUseCaseResponse> {
     const userWithSameUsername =
       await this.userRepository.findUserByEmail(email)
@@ -55,6 +59,8 @@ export class RegisterUserUseCase {
       isActive,
       id: newUserId,
       CustomerType: customerType ?? CustomerType.B2C,
+      name,
+      address,
     })
 
     const user: Omit<User, 'passwordHash'> = {

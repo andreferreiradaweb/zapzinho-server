@@ -71,8 +71,8 @@ export async function whatsappWebhookController(
     })
 
     return reply.status(200).send({ ok: true, created, leadId: lead.id })
-  } catch {
-    // If instanceId doesn't match any user, silently ack (don't expose internals)
+  } catch (err) {
+    console.error('[Webhook] Error:', err)
     return reply.status(200).send({ ok: false, reason: 'instance_not_found' })
   }
 }

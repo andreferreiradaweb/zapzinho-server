@@ -27,7 +27,7 @@ export async function sendWhatsAppMessage({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        apikey: env.WAPI_TOKEN,
+        Authorization: `Bearer ${env.WAPI_TOKEN}`,
       },
       body: JSON.stringify({
         phone: normalizedPhone,
@@ -54,4 +54,75 @@ export async function sendWhatsAppMessage({
  */
 export function wapiDelay(): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, env.WAPI_DELAY_MS))
+}
+
+interface GetQrCodeResult {
+  success: boolean
+  qrCode?: string // base64 image data URL
+  error?: string
+}
+
+/**
+ * Fetches the QR code for a given W-API instance.
+ * Returns a base64 image string ready for display.
+ */
+export async function getInstanceQrCode(instanceId: string): Promise<GetQrCodeResult> {
+  try {
+    const url = `${env.WAPI_BASE_URL}/instance/qrcode?instanceId=${instanceId}`
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${env.WAPI_TOKEN}`,
+      },
+    })
+
+    if (!response.ok) {
+      const body = await response.text()
+      return { success: false, error: `HTTP ${response.status}: ${body}` }
+    }
+
+    const data = await response.json()
+    // W-API returns { value: "data:image/png;base64,..." }
+    const qrCode: string = data.value ?? data.qrcode ?? data.qr ?? ''
+    return { success: true, qrCode }
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error)
+    return { success: false, error: msg }
+  }
+}
+
+interface InstanceStatusResult {
+  success: boolean
+  connected?: boolean
+  status?: string
+  error?: string
+}
+
+/**
+ * Checks the connection status of a W-API instance.
+ */
+export async function getInstanceStatus(instanceId: string): Promise<InstanceStatusResult> {
+  try {
+    const url = `${env.WAPI_BASE_URL}/instance/status?instanceId=${instanceId}`
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${env.WAPI_TOKEN}`,
+      },
+    })
+
+    if (!response.ok) {
+      const body = await response.text()
+      return { success: false, error: `HTTP ${response.status}: ${body}` }
+    }
+
+    const data = await response.json()
+    const connected: boolean = data.connected ?? data.status === 'connected'
+    return { success: true, connected, status: data.status }
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error)
+    return { success: false, error: msg }
+  }
 }

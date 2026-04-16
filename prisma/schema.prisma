@@ -11,7 +11,9 @@ model User {
   id                       String    @id @default(uuid())
   email                    String    @unique
   passwordHash             String
+  name                     String?
   phoneNumber              String?
+  address                  String?
   isActive                 Boolean
   Role                     Role
   CustomerType             CustomerType
@@ -42,7 +44,7 @@ model Product {
   title       String
   description String?
   code        String?
-  price       String
+  price       String?
   condition   String?
   photos      String[]
   User        User        @relation(fields: [userId], references: [id])
@@ -64,6 +66,8 @@ model Lead {
   Status          LeadStatus
   Option          LeadOption
   createdAt       DateTime        @default(now())
+  lastBroadcastAt     DateTime?
+  lastClientMessageAt DateTime?
   BroadcastLeads  BroadcastLead[]
   MessageLogs     MessageLog[]
 }

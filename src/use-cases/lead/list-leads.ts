@@ -12,6 +12,7 @@ interface ListLeadsUseCaseRequest {
   option?: LeadOption
   startDate?: string
   endDate?: string
+  phone?: string
 }
 
 interface ListLeadsUseCaseResponse {
@@ -36,6 +37,7 @@ export class ListLeadsUseCase {
     option,
     startDate,
     endDate,
+    phone,
   }: ListLeadsUseCaseRequest): Promise<ListLeadsUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
 
@@ -50,6 +52,7 @@ export class ListLeadsUseCase {
       option,
       startDate,
       endDate,
+      phone,
     )
 
     const offset = (page - 1) * limit
@@ -63,6 +66,7 @@ export class ListLeadsUseCase {
       option,
       startDate,
       endDate,
+      phone,
     )
 
     return {

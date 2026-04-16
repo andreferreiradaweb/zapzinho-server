@@ -11,6 +11,7 @@ export interface LeadRepository {
     option?: LeadOption,
     startDate?: string,
     endDate?: string,
+    phone?: string,
   ): Promise<number>
   filterManyByUserId(
     userId: string,
@@ -21,9 +22,10 @@ export interface LeadRepository {
     option?: LeadOption,
     startDate?: string,
     endDate?: string,
+    phone?: string,
   ): Promise<Lead[]>
   delete(id: string): Promise<Lead>
   create(data: Prisma.LeadUncheckedCreateInput): Promise<Lead>
   update(data: Prisma.LeadUncheckedUpdateInput): Promise<Lead>
-  findAllForBroadcast(userId: string, productId?: string, status?: LeadStatus): Promise<Lead[]>
+  findAllForBroadcast(userId: string, productId?: string, status?: LeadStatus, lastMessageRange?: string, lastBroadcastRange?: string): Promise<Lead[]>
 }

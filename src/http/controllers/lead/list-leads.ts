@@ -11,6 +11,7 @@ interface ListLeadsRequestQuery {
   option?: LeadOption
   startDate?: string
   endDate?: string
+  phone?: string
 }
 
 export async function ListLeadsController(
@@ -20,7 +21,7 @@ export async function ListLeadsController(
   reply: FastifyReply,
 ) {
   const { sub } = request.user
-  const { page, limit, search, status, startDate, endDate, option } = request.query
+  const { page, limit, search, status, startDate, endDate, option, phone } = request.query
   try {
     const listLeadsUseCase = ListLeadsFactory()
     const leads = await listLeadsUseCase.execute({
@@ -32,6 +33,7 @@ export async function ListLeadsController(
       startDate,
       endDate,
       option,
+      phone,
     })
 
     return reply.status(200).send(leads)

@@ -27,7 +27,7 @@ export type AggregateMessageLog = {
 export type MessageLogMinAggregateOutputType = {
   id: string | null
   userId: string | null
-  contactId: string | null
+  leadId: string | null
   phone: string | null
   message: string | null
   type: $Enums.MessageType | null
@@ -40,7 +40,7 @@ export type MessageLogMinAggregateOutputType = {
 export type MessageLogMaxAggregateOutputType = {
   id: string | null
   userId: string | null
-  contactId: string | null
+  leadId: string | null
   phone: string | null
   message: string | null
   type: $Enums.MessageType | null
@@ -53,7 +53,7 @@ export type MessageLogMaxAggregateOutputType = {
 export type MessageLogCountAggregateOutputType = {
   id: number
   userId: number
-  contactId: number
+  leadId: number
   phone: number
   message: number
   type: number
@@ -68,7 +68,7 @@ export type MessageLogCountAggregateOutputType = {
 export type MessageLogMinAggregateInputType = {
   id?: true
   userId?: true
-  contactId?: true
+  leadId?: true
   phone?: true
   message?: true
   type?: true
@@ -81,7 +81,7 @@ export type MessageLogMinAggregateInputType = {
 export type MessageLogMaxAggregateInputType = {
   id?: true
   userId?: true
-  contactId?: true
+  leadId?: true
   phone?: true
   message?: true
   type?: true
@@ -94,7 +94,7 @@ export type MessageLogMaxAggregateInputType = {
 export type MessageLogCountAggregateInputType = {
   id?: true
   userId?: true
-  contactId?: true
+  leadId?: true
   phone?: true
   message?: true
   type?: true
@@ -180,7 +180,7 @@ export type MessageLogGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type MessageLogGroupByOutputType = {
   id: string
   userId: string
-  contactId: string | null
+  leadId: string | null
   phone: string
   message: string
   type: $Enums.MessageType
@@ -214,7 +214,7 @@ export type MessageLogWhereInput = {
   NOT?: Prisma.MessageLogWhereInput | Prisma.MessageLogWhereInput[]
   id?: Prisma.StringFilter<"MessageLog"> | string
   userId?: Prisma.StringFilter<"MessageLog"> | string
-  contactId?: Prisma.StringNullableFilter<"MessageLog"> | string | null
+  leadId?: Prisma.StringNullableFilter<"MessageLog"> | string | null
   phone?: Prisma.StringFilter<"MessageLog"> | string
   message?: Prisma.StringFilter<"MessageLog"> | string
   type?: Prisma.EnumMessageTypeFilter<"MessageLog"> | $Enums.MessageType
@@ -223,13 +223,13 @@ export type MessageLogWhereInput = {
   errorMsg?: Prisma.StringNullableFilter<"MessageLog"> | string | null
   createdAt?: Prisma.DateTimeFilter<"MessageLog"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  Contact?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
+  Lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
 }
 
 export type MessageLogOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  contactId?: Prisma.SortOrderInput | Prisma.SortOrder
+  leadId?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrder
   message?: Prisma.SortOrder
   type?: Prisma.SortOrder
@@ -238,7 +238,7 @@ export type MessageLogOrderByWithRelationInput = {
   errorMsg?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   User?: Prisma.UserOrderByWithRelationInput
-  Contact?: Prisma.ContactOrderByWithRelationInput
+  Lead?: Prisma.LeadOrderByWithRelationInput
 }
 
 export type MessageLogWhereUniqueInput = Prisma.AtLeast<{
@@ -247,7 +247,7 @@ export type MessageLogWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MessageLogWhereInput[]
   NOT?: Prisma.MessageLogWhereInput | Prisma.MessageLogWhereInput[]
   userId?: Prisma.StringFilter<"MessageLog"> | string
-  contactId?: Prisma.StringNullableFilter<"MessageLog"> | string | null
+  leadId?: Prisma.StringNullableFilter<"MessageLog"> | string | null
   phone?: Prisma.StringFilter<"MessageLog"> | string
   message?: Prisma.StringFilter<"MessageLog"> | string
   type?: Prisma.EnumMessageTypeFilter<"MessageLog"> | $Enums.MessageType
@@ -256,13 +256,13 @@ export type MessageLogWhereUniqueInput = Prisma.AtLeast<{
   errorMsg?: Prisma.StringNullableFilter<"MessageLog"> | string | null
   createdAt?: Prisma.DateTimeFilter<"MessageLog"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  Contact?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
+  Lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
 }, "id">
 
 export type MessageLogOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  contactId?: Prisma.SortOrderInput | Prisma.SortOrder
+  leadId?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrder
   message?: Prisma.SortOrder
   type?: Prisma.SortOrder
@@ -281,7 +281,7 @@ export type MessageLogScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MessageLogScalarWhereWithAggregatesInput | Prisma.MessageLogScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"MessageLog"> | string
   userId?: Prisma.StringWithAggregatesFilter<"MessageLog"> | string
-  contactId?: Prisma.StringNullableWithAggregatesFilter<"MessageLog"> | string | null
+  leadId?: Prisma.StringNullableWithAggregatesFilter<"MessageLog"> | string | null
   phone?: Prisma.StringWithAggregatesFilter<"MessageLog"> | string
   message?: Prisma.StringWithAggregatesFilter<"MessageLog"> | string
   type?: Prisma.EnumMessageTypeWithAggregatesFilter<"MessageLog"> | $Enums.MessageType
@@ -301,13 +301,13 @@ export type MessageLogCreateInput = {
   errorMsg?: string | null
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutMessageLogsInput
-  Contact?: Prisma.ContactCreateNestedOneWithoutMessageLogsInput
+  Lead?: Prisma.LeadCreateNestedOneWithoutMessageLogsInput
 }
 
 export type MessageLogUncheckedCreateInput = {
   id?: string
   userId: string
-  contactId?: string | null
+  leadId?: string | null
   phone: string
   message: string
   type: $Enums.MessageType
@@ -327,13 +327,13 @@ export type MessageLogUpdateInput = {
   errorMsg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutMessageLogsNestedInput
-  Contact?: Prisma.ContactUpdateOneWithoutMessageLogsNestedInput
+  Lead?: Prisma.LeadUpdateOneWithoutMessageLogsNestedInput
 }
 
 export type MessageLogUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
@@ -346,7 +346,7 @@ export type MessageLogUncheckedUpdateInput = {
 export type MessageLogCreateManyInput = {
   id?: string
   userId: string
-  contactId?: string | null
+  leadId?: string | null
   phone: string
   message: string
   type: $Enums.MessageType
@@ -370,7 +370,7 @@ export type MessageLogUpdateManyMutationInput = {
 export type MessageLogUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
@@ -393,7 +393,7 @@ export type MessageLogOrderByRelationAggregateInput = {
 export type MessageLogCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  contactId?: Prisma.SortOrder
+  leadId?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   message?: Prisma.SortOrder
   type?: Prisma.SortOrder
@@ -406,7 +406,7 @@ export type MessageLogCountOrderByAggregateInput = {
 export type MessageLogMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  contactId?: Prisma.SortOrder
+  leadId?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   message?: Prisma.SortOrder
   type?: Prisma.SortOrder
@@ -419,7 +419,7 @@ export type MessageLogMaxOrderByAggregateInput = {
 export type MessageLogMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  contactId?: Prisma.SortOrder
+  leadId?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   message?: Prisma.SortOrder
   type?: Prisma.SortOrder
@@ -471,45 +471,45 @@ export type MessageLogUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.MessageLogScalarWhereInput | Prisma.MessageLogScalarWhereInput[]
 }
 
-export type MessageLogCreateNestedManyWithoutContactInput = {
-  create?: Prisma.XOR<Prisma.MessageLogCreateWithoutContactInput, Prisma.MessageLogUncheckedCreateWithoutContactInput> | Prisma.MessageLogCreateWithoutContactInput[] | Prisma.MessageLogUncheckedCreateWithoutContactInput[]
-  connectOrCreate?: Prisma.MessageLogCreateOrConnectWithoutContactInput | Prisma.MessageLogCreateOrConnectWithoutContactInput[]
-  createMany?: Prisma.MessageLogCreateManyContactInputEnvelope
+export type MessageLogCreateNestedManyWithoutLeadInput = {
+  create?: Prisma.XOR<Prisma.MessageLogCreateWithoutLeadInput, Prisma.MessageLogUncheckedCreateWithoutLeadInput> | Prisma.MessageLogCreateWithoutLeadInput[] | Prisma.MessageLogUncheckedCreateWithoutLeadInput[]
+  connectOrCreate?: Prisma.MessageLogCreateOrConnectWithoutLeadInput | Prisma.MessageLogCreateOrConnectWithoutLeadInput[]
+  createMany?: Prisma.MessageLogCreateManyLeadInputEnvelope
   connect?: Prisma.MessageLogWhereUniqueInput | Prisma.MessageLogWhereUniqueInput[]
 }
 
-export type MessageLogUncheckedCreateNestedManyWithoutContactInput = {
-  create?: Prisma.XOR<Prisma.MessageLogCreateWithoutContactInput, Prisma.MessageLogUncheckedCreateWithoutContactInput> | Prisma.MessageLogCreateWithoutContactInput[] | Prisma.MessageLogUncheckedCreateWithoutContactInput[]
-  connectOrCreate?: Prisma.MessageLogCreateOrConnectWithoutContactInput | Prisma.MessageLogCreateOrConnectWithoutContactInput[]
-  createMany?: Prisma.MessageLogCreateManyContactInputEnvelope
+export type MessageLogUncheckedCreateNestedManyWithoutLeadInput = {
+  create?: Prisma.XOR<Prisma.MessageLogCreateWithoutLeadInput, Prisma.MessageLogUncheckedCreateWithoutLeadInput> | Prisma.MessageLogCreateWithoutLeadInput[] | Prisma.MessageLogUncheckedCreateWithoutLeadInput[]
+  connectOrCreate?: Prisma.MessageLogCreateOrConnectWithoutLeadInput | Prisma.MessageLogCreateOrConnectWithoutLeadInput[]
+  createMany?: Prisma.MessageLogCreateManyLeadInputEnvelope
   connect?: Prisma.MessageLogWhereUniqueInput | Prisma.MessageLogWhereUniqueInput[]
 }
 
-export type MessageLogUpdateManyWithoutContactNestedInput = {
-  create?: Prisma.XOR<Prisma.MessageLogCreateWithoutContactInput, Prisma.MessageLogUncheckedCreateWithoutContactInput> | Prisma.MessageLogCreateWithoutContactInput[] | Prisma.MessageLogUncheckedCreateWithoutContactInput[]
-  connectOrCreate?: Prisma.MessageLogCreateOrConnectWithoutContactInput | Prisma.MessageLogCreateOrConnectWithoutContactInput[]
-  upsert?: Prisma.MessageLogUpsertWithWhereUniqueWithoutContactInput | Prisma.MessageLogUpsertWithWhereUniqueWithoutContactInput[]
-  createMany?: Prisma.MessageLogCreateManyContactInputEnvelope
+export type MessageLogUpdateManyWithoutLeadNestedInput = {
+  create?: Prisma.XOR<Prisma.MessageLogCreateWithoutLeadInput, Prisma.MessageLogUncheckedCreateWithoutLeadInput> | Prisma.MessageLogCreateWithoutLeadInput[] | Prisma.MessageLogUncheckedCreateWithoutLeadInput[]
+  connectOrCreate?: Prisma.MessageLogCreateOrConnectWithoutLeadInput | Prisma.MessageLogCreateOrConnectWithoutLeadInput[]
+  upsert?: Prisma.MessageLogUpsertWithWhereUniqueWithoutLeadInput | Prisma.MessageLogUpsertWithWhereUniqueWithoutLeadInput[]
+  createMany?: Prisma.MessageLogCreateManyLeadInputEnvelope
   set?: Prisma.MessageLogWhereUniqueInput | Prisma.MessageLogWhereUniqueInput[]
   disconnect?: Prisma.MessageLogWhereUniqueInput | Prisma.MessageLogWhereUniqueInput[]
   delete?: Prisma.MessageLogWhereUniqueInput | Prisma.MessageLogWhereUniqueInput[]
   connect?: Prisma.MessageLogWhereUniqueInput | Prisma.MessageLogWhereUniqueInput[]
-  update?: Prisma.MessageLogUpdateWithWhereUniqueWithoutContactInput | Prisma.MessageLogUpdateWithWhereUniqueWithoutContactInput[]
-  updateMany?: Prisma.MessageLogUpdateManyWithWhereWithoutContactInput | Prisma.MessageLogUpdateManyWithWhereWithoutContactInput[]
+  update?: Prisma.MessageLogUpdateWithWhereUniqueWithoutLeadInput | Prisma.MessageLogUpdateWithWhereUniqueWithoutLeadInput[]
+  updateMany?: Prisma.MessageLogUpdateManyWithWhereWithoutLeadInput | Prisma.MessageLogUpdateManyWithWhereWithoutLeadInput[]
   deleteMany?: Prisma.MessageLogScalarWhereInput | Prisma.MessageLogScalarWhereInput[]
 }
 
-export type MessageLogUncheckedUpdateManyWithoutContactNestedInput = {
-  create?: Prisma.XOR<Prisma.MessageLogCreateWithoutContactInput, Prisma.MessageLogUncheckedCreateWithoutContactInput> | Prisma.MessageLogCreateWithoutContactInput[] | Prisma.MessageLogUncheckedCreateWithoutContactInput[]
-  connectOrCreate?: Prisma.MessageLogCreateOrConnectWithoutContactInput | Prisma.MessageLogCreateOrConnectWithoutContactInput[]
-  upsert?: Prisma.MessageLogUpsertWithWhereUniqueWithoutContactInput | Prisma.MessageLogUpsertWithWhereUniqueWithoutContactInput[]
-  createMany?: Prisma.MessageLogCreateManyContactInputEnvelope
+export type MessageLogUncheckedUpdateManyWithoutLeadNestedInput = {
+  create?: Prisma.XOR<Prisma.MessageLogCreateWithoutLeadInput, Prisma.MessageLogUncheckedCreateWithoutLeadInput> | Prisma.MessageLogCreateWithoutLeadInput[] | Prisma.MessageLogUncheckedCreateWithoutLeadInput[]
+  connectOrCreate?: Prisma.MessageLogCreateOrConnectWithoutLeadInput | Prisma.MessageLogCreateOrConnectWithoutLeadInput[]
+  upsert?: Prisma.MessageLogUpsertWithWhereUniqueWithoutLeadInput | Prisma.MessageLogUpsertWithWhereUniqueWithoutLeadInput[]
+  createMany?: Prisma.MessageLogCreateManyLeadInputEnvelope
   set?: Prisma.MessageLogWhereUniqueInput | Prisma.MessageLogWhereUniqueInput[]
   disconnect?: Prisma.MessageLogWhereUniqueInput | Prisma.MessageLogWhereUniqueInput[]
   delete?: Prisma.MessageLogWhereUniqueInput | Prisma.MessageLogWhereUniqueInput[]
   connect?: Prisma.MessageLogWhereUniqueInput | Prisma.MessageLogWhereUniqueInput[]
-  update?: Prisma.MessageLogUpdateWithWhereUniqueWithoutContactInput | Prisma.MessageLogUpdateWithWhereUniqueWithoutContactInput[]
-  updateMany?: Prisma.MessageLogUpdateManyWithWhereWithoutContactInput | Prisma.MessageLogUpdateManyWithWhereWithoutContactInput[]
+  update?: Prisma.MessageLogUpdateWithWhereUniqueWithoutLeadInput | Prisma.MessageLogUpdateWithWhereUniqueWithoutLeadInput[]
+  updateMany?: Prisma.MessageLogUpdateManyWithWhereWithoutLeadInput | Prisma.MessageLogUpdateManyWithWhereWithoutLeadInput[]
   deleteMany?: Prisma.MessageLogScalarWhereInput | Prisma.MessageLogScalarWhereInput[]
 }
 
@@ -526,12 +526,12 @@ export type MessageLogCreateWithoutUserInput = {
   sentAt?: Date | string | null
   errorMsg?: string | null
   createdAt?: Date | string
-  Contact?: Prisma.ContactCreateNestedOneWithoutMessageLogsInput
+  Lead?: Prisma.LeadCreateNestedOneWithoutMessageLogsInput
 }
 
 export type MessageLogUncheckedCreateWithoutUserInput = {
   id?: string
-  contactId?: string | null
+  leadId?: string | null
   phone: string
   message: string
   type: $Enums.MessageType
@@ -573,7 +573,7 @@ export type MessageLogScalarWhereInput = {
   NOT?: Prisma.MessageLogScalarWhereInput | Prisma.MessageLogScalarWhereInput[]
   id?: Prisma.StringFilter<"MessageLog"> | string
   userId?: Prisma.StringFilter<"MessageLog"> | string
-  contactId?: Prisma.StringNullableFilter<"MessageLog"> | string | null
+  leadId?: Prisma.StringNullableFilter<"MessageLog"> | string | null
   phone?: Prisma.StringFilter<"MessageLog"> | string
   message?: Prisma.StringFilter<"MessageLog"> | string
   type?: Prisma.EnumMessageTypeFilter<"MessageLog"> | $Enums.MessageType
@@ -583,7 +583,7 @@ export type MessageLogScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"MessageLog"> | Date | string
 }
 
-export type MessageLogCreateWithoutContactInput = {
+export type MessageLogCreateWithoutLeadInput = {
   id?: string
   phone: string
   message: string
@@ -595,7 +595,7 @@ export type MessageLogCreateWithoutContactInput = {
   User: Prisma.UserCreateNestedOneWithoutMessageLogsInput
 }
 
-export type MessageLogUncheckedCreateWithoutContactInput = {
+export type MessageLogUncheckedCreateWithoutLeadInput = {
   id?: string
   userId: string
   phone: string
@@ -607,35 +607,35 @@ export type MessageLogUncheckedCreateWithoutContactInput = {
   createdAt?: Date | string
 }
 
-export type MessageLogCreateOrConnectWithoutContactInput = {
+export type MessageLogCreateOrConnectWithoutLeadInput = {
   where: Prisma.MessageLogWhereUniqueInput
-  create: Prisma.XOR<Prisma.MessageLogCreateWithoutContactInput, Prisma.MessageLogUncheckedCreateWithoutContactInput>
+  create: Prisma.XOR<Prisma.MessageLogCreateWithoutLeadInput, Prisma.MessageLogUncheckedCreateWithoutLeadInput>
 }
 
-export type MessageLogCreateManyContactInputEnvelope = {
-  data: Prisma.MessageLogCreateManyContactInput | Prisma.MessageLogCreateManyContactInput[]
+export type MessageLogCreateManyLeadInputEnvelope = {
+  data: Prisma.MessageLogCreateManyLeadInput | Prisma.MessageLogCreateManyLeadInput[]
   skipDuplicates?: boolean
 }
 
-export type MessageLogUpsertWithWhereUniqueWithoutContactInput = {
+export type MessageLogUpsertWithWhereUniqueWithoutLeadInput = {
   where: Prisma.MessageLogWhereUniqueInput
-  update: Prisma.XOR<Prisma.MessageLogUpdateWithoutContactInput, Prisma.MessageLogUncheckedUpdateWithoutContactInput>
-  create: Prisma.XOR<Prisma.MessageLogCreateWithoutContactInput, Prisma.MessageLogUncheckedCreateWithoutContactInput>
+  update: Prisma.XOR<Prisma.MessageLogUpdateWithoutLeadInput, Prisma.MessageLogUncheckedUpdateWithoutLeadInput>
+  create: Prisma.XOR<Prisma.MessageLogCreateWithoutLeadInput, Prisma.MessageLogUncheckedCreateWithoutLeadInput>
 }
 
-export type MessageLogUpdateWithWhereUniqueWithoutContactInput = {
+export type MessageLogUpdateWithWhereUniqueWithoutLeadInput = {
   where: Prisma.MessageLogWhereUniqueInput
-  data: Prisma.XOR<Prisma.MessageLogUpdateWithoutContactInput, Prisma.MessageLogUncheckedUpdateWithoutContactInput>
+  data: Prisma.XOR<Prisma.MessageLogUpdateWithoutLeadInput, Prisma.MessageLogUncheckedUpdateWithoutLeadInput>
 }
 
-export type MessageLogUpdateManyWithWhereWithoutContactInput = {
+export type MessageLogUpdateManyWithWhereWithoutLeadInput = {
   where: Prisma.MessageLogScalarWhereInput
-  data: Prisma.XOR<Prisma.MessageLogUpdateManyMutationInput, Prisma.MessageLogUncheckedUpdateManyWithoutContactInput>
+  data: Prisma.XOR<Prisma.MessageLogUpdateManyMutationInput, Prisma.MessageLogUncheckedUpdateManyWithoutLeadInput>
 }
 
 export type MessageLogCreateManyUserInput = {
   id?: string
-  contactId?: string | null
+  leadId?: string | null
   phone: string
   message: string
   type: $Enums.MessageType
@@ -654,12 +654,12 @@ export type MessageLogUpdateWithoutUserInput = {
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   errorMsg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Contact?: Prisma.ContactUpdateOneWithoutMessageLogsNestedInput
+  Lead?: Prisma.LeadUpdateOneWithoutMessageLogsNestedInput
 }
 
 export type MessageLogUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
@@ -671,7 +671,7 @@ export type MessageLogUncheckedUpdateWithoutUserInput = {
 
 export type MessageLogUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
@@ -681,7 +681,7 @@ export type MessageLogUncheckedUpdateManyWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type MessageLogCreateManyContactInput = {
+export type MessageLogCreateManyLeadInput = {
   id?: string
   userId: string
   phone: string
@@ -693,7 +693,7 @@ export type MessageLogCreateManyContactInput = {
   createdAt?: Date | string
 }
 
-export type MessageLogUpdateWithoutContactInput = {
+export type MessageLogUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
@@ -705,7 +705,7 @@ export type MessageLogUpdateWithoutContactInput = {
   User?: Prisma.UserUpdateOneRequiredWithoutMessageLogsNestedInput
 }
 
-export type MessageLogUncheckedUpdateWithoutContactInput = {
+export type MessageLogUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -717,7 +717,7 @@ export type MessageLogUncheckedUpdateWithoutContactInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type MessageLogUncheckedUpdateManyWithoutContactInput = {
+export type MessageLogUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -734,7 +734,7 @@ export type MessageLogUncheckedUpdateManyWithoutContactInput = {
 export type MessageLogSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  contactId?: boolean
+  leadId?: boolean
   phone?: boolean
   message?: boolean
   type?: boolean
@@ -743,13 +743,13 @@ export type MessageLogSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   errorMsg?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  Contact?: boolean | Prisma.MessageLog$ContactArgs<ExtArgs>
+  Lead?: boolean | Prisma.MessageLog$LeadArgs<ExtArgs>
 }, ExtArgs["result"]["messageLog"]>
 
 export type MessageLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  contactId?: boolean
+  leadId?: boolean
   phone?: boolean
   message?: boolean
   type?: boolean
@@ -758,13 +758,13 @@ export type MessageLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   errorMsg?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  Contact?: boolean | Prisma.MessageLog$ContactArgs<ExtArgs>
+  Lead?: boolean | Prisma.MessageLog$LeadArgs<ExtArgs>
 }, ExtArgs["result"]["messageLog"]>
 
 export type MessageLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  contactId?: boolean
+  leadId?: boolean
   phone?: boolean
   message?: boolean
   type?: boolean
@@ -773,13 +773,13 @@ export type MessageLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   errorMsg?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  Contact?: boolean | Prisma.MessageLog$ContactArgs<ExtArgs>
+  Lead?: boolean | Prisma.MessageLog$LeadArgs<ExtArgs>
 }, ExtArgs["result"]["messageLog"]>
 
 export type MessageLogSelectScalar = {
   id?: boolean
   userId?: boolean
-  contactId?: boolean
+  leadId?: boolean
   phone?: boolean
   message?: boolean
   type?: boolean
@@ -789,30 +789,30 @@ export type MessageLogSelectScalar = {
   createdAt?: boolean
 }
 
-export type MessageLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "contactId" | "phone" | "message" | "type" | "status" | "sentAt" | "errorMsg" | "createdAt", ExtArgs["result"]["messageLog"]>
+export type MessageLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "leadId" | "phone" | "message" | "type" | "status" | "sentAt" | "errorMsg" | "createdAt", ExtArgs["result"]["messageLog"]>
 export type MessageLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  Contact?: boolean | Prisma.MessageLog$ContactArgs<ExtArgs>
+  Lead?: boolean | Prisma.MessageLog$LeadArgs<ExtArgs>
 }
 export type MessageLogIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  Contact?: boolean | Prisma.MessageLog$ContactArgs<ExtArgs>
+  Lead?: boolean | Prisma.MessageLog$LeadArgs<ExtArgs>
 }
 export type MessageLogIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  Contact?: boolean | Prisma.MessageLog$ContactArgs<ExtArgs>
+  Lead?: boolean | Prisma.MessageLog$LeadArgs<ExtArgs>
 }
 
 export type $MessageLogPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MessageLog"
   objects: {
     User: Prisma.$UserPayload<ExtArgs>
-    Contact: Prisma.$ContactPayload<ExtArgs> | null
+    Lead: Prisma.$LeadPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
-    contactId: string | null
+    leadId: string | null
     phone: string
     message: string
     type: $Enums.MessageType
@@ -1215,7 +1215,7 @@ readonly fields: MessageLogFieldRefs;
 export interface Prisma__MessageLogClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  Contact<T extends Prisma.MessageLog$ContactArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MessageLog$ContactArgs<ExtArgs>>): Prisma.Prisma__ContactClient<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  Lead<T extends Prisma.MessageLog$LeadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MessageLog$LeadArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1247,7 +1247,7 @@ export interface Prisma__MessageLogClient<T, Null = never, ExtArgs extends runti
 export interface MessageLogFieldRefs {
   readonly id: Prisma.FieldRef<"MessageLog", 'String'>
   readonly userId: Prisma.FieldRef<"MessageLog", 'String'>
-  readonly contactId: Prisma.FieldRef<"MessageLog", 'String'>
+  readonly leadId: Prisma.FieldRef<"MessageLog", 'String'>
   readonly phone: Prisma.FieldRef<"MessageLog", 'String'>
   readonly message: Prisma.FieldRef<"MessageLog", 'String'>
   readonly type: Prisma.FieldRef<"MessageLog", 'MessageType'>
@@ -1651,22 +1651,22 @@ export type MessageLogDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
- * MessageLog.Contact
+ * MessageLog.Lead
  */
-export type MessageLog$ContactArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type MessageLog$LeadArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Contact
+   * Select specific fields to fetch from the Lead
    */
-  select?: Prisma.ContactSelect<ExtArgs> | null
+  select?: Prisma.LeadSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Contact
+   * Omit specific fields from the Lead
    */
-  omit?: Prisma.ContactOmit<ExtArgs> | null
+  omit?: Prisma.LeadOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ContactInclude<ExtArgs> | null
-  where?: Prisma.ContactWhereInput
+  include?: Prisma.LeadInclude<ExtArgs> | null
+  where?: Prisma.LeadWhereInput
 }
 
 /**
