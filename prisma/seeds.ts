@@ -5,18 +5,18 @@ import bcrypt from 'bcrypt'
 async function seed() {
 
   const adminHash = await bcrypt.hash(env.PASSWORD_ADMIN, 6)
-  const clientHash = await bcrypt.hash('Teste123', 6)
+  const clientHash = await bcrypt.hash('312978', 6)
 
   const users = [
     {
-      email: 'andreferreiradaweb@gmail.com',
+      email: 'admin@zapzinho.com',
       Role: Role.ADMIN,
       CustomerType: CustomerType.B2C,
       passwordHash: adminHash,
       isActive: true,
     },
     {
-      email: 'cliente@teste.com',
+      email: 'cliente@zapzinho.com',
       Role: Role.CLIENT,
       CustomerType: CustomerType.B2C,
       passwordHash: clientHash,
