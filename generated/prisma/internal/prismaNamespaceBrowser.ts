@@ -85,13 +85,16 @@ export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   passwordHash: 'passwordHash',
+  name: 'name',
   phoneNumber: 'phoneNumber',
+  address: 'address',
   isActive: 'isActive',
   Role: 'Role',
   CustomerType: 'CustomerType',
   trialExpiresAt: 'trialExpiresAt',
   onboardingMessageSentAt: 'onboardingMessageSentAt',
   wapiInstanceId: 'wapiInstanceId',
+  wapiToken: 'wapiToken',
   createdAt: 'createdAt'
 } as const
 

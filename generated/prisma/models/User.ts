@@ -28,13 +28,16 @@ export type UserMinAggregateOutputType = {
   id: string | null
   email: string | null
   passwordHash: string | null
+  name: string | null
   phoneNumber: string | null
+  address: string | null
   isActive: boolean | null
   Role: $Enums.Role | null
   CustomerType: $Enums.CustomerType | null
   trialExpiresAt: Date | null
   onboardingMessageSentAt: Date | null
   wapiInstanceId: string | null
+  wapiToken: string | null
   createdAt: Date | null
 }
 
@@ -42,13 +45,16 @@ export type UserMaxAggregateOutputType = {
   id: string | null
   email: string | null
   passwordHash: string | null
+  name: string | null
   phoneNumber: string | null
+  address: string | null
   isActive: boolean | null
   Role: $Enums.Role | null
   CustomerType: $Enums.CustomerType | null
   trialExpiresAt: Date | null
   onboardingMessageSentAt: Date | null
   wapiInstanceId: string | null
+  wapiToken: string | null
   createdAt: Date | null
 }
 
@@ -56,13 +62,16 @@ export type UserCountAggregateOutputType = {
   id: number
   email: number
   passwordHash: number
+  name: number
   phoneNumber: number
+  address: number
   isActive: number
   Role: number
   CustomerType: number
   trialExpiresAt: number
   onboardingMessageSentAt: number
   wapiInstanceId: number
+  wapiToken: number
   createdAt: number
   _all: number
 }
@@ -72,13 +81,16 @@ export type UserMinAggregateInputType = {
   id?: true
   email?: true
   passwordHash?: true
+  name?: true
   phoneNumber?: true
+  address?: true
   isActive?: true
   Role?: true
   CustomerType?: true
   trialExpiresAt?: true
   onboardingMessageSentAt?: true
   wapiInstanceId?: true
+  wapiToken?: true
   createdAt?: true
 }
 
@@ -86,13 +98,16 @@ export type UserMaxAggregateInputType = {
   id?: true
   email?: true
   passwordHash?: true
+  name?: true
   phoneNumber?: true
+  address?: true
   isActive?: true
   Role?: true
   CustomerType?: true
   trialExpiresAt?: true
   onboardingMessageSentAt?: true
   wapiInstanceId?: true
+  wapiToken?: true
   createdAt?: true
 }
 
@@ -100,13 +115,16 @@ export type UserCountAggregateInputType = {
   id?: true
   email?: true
   passwordHash?: true
+  name?: true
   phoneNumber?: true
+  address?: true
   isActive?: true
   Role?: true
   CustomerType?: true
   trialExpiresAt?: true
   onboardingMessageSentAt?: true
   wapiInstanceId?: true
+  wapiToken?: true
   createdAt?: true
   _all?: true
 }
@@ -187,13 +205,16 @@ export type UserGroupByOutputType = {
   id: string
   email: string
   passwordHash: string
+  name: string | null
   phoneNumber: string | null
+  address: string | null
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt: Date | null
   onboardingMessageSentAt: Date | null
   wapiInstanceId: string | null
+  wapiToken: string | null
   createdAt: Date
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
@@ -222,13 +243,16 @@ export type UserWhereInput = {
   id?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   passwordHash?: Prisma.StringFilter<"User"> | string
+  name?: Prisma.StringNullableFilter<"User"> | string | null
   phoneNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  address?: Prisma.StringNullableFilter<"User"> | string | null
   isActive?: Prisma.BoolFilter<"User"> | boolean
   Role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFilter<"User"> | $Enums.CustomerType
   trialExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   onboardingMessageSentAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   wapiInstanceId?: Prisma.StringNullableFilter<"User"> | string | null
+  wapiToken?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   Products?: Prisma.ProductListRelationFilter
   Leads?: Prisma.LeadListRelationFilter
@@ -241,13 +265,16 @@ export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
+  name?: Prisma.SortOrderInput | Prisma.SortOrder
   phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   onboardingMessageSentAt?: Prisma.SortOrderInput | Prisma.SortOrder
   wapiInstanceId?: Prisma.SortOrderInput | Prisma.SortOrder
+  wapiToken?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   Products?: Prisma.ProductOrderByRelationAggregateInput
   Leads?: Prisma.LeadOrderByRelationAggregateInput
@@ -264,12 +291,15 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   passwordHash?: Prisma.StringFilter<"User"> | string
+  name?: Prisma.StringNullableFilter<"User"> | string | null
   phoneNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  address?: Prisma.StringNullableFilter<"User"> | string | null
   isActive?: Prisma.BoolFilter<"User"> | boolean
   Role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFilter<"User"> | $Enums.CustomerType
   trialExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   onboardingMessageSentAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  wapiToken?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   Products?: Prisma.ProductListRelationFilter
   Leads?: Prisma.LeadListRelationFilter
@@ -282,13 +312,16 @@ export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
+  name?: Prisma.SortOrderInput | Prisma.SortOrder
   phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   onboardingMessageSentAt?: Prisma.SortOrderInput | Prisma.SortOrder
   wapiInstanceId?: Prisma.SortOrderInput | Prisma.SortOrder
+  wapiToken?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -302,13 +335,16 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   passwordHash?: Prisma.StringWithAggregatesFilter<"User"> | string
+  name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   phoneNumber?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  address?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   Role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeWithAggregatesFilter<"User"> | $Enums.CustomerType
   trialExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   onboardingMessageSentAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   wapiInstanceId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  wapiToken?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
@@ -316,13 +352,16 @@ export type UserCreateInput = {
   id?: string
   email: string
   passwordHash: string
+  name?: string | null
   phoneNumber?: string | null
+  address?: string | null
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
   wapiInstanceId?: string | null
+  wapiToken?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -335,13 +374,16 @@ export type UserUncheckedCreateInput = {
   id?: string
   email: string
   passwordHash: string
+  name?: string | null
   phoneNumber?: string | null
+  address?: string | null
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
   wapiInstanceId?: string | null
+  wapiToken?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -354,13 +396,16 @@ export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -373,13 +418,16 @@ export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -392,13 +440,16 @@ export type UserCreateManyInput = {
   id?: string
   email: string
   passwordHash: string
+  name?: string | null
   phoneNumber?: string | null
+  address?: string | null
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
   wapiInstanceId?: string | null
+  wapiToken?: string | null
   createdAt?: Date | string
 }
 
@@ -406,13 +457,16 @@ export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -420,13 +474,16 @@ export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -434,13 +491,16 @@ export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
+  address?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrder
   onboardingMessageSentAt?: Prisma.SortOrder
   wapiInstanceId?: Prisma.SortOrder
+  wapiToken?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -448,13 +508,16 @@ export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
+  address?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrder
   onboardingMessageSentAt?: Prisma.SortOrder
   wapiInstanceId?: Prisma.SortOrder
+  wapiToken?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -462,13 +525,16 @@ export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
+  address?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrder
   onboardingMessageSentAt?: Prisma.SortOrder
   wapiInstanceId?: Prisma.SortOrder
+  wapiToken?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -579,13 +645,16 @@ export type UserCreateWithoutProductsInput = {
   id?: string
   email: string
   passwordHash: string
+  name?: string | null
   phoneNumber?: string | null
+  address?: string | null
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
   wapiInstanceId?: string | null
+  wapiToken?: string | null
   createdAt?: Date | string
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
@@ -597,13 +666,16 @@ export type UserUncheckedCreateWithoutProductsInput = {
   id?: string
   email: string
   passwordHash: string
+  name?: string | null
   phoneNumber?: string | null
+  address?: string | null
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
   wapiInstanceId?: string | null
+  wapiToken?: string | null
   createdAt?: Date | string
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
@@ -631,13 +703,16 @@ export type UserUpdateWithoutProductsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
@@ -649,13 +724,16 @@ export type UserUncheckedUpdateWithoutProductsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
@@ -667,13 +745,16 @@ export type UserCreateWithoutLeadsInput = {
   id?: string
   email: string
   passwordHash: string
+  name?: string | null
   phoneNumber?: string | null
+  address?: string | null
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
   wapiInstanceId?: string | null
+  wapiToken?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
@@ -685,13 +766,16 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   id?: string
   email: string
   passwordHash: string
+  name?: string | null
   phoneNumber?: string | null
+  address?: string | null
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
   wapiInstanceId?: string | null
+  wapiToken?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
@@ -719,13 +803,16 @@ export type UserUpdateWithoutLeadsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
@@ -737,13 +824,16 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
@@ -755,13 +845,16 @@ export type UserCreateWithoutMessageTemplatesInput = {
   id?: string
   email: string
   passwordHash: string
+  name?: string | null
   phoneNumber?: string | null
+  address?: string | null
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
   wapiInstanceId?: string | null
+  wapiToken?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -773,13 +866,16 @@ export type UserUncheckedCreateWithoutMessageTemplatesInput = {
   id?: string
   email: string
   passwordHash: string
+  name?: string | null
   phoneNumber?: string | null
+  address?: string | null
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
   wapiInstanceId?: string | null
+  wapiToken?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -807,13 +903,16 @@ export type UserUpdateWithoutMessageTemplatesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -825,13 +924,16 @@ export type UserUncheckedUpdateWithoutMessageTemplatesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -843,13 +945,16 @@ export type UserCreateWithoutBroadcastsInput = {
   id?: string
   email: string
   passwordHash: string
+  name?: string | null
   phoneNumber?: string | null
+  address?: string | null
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
   wapiInstanceId?: string | null
+  wapiToken?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -861,13 +966,16 @@ export type UserUncheckedCreateWithoutBroadcastsInput = {
   id?: string
   email: string
   passwordHash: string
+  name?: string | null
   phoneNumber?: string | null
+  address?: string | null
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
   wapiInstanceId?: string | null
+  wapiToken?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -895,13 +1003,16 @@ export type UserUpdateWithoutBroadcastsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -913,13 +1024,16 @@ export type UserUncheckedUpdateWithoutBroadcastsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -931,13 +1045,16 @@ export type UserCreateWithoutMessageLogsInput = {
   id?: string
   email: string
   passwordHash: string
+  name?: string | null
   phoneNumber?: string | null
+  address?: string | null
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
   wapiInstanceId?: string | null
+  wapiToken?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -949,13 +1066,16 @@ export type UserUncheckedCreateWithoutMessageLogsInput = {
   id?: string
   email: string
   passwordHash: string
+  name?: string | null
   phoneNumber?: string | null
+  address?: string | null
   isActive: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
   onboardingMessageSentAt?: Date | string | null
   wapiInstanceId?: string | null
+  wapiToken?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -983,13 +1103,16 @@ export type UserUpdateWithoutMessageLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -1001,13 +1124,16 @@ export type UserUncheckedUpdateWithoutMessageLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -1086,13 +1212,16 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   email?: boolean
   passwordHash?: boolean
+  name?: boolean
   phoneNumber?: boolean
+  address?: boolean
   isActive?: boolean
   Role?: boolean
   CustomerType?: boolean
   trialExpiresAt?: boolean
   onboardingMessageSentAt?: boolean
   wapiInstanceId?: boolean
+  wapiToken?: boolean
   createdAt?: boolean
   Products?: boolean | Prisma.User$ProductsArgs<ExtArgs>
   Leads?: boolean | Prisma.User$LeadsArgs<ExtArgs>
@@ -1106,13 +1235,16 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   email?: boolean
   passwordHash?: boolean
+  name?: boolean
   phoneNumber?: boolean
+  address?: boolean
   isActive?: boolean
   Role?: boolean
   CustomerType?: boolean
   trialExpiresAt?: boolean
   onboardingMessageSentAt?: boolean
   wapiInstanceId?: boolean
+  wapiToken?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -1120,13 +1252,16 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   email?: boolean
   passwordHash?: boolean
+  name?: boolean
   phoneNumber?: boolean
+  address?: boolean
   isActive?: boolean
   Role?: boolean
   CustomerType?: boolean
   trialExpiresAt?: boolean
   onboardingMessageSentAt?: boolean
   wapiInstanceId?: boolean
+  wapiToken?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -1134,17 +1269,20 @@ export type UserSelectScalar = {
   id?: boolean
   email?: boolean
   passwordHash?: boolean
+  name?: boolean
   phoneNumber?: boolean
+  address?: boolean
   isActive?: boolean
   Role?: boolean
   CustomerType?: boolean
   trialExpiresAt?: boolean
   onboardingMessageSentAt?: boolean
   wapiInstanceId?: boolean
+  wapiToken?: boolean
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "phoneNumber" | "isActive" | "Role" | "CustomerType" | "trialExpiresAt" | "onboardingMessageSentAt" | "wapiInstanceId" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "phoneNumber" | "address" | "isActive" | "Role" | "CustomerType" | "trialExpiresAt" | "onboardingMessageSentAt" | "wapiInstanceId" | "wapiToken" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Products?: boolean | Prisma.User$ProductsArgs<ExtArgs>
   Leads?: boolean | Prisma.User$LeadsArgs<ExtArgs>
@@ -1169,13 +1307,16 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: string
     email: string
     passwordHash: string
+    name: string | null
     phoneNumber: string | null
+    address: string | null
     isActive: boolean
     Role: $Enums.Role
     CustomerType: $Enums.CustomerType
     trialExpiresAt: Date | null
     onboardingMessageSentAt: Date | null
     wapiInstanceId: string | null
+    wapiToken: string | null
     createdAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -1608,13 +1749,16 @@ export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
+  readonly name: Prisma.FieldRef<"User", 'String'>
   readonly phoneNumber: Prisma.FieldRef<"User", 'String'>
+  readonly address: Prisma.FieldRef<"User", 'String'>
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
   readonly Role: Prisma.FieldRef<"User", 'Role'>
   readonly CustomerType: Prisma.FieldRef<"User", 'CustomerType'>
   readonly trialExpiresAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly onboardingMessageSentAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly wapiInstanceId: Prisma.FieldRef<"User", 'String'>
+  readonly wapiToken: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
