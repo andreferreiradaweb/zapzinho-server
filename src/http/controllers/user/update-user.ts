@@ -18,9 +18,11 @@ export async function updateUserController(
     customerType: z.nativeEnum(CustomerType).optional(),
     name: z.string().optional(),
     address: z.string().optional(),
+    wapiInstanceId: z.string().optional().nullable(),
+    wapiToken: z.string().optional().nullable(),
   })
 
-  const { email, password, isActive, role, customerType, phoneNumber, id, name, address } =
+  const { email, password, isActive, role, customerType, phoneNumber, id, name, address, wapiInstanceId, wapiToken } =
     updateBodySchema.parse(request.body)
 
   try {
@@ -35,6 +37,8 @@ export async function updateUserController(
       customerType,
       name,
       address,
+      wapiInstanceId,
+      wapiToken,
     })
     return reply.status(201).send(user)
   } catch (error) {

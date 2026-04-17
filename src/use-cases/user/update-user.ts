@@ -14,6 +14,8 @@ interface UpdateUserUseCaseRequest {
   customerType?: CustomerType
   name?: string
   address?: string
+  wapiInstanceId?: string | null
+  wapiToken?: string | null
 }
 
 interface UpdateUserUseCaseResponse {
@@ -33,6 +35,8 @@ export class UpdateUserUseCase {
     customerType,
     name,
     address,
+    wapiInstanceId,
+    wapiToken,
   }: UpdateUserUseCaseRequest): Promise<UpdateUserUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(id)
 
@@ -65,6 +69,8 @@ export class UpdateUserUseCase {
       CustomerType: customerType || findedUser.CustomerType,
       name: name ?? findedUser.name,
       address: address ?? findedUser.address,
+      wapiInstanceId: wapiInstanceId !== undefined ? wapiInstanceId : findedUser.wapiInstanceId,
+      wapiToken: wapiToken !== undefined ? wapiToken : findedUser.wapiToken,
     })
 
     return { user }

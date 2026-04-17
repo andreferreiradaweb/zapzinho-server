@@ -10,6 +10,7 @@ import { SelfUpdateUserController } from './self-update-user'
 import { DeleteUserController } from './delete-user'
 import { GetInstanceQrCodeController } from './get-instance-qrcode'
 import { GetInstanceStatusController } from './get-instance-status'
+import { DisconnectInstanceController } from './disconnect-instance'
 
 export async function usersRoutes(app: FastifyInstance) {
   app.post(
@@ -43,6 +44,11 @@ export async function usersRoutes(app: FastifyInstance) {
     '/user/:id/instance/status',
     { onRequest: [verifyJwt] },
     GetInstanceStatusController,
+  )
+  app.post(
+    '/user/:id/instance/disconnect',
+    { onRequest: [verifyJwt] },
+    DisconnectInstanceController,
   )
   app.get(
     '/user',

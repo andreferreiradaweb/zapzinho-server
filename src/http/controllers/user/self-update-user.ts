@@ -8,10 +8,7 @@ export async function SelfUpdateUserController(
   reply: FastifyReply,
 ) {
   const updateBodySchema = z.object({
-    password: z
-      .string()
-      .min(6)
-      .optional(),
+    password: z.string().min(6).optional(),
     phoneNumber: z.string().optional(),
     newPassword: z
       .string()

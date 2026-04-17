@@ -5,22 +5,14 @@ import { prisma } from '@/lib/prisma'
 export class PrismaUserRepository implements UserRepository {
   async countUsers(search: string) {
     const count = await prisma.user.count({
-      where: {
-        OR: [
-          {
-            email: {
-              contains: search,
-              mode: 'insensitive',
-            },
-          },
-          {
-            phoneNumber: {
-              contains: search,
-              mode: 'insensitive',
-            },
-          },
-        ],
-      },
+      where: search
+        ? {
+            OR: [
+              { email: { contains: search, mode: 'insensitive' } },
+              { phoneNumber: { contains: search, mode: 'insensitive' } },
+            ],
+          }
+        : {},
     })
     return count
   }
@@ -29,21 +21,19 @@ export class PrismaUserRepository implements UserRepository {
     offset: number,
     limit: number,
     search: string,
-    role: Role,
+    role?: Role,
   ) {
     const users = await prisma.user.findMany({
       where: {
-        OR: [
-          {
-            phoneNumber: {
-              contains: search,
-              mode: 'insensitive',
-            },
-          },
-        ],
-        Role: {
-          equals: role,
-        },
+        ...(search
+          ? {
+              OR: [
+                { email: { contains: search, mode: 'insensitive' } },
+                { phoneNumber: { contains: search, mode: 'insensitive' } },
+              ],
+            }
+          : {}),
+        ...(role ? { Role: { equals: role } } : {}),
       },
       orderBy: {
         createdAt: 'desc',

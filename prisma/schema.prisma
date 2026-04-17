@@ -20,6 +20,7 @@ model User {
   trialExpiresAt           DateTime?
   onboardingMessageSentAt  DateTime?
   wapiInstanceId           String?   @unique
+  wapiToken                String?
   createdAt                DateTime  @default(now())
   Products                 Product[]
   Leads                    Lead[]

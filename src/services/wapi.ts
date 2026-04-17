@@ -59,6 +59,7 @@ export function wapiDelay(): Promise<void> {
 interface GetQrCodeResult {
   success: boolean
   qrCode?: string // base64 image data URL
+  alreadyConnected?: boolean
   error?: string
 }
 
@@ -68,7 +69,7 @@ interface GetQrCodeResult {
  */
 export async function getInstanceQrCode(instanceId: string): Promise<GetQrCodeResult> {
   try {
-    const url = `${env.WAPI_BASE_URL}/instance/qrcode?instanceId=${instanceId}`
+    const url = `${env.WAPI_BASE_URL}/instance/qr-code?instanceId=${instanceId}`
 
     const response = await fetch(url, {
       method: 'GET',
@@ -77,15 +78,50 @@ export async function getInstanceQrCode(instanceId: string): Promise<GetQrCodeRe
       },
     })
 
-    if (!response.ok) {
-      const body = await response.text()
-      return { success: false, error: `HTTP ${response.status}: ${body}` }
+    const data = await response.json()
+
+    // W-API returns { instanceId, connected: true } when already connected (no QR needed)
+    if (data.connected === true) {
+      return { success: true, qrCode: '', alreadyConnected: true }
     }
 
-    const data = await response.json()
-    // W-API returns { value: "data:image/png;base64,..." }
-    const qrCode: string = data.value ?? data.qrcode ?? data.qr ?? ''
+    if (!response.ok || data.error) {
+      return { success: false, error: data.message ?? `HTTP ${response.status}` }
+    }
+
+    // W-API returns { qrcode: "data:image/png;base64,..." } when disconnected
+    const qrCode: string = data.qrcode ?? data.value ?? data.qr ?? ''
     return { success: true, qrCode }
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error)
+    return { success: false, error: msg }
+  }
+}
+
+interface DisconnectResult {
+  success: boolean
+  error?: string
+}
+
+/**
+ * Disconnects a W-API instance (logout from WhatsApp).
+ */
+export async function disconnectInstance(instanceId: string): Promise<DisconnectResult> {
+  try {
+    const url = `${env.WAPI_BASE_URL}/instance/disconnect?instanceId=${instanceId}`
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${env.WAPI_TOKEN}`,
+      },
+    })
+
+    const data = await response.json()
+    if (data.error) {
+      return { success: false, error: data.message }
+    }
+    return { success: true }
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error)
     return { success: false, error: msg }
@@ -104,7 +140,8 @@ interface InstanceStatusResult {
  */
 export async function getInstanceStatus(instanceId: string): Promise<InstanceStatusResult> {
   try {
-    const url = `${env.WAPI_BASE_URL}/instance/status?instanceId=${instanceId}`
+    // W-API uses the same qr-code endpoint to check connection status
+    const url = `${env.WAPI_BASE_URL}/instance/qr-code?instanceId=${instanceId}`
 
     const response = await fetch(url, {
       method: 'GET',
@@ -113,14 +150,9 @@ export async function getInstanceStatus(instanceId: string): Promise<InstanceSta
       },
     })
 
-    if (!response.ok) {
-      const body = await response.text()
-      return { success: false, error: `HTTP ${response.status}: ${body}` }
-    }
-
     const data = await response.json()
-    const connected: boolean = data.connected ?? data.status === 'connected'
-    return { success: true, connected, status: data.status }
+    const connected: boolean = data.connected === true
+    return { success: true, connected, status: connected ? 'connected' : 'disconnected' }
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error)
     return { success: false, error: msg }

@@ -1,10 +1,10 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
-import { getInstanceQrCode } from '@/services/wapi'
+import { disconnectInstance } from '@/services/wapi'
 import { Role } from '@/lib/prisma'
 
-export async function GetInstanceQrCodeController(
+export async function DisconnectInstanceController(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
@@ -22,17 +22,13 @@ export async function GetInstanceQrCodeController(
   }
 
   if (!user.wapiInstanceId) {
-    return reply.status(400).send({ message: 'NO_INSTANCE' })
+    return reply.status(400).send({ message: 'No instance configured for this user' })
   }
 
-  const result = await getInstanceQrCode(user.wapiInstanceId)
+  const result = await disconnectInstance(user.wapiInstanceId)
   if (!result.success) {
     return reply.status(502).send({ message: result.error })
   }
 
-  if (result.alreadyConnected) {
-    return reply.status(200).send({ instanceId: user.wapiInstanceId, qrCode: null, connected: true })
-  }
-
-  return reply.status(200).send({ instanceId: user.wapiInstanceId, qrCode: result.qrCode, connected: false })
+  return reply.status(200).send({ message: 'Disconnected successfully' })
 }
