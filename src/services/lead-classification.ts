@@ -46,10 +46,12 @@ ${messages.map(m => `- "${m}"`).join('\n')}
 Categorias disponíveis: ${JSON.stringify(categories.map(c => c.name))}
 Produtos disponíveis: ${JSON.stringify(products.map(p => p.title))}
 
+IMPORTANTE: os valores de categoryName e productTitle devem ser COPIADOS LITERALMENTE das listas acima. Nunca reescreva, abrevie ou modifique. Se não tiver certeza, retorne null.
+
 Responda APENAS em JSON válido:
 {
-  "categoryName": "<nome exato de uma das categorias ou null>",
-  "productTitle": "<título exato de um dos produtos — somente se explicitamente mencionado pelo cliente, senão null>"
+  "categoryName": "<copiado literalmente da lista de categorias ou null>",
+  "productTitle": "<copiado literalmente da lista de produtos — somente se o cliente identificar claramente um produto específico, senão null>"
 }`
 
   console.log(`${tag} 🤖 Chamando Gemini...`)
