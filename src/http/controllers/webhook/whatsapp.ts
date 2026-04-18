@@ -36,13 +36,18 @@ export async function whatsappWebhookController(
   const bodySchema = z.object({
     event: z.string().optional(),
     instanceId: z.string(),
-    data: z.object({
-      from: z.string(),               // "5511999999999@c.us"
-      fromMe: z.boolean().optional(), // true = message sent by the bot
-      pushName: z.string().optional(),
-      body: z.string().optional(),
-      type: z.string().optional(),
+    fromMe: z.boolean().optional(),
+    isGroup: z.boolean().optional(),
+    chat: z.object({
+      id: z.string(),
     }),
+    sender: z.object({
+      id: z.string().optional(),
+      pushName: z.string().optional(),
+    }).optional(),
+    msgContent: z.object({
+      conversation: z.string().optional(),
+    }).optional(),
   })
 
   console.log('[Webhook] Incoming payload:', JSON.stringify(request.body))
@@ -53,22 +58,21 @@ export async function whatsappWebhookController(
     return reply.status(200).send({ ok: false, reason: 'invalid_payload' })
   }
 
-  const { instanceId, data } = parsed.data
+  const { instanceId, fromMe, isGroup, chat, sender, msgContent } = parsed.data
 
   // Skip messages sent by the bot itself
-  if (data.fromMe === true) {
+  if (fromMe === true) {
     return reply.status(200).send({ ok: true, reason: 'outgoing_message_ignored' })
   }
 
-  // Groups have @g.us suffix — skip them
-  if (data.from.endsWith('@g.us')) {
+  // Skip group messages
+  if (isGroup === true) {
     return reply.status(200).send({ ok: true, reason: 'group_message_ignored' })
   }
 
-  // Normalize phone: strip @c.us and any non-digit characters
-  const phone = data.from.replace('@c.us', '').replace(/\D/g, '')
-  const name = data.pushName ?? phone
-  const message = data.body ?? ''
+  const phone = chat.id.replace(/\D/g, '')
+  const name = sender?.pushName ?? phone
+  const message = msgContent?.conversation ?? ''
 
   try {
     const { lead, created } = await makeHandleIncomingMessage().execute({
