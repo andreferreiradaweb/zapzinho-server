@@ -18,6 +18,9 @@
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui"
   },
+  "prisma": {
+    "seed": "npx tsx prisma/seeds.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
