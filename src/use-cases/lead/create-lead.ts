@@ -14,6 +14,7 @@ interface CreateLeadUseCaseRequest {
   id?: string
   createdAt?: Date
   productId: string
+  categoryId?: string
 }
 
 interface CreateLeadUseCaseResponse {
@@ -36,6 +37,7 @@ export class CreateLeadUseCase {
     id,
     createdAt,
     productId,
+    categoryId,
   }: CreateLeadUseCaseRequest): Promise<CreateLeadUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
     if (!findedUser) {
@@ -58,6 +60,7 @@ export class CreateLeadUseCase {
       id,
       createdAt,
       productId,
+      categoryId,
     })
 
     return { lead }

@@ -48,6 +48,7 @@ model ProductCategory {
   createdAt DateTime  @default(now())
   User      User      @relation(fields: [userId], references: [id])
   Products  Product[]
+  Leads     Lead[]
 }
 
 model Product {
@@ -75,6 +76,8 @@ model Lead {
   message         String?
   Product         Product?        @relation(fields: [productId], references: [id])
   productId       String?
+  Category        ProductCategory? @relation(fields: [categoryId], references: [id])
+  categoryId      String?
   User            User            @relation(fields: [userId], references: [id])
   userId          String
   Status          LeadStatus

@@ -88,24 +88,30 @@ export class PrismaLeadRepository implements LeadRepository {
   ) {
     const where: Prisma.LeadWhereInput = { userId }
 
+    const andConditions: Prisma.LeadWhereInput[] = []
+
     if (status) where.Status = { equals: status }
-    if (search) where.OR = [
+    if (search) andConditions.push({ OR: [
       { nome: { contains: search, mode: 'insensitive' } },
       { email: { contains: search, mode: 'insensitive' } },
       { telefone: { contains: search } },
-    ]
+    ]})
     if (productId) where.productId = { equals: productId }
-    if (categoryId) where.Product = { categoryId }
+    if (categoryId) andConditions.push({ OR: [
+      { categoryId },
+      { Product: { categoryId } },
+    ]})
     if (phone) where.telefone = { contains: phone.replace(/\D/g, '') }
     if (startDate && endDate) {
       where.createdAt = { gte: new Date(startDate), lte: new Date(endDate) }
     }
+    if (andConditions.length > 0) where.AND = andConditions
 
     return prisma.lead.findMany({
       where,
       skip: offset,
       take: Number(limit),
-      include: { Product: { include: { Category: true } } },
+      include: { Product: { include: { Category: true } }, Category: true },
       orderBy: { createdAt: 'desc' },
     }) as Promise<LeadWithProduct[]>
   }
@@ -121,19 +127,24 @@ export class PrismaLeadRepository implements LeadRepository {
     categoryId?: string,
   ) {
     const where: Prisma.LeadWhereInput = { userId }
+    const andConditions: Prisma.LeadWhereInput[] = []
 
     if (status) where.Status = { equals: status }
-    if (search) where.OR = [
+    if (search) andConditions.push({ OR: [
       { nome: { contains: search, mode: 'insensitive' } },
       { email: { contains: search, mode: 'insensitive' } },
       { telefone: { contains: search } },
-    ]
+    ]})
     if (productId) where.productId = { equals: productId }
-    if (categoryId) where.Product = { categoryId }
+    if (categoryId) andConditions.push({ OR: [
+      { categoryId },
+      { Product: { categoryId } },
+    ]})
     if (phone) where.telefone = { contains: phone.replace(/\D/g, '') }
     if (startDate && endDate) {
       where.createdAt = { gte: new Date(startDate), lte: new Date(endDate) }
     }
+    if (andConditions.length > 0) where.AND = andConditions
 
     return prisma.lead.count({ where })
   }
@@ -167,7 +178,7 @@ export class PrismaLeadRepository implements LeadRepository {
       where: {
         userId,
         ...(productId ? { productId } : {}),
-        ...(categoryId ? { Product: { categoryId } } : {}),
+        ...(categoryId ? { OR: [{ categoryId }, { Product: { categoryId } }] } : {}),
         ...(status ? { Status: status } : {}),
         ...(lastMessageFilter ? { lastClientMessageAt: lastMessageFilter } : {}),
         ...(lastBroadcastFilter ? { lastBroadcastAt: lastBroadcastFilter } : {}),

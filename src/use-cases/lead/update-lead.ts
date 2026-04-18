@@ -12,6 +12,7 @@ interface UpdateLeadUseCaseRequest {
   email?: string
   telefone?: string
   productId?: string
+  categoryId?: string
   message?: string
 }
 
@@ -32,6 +33,7 @@ export class UpdateLeadUseCase {
     email,
     telefone,
     productId,
+    categoryId,
     Status,
     message,
   }: UpdateLeadUseCaseRequest): Promise<UpdateLeadUseCaseResponse> {
@@ -57,6 +59,7 @@ export class UpdateLeadUseCase {
       email,
       telefone,
       productId,
+      categoryId,
       Status,
       createdAt: new Date(),
       message,

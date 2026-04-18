@@ -13,6 +13,7 @@ const createLeadBodySchema = z.object({
   id: z.string().uuid().optional(),
   createdAt: z.string().optional(),
   productId: z.string().uuid().optional().or(z.literal('')).transform(v => v || undefined),
+  categoryId: z.string().uuid().optional().or(z.literal('')).transform(v => v || undefined),
 })
 
 export async function CreateLeadController(
@@ -22,7 +23,7 @@ export async function CreateLeadController(
   try {
     const { sub } = request.user
     const validatedBody = createLeadBodySchema.parse(request.body)
-    const { nome, email, telefone, message, Status, productId, id, createdAt } =
+    const { nome, email, telefone, message, Status, productId, categoryId, id, createdAt } =
       validatedBody
 
     const createdAtDate = createdAt ? new Date(createdAt) : new Date()
@@ -38,6 +39,7 @@ export async function CreateLeadController(
       id,
       createdAt: createdAtDate,
       productId,
+      categoryId,
     })
 
     return reply.status(201).send(createdLead)
