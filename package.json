@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsup src/server.ts --out-dir build --format cjs",
+    "build": "tsup src/server.ts --out-dir build --format cjs --shims",
     "start": "node build/server.js",
     "db:migrate:prod": "prisma migrate deploy",
     "lint": "eslint src --ext .ts --fix",
