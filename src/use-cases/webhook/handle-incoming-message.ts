@@ -20,6 +20,7 @@ export class HandleIncomingMessageUseCase {
   constructor(
     private userRepository: UserRepository,
     private leadRepository: LeadRepository,
+    private adminInstanceId: string,
   ) {}
 
   async execute({
@@ -28,7 +29,12 @@ export class HandleIncomingMessageUseCase {
     name,
     message,
   }: HandleIncomingMessageRequest): Promise<HandleIncomingMessageResponse> {
-    const user = await this.userRepository.findUserByInstanceId(instanceId)
+    let user = await this.userRepository.findUserByInstanceId(instanceId)
+
+    if (!user && instanceId === this.adminInstanceId) {
+      user = await this.userRepository.findAdminUser()
+    }
+
     if (!user) throw new ResourceNotFound()
 
     const existing = await this.leadRepository.findLeadWhereUserByNumber(user.id, phone)

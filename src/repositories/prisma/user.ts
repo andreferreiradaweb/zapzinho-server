@@ -82,6 +82,13 @@ export class PrismaUserRepository implements UserRepository {
     return user || null
   }
 
+  async findAdminUser() {
+    const user = await prisma.user.findFirst({
+      where: { Role: 'ADMIN' },
+    })
+    return user || null
+  }
+
   async create(data: Prisma.UserUncheckedCreateInput) {
     const { email, id, phoneNumber, isActive } =
       await prisma.user.create({
