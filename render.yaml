@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: zapzinho-server
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run db:migrate:prod && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PASSWORD_ADMIN
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: WAPI_BASE_URL
+        sync: false
+      - key: WAPI_TOKEN
+        sync: false
+      - key: WAPI_INSTANCE_ID
+        sync: false
+      - key: WAPI_DELAY_MS
+        sync: false
+      - key: WAPI_WEBHOOK_SECRET
+        sync: false
