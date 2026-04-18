@@ -38,20 +38,28 @@ export async function whatsappWebhookController(
     instanceId: z.string(),
     data: z.object({
       from: z.string(),               // "5511999999999@c.us"
+      fromMe: z.boolean().optional(), // true = message sent by the bot
       pushName: z.string().optional(),
       body: z.string().optional(),
       type: z.string().optional(),
     }),
   })
 
+  console.log('[Webhook] Incoming payload:', JSON.stringify(request.body))
+
   const parsed = bodySchema.safeParse(request.body)
   if (!parsed.success) {
+    console.warn('[Webhook] Invalid payload:', parsed.error.format())
     return reply.status(200).send({ ok: false, reason: 'invalid_payload' })
   }
 
   const { instanceId, data } = parsed.data
 
-  // Ignore non-chat messages (images, audio, etc. still capture the lead)
+  // Skip messages sent by the bot itself
+  if (data.fromMe === true) {
+    return reply.status(200).send({ ok: true, reason: 'outgoing_message_ignored' })
+  }
+
   // Groups have @g.us suffix — skip them
   if (data.from.endsWith('@g.us')) {
     return reply.status(200).send({ ok: true, reason: 'group_message_ignored' })
