@@ -111,7 +111,16 @@ export class PrismaLeadRepository implements LeadRepository {
       where,
       skip: offset,
       take: Number(limit),
-      include: { Product: { include: { Category: true } }, Category: true },
+      include: {
+        Product: { include: { Category: true } },
+        Category: true,
+        BroadcastLeads: {
+          where: { status: 'SENT' },
+          orderBy: { sentAt: 'desc' },
+          take: 1,
+          include: { Broadcast: { select: { name: true } } },
+        },
+      },
       orderBy: { createdAt: 'desc' },
     }) as Promise<LeadWithProduct[]>
   }
