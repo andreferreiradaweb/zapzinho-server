@@ -7,7 +7,7 @@ import { CreateLeadFactory } from '@/factory/lead/create-lead'
 const createLeadBodySchema = z.object({
   nome: z.string(),
   email: z.string().email(),
-  telefone: z.string(),
+  telefone: z.string().transform(v => v.replace(/\D/g, '')),
   message: z.string(),
   Status: z.nativeEnum(LeadStatus),
   id: z.string().uuid().optional(),
