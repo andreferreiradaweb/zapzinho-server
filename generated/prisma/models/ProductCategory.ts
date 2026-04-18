@@ -176,6 +176,8 @@ export type ProductCategoryWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"ProductCategory"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Products?: Prisma.ProductListRelationFilter
+  Leads?: Prisma.LeadListRelationFilter
+  Automations?: Prisma.AutomationListRelationFilter
 }
 
 export type ProductCategoryOrderByWithRelationInput = {
@@ -185,6 +187,8 @@ export type ProductCategoryOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   User?: Prisma.UserOrderByWithRelationInput
   Products?: Prisma.ProductOrderByRelationAggregateInput
+  Leads?: Prisma.LeadOrderByRelationAggregateInput
+  Automations?: Prisma.AutomationOrderByRelationAggregateInput
 }
 
 export type ProductCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -197,6 +201,8 @@ export type ProductCategoryWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"ProductCategory"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Products?: Prisma.ProductListRelationFilter
+  Leads?: Prisma.LeadListRelationFilter
+  Automations?: Prisma.AutomationListRelationFilter
 }, "id">
 
 export type ProductCategoryOrderByWithAggregationInput = {
@@ -225,6 +231,8 @@ export type ProductCategoryCreateInput = {
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutProductCategoriesInput
   Products?: Prisma.ProductCreateNestedManyWithoutCategoryInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutCategoryInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryUncheckedCreateInput = {
@@ -233,6 +241,8 @@ export type ProductCategoryUncheckedCreateInput = {
   userId: string
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutCategoryInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCategoryInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryUpdateInput = {
@@ -241,6 +251,8 @@ export type ProductCategoryUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutProductCategoriesNestedInput
   Products?: Prisma.ProductUpdateManyWithoutCategoryNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutCategoryNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryUncheckedUpdateInput = {
@@ -249,6 +261,8 @@ export type ProductCategoryUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutCategoryNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutCategoryNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryCreateManyInput = {
@@ -365,11 +379,45 @@ export type ProductCategoryUpdateOneWithoutProductsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductCategoryUpdateToOneWithWhereWithoutProductsInput, Prisma.ProductCategoryUpdateWithoutProductsInput>, Prisma.ProductCategoryUncheckedUpdateWithoutProductsInput>
 }
 
+export type ProductCategoryCreateNestedOneWithoutLeadsInput = {
+  create?: Prisma.XOR<Prisma.ProductCategoryCreateWithoutLeadsInput, Prisma.ProductCategoryUncheckedCreateWithoutLeadsInput>
+  connectOrCreate?: Prisma.ProductCategoryCreateOrConnectWithoutLeadsInput
+  connect?: Prisma.ProductCategoryWhereUniqueInput
+}
+
+export type ProductCategoryUpdateOneWithoutLeadsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductCategoryCreateWithoutLeadsInput, Prisma.ProductCategoryUncheckedCreateWithoutLeadsInput>
+  connectOrCreate?: Prisma.ProductCategoryCreateOrConnectWithoutLeadsInput
+  upsert?: Prisma.ProductCategoryUpsertWithoutLeadsInput
+  disconnect?: Prisma.ProductCategoryWhereInput | boolean
+  delete?: Prisma.ProductCategoryWhereInput | boolean
+  connect?: Prisma.ProductCategoryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductCategoryUpdateToOneWithWhereWithoutLeadsInput, Prisma.ProductCategoryUpdateWithoutLeadsInput>, Prisma.ProductCategoryUncheckedUpdateWithoutLeadsInput>
+}
+
+export type ProductCategoryCreateNestedOneWithoutAutomationsInput = {
+  create?: Prisma.XOR<Prisma.ProductCategoryCreateWithoutAutomationsInput, Prisma.ProductCategoryUncheckedCreateWithoutAutomationsInput>
+  connectOrCreate?: Prisma.ProductCategoryCreateOrConnectWithoutAutomationsInput
+  connect?: Prisma.ProductCategoryWhereUniqueInput
+}
+
+export type ProductCategoryUpdateOneWithoutAutomationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductCategoryCreateWithoutAutomationsInput, Prisma.ProductCategoryUncheckedCreateWithoutAutomationsInput>
+  connectOrCreate?: Prisma.ProductCategoryCreateOrConnectWithoutAutomationsInput
+  upsert?: Prisma.ProductCategoryUpsertWithoutAutomationsInput
+  disconnect?: Prisma.ProductCategoryWhereInput | boolean
+  delete?: Prisma.ProductCategoryWhereInput | boolean
+  connect?: Prisma.ProductCategoryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductCategoryUpdateToOneWithWhereWithoutAutomationsInput, Prisma.ProductCategoryUpdateWithoutAutomationsInput>, Prisma.ProductCategoryUncheckedUpdateWithoutAutomationsInput>
+}
+
 export type ProductCategoryCreateWithoutUserInput = {
   id?: string
   name: string
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutCategoryInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutCategoryInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryUncheckedCreateWithoutUserInput = {
@@ -377,6 +425,8 @@ export type ProductCategoryUncheckedCreateWithoutUserInput = {
   name: string
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutCategoryInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCategoryInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryCreateOrConnectWithoutUserInput = {
@@ -420,6 +470,8 @@ export type ProductCategoryCreateWithoutProductsInput = {
   name: string
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutProductCategoriesInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutCategoryInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryUncheckedCreateWithoutProductsInput = {
@@ -427,6 +479,8 @@ export type ProductCategoryUncheckedCreateWithoutProductsInput = {
   name: string
   userId: string
   createdAt?: Date | string
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCategoryInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryCreateOrConnectWithoutProductsInput = {
@@ -450,6 +504,8 @@ export type ProductCategoryUpdateWithoutProductsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutProductCategoriesNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutCategoryNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryUncheckedUpdateWithoutProductsInput = {
@@ -457,6 +513,112 @@ export type ProductCategoryUncheckedUpdateWithoutProductsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutCategoryNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutCategoryNestedInput
+}
+
+export type ProductCategoryCreateWithoutLeadsInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  User: Prisma.UserCreateNestedOneWithoutProductCategoriesInput
+  Products?: Prisma.ProductCreateNestedManyWithoutCategoryInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutCategoryInput
+}
+
+export type ProductCategoryUncheckedCreateWithoutLeadsInput = {
+  id?: string
+  name: string
+  userId: string
+  createdAt?: Date | string
+  Products?: Prisma.ProductUncheckedCreateNestedManyWithoutCategoryInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutCategoryInput
+}
+
+export type ProductCategoryCreateOrConnectWithoutLeadsInput = {
+  where: Prisma.ProductCategoryWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductCategoryCreateWithoutLeadsInput, Prisma.ProductCategoryUncheckedCreateWithoutLeadsInput>
+}
+
+export type ProductCategoryUpsertWithoutLeadsInput = {
+  update: Prisma.XOR<Prisma.ProductCategoryUpdateWithoutLeadsInput, Prisma.ProductCategoryUncheckedUpdateWithoutLeadsInput>
+  create: Prisma.XOR<Prisma.ProductCategoryCreateWithoutLeadsInput, Prisma.ProductCategoryUncheckedCreateWithoutLeadsInput>
+  where?: Prisma.ProductCategoryWhereInput
+}
+
+export type ProductCategoryUpdateToOneWithWhereWithoutLeadsInput = {
+  where?: Prisma.ProductCategoryWhereInput
+  data: Prisma.XOR<Prisma.ProductCategoryUpdateWithoutLeadsInput, Prisma.ProductCategoryUncheckedUpdateWithoutLeadsInput>
+}
+
+export type ProductCategoryUpdateWithoutLeadsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  User?: Prisma.UserUpdateOneRequiredWithoutProductCategoriesNestedInput
+  Products?: Prisma.ProductUpdateManyWithoutCategoryNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutCategoryNestedInput
+}
+
+export type ProductCategoryUncheckedUpdateWithoutLeadsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Products?: Prisma.ProductUncheckedUpdateManyWithoutCategoryNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutCategoryNestedInput
+}
+
+export type ProductCategoryCreateWithoutAutomationsInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  User: Prisma.UserCreateNestedOneWithoutProductCategoriesInput
+  Products?: Prisma.ProductCreateNestedManyWithoutCategoryInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutCategoryInput
+}
+
+export type ProductCategoryUncheckedCreateWithoutAutomationsInput = {
+  id?: string
+  name: string
+  userId: string
+  createdAt?: Date | string
+  Products?: Prisma.ProductUncheckedCreateNestedManyWithoutCategoryInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCategoryInput
+}
+
+export type ProductCategoryCreateOrConnectWithoutAutomationsInput = {
+  where: Prisma.ProductCategoryWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductCategoryCreateWithoutAutomationsInput, Prisma.ProductCategoryUncheckedCreateWithoutAutomationsInput>
+}
+
+export type ProductCategoryUpsertWithoutAutomationsInput = {
+  update: Prisma.XOR<Prisma.ProductCategoryUpdateWithoutAutomationsInput, Prisma.ProductCategoryUncheckedUpdateWithoutAutomationsInput>
+  create: Prisma.XOR<Prisma.ProductCategoryCreateWithoutAutomationsInput, Prisma.ProductCategoryUncheckedCreateWithoutAutomationsInput>
+  where?: Prisma.ProductCategoryWhereInput
+}
+
+export type ProductCategoryUpdateToOneWithWhereWithoutAutomationsInput = {
+  where?: Prisma.ProductCategoryWhereInput
+  data: Prisma.XOR<Prisma.ProductCategoryUpdateWithoutAutomationsInput, Prisma.ProductCategoryUncheckedUpdateWithoutAutomationsInput>
+}
+
+export type ProductCategoryUpdateWithoutAutomationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  User?: Prisma.UserUpdateOneRequiredWithoutProductCategoriesNestedInput
+  Products?: Prisma.ProductUpdateManyWithoutCategoryNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutCategoryNestedInput
+}
+
+export type ProductCategoryUncheckedUpdateWithoutAutomationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Products?: Prisma.ProductUncheckedUpdateManyWithoutCategoryNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryCreateManyUserInput = {
@@ -470,6 +632,8 @@ export type ProductCategoryUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutCategoryNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutCategoryNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryUncheckedUpdateWithoutUserInput = {
@@ -477,6 +641,8 @@ export type ProductCategoryUncheckedUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutCategoryNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutCategoryNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryUncheckedUpdateManyWithoutUserInput = {
@@ -492,10 +658,14 @@ export type ProductCategoryUncheckedUpdateManyWithoutUserInput = {
 
 export type ProductCategoryCountOutputType = {
   Products: number
+  Leads: number
+  Automations: number
 }
 
 export type ProductCategoryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Products?: boolean | ProductCategoryCountOutputTypeCountProductsArgs
+  Leads?: boolean | ProductCategoryCountOutputTypeCountLeadsArgs
+  Automations?: boolean | ProductCategoryCountOutputTypeCountAutomationsArgs
 }
 
 /**
@@ -515,6 +685,20 @@ export type ProductCategoryCountOutputTypeCountProductsArgs<ExtArgs extends runt
   where?: Prisma.ProductWhereInput
 }
 
+/**
+ * ProductCategoryCountOutputType without action
+ */
+export type ProductCategoryCountOutputTypeCountLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadWhereInput
+}
+
+/**
+ * ProductCategoryCountOutputType without action
+ */
+export type ProductCategoryCountOutputTypeCountAutomationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AutomationWhereInput
+}
+
 
 export type ProductCategorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -523,6 +707,8 @@ export type ProductCategorySelect<ExtArgs extends runtime.Types.Extensions.Inter
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Products?: boolean | Prisma.ProductCategory$ProductsArgs<ExtArgs>
+  Leads?: boolean | Prisma.ProductCategory$LeadsArgs<ExtArgs>
+  Automations?: boolean | Prisma.ProductCategory$AutomationsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCategoryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productCategory"]>
 
@@ -553,6 +739,8 @@ export type ProductCategoryOmit<ExtArgs extends runtime.Types.Extensions.Interna
 export type ProductCategoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Products?: boolean | Prisma.ProductCategory$ProductsArgs<ExtArgs>
+  Leads?: boolean | Prisma.ProductCategory$LeadsArgs<ExtArgs>
+  Automations?: boolean | Prisma.ProductCategory$AutomationsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCategoryCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductCategoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -567,6 +755,8 @@ export type $ProductCategoryPayload<ExtArgs extends runtime.Types.Extensions.Int
   objects: {
     User: Prisma.$UserPayload<ExtArgs>
     Products: Prisma.$ProductPayload<ExtArgs>[]
+    Leads: Prisma.$LeadPayload<ExtArgs>[]
+    Automations: Prisma.$AutomationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -969,6 +1159,8 @@ export interface Prisma__ProductCategoryClient<T, Null = never, ExtArgs extends 
   readonly [Symbol.toStringTag]: "PrismaPromise"
   User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   Products<T extends Prisma.ProductCategory$ProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductCategory$ProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Leads<T extends Prisma.ProductCategory$LeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductCategory$LeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Automations<T extends Prisma.ProductCategory$AutomationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductCategory$AutomationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AutomationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1419,6 +1611,54 @@ export type ProductCategory$ProductsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.ProductScalarFieldEnum | Prisma.ProductScalarFieldEnum[]
+}
+
+/**
+ * ProductCategory.Leads
+ */
+export type ProductCategory$LeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Lead
+   */
+  select?: Prisma.LeadSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Lead
+   */
+  omit?: Prisma.LeadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
+  where?: Prisma.LeadWhereInput
+  orderBy?: Prisma.LeadOrderByWithRelationInput | Prisma.LeadOrderByWithRelationInput[]
+  cursor?: Prisma.LeadWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadScalarFieldEnum | Prisma.LeadScalarFieldEnum[]
+}
+
+/**
+ * ProductCategory.Automations
+ */
+export type ProductCategory$AutomationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Automation
+   */
+  select?: Prisma.AutomationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Automation
+   */
+  omit?: Prisma.AutomationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AutomationInclude<ExtArgs> | null
+  where?: Prisma.AutomationWhereInput
+  orderBy?: Prisma.AutomationOrderByWithRelationInput | Prisma.AutomationOrderByWithRelationInput[]
+  cursor?: Prisma.AutomationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AutomationScalarFieldEnum | Prisma.AutomationScalarFieldEnum[]
 }
 
 /**

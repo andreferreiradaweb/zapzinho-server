@@ -53,6 +53,11 @@ export type Broadcast = Prisma.BroadcastModel
  */
 export type BroadcastLead = Prisma.BroadcastLeadModel
 /**
+ * Model Automation
+ * 
+ */
+export type Automation = Prisma.AutomationModel
+/**
  * Model BroadcastBlock
  * 
  */

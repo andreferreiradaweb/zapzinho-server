@@ -391,6 +391,7 @@ export const ModelName = {
   MessageTemplate: 'MessageTemplate',
   Broadcast: 'Broadcast',
   BroadcastLead: 'BroadcastLead',
+  Automation: 'Automation',
   BroadcastBlock: 'BroadcastBlock',
   MessageLog: 'MessageLog',
   Customer: 'Customer',
@@ -413,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "productCategory" | "product" | "lead" | "messageTemplate" | "broadcast" | "broadcastLead" | "broadcastBlock" | "messageLog" | "customer" | "address" | "order" | "orderItem" | "payment"
+    modelProps: "user" | "productCategory" | "product" | "lead" | "messageTemplate" | "broadcast" | "broadcastLead" | "automation" | "broadcastBlock" | "messageLog" | "customer" | "address" | "order" | "orderItem" | "payment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -932,6 +933,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.BroadcastLeadCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.BroadcastLeadCountAggregateOutputType> | number
+        }
+      }
+    }
+    Automation: {
+      payload: Prisma.$AutomationPayload<ExtArgs>
+      fields: Prisma.AutomationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AutomationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AutomationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AutomationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AutomationPayload>
+        }
+        findFirst: {
+          args: Prisma.AutomationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AutomationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AutomationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AutomationPayload>
+        }
+        findMany: {
+          args: Prisma.AutomationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AutomationPayload>[]
+        }
+        create: {
+          args: Prisma.AutomationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AutomationPayload>
+        }
+        createMany: {
+          args: Prisma.AutomationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AutomationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AutomationPayload>[]
+        }
+        delete: {
+          args: Prisma.AutomationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AutomationPayload>
+        }
+        update: {
+          args: Prisma.AutomationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AutomationPayload>
+        }
+        deleteMany: {
+          args: Prisma.AutomationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AutomationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AutomationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AutomationPayload>[]
+        }
+        upsert: {
+          args: Prisma.AutomationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AutomationPayload>
+        }
+        aggregate: {
+          args: Prisma.AutomationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAutomation>
+        }
+        groupBy: {
+          args: Prisma.AutomationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AutomationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AutomationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AutomationCountAggregateOutputType> | number
         }
       }
     }
@@ -1545,6 +1620,7 @@ export const LeadScalarFieldEnum = {
   email: 'email',
   message: 'message',
   productId: 'productId',
+  categoryId: 'categoryId',
   userId: 'userId',
   Status: 'Status',
   createdAt: 'createdAt',
@@ -1599,6 +1675,26 @@ export const BroadcastLeadScalarFieldEnum = {
 } as const
 
 export type BroadcastLeadScalarFieldEnum = (typeof BroadcastLeadScalarFieldEnum)[keyof typeof BroadcastLeadScalarFieldEnum]
+
+
+export const AutomationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  message: 'message',
+  imageUrls: 'imageUrls',
+  videoUrl: 'videoUrl',
+  templateId: 'templateId',
+  isActive: 'isActive',
+  productId: 'productId',
+  categoryId: 'categoryId',
+  leadStatus: 'leadStatus',
+  lastMessageRange: 'lastMessageRange',
+  lastBroadcastRange: 'lastBroadcastRange',
+  createdAt: 'createdAt'
+} as const
+
+export type AutomationScalarFieldEnum = (typeof AutomationScalarFieldEnum)[keyof typeof AutomationScalarFieldEnum]
 
 
 export const BroadcastBlockScalarFieldEnum = {
@@ -2008,6 +2104,7 @@ export type GlobalOmitConfig = {
   messageTemplate?: Prisma.MessageTemplateOmit
   broadcast?: Prisma.BroadcastOmit
   broadcastLead?: Prisma.BroadcastLeadOmit
+  automation?: Prisma.AutomationOmit
   broadcastBlock?: Prisma.BroadcastBlockOmit
   messageLog?: Prisma.MessageLogOmit
   customer?: Prisma.CustomerOmit

@@ -27,6 +27,7 @@ model User {
   Leads                    Lead[]
   MessageTemplates         MessageTemplate[]
   Broadcasts               Broadcast[]
+  Automations              Automation[]
   MessageLogs              MessageLog[]
   BroadcastBlocks          BroadcastBlock[]
 }
@@ -47,8 +48,9 @@ model ProductCategory {
   userId    String
   createdAt DateTime  @default(now())
   User      User      @relation(fields: [userId], references: [id])
-  Products  Product[]
-  Leads     Lead[]
+  Products    Product[]
+  Leads       Lead[]
+  Automations Automation[]
 }
 
 model Product {
@@ -66,6 +68,7 @@ model Product {
   categoryId  String?
   Leads       Lead[]
   OrderItems  OrderItem[]
+  Automations Automation[]
 }
 
 model Lead {
@@ -108,7 +111,8 @@ model MessageTemplate {
   videoUrl   String?
   createdAt  DateTime    @default(now())
   User       User        @relation(fields: [userId], references: [id])
-  Broadcasts Broadcast[]
+  Broadcasts   Broadcast[]
+  Automations  Automation[]
 }
 
 // Broadcast campaigns
@@ -152,6 +156,28 @@ model BroadcastLead {
   Lead        Lead          @relation(fields: [leadId], references: [id])
 }
 
+// Automated recurring broadcast rules
+model Automation {
+  id                 String           @id @default(uuid())
+  userId             String
+  name               String
+  message            String
+  imageUrls          String[]
+  videoUrl           String?
+  templateId         String?
+  isActive           Boolean          @default(false)
+  productId          String?
+  categoryId         String?
+  leadStatus         LeadStatus?
+  lastMessageRange   String?
+  lastBroadcastRange String?
+  createdAt          DateTime         @default(now())
+  User               User             @relation(fields: [userId], references: [id])
+  Template           MessageTemplate? @relation(fields: [templateId], references: [id])
+  Product            Product?         @relation(fields: [productId], references: [id])
+  Category           ProductCategory? @relation(fields: [categoryId], references: [id])
+}
+
 // Leads blocked from receiving broadcast messages
 model BroadcastBlock {
   id        String   @id @default(uuid())
@@ -192,6 +218,7 @@ enum MessageType {
   TRIAL_EXPIRY
   NPS
   BROADCAST
+  AUTOMATION
   MANUAL
 }
 

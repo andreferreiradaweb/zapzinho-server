@@ -259,6 +259,7 @@ export type UserWhereInput = {
   Leads?: Prisma.LeadListRelationFilter
   MessageTemplates?: Prisma.MessageTemplateListRelationFilter
   Broadcasts?: Prisma.BroadcastListRelationFilter
+  Automations?: Prisma.AutomationListRelationFilter
   MessageLogs?: Prisma.MessageLogListRelationFilter
   BroadcastBlocks?: Prisma.BroadcastBlockListRelationFilter
 }
@@ -283,6 +284,7 @@ export type UserOrderByWithRelationInput = {
   Leads?: Prisma.LeadOrderByRelationAggregateInput
   MessageTemplates?: Prisma.MessageTemplateOrderByRelationAggregateInput
   Broadcasts?: Prisma.BroadcastOrderByRelationAggregateInput
+  Automations?: Prisma.AutomationOrderByRelationAggregateInput
   MessageLogs?: Prisma.MessageLogOrderByRelationAggregateInput
   BroadcastBlocks?: Prisma.BroadcastBlockOrderByRelationAggregateInput
 }
@@ -310,6 +312,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   Leads?: Prisma.LeadListRelationFilter
   MessageTemplates?: Prisma.MessageTemplateListRelationFilter
   Broadcasts?: Prisma.BroadcastListRelationFilter
+  Automations?: Prisma.AutomationListRelationFilter
   MessageLogs?: Prisma.MessageLogListRelationFilter
   BroadcastBlocks?: Prisma.BroadcastBlockListRelationFilter
 }, "id" | "email" | "wapiInstanceId">
@@ -374,6 +377,7 @@ export type UserCreateInput = {
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
   BroadcastBlocks?: Prisma.BroadcastBlockCreateNestedManyWithoutUserInput
 }
@@ -398,6 +402,7 @@ export type UserUncheckedCreateInput = {
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
   BroadcastBlocks?: Prisma.BroadcastBlockUncheckedCreateNestedManyWithoutUserInput
 }
@@ -422,6 +427,7 @@ export type UserUpdateInput = {
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUpdateManyWithoutUserNestedInput
 }
@@ -446,6 +452,7 @@ export type UserUncheckedUpdateInput = {
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -655,6 +662,20 @@ export type UserUpdateOneRequiredWithoutBroadcastsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBroadcastsInput, Prisma.UserUpdateWithoutBroadcastsInput>, Prisma.UserUncheckedUpdateWithoutBroadcastsInput>
 }
 
+export type UserCreateNestedOneWithoutAutomationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAutomationsInput, Prisma.UserUncheckedCreateWithoutAutomationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAutomationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAutomationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAutomationsInput, Prisma.UserUncheckedCreateWithoutAutomationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAutomationsInput
+  upsert?: Prisma.UserUpsertWithoutAutomationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAutomationsInput, Prisma.UserUpdateWithoutAutomationsInput>, Prisma.UserUncheckedUpdateWithoutAutomationsInput>
+}
+
 export type UserCreateNestedOneWithoutBroadcastBlocksInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBroadcastBlocksInput, Prisma.UserUncheckedCreateWithoutBroadcastBlocksInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBroadcastBlocksInput
@@ -702,6 +723,7 @@ export type UserCreateWithoutProductCategoriesInput = {
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
   BroadcastBlocks?: Prisma.BroadcastBlockCreateNestedManyWithoutUserInput
 }
@@ -725,6 +747,7 @@ export type UserUncheckedCreateWithoutProductCategoriesInput = {
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
   BroadcastBlocks?: Prisma.BroadcastBlockUncheckedCreateNestedManyWithoutUserInput
 }
@@ -764,6 +787,7 @@ export type UserUpdateWithoutProductCategoriesInput = {
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUpdateManyWithoutUserNestedInput
 }
@@ -787,6 +811,7 @@ export type UserUncheckedUpdateWithoutProductCategoriesInput = {
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -810,6 +835,7 @@ export type UserCreateWithoutProductsInput = {
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
   BroadcastBlocks?: Prisma.BroadcastBlockCreateNestedManyWithoutUserInput
 }
@@ -833,6 +859,7 @@ export type UserUncheckedCreateWithoutProductsInput = {
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
   BroadcastBlocks?: Prisma.BroadcastBlockUncheckedCreateNestedManyWithoutUserInput
 }
@@ -872,6 +899,7 @@ export type UserUpdateWithoutProductsInput = {
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUpdateManyWithoutUserNestedInput
 }
@@ -895,6 +923,7 @@ export type UserUncheckedUpdateWithoutProductsInput = {
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -918,6 +947,7 @@ export type UserCreateWithoutLeadsInput = {
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
   BroadcastBlocks?: Prisma.BroadcastBlockCreateNestedManyWithoutUserInput
 }
@@ -941,6 +971,7 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
   BroadcastBlocks?: Prisma.BroadcastBlockUncheckedCreateNestedManyWithoutUserInput
 }
@@ -980,6 +1011,7 @@ export type UserUpdateWithoutLeadsInput = {
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUpdateManyWithoutUserNestedInput
 }
@@ -1003,6 +1035,7 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1026,6 +1059,7 @@ export type UserCreateWithoutMessageTemplatesInput = {
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
   BroadcastBlocks?: Prisma.BroadcastBlockCreateNestedManyWithoutUserInput
 }
@@ -1049,6 +1083,7 @@ export type UserUncheckedCreateWithoutMessageTemplatesInput = {
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
   BroadcastBlocks?: Prisma.BroadcastBlockUncheckedCreateNestedManyWithoutUserInput
 }
@@ -1088,6 +1123,7 @@ export type UserUpdateWithoutMessageTemplatesInput = {
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUpdateManyWithoutUserNestedInput
 }
@@ -1111,6 +1147,7 @@ export type UserUncheckedUpdateWithoutMessageTemplatesInput = {
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1134,6 +1171,7 @@ export type UserCreateWithoutBroadcastsInput = {
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
   BroadcastBlocks?: Prisma.BroadcastBlockCreateNestedManyWithoutUserInput
 }
@@ -1157,6 +1195,7 @@ export type UserUncheckedCreateWithoutBroadcastsInput = {
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
   BroadcastBlocks?: Prisma.BroadcastBlockUncheckedCreateNestedManyWithoutUserInput
 }
@@ -1196,6 +1235,7 @@ export type UserUpdateWithoutBroadcastsInput = {
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUpdateManyWithoutUserNestedInput
 }
@@ -1219,6 +1259,119 @@ export type UserUncheckedUpdateWithoutBroadcastsInput = {
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
+  BroadcastBlocks?: Prisma.BroadcastBlockUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAutomationsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name?: string | null
+  phoneNumber?: string | null
+  address?: string | null
+  isActive: boolean
+  Role: $Enums.Role
+  CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
+  wapiToken?: string | null
+  createdAt?: Date | string
+  Products?: Prisma.ProductCreateNestedManyWithoutUserInput
+  ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
+  BroadcastBlocks?: Prisma.BroadcastBlockCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAutomationsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name?: string | null
+  phoneNumber?: string | null
+  address?: string | null
+  isActive: boolean
+  Role: $Enums.Role
+  CustomerType: $Enums.CustomerType
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
+  wapiToken?: string | null
+  createdAt?: Date | string
+  Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
+  ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
+  BroadcastBlocks?: Prisma.BroadcastBlockUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAutomationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAutomationsInput, Prisma.UserUncheckedCreateWithoutAutomationsInput>
+}
+
+export type UserUpsertWithoutAutomationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAutomationsInput, Prisma.UserUncheckedUpdateWithoutAutomationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAutomationsInput, Prisma.UserUncheckedCreateWithoutAutomationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAutomationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAutomationsInput, Prisma.UserUncheckedUpdateWithoutAutomationsInput>
+}
+
+export type UserUpdateWithoutAutomationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
+  ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
+  BroadcastBlocks?: Prisma.BroadcastBlockUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAutomationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
+  ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1243,6 +1396,7 @@ export type UserCreateWithoutBroadcastBlocksInput = {
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
 }
 
@@ -1266,6 +1420,7 @@ export type UserUncheckedCreateWithoutBroadcastBlocksInput = {
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutUserInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -1305,6 +1460,7 @@ export type UserUpdateWithoutBroadcastBlocksInput = {
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
 }
 
@@ -1328,6 +1484,7 @@ export type UserUncheckedUpdateWithoutBroadcastBlocksInput = {
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutUserNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -1351,6 +1508,7 @@ export type UserCreateWithoutMessageLogsInput = {
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutUserInput
   BroadcastBlocks?: Prisma.BroadcastBlockCreateNestedManyWithoutUserInput
 }
 
@@ -1374,6 +1532,7 @@ export type UserUncheckedCreateWithoutMessageLogsInput = {
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutUserInput
   BroadcastBlocks?: Prisma.BroadcastBlockUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -1413,6 +1572,7 @@ export type UserUpdateWithoutMessageLogsInput = {
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutUserNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUpdateManyWithoutUserNestedInput
 }
 
@@ -1436,6 +1596,7 @@ export type UserUncheckedUpdateWithoutMessageLogsInput = {
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutUserNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -1450,6 +1611,7 @@ export type UserCountOutputType = {
   Leads: number
   MessageTemplates: number
   Broadcasts: number
+  Automations: number
   MessageLogs: number
   BroadcastBlocks: number
 }
@@ -1460,6 +1622,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   Leads?: boolean | UserCountOutputTypeCountLeadsArgs
   MessageTemplates?: boolean | UserCountOutputTypeCountMessageTemplatesArgs
   Broadcasts?: boolean | UserCountOutputTypeCountBroadcastsArgs
+  Automations?: boolean | UserCountOutputTypeCountAutomationsArgs
   MessageLogs?: boolean | UserCountOutputTypeCountMessageLogsArgs
   BroadcastBlocks?: boolean | UserCountOutputTypeCountBroadcastBlocksArgs
 }
@@ -1512,6 +1675,13 @@ export type UserCountOutputTypeCountBroadcastsArgs<ExtArgs extends runtime.Types
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountAutomationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AutomationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountMessageLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MessageLogWhereInput
 }
@@ -1544,6 +1714,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   Leads?: boolean | Prisma.User$LeadsArgs<ExtArgs>
   MessageTemplates?: boolean | Prisma.User$MessageTemplatesArgs<ExtArgs>
   Broadcasts?: boolean | Prisma.User$BroadcastsArgs<ExtArgs>
+  Automations?: boolean | Prisma.User$AutomationsArgs<ExtArgs>
   MessageLogs?: boolean | Prisma.User$MessageLogsArgs<ExtArgs>
   BroadcastBlocks?: boolean | Prisma.User$BroadcastBlocksArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1607,6 +1778,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   Leads?: boolean | Prisma.User$LeadsArgs<ExtArgs>
   MessageTemplates?: boolean | Prisma.User$MessageTemplatesArgs<ExtArgs>
   Broadcasts?: boolean | Prisma.User$BroadcastsArgs<ExtArgs>
+  Automations?: boolean | Prisma.User$AutomationsArgs<ExtArgs>
   MessageLogs?: boolean | Prisma.User$MessageLogsArgs<ExtArgs>
   BroadcastBlocks?: boolean | Prisma.User$BroadcastBlocksArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1622,6 +1794,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     Leads: Prisma.$LeadPayload<ExtArgs>[]
     MessageTemplates: Prisma.$MessageTemplatePayload<ExtArgs>[]
     Broadcasts: Prisma.$BroadcastPayload<ExtArgs>[]
+    Automations: Prisma.$AutomationPayload<ExtArgs>[]
     MessageLogs: Prisma.$MessageLogPayload<ExtArgs>[]
     BroadcastBlocks: Prisma.$BroadcastBlockPayload<ExtArgs>[]
   }
@@ -2039,6 +2212,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   Leads<T extends Prisma.User$LeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$LeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   MessageTemplates<T extends Prisma.User$MessageTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$MessageTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Broadcasts<T extends Prisma.User$BroadcastsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$BroadcastsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Automations<T extends Prisma.User$AutomationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$AutomationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AutomationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   MessageLogs<T extends Prisma.User$MessageLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$MessageLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   BroadcastBlocks<T extends Prisma.User$BroadcastBlocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$BroadcastBlocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastBlockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -2589,6 +2763,30 @@ export type User$BroadcastsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.BroadcastScalarFieldEnum | Prisma.BroadcastScalarFieldEnum[]
+}
+
+/**
+ * User.Automations
+ */
+export type User$AutomationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Automation
+   */
+  select?: Prisma.AutomationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Automation
+   */
+  omit?: Prisma.AutomationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AutomationInclude<ExtArgs> | null
+  where?: Prisma.AutomationWhereInput
+  orderBy?: Prisma.AutomationOrderByWithRelationInput | Prisma.AutomationOrderByWithRelationInput[]
+  cursor?: Prisma.AutomationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AutomationScalarFieldEnum | Prisma.AutomationScalarFieldEnum[]
 }
 
 /**

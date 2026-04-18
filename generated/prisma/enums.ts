@@ -62,6 +62,7 @@ export const MessageType = {
   TRIAL_EXPIRY: 'TRIAL_EXPIRY',
   NPS: 'NPS',
   BROADCAST: 'BROADCAST',
+  AUTOMATION: 'AUTOMATION',
   MANUAL: 'MANUAL'
 } as const
 

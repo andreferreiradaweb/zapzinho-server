@@ -1,6 +1,7 @@
 import cron from 'node-cron'
 import { runReactivationJob } from './reactivation'
 import { runTrialExpiryJob } from './trial-expiry'
+import { runAutomationJob } from './automation'
 
 export function startCronJobs() {
   // Reactivation: daily at 09:00
@@ -17,5 +18,12 @@ export function startCronJobs() {
     )
   })
 
-  console.log('[Cron] Jobs scheduled: reactivation (09:00), trial-expiry (10:00)')
+  // Automation broadcasts: daily at 08:00
+  cron.schedule('0 8 * * *', () => {
+    runAutomationJob().catch((err) =>
+      console.error('[Cron] Automation job error:', err),
+    )
+  })
+
+  console.log('[Cron] Jobs scheduled: reactivation (09:00), trial-expiry (10:00), automations (08:00)')
 }

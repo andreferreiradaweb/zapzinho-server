@@ -208,6 +208,7 @@ export type MessageTemplateWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"MessageTemplate"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Broadcasts?: Prisma.BroadcastListRelationFilter
+  Automations?: Prisma.AutomationListRelationFilter
 }
 
 export type MessageTemplateOrderByWithRelationInput = {
@@ -221,6 +222,7 @@ export type MessageTemplateOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   User?: Prisma.UserOrderByWithRelationInput
   Broadcasts?: Prisma.BroadcastOrderByRelationAggregateInput
+  Automations?: Prisma.AutomationOrderByRelationAggregateInput
 }
 
 export type MessageTemplateWhereUniqueInput = Prisma.AtLeast<{
@@ -237,6 +239,7 @@ export type MessageTemplateWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"MessageTemplate"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Broadcasts?: Prisma.BroadcastListRelationFilter
+  Automations?: Prisma.AutomationListRelationFilter
 }, "id">
 
 export type MessageTemplateOrderByWithAggregationInput = {
@@ -277,6 +280,7 @@ export type MessageTemplateCreateInput = {
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutMessageTemplatesInput
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutTemplateInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutTemplateInput
 }
 
 export type MessageTemplateUncheckedCreateInput = {
@@ -289,6 +293,7 @@ export type MessageTemplateUncheckedCreateInput = {
   videoUrl?: string | null
   createdAt?: Date | string
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutTemplateInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutTemplateInput
 }
 
 export type MessageTemplateUpdateInput = {
@@ -301,6 +306,7 @@ export type MessageTemplateUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutMessageTemplatesNestedInput
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutTemplateNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutTemplateNestedInput
 }
 
 export type MessageTemplateUncheckedUpdateInput = {
@@ -313,6 +319,7 @@ export type MessageTemplateUncheckedUpdateInput = {
   videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutTemplateNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutTemplateNestedInput
 }
 
 export type MessageTemplateCreateManyInput = {
@@ -453,6 +460,22 @@ export type MessageTemplateUpdateOneWithoutBroadcastsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MessageTemplateUpdateToOneWithWhereWithoutBroadcastsInput, Prisma.MessageTemplateUpdateWithoutBroadcastsInput>, Prisma.MessageTemplateUncheckedUpdateWithoutBroadcastsInput>
 }
 
+export type MessageTemplateCreateNestedOneWithoutAutomationsInput = {
+  create?: Prisma.XOR<Prisma.MessageTemplateCreateWithoutAutomationsInput, Prisma.MessageTemplateUncheckedCreateWithoutAutomationsInput>
+  connectOrCreate?: Prisma.MessageTemplateCreateOrConnectWithoutAutomationsInput
+  connect?: Prisma.MessageTemplateWhereUniqueInput
+}
+
+export type MessageTemplateUpdateOneWithoutAutomationsNestedInput = {
+  create?: Prisma.XOR<Prisma.MessageTemplateCreateWithoutAutomationsInput, Prisma.MessageTemplateUncheckedCreateWithoutAutomationsInput>
+  connectOrCreate?: Prisma.MessageTemplateCreateOrConnectWithoutAutomationsInput
+  upsert?: Prisma.MessageTemplateUpsertWithoutAutomationsInput
+  disconnect?: Prisma.MessageTemplateWhereInput | boolean
+  delete?: Prisma.MessageTemplateWhereInput | boolean
+  connect?: Prisma.MessageTemplateWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MessageTemplateUpdateToOneWithWhereWithoutAutomationsInput, Prisma.MessageTemplateUpdateWithoutAutomationsInput>, Prisma.MessageTemplateUncheckedUpdateWithoutAutomationsInput>
+}
+
 export type MessageTemplateCreateWithoutUserInput = {
   id?: string
   name: string
@@ -462,6 +485,7 @@ export type MessageTemplateCreateWithoutUserInput = {
   videoUrl?: string | null
   createdAt?: Date | string
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutTemplateInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutTemplateInput
 }
 
 export type MessageTemplateUncheckedCreateWithoutUserInput = {
@@ -473,6 +497,7 @@ export type MessageTemplateUncheckedCreateWithoutUserInput = {
   videoUrl?: string | null
   createdAt?: Date | string
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutTemplateInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutTemplateInput
 }
 
 export type MessageTemplateCreateOrConnectWithoutUserInput = {
@@ -524,6 +549,7 @@ export type MessageTemplateCreateWithoutBroadcastsInput = {
   videoUrl?: string | null
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutMessageTemplatesInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutTemplateInput
 }
 
 export type MessageTemplateUncheckedCreateWithoutBroadcastsInput = {
@@ -535,6 +561,7 @@ export type MessageTemplateUncheckedCreateWithoutBroadcastsInput = {
   imageUrl?: string | null
   videoUrl?: string | null
   createdAt?: Date | string
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutTemplateInput
 }
 
 export type MessageTemplateCreateOrConnectWithoutBroadcastsInput = {
@@ -562,6 +589,7 @@ export type MessageTemplateUpdateWithoutBroadcastsInput = {
   videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutMessageTemplatesNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutTemplateNestedInput
 }
 
 export type MessageTemplateUncheckedUpdateWithoutBroadcastsInput = {
@@ -573,6 +601,71 @@ export type MessageTemplateUncheckedUpdateWithoutBroadcastsInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutTemplateNestedInput
+}
+
+export type MessageTemplateCreateWithoutAutomationsInput = {
+  id?: string
+  name: string
+  content: string
+  category?: string | null
+  imageUrl?: string | null
+  videoUrl?: string | null
+  createdAt?: Date | string
+  User: Prisma.UserCreateNestedOneWithoutMessageTemplatesInput
+  Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutTemplateInput
+}
+
+export type MessageTemplateUncheckedCreateWithoutAutomationsInput = {
+  id?: string
+  userId: string
+  name: string
+  content: string
+  category?: string | null
+  imageUrl?: string | null
+  videoUrl?: string | null
+  createdAt?: Date | string
+  Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutTemplateInput
+}
+
+export type MessageTemplateCreateOrConnectWithoutAutomationsInput = {
+  where: Prisma.MessageTemplateWhereUniqueInput
+  create: Prisma.XOR<Prisma.MessageTemplateCreateWithoutAutomationsInput, Prisma.MessageTemplateUncheckedCreateWithoutAutomationsInput>
+}
+
+export type MessageTemplateUpsertWithoutAutomationsInput = {
+  update: Prisma.XOR<Prisma.MessageTemplateUpdateWithoutAutomationsInput, Prisma.MessageTemplateUncheckedUpdateWithoutAutomationsInput>
+  create: Prisma.XOR<Prisma.MessageTemplateCreateWithoutAutomationsInput, Prisma.MessageTemplateUncheckedCreateWithoutAutomationsInput>
+  where?: Prisma.MessageTemplateWhereInput
+}
+
+export type MessageTemplateUpdateToOneWithWhereWithoutAutomationsInput = {
+  where?: Prisma.MessageTemplateWhereInput
+  data: Prisma.XOR<Prisma.MessageTemplateUpdateWithoutAutomationsInput, Prisma.MessageTemplateUncheckedUpdateWithoutAutomationsInput>
+}
+
+export type MessageTemplateUpdateWithoutAutomationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  User?: Prisma.UserUpdateOneRequiredWithoutMessageTemplatesNestedInput
+  Broadcasts?: Prisma.BroadcastUpdateManyWithoutTemplateNestedInput
+}
+
+export type MessageTemplateUncheckedUpdateWithoutAutomationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutTemplateNestedInput
 }
 
 export type MessageTemplateCreateManyUserInput = {
@@ -594,6 +687,7 @@ export type MessageTemplateUpdateWithoutUserInput = {
   videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutTemplateNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutTemplateNestedInput
 }
 
 export type MessageTemplateUncheckedUpdateWithoutUserInput = {
@@ -605,6 +699,7 @@ export type MessageTemplateUncheckedUpdateWithoutUserInput = {
   videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutTemplateNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutTemplateNestedInput
 }
 
 export type MessageTemplateUncheckedUpdateManyWithoutUserInput = {
@@ -624,10 +719,12 @@ export type MessageTemplateUncheckedUpdateManyWithoutUserInput = {
 
 export type MessageTemplateCountOutputType = {
   Broadcasts: number
+  Automations: number
 }
 
 export type MessageTemplateCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Broadcasts?: boolean | MessageTemplateCountOutputTypeCountBroadcastsArgs
+  Automations?: boolean | MessageTemplateCountOutputTypeCountAutomationsArgs
 }
 
 /**
@@ -647,6 +744,13 @@ export type MessageTemplateCountOutputTypeCountBroadcastsArgs<ExtArgs extends ru
   where?: Prisma.BroadcastWhereInput
 }
 
+/**
+ * MessageTemplateCountOutputType without action
+ */
+export type MessageTemplateCountOutputTypeCountAutomationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AutomationWhereInput
+}
+
 
 export type MessageTemplateSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -659,6 +763,7 @@ export type MessageTemplateSelect<ExtArgs extends runtime.Types.Extensions.Inter
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Broadcasts?: boolean | Prisma.MessageTemplate$BroadcastsArgs<ExtArgs>
+  Automations?: boolean | Prisma.MessageTemplate$AutomationsArgs<ExtArgs>
   _count?: boolean | Prisma.MessageTemplateCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["messageTemplate"]>
 
@@ -701,6 +806,7 @@ export type MessageTemplateOmit<ExtArgs extends runtime.Types.Extensions.Interna
 export type MessageTemplateInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Broadcasts?: boolean | Prisma.MessageTemplate$BroadcastsArgs<ExtArgs>
+  Automations?: boolean | Prisma.MessageTemplate$AutomationsArgs<ExtArgs>
   _count?: boolean | Prisma.MessageTemplateCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MessageTemplateIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -715,6 +821,7 @@ export type $MessageTemplatePayload<ExtArgs extends runtime.Types.Extensions.Int
   objects: {
     User: Prisma.$UserPayload<ExtArgs>
     Broadcasts: Prisma.$BroadcastPayload<ExtArgs>[]
+    Automations: Prisma.$AutomationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1121,6 +1228,7 @@ export interface Prisma__MessageTemplateClient<T, Null = never, ExtArgs extends 
   readonly [Symbol.toStringTag]: "PrismaPromise"
   User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   Broadcasts<T extends Prisma.MessageTemplate$BroadcastsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MessageTemplate$BroadcastsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Automations<T extends Prisma.MessageTemplate$AutomationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MessageTemplate$AutomationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AutomationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1575,6 +1683,30 @@ export type MessageTemplate$BroadcastsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.BroadcastScalarFieldEnum | Prisma.BroadcastScalarFieldEnum[]
+}
+
+/**
+ * MessageTemplate.Automations
+ */
+export type MessageTemplate$AutomationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Automation
+   */
+  select?: Prisma.AutomationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Automation
+   */
+  omit?: Prisma.AutomationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AutomationInclude<ExtArgs> | null
+  where?: Prisma.AutomationWhereInput
+  orderBy?: Prisma.AutomationOrderByWithRelationInput | Prisma.AutomationOrderByWithRelationInput[]
+  cursor?: Prisma.AutomationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AutomationScalarFieldEnum | Prisma.AutomationScalarFieldEnum[]
 }
 
 /**

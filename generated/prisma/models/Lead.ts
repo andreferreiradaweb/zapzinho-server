@@ -31,6 +31,7 @@ export type LeadMinAggregateOutputType = {
   email: string | null
   message: string | null
   productId: string | null
+  categoryId: string | null
   userId: string | null
   Status: $Enums.LeadStatus | null
   createdAt: Date | null
@@ -45,6 +46,7 @@ export type LeadMaxAggregateOutputType = {
   email: string | null
   message: string | null
   productId: string | null
+  categoryId: string | null
   userId: string | null
   Status: $Enums.LeadStatus | null
   createdAt: Date | null
@@ -59,6 +61,7 @@ export type LeadCountAggregateOutputType = {
   email: number
   message: number
   productId: number
+  categoryId: number
   userId: number
   Status: number
   createdAt: number
@@ -75,6 +78,7 @@ export type LeadMinAggregateInputType = {
   email?: true
   message?: true
   productId?: true
+  categoryId?: true
   userId?: true
   Status?: true
   createdAt?: true
@@ -89,6 +93,7 @@ export type LeadMaxAggregateInputType = {
   email?: true
   message?: true
   productId?: true
+  categoryId?: true
   userId?: true
   Status?: true
   createdAt?: true
@@ -103,6 +108,7 @@ export type LeadCountAggregateInputType = {
   email?: true
   message?: true
   productId?: true
+  categoryId?: true
   userId?: true
   Status?: true
   createdAt?: true
@@ -190,6 +196,7 @@ export type LeadGroupByOutputType = {
   email: string | null
   message: string | null
   productId: string | null
+  categoryId: string | null
   userId: string
   Status: $Enums.LeadStatus
   createdAt: Date
@@ -225,12 +232,14 @@ export type LeadWhereInput = {
   email?: Prisma.StringNullableFilter<"Lead"> | string | null
   message?: Prisma.StringNullableFilter<"Lead"> | string | null
   productId?: Prisma.StringNullableFilter<"Lead"> | string | null
+  categoryId?: Prisma.StringNullableFilter<"Lead"> | string | null
   userId?: Prisma.StringFilter<"Lead"> | string
   Status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
   lastBroadcastAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   lastClientMessageAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   Product?: Prisma.XOR<Prisma.ProductNullableScalarRelationFilter, Prisma.ProductWhereInput> | null
+  Category?: Prisma.XOR<Prisma.ProductCategoryNullableScalarRelationFilter, Prisma.ProductCategoryWhereInput> | null
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   BroadcastLeads?: Prisma.BroadcastLeadListRelationFilter
   MessageLogs?: Prisma.MessageLogListRelationFilter
@@ -244,12 +253,14 @@ export type LeadOrderByWithRelationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   message?: Prisma.SortOrderInput | Prisma.SortOrder
   productId?: Prisma.SortOrderInput | Prisma.SortOrder
+  categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   Status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   lastBroadcastAt?: Prisma.SortOrderInput | Prisma.SortOrder
   lastClientMessageAt?: Prisma.SortOrderInput | Prisma.SortOrder
   Product?: Prisma.ProductOrderByWithRelationInput
+  Category?: Prisma.ProductCategoryOrderByWithRelationInput
   User?: Prisma.UserOrderByWithRelationInput
   BroadcastLeads?: Prisma.BroadcastLeadOrderByRelationAggregateInput
   MessageLogs?: Prisma.MessageLogOrderByRelationAggregateInput
@@ -266,12 +277,14 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   email?: Prisma.StringNullableFilter<"Lead"> | string | null
   message?: Prisma.StringNullableFilter<"Lead"> | string | null
   productId?: Prisma.StringNullableFilter<"Lead"> | string | null
+  categoryId?: Prisma.StringNullableFilter<"Lead"> | string | null
   userId?: Prisma.StringFilter<"Lead"> | string
   Status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
   lastBroadcastAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   lastClientMessageAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   Product?: Prisma.XOR<Prisma.ProductNullableScalarRelationFilter, Prisma.ProductWhereInput> | null
+  Category?: Prisma.XOR<Prisma.ProductCategoryNullableScalarRelationFilter, Prisma.ProductCategoryWhereInput> | null
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   BroadcastLeads?: Prisma.BroadcastLeadListRelationFilter
   MessageLogs?: Prisma.MessageLogListRelationFilter
@@ -285,6 +298,7 @@ export type LeadOrderByWithAggregationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   message?: Prisma.SortOrderInput | Prisma.SortOrder
   productId?: Prisma.SortOrderInput | Prisma.SortOrder
+  categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   Status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -305,6 +319,7 @@ export type LeadScalarWhereWithAggregatesInput = {
   email?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   message?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   productId?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  categoryId?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   userId?: Prisma.StringWithAggregatesFilter<"Lead"> | string
   Status?: Prisma.EnumLeadStatusWithAggregatesFilter<"Lead"> | $Enums.LeadStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Lead"> | Date | string
@@ -323,6 +338,7 @@ export type LeadCreateInput = {
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
   Product?: Prisma.ProductCreateNestedOneWithoutLeadsInput
+  Category?: Prisma.ProductCategoryCreateNestedOneWithoutLeadsInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
   BroadcastLeads?: Prisma.BroadcastLeadCreateNestedManyWithoutLeadInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutLeadInput
@@ -336,6 +352,7 @@ export type LeadUncheckedCreateInput = {
   email?: string | null
   message?: string | null
   productId?: string | null
+  categoryId?: string | null
   userId: string
   Status: $Enums.LeadStatus
   createdAt?: Date | string
@@ -357,6 +374,7 @@ export type LeadUpdateInput = {
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Product?: Prisma.ProductUpdateOneWithoutLeadsNestedInput
+  Category?: Prisma.ProductCategoryUpdateOneWithoutLeadsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
   BroadcastLeads?: Prisma.BroadcastLeadUpdateManyWithoutLeadNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutLeadNestedInput
@@ -370,6 +388,7 @@ export type LeadUncheckedUpdateInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   Status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -387,6 +406,7 @@ export type LeadCreateManyInput = {
   email?: string | null
   message?: string | null
   productId?: string | null
+  categoryId?: string | null
   userId: string
   Status: $Enums.LeadStatus
   createdAt?: Date | string
@@ -413,6 +433,7 @@ export type LeadUncheckedUpdateManyInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   Status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -437,6 +458,7 @@ export type LeadCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   message?: Prisma.SortOrder
   productId?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   Status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -451,6 +473,7 @@ export type LeadMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   message?: Prisma.SortOrder
   productId?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   Status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -465,6 +488,7 @@ export type LeadMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   message?: Prisma.SortOrder
   productId?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   Status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -521,6 +545,48 @@ export type LeadUncheckedUpdateManyWithoutUserNestedInput = {
   connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
   update?: Prisma.LeadUpdateWithWhereUniqueWithoutUserInput | Prisma.LeadUpdateWithWhereUniqueWithoutUserInput[]
   updateMany?: Prisma.LeadUpdateManyWithWhereWithoutUserInput | Prisma.LeadUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
+}
+
+export type LeadCreateNestedManyWithoutCategoryInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutCategoryInput, Prisma.LeadUncheckedCreateWithoutCategoryInput> | Prisma.LeadCreateWithoutCategoryInput[] | Prisma.LeadUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutCategoryInput | Prisma.LeadCreateOrConnectWithoutCategoryInput[]
+  createMany?: Prisma.LeadCreateManyCategoryInputEnvelope
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+}
+
+export type LeadUncheckedCreateNestedManyWithoutCategoryInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutCategoryInput, Prisma.LeadUncheckedCreateWithoutCategoryInput> | Prisma.LeadCreateWithoutCategoryInput[] | Prisma.LeadUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutCategoryInput | Prisma.LeadCreateOrConnectWithoutCategoryInput[]
+  createMany?: Prisma.LeadCreateManyCategoryInputEnvelope
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+}
+
+export type LeadUpdateManyWithoutCategoryNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutCategoryInput, Prisma.LeadUncheckedCreateWithoutCategoryInput> | Prisma.LeadCreateWithoutCategoryInput[] | Prisma.LeadUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutCategoryInput | Prisma.LeadCreateOrConnectWithoutCategoryInput[]
+  upsert?: Prisma.LeadUpsertWithWhereUniqueWithoutCategoryInput | Prisma.LeadUpsertWithWhereUniqueWithoutCategoryInput[]
+  createMany?: Prisma.LeadCreateManyCategoryInputEnvelope
+  set?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  disconnect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  delete?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  update?: Prisma.LeadUpdateWithWhereUniqueWithoutCategoryInput | Prisma.LeadUpdateWithWhereUniqueWithoutCategoryInput[]
+  updateMany?: Prisma.LeadUpdateManyWithWhereWithoutCategoryInput | Prisma.LeadUpdateManyWithWhereWithoutCategoryInput[]
+  deleteMany?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
+}
+
+export type LeadUncheckedUpdateManyWithoutCategoryNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutCategoryInput, Prisma.LeadUncheckedCreateWithoutCategoryInput> | Prisma.LeadCreateWithoutCategoryInput[] | Prisma.LeadUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutCategoryInput | Prisma.LeadCreateOrConnectWithoutCategoryInput[]
+  upsert?: Prisma.LeadUpsertWithWhereUniqueWithoutCategoryInput | Prisma.LeadUpsertWithWhereUniqueWithoutCategoryInput[]
+  createMany?: Prisma.LeadCreateManyCategoryInputEnvelope
+  set?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  disconnect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  delete?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  update?: Prisma.LeadUpdateWithWhereUniqueWithoutCategoryInput | Prisma.LeadUpdateWithWhereUniqueWithoutCategoryInput[]
+  updateMany?: Prisma.LeadUpdateManyWithWhereWithoutCategoryInput | Prisma.LeadUpdateManyWithWhereWithoutCategoryInput[]
   deleteMany?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
 }
 
@@ -625,6 +691,7 @@ export type LeadCreateWithoutUserInput = {
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
   Product?: Prisma.ProductCreateNestedOneWithoutLeadsInput
+  Category?: Prisma.ProductCategoryCreateNestedOneWithoutLeadsInput
   BroadcastLeads?: Prisma.BroadcastLeadCreateNestedManyWithoutLeadInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutLeadInput
   BroadcastBlocks?: Prisma.BroadcastBlockCreateNestedManyWithoutLeadInput
@@ -637,6 +704,7 @@ export type LeadUncheckedCreateWithoutUserInput = {
   email?: string | null
   message?: string | null
   productId?: string | null
+  categoryId?: string | null
   Status: $Enums.LeadStatus
   createdAt?: Date | string
   lastBroadcastAt?: Date | string | null
@@ -682,11 +750,72 @@ export type LeadScalarWhereInput = {
   email?: Prisma.StringNullableFilter<"Lead"> | string | null
   message?: Prisma.StringNullableFilter<"Lead"> | string | null
   productId?: Prisma.StringNullableFilter<"Lead"> | string | null
+  categoryId?: Prisma.StringNullableFilter<"Lead"> | string | null
   userId?: Prisma.StringFilter<"Lead"> | string
   Status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
   lastBroadcastAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   lastClientMessageAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+}
+
+export type LeadCreateWithoutCategoryInput = {
+  id?: string
+  nome: string
+  telefone: string
+  email?: string | null
+  message?: string | null
+  Status: $Enums.LeadStatus
+  createdAt?: Date | string
+  lastBroadcastAt?: Date | string | null
+  lastClientMessageAt?: Date | string | null
+  Product?: Prisma.ProductCreateNestedOneWithoutLeadsInput
+  User: Prisma.UserCreateNestedOneWithoutLeadsInput
+  BroadcastLeads?: Prisma.BroadcastLeadCreateNestedManyWithoutLeadInput
+  MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutLeadInput
+  BroadcastBlocks?: Prisma.BroadcastBlockCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutCategoryInput = {
+  id?: string
+  nome: string
+  telefone: string
+  email?: string | null
+  message?: string | null
+  productId?: string | null
+  userId: string
+  Status: $Enums.LeadStatus
+  createdAt?: Date | string
+  lastBroadcastAt?: Date | string | null
+  lastClientMessageAt?: Date | string | null
+  BroadcastLeads?: Prisma.BroadcastLeadUncheckedCreateNestedManyWithoutLeadInput
+  MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutLeadInput
+  BroadcastBlocks?: Prisma.BroadcastBlockUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutCategoryInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutCategoryInput, Prisma.LeadUncheckedCreateWithoutCategoryInput>
+}
+
+export type LeadCreateManyCategoryInputEnvelope = {
+  data: Prisma.LeadCreateManyCategoryInput | Prisma.LeadCreateManyCategoryInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeadUpsertWithWhereUniqueWithoutCategoryInput = {
+  where: Prisma.LeadWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutCategoryInput, Prisma.LeadUncheckedUpdateWithoutCategoryInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutCategoryInput, Prisma.LeadUncheckedCreateWithoutCategoryInput>
+}
+
+export type LeadUpdateWithWhereUniqueWithoutCategoryInput = {
+  where: Prisma.LeadWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutCategoryInput, Prisma.LeadUncheckedUpdateWithoutCategoryInput>
+}
+
+export type LeadUpdateManyWithWhereWithoutCategoryInput = {
+  where: Prisma.LeadScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateManyMutationInput, Prisma.LeadUncheckedUpdateManyWithoutCategoryInput>
 }
 
 export type LeadCreateWithoutProductInput = {
@@ -699,6 +828,7 @@ export type LeadCreateWithoutProductInput = {
   createdAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  Category?: Prisma.ProductCategoryCreateNestedOneWithoutLeadsInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
   BroadcastLeads?: Prisma.BroadcastLeadCreateNestedManyWithoutLeadInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutLeadInput
@@ -711,6 +841,7 @@ export type LeadUncheckedCreateWithoutProductInput = {
   telefone: string
   email?: string | null
   message?: string | null
+  categoryId?: string | null
   userId: string
   Status: $Enums.LeadStatus
   createdAt?: Date | string
@@ -758,6 +889,7 @@ export type LeadCreateWithoutBroadcastLeadsInput = {
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
   Product?: Prisma.ProductCreateNestedOneWithoutLeadsInput
+  Category?: Prisma.ProductCategoryCreateNestedOneWithoutLeadsInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutLeadInput
   BroadcastBlocks?: Prisma.BroadcastBlockCreateNestedManyWithoutLeadInput
@@ -770,6 +902,7 @@ export type LeadUncheckedCreateWithoutBroadcastLeadsInput = {
   email?: string | null
   message?: string | null
   productId?: string | null
+  categoryId?: string | null
   userId: string
   Status: $Enums.LeadStatus
   createdAt?: Date | string
@@ -806,6 +939,7 @@ export type LeadUpdateWithoutBroadcastLeadsInput = {
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Product?: Prisma.ProductUpdateOneWithoutLeadsNestedInput
+  Category?: Prisma.ProductCategoryUpdateOneWithoutLeadsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutLeadNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUpdateManyWithoutLeadNestedInput
@@ -818,6 +952,7 @@ export type LeadUncheckedUpdateWithoutBroadcastLeadsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   Status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -838,6 +973,7 @@ export type LeadCreateWithoutBroadcastBlocksInput = {
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
   Product?: Prisma.ProductCreateNestedOneWithoutLeadsInput
+  Category?: Prisma.ProductCategoryCreateNestedOneWithoutLeadsInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
   BroadcastLeads?: Prisma.BroadcastLeadCreateNestedManyWithoutLeadInput
   MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutLeadInput
@@ -850,6 +986,7 @@ export type LeadUncheckedCreateWithoutBroadcastBlocksInput = {
   email?: string | null
   message?: string | null
   productId?: string | null
+  categoryId?: string | null
   userId: string
   Status: $Enums.LeadStatus
   createdAt?: Date | string
@@ -886,6 +1023,7 @@ export type LeadUpdateWithoutBroadcastBlocksInput = {
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Product?: Prisma.ProductUpdateOneWithoutLeadsNestedInput
+  Category?: Prisma.ProductCategoryUpdateOneWithoutLeadsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
   BroadcastLeads?: Prisma.BroadcastLeadUpdateManyWithoutLeadNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutLeadNestedInput
@@ -898,6 +1036,7 @@ export type LeadUncheckedUpdateWithoutBroadcastBlocksInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   Status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -918,6 +1057,7 @@ export type LeadCreateWithoutMessageLogsInput = {
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
   Product?: Prisma.ProductCreateNestedOneWithoutLeadsInput
+  Category?: Prisma.ProductCategoryCreateNestedOneWithoutLeadsInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
   BroadcastLeads?: Prisma.BroadcastLeadCreateNestedManyWithoutLeadInput
   BroadcastBlocks?: Prisma.BroadcastBlockCreateNestedManyWithoutLeadInput
@@ -930,6 +1070,7 @@ export type LeadUncheckedCreateWithoutMessageLogsInput = {
   email?: string | null
   message?: string | null
   productId?: string | null
+  categoryId?: string | null
   userId: string
   Status: $Enums.LeadStatus
   createdAt?: Date | string
@@ -966,6 +1107,7 @@ export type LeadUpdateWithoutMessageLogsInput = {
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Product?: Prisma.ProductUpdateOneWithoutLeadsNestedInput
+  Category?: Prisma.ProductCategoryUpdateOneWithoutLeadsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
   BroadcastLeads?: Prisma.BroadcastLeadUpdateManyWithoutLeadNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUpdateManyWithoutLeadNestedInput
@@ -978,6 +1120,7 @@ export type LeadUncheckedUpdateWithoutMessageLogsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   Status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -994,6 +1137,7 @@ export type LeadCreateManyUserInput = {
   email?: string | null
   message?: string | null
   productId?: string | null
+  categoryId?: string | null
   Status: $Enums.LeadStatus
   createdAt?: Date | string
   lastBroadcastAt?: Date | string | null
@@ -1011,6 +1155,7 @@ export type LeadUpdateWithoutUserInput = {
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Product?: Prisma.ProductUpdateOneWithoutLeadsNestedInput
+  Category?: Prisma.ProductCategoryUpdateOneWithoutLeadsNestedInput
   BroadcastLeads?: Prisma.BroadcastLeadUpdateManyWithoutLeadNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutLeadNestedInput
   BroadcastBlocks?: Prisma.BroadcastBlockUpdateManyWithoutLeadNestedInput
@@ -1023,6 +1168,7 @@ export type LeadUncheckedUpdateWithoutUserInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1039,6 +1185,69 @@ export type LeadUncheckedUpdateManyWithoutUserInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  Status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type LeadCreateManyCategoryInput = {
+  id?: string
+  nome: string
+  telefone: string
+  email?: string | null
+  message?: string | null
+  productId?: string | null
+  userId: string
+  Status: $Enums.LeadStatus
+  createdAt?: Date | string
+  lastBroadcastAt?: Date | string | null
+  lastClientMessageAt?: Date | string | null
+}
+
+export type LeadUpdateWithoutCategoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  Status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Product?: Prisma.ProductUpdateOneWithoutLeadsNestedInput
+  User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
+  BroadcastLeads?: Prisma.BroadcastLeadUpdateManyWithoutLeadNestedInput
+  MessageLogs?: Prisma.MessageLogUpdateManyWithoutLeadNestedInput
+  BroadcastBlocks?: Prisma.BroadcastBlockUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutCategoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  Status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  BroadcastLeads?: Prisma.BroadcastLeadUncheckedUpdateManyWithoutLeadNestedInput
+  MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutLeadNestedInput
+  BroadcastBlocks?: Prisma.BroadcastBlockUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateManyWithoutCategoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   Status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1051,6 +1260,7 @@ export type LeadCreateManyProductInput = {
   telefone: string
   email?: string | null
   message?: string | null
+  categoryId?: string | null
   userId: string
   Status: $Enums.LeadStatus
   createdAt?: Date | string
@@ -1068,6 +1278,7 @@ export type LeadUpdateWithoutProductInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Category?: Prisma.ProductCategoryUpdateOneWithoutLeadsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
   BroadcastLeads?: Prisma.BroadcastLeadUpdateManyWithoutLeadNestedInput
   MessageLogs?: Prisma.MessageLogUpdateManyWithoutLeadNestedInput
@@ -1080,6 +1291,7 @@ export type LeadUncheckedUpdateWithoutProductInput = {
   telefone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   Status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1096,6 +1308,7 @@ export type LeadUncheckedUpdateManyWithoutProductInput = {
   telefone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   Status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1159,12 +1372,14 @@ export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   message?: boolean
   productId?: boolean
+  categoryId?: boolean
   userId?: boolean
   Status?: boolean
   createdAt?: boolean
   lastBroadcastAt?: boolean
   lastClientMessageAt?: boolean
   Product?: boolean | Prisma.Lead$ProductArgs<ExtArgs>
+  Category?: boolean | Prisma.Lead$CategoryArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   BroadcastLeads?: boolean | Prisma.Lead$BroadcastLeadsArgs<ExtArgs>
   MessageLogs?: boolean | Prisma.Lead$MessageLogsArgs<ExtArgs>
@@ -1179,12 +1394,14 @@ export type LeadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   message?: boolean
   productId?: boolean
+  categoryId?: boolean
   userId?: boolean
   Status?: boolean
   createdAt?: boolean
   lastBroadcastAt?: boolean
   lastClientMessageAt?: boolean
   Product?: boolean | Prisma.Lead$ProductArgs<ExtArgs>
+  Category?: boolean | Prisma.Lead$CategoryArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
@@ -1195,12 +1412,14 @@ export type LeadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   message?: boolean
   productId?: boolean
+  categoryId?: boolean
   userId?: boolean
   Status?: boolean
   createdAt?: boolean
   lastBroadcastAt?: boolean
   lastClientMessageAt?: boolean
   Product?: boolean | Prisma.Lead$ProductArgs<ExtArgs>
+  Category?: boolean | Prisma.Lead$CategoryArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
@@ -1211,6 +1430,7 @@ export type LeadSelectScalar = {
   email?: boolean
   message?: boolean
   productId?: boolean
+  categoryId?: boolean
   userId?: boolean
   Status?: boolean
   createdAt?: boolean
@@ -1218,9 +1438,10 @@ export type LeadSelectScalar = {
   lastClientMessageAt?: boolean
 }
 
-export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "telefone" | "email" | "message" | "productId" | "userId" | "Status" | "createdAt" | "lastBroadcastAt" | "lastClientMessageAt", ExtArgs["result"]["lead"]>
+export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "telefone" | "email" | "message" | "productId" | "categoryId" | "userId" | "Status" | "createdAt" | "lastBroadcastAt" | "lastClientMessageAt", ExtArgs["result"]["lead"]>
 export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Product?: boolean | Prisma.Lead$ProductArgs<ExtArgs>
+  Category?: boolean | Prisma.Lead$CategoryArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   BroadcastLeads?: boolean | Prisma.Lead$BroadcastLeadsArgs<ExtArgs>
   MessageLogs?: boolean | Prisma.Lead$MessageLogsArgs<ExtArgs>
@@ -1229,10 +1450,12 @@ export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 }
 export type LeadIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Product?: boolean | Prisma.Lead$ProductArgs<ExtArgs>
+  Category?: boolean | Prisma.Lead$CategoryArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type LeadIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Product?: boolean | Prisma.Lead$ProductArgs<ExtArgs>
+  Category?: boolean | Prisma.Lead$CategoryArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
@@ -1240,6 +1463,7 @@ export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "Lead"
   objects: {
     Product: Prisma.$ProductPayload<ExtArgs> | null
+    Category: Prisma.$ProductCategoryPayload<ExtArgs> | null
     User: Prisma.$UserPayload<ExtArgs>
     BroadcastLeads: Prisma.$BroadcastLeadPayload<ExtArgs>[]
     MessageLogs: Prisma.$MessageLogPayload<ExtArgs>[]
@@ -1252,6 +1476,7 @@ export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     email: string | null
     message: string | null
     productId: string | null
+    categoryId: string | null
     userId: string
     Status: $Enums.LeadStatus
     createdAt: Date
@@ -1652,6 +1877,7 @@ readonly fields: LeadFieldRefs;
 export interface Prisma__LeadClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   Product<T extends Prisma.Lead$ProductArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$ProductArgs<ExtArgs>>): Prisma.Prisma__ProductClient<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  Category<T extends Prisma.Lead$CategoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$CategoryArgs<ExtArgs>>): Prisma.Prisma__ProductCategoryClient<runtime.Types.Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   BroadcastLeads<T extends Prisma.Lead$BroadcastLeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$BroadcastLeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastLeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   MessageLogs<T extends Prisma.Lead$MessageLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$MessageLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1691,6 +1917,7 @@ export interface LeadFieldRefs {
   readonly email: Prisma.FieldRef<"Lead", 'String'>
   readonly message: Prisma.FieldRef<"Lead", 'String'>
   readonly productId: Prisma.FieldRef<"Lead", 'String'>
+  readonly categoryId: Prisma.FieldRef<"Lead", 'String'>
   readonly userId: Prisma.FieldRef<"Lead", 'String'>
   readonly Status: Prisma.FieldRef<"Lead", 'LeadStatus'>
   readonly createdAt: Prisma.FieldRef<"Lead", 'DateTime'>
@@ -2108,6 +2335,25 @@ export type Lead$ProductArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.ProductInclude<ExtArgs> | null
   where?: Prisma.ProductWhereInput
+}
+
+/**
+ * Lead.Category
+ */
+export type Lead$CategoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductCategory
+   */
+  select?: Prisma.ProductCategorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProductCategory
+   */
+  omit?: Prisma.ProductCategoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductCategoryInclude<ExtArgs> | null
+  where?: Prisma.ProductCategoryWhereInput
 }
 
 /**

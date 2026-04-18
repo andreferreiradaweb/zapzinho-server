@@ -58,6 +58,7 @@ export const ModelName = {
   MessageTemplate: 'MessageTemplate',
   Broadcast: 'Broadcast',
   BroadcastLead: 'BroadcastLead',
+  Automation: 'Automation',
   BroadcastBlock: 'BroadcastBlock',
   MessageLog: 'MessageLog',
   Customer: 'Customer',
@@ -136,6 +137,7 @@ export const LeadScalarFieldEnum = {
   email: 'email',
   message: 'message',
   productId: 'productId',
+  categoryId: 'categoryId',
   userId: 'userId',
   Status: 'Status',
   createdAt: 'createdAt',
@@ -190,6 +192,26 @@ export const BroadcastLeadScalarFieldEnum = {
 } as const
 
 export type BroadcastLeadScalarFieldEnum = (typeof BroadcastLeadScalarFieldEnum)[keyof typeof BroadcastLeadScalarFieldEnum]
+
+
+export const AutomationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  message: 'message',
+  imageUrls: 'imageUrls',
+  videoUrl: 'videoUrl',
+  templateId: 'templateId',
+  isActive: 'isActive',
+  productId: 'productId',
+  categoryId: 'categoryId',
+  leadStatus: 'leadStatus',
+  lastMessageRange: 'lastMessageRange',
+  lastBroadcastRange: 'lastBroadcastRange',
+  createdAt: 'createdAt'
+} as const
+
+export type AutomationScalarFieldEnum = (typeof AutomationScalarFieldEnum)[keyof typeof AutomationScalarFieldEnum]
 
 
 export const BroadcastBlockScalarFieldEnum = {
