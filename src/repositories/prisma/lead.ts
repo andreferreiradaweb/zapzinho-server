@@ -118,7 +118,7 @@ export class PrismaLeadRepository implements LeadRepository {
           where: { status: 'SENT' },
           orderBy: { sentAt: 'desc' },
           take: 1,
-          include: { Broadcast: { select: { name: true } } },
+          include: { Broadcast: { select: { name: true, message: true } } },
         },
       },
       orderBy: { createdAt: 'desc' },
