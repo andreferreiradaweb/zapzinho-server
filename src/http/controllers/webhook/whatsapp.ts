@@ -2,6 +2,7 @@ import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 import { makeHandleIncomingMessage } from '@/factory/webhook/make-handle-incoming-message'
 import { env } from '@/config/validatedEnv'
+import { addMessage as addClassificationMessage } from '@/services/lead-classification'
 
 /**
  * POST /webhook/whatsapp
@@ -81,6 +82,10 @@ export async function whatsappWebhookController(
       name,
       message,
     })
+
+    if (message) {
+      addClassificationMessage(lead.id, lead.userId, message, created)
+    }
 
     return reply.status(200).send({ ok: true, created, leadId: lead.id })
   } catch (err) {

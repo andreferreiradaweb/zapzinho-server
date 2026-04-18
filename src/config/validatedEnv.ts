@@ -14,6 +14,7 @@ const envSchema = z.object({
   WAPI_INSTANCE_ID: z.string().default(''),
   WAPI_DELAY_MS: z.coerce.number().default(1500),
   WAPI_WEBHOOK_SECRET: z.string().default(''),
+  GEMINI_API_KEY: z.string().default(''),
 })
 
 const _env = envSchema.safeParse(process.env)
