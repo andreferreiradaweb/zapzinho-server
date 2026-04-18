@@ -12,19 +12,27 @@ const buffer = new Map<string, PendingClassification>()
 const WINDOW_MS = 15_000
 const MAX_MESSAGES = 3
 
+const tag = '[LeadClassification]'
+
 async function classify(leadId: string, userId: string, messages: string[]) {
+  console.log(`${tag} ⏱ Timer disparado — lead=${leadId} mensagens=${JSON.stringify(messages)}`)
+
+  if (!env.GEMINI_API_KEY) {
+    console.warn(`${tag} ❌ GEMINI_API_KEY não configurada — abortando`)
+    return
+  }
+
   const [categories, products] = await Promise.all([
     prisma.productCategory.findMany({ where: { userId } }),
     prisma.product.findMany({ where: { userId }, select: { id: true, title: true } }),
   ])
 
-  if (!categories.length && !products.length) return
+  console.log(`${tag} 📦 userId=${userId} categorias=${categories.map(c => c.name).join(', ') || '(nenhuma)'} produtos=${products.map(p => p.title).join(', ') || '(nenhum)'}`)
 
-  const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY)
-  const model = genAI.getGenerativeModel({
-    model: 'gemini-2.5-flash',
-    generationConfig: { responseMimeType: 'application/json' },
-  })
+  if (!categories.length && !products.length) {
+    console.warn(`${tag} ⚠️ Nenhuma categoria nem produto cadastrado — pulando classificação`)
+    return
+  }
 
   const prompt = `Você é um assistente de CRM para uma loja no WhatsApp (Brasil).
 Analise as mensagens abaixo de um novo cliente e identifique:
@@ -43,8 +51,19 @@ Responda APENAS em JSON válido:
   "productTitle": "<título exato de um dos produtos ou null>"
 }`
 
+  console.log(`${tag} 🤖 Chamando Gemini...`)
+
+  const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY)
+  const model = genAI.getGenerativeModel({
+    model: 'gemini-2.5-flash',
+    generationConfig: { responseMimeType: 'application/json' },
+  })
+
   const result = await model.generateContent(prompt)
-  const parsed = JSON.parse(result.response.text()) as {
+  const rawText = result.response.text()
+  console.log(`${tag} 🤖 Resposta Gemini: ${rawText}`)
+
+  const parsed = JSON.parse(rawText) as {
     categoryName: string | null
     productTitle: string | null
   }
@@ -56,6 +75,7 @@ Responda APENAS em JSON válido:
       c => c.name.toLowerCase() === parsed.categoryName!.toLowerCase(),
     )
     if (match) updates.categoryId = match.id
+    else console.warn(`${tag} ⚠️ Categoria "${parsed.categoryName}" não encontrada no banco`)
   }
 
   if (parsed.productTitle) {
@@ -63,11 +83,14 @@ Responda APENAS em JSON válido:
       p => p.title.toLowerCase() === parsed.productTitle!.toLowerCase(),
     )
     if (match) updates.productId = match.id
+    else console.warn(`${tag} ⚠️ Produto "${parsed.productTitle}" não encontrado no banco`)
   }
 
   if (Object.keys(updates).length > 0) {
     await prisma.lead.update({ where: { id: leadId }, data: updates })
-    console.log(`[LeadClassification] Lead ${leadId} atualizado:`, updates)
+    console.log(`${tag} ✅ Lead ${leadId} atualizado:`, updates)
+  } else {
+    console.log(`${tag} ℹ️ Gemini não identificou correspondência — lead não atualizado`)
   }
 }
 
@@ -77,15 +100,20 @@ export function addMessage(
   message: string,
   isNew: boolean,
 ) {
-  if (!message.trim()) return
+  if (!message.trim()) {
+    console.log(`${tag} Mensagem vazia ignorada — lead=${leadId}`)
+    return
+  }
 
   if (isNew) {
+    console.log(`${tag} 🆕 Novo lead — iniciando buffer de ${WINDOW_MS / 1000}s — lead=${leadId} msg="${message}"`)
+
     const timer = setTimeout(() => {
       const entry = buffer.get(leadId)
       if (!entry) return
       buffer.delete(leadId)
       classify(leadId, userId, entry.messages).catch(err =>
-        console.error('[LeadClassification] Erro ao classificar lead', leadId, err),
+        console.error(`${tag} ❌ Erro ao classificar lead ${leadId}:`, err),
       )
     }, WINDOW_MS)
 
@@ -96,5 +124,8 @@ export function addMessage(
   const entry = buffer.get(leadId)
   if (entry && entry.messages.length < MAX_MESSAGES) {
     entry.messages.push(message)
+    console.log(`${tag} ➕ Mensagem adicionada ao buffer — lead=${leadId} total=${entry.messages.length} msg="${message}"`)
+  } else if (!entry) {
+    console.log(`${tag} ℹ️ Buffer expirado ou inexistente — lead=${leadId} mensagem ignorada`)
   }
 }
