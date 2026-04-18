@@ -105,7 +105,7 @@ export class PrismaLeadRepository implements LeadRepository {
       where,
       skip: offset,
       take: Number(limit),
-      include: { Product: true },
+      include: { Product: { include: { Category: true } } },
       orderBy: { createdAt: 'desc' },
     }) as Promise<LeadWithProduct[]>
   }
