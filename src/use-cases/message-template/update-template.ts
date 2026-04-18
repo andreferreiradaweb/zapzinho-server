@@ -9,6 +9,8 @@ interface UpdateTemplateRequest {
   name?: string
   content?: string
   category?: string
+  imageUrl?: string | null
+  videoUrl?: string | null
 }
 
 export class UpdateTemplateUseCase {
@@ -18,6 +20,6 @@ export class UpdateTemplateUseCase {
     const template = await this.repo.findById(data.id)
     if (!template) throw new ResourceNotFound()
     if (template.userId !== data.userId) throw new InvalidCredentialsError()
-    return this.repo.update({ id: data.id, name: data.name, content: data.content, category: data.category })
+    return this.repo.update({ id: data.id, name: data.name, content: data.content, category: data.category, imageUrl: data.imageUrl, videoUrl: data.videoUrl })
   }
 }

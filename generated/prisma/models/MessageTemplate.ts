@@ -30,6 +30,8 @@ export type MessageTemplateMinAggregateOutputType = {
   name: string | null
   content: string | null
   category: string | null
+  imageUrl: string | null
+  videoUrl: string | null
   createdAt: Date | null
 }
 
@@ -39,6 +41,8 @@ export type MessageTemplateMaxAggregateOutputType = {
   name: string | null
   content: string | null
   category: string | null
+  imageUrl: string | null
+  videoUrl: string | null
   createdAt: Date | null
 }
 
@@ -48,6 +52,8 @@ export type MessageTemplateCountAggregateOutputType = {
   name: number
   content: number
   category: number
+  imageUrl: number
+  videoUrl: number
   createdAt: number
   _all: number
 }
@@ -59,6 +65,8 @@ export type MessageTemplateMinAggregateInputType = {
   name?: true
   content?: true
   category?: true
+  imageUrl?: true
+  videoUrl?: true
   createdAt?: true
 }
 
@@ -68,6 +76,8 @@ export type MessageTemplateMaxAggregateInputType = {
   name?: true
   content?: true
   category?: true
+  imageUrl?: true
+  videoUrl?: true
   createdAt?: true
 }
 
@@ -77,6 +87,8 @@ export type MessageTemplateCountAggregateInputType = {
   name?: true
   content?: true
   category?: true
+  imageUrl?: true
+  videoUrl?: true
   createdAt?: true
   _all?: true
 }
@@ -159,6 +171,8 @@ export type MessageTemplateGroupByOutputType = {
   name: string
   content: string
   category: string | null
+  imageUrl: string | null
+  videoUrl: string | null
   createdAt: Date
   _count: MessageTemplateCountAggregateOutputType | null
   _min: MessageTemplateMinAggregateOutputType | null
@@ -189,6 +203,8 @@ export type MessageTemplateWhereInput = {
   name?: Prisma.StringFilter<"MessageTemplate"> | string
   content?: Prisma.StringFilter<"MessageTemplate"> | string
   category?: Prisma.StringNullableFilter<"MessageTemplate"> | string | null
+  imageUrl?: Prisma.StringNullableFilter<"MessageTemplate"> | string | null
+  videoUrl?: Prisma.StringNullableFilter<"MessageTemplate"> | string | null
   createdAt?: Prisma.DateTimeFilter<"MessageTemplate"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Broadcasts?: Prisma.BroadcastListRelationFilter
@@ -200,6 +216,8 @@ export type MessageTemplateOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   content?: Prisma.SortOrder
   category?: Prisma.SortOrderInput | Prisma.SortOrder
+  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  videoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   User?: Prisma.UserOrderByWithRelationInput
   Broadcasts?: Prisma.BroadcastOrderByRelationAggregateInput
@@ -214,6 +232,8 @@ export type MessageTemplateWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"MessageTemplate"> | string
   content?: Prisma.StringFilter<"MessageTemplate"> | string
   category?: Prisma.StringNullableFilter<"MessageTemplate"> | string | null
+  imageUrl?: Prisma.StringNullableFilter<"MessageTemplate"> | string | null
+  videoUrl?: Prisma.StringNullableFilter<"MessageTemplate"> | string | null
   createdAt?: Prisma.DateTimeFilter<"MessageTemplate"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Broadcasts?: Prisma.BroadcastListRelationFilter
@@ -225,6 +245,8 @@ export type MessageTemplateOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   content?: Prisma.SortOrder
   category?: Prisma.SortOrderInput | Prisma.SortOrder
+  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  videoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.MessageTemplateCountOrderByAggregateInput
   _max?: Prisma.MessageTemplateMaxOrderByAggregateInput
@@ -240,6 +262,8 @@ export type MessageTemplateScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"MessageTemplate"> | string
   content?: Prisma.StringWithAggregatesFilter<"MessageTemplate"> | string
   category?: Prisma.StringNullableWithAggregatesFilter<"MessageTemplate"> | string | null
+  imageUrl?: Prisma.StringNullableWithAggregatesFilter<"MessageTemplate"> | string | null
+  videoUrl?: Prisma.StringNullableWithAggregatesFilter<"MessageTemplate"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MessageTemplate"> | Date | string
 }
 
@@ -248,6 +272,8 @@ export type MessageTemplateCreateInput = {
   name: string
   content: string
   category?: string | null
+  imageUrl?: string | null
+  videoUrl?: string | null
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutMessageTemplatesInput
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutTemplateInput
@@ -259,6 +285,8 @@ export type MessageTemplateUncheckedCreateInput = {
   name: string
   content: string
   category?: string | null
+  imageUrl?: string | null
+  videoUrl?: string | null
   createdAt?: Date | string
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutTemplateInput
 }
@@ -268,6 +296,8 @@ export type MessageTemplateUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutMessageTemplatesNestedInput
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutTemplateNestedInput
@@ -279,6 +309,8 @@ export type MessageTemplateUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutTemplateNestedInput
 }
@@ -289,6 +321,8 @@ export type MessageTemplateCreateManyInput = {
   name: string
   content: string
   category?: string | null
+  imageUrl?: string | null
+  videoUrl?: string | null
   createdAt?: Date | string
 }
 
@@ -297,6 +331,8 @@ export type MessageTemplateUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -306,6 +342,8 @@ export type MessageTemplateUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -325,6 +363,8 @@ export type MessageTemplateCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   content?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
+  videoUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -334,6 +374,8 @@ export type MessageTemplateMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   content?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
+  videoUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -343,6 +385,8 @@ export type MessageTemplateMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   content?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
+  videoUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -414,6 +458,8 @@ export type MessageTemplateCreateWithoutUserInput = {
   name: string
   content: string
   category?: string | null
+  imageUrl?: string | null
+  videoUrl?: string | null
   createdAt?: Date | string
   Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutTemplateInput
 }
@@ -423,6 +469,8 @@ export type MessageTemplateUncheckedCreateWithoutUserInput = {
   name: string
   content: string
   category?: string | null
+  imageUrl?: string | null
+  videoUrl?: string | null
   createdAt?: Date | string
   Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutTemplateInput
 }
@@ -462,6 +510,8 @@ export type MessageTemplateScalarWhereInput = {
   name?: Prisma.StringFilter<"MessageTemplate"> | string
   content?: Prisma.StringFilter<"MessageTemplate"> | string
   category?: Prisma.StringNullableFilter<"MessageTemplate"> | string | null
+  imageUrl?: Prisma.StringNullableFilter<"MessageTemplate"> | string | null
+  videoUrl?: Prisma.StringNullableFilter<"MessageTemplate"> | string | null
   createdAt?: Prisma.DateTimeFilter<"MessageTemplate"> | Date | string
 }
 
@@ -470,6 +520,8 @@ export type MessageTemplateCreateWithoutBroadcastsInput = {
   name: string
   content: string
   category?: string | null
+  imageUrl?: string | null
+  videoUrl?: string | null
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutMessageTemplatesInput
 }
@@ -480,6 +532,8 @@ export type MessageTemplateUncheckedCreateWithoutBroadcastsInput = {
   name: string
   content: string
   category?: string | null
+  imageUrl?: string | null
+  videoUrl?: string | null
   createdAt?: Date | string
 }
 
@@ -504,6 +558,8 @@ export type MessageTemplateUpdateWithoutBroadcastsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutMessageTemplatesNestedInput
 }
@@ -514,6 +570,8 @@ export type MessageTemplateUncheckedUpdateWithoutBroadcastsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -522,6 +580,8 @@ export type MessageTemplateCreateManyUserInput = {
   name: string
   content: string
   category?: string | null
+  imageUrl?: string | null
+  videoUrl?: string | null
   createdAt?: Date | string
 }
 
@@ -530,6 +590,8 @@ export type MessageTemplateUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Broadcasts?: Prisma.BroadcastUpdateManyWithoutTemplateNestedInput
 }
@@ -539,6 +601,8 @@ export type MessageTemplateUncheckedUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutTemplateNestedInput
 }
@@ -548,6 +612,8 @@ export type MessageTemplateUncheckedUpdateManyWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -588,6 +654,8 @@ export type MessageTemplateSelect<ExtArgs extends runtime.Types.Extensions.Inter
   name?: boolean
   content?: boolean
   category?: boolean
+  imageUrl?: boolean
+  videoUrl?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Broadcasts?: boolean | Prisma.MessageTemplate$BroadcastsArgs<ExtArgs>
@@ -600,6 +668,8 @@ export type MessageTemplateSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   name?: boolean
   content?: boolean
   category?: boolean
+  imageUrl?: boolean
+  videoUrl?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["messageTemplate"]>
@@ -610,6 +680,8 @@ export type MessageTemplateSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   name?: boolean
   content?: boolean
   category?: boolean
+  imageUrl?: boolean
+  videoUrl?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["messageTemplate"]>
@@ -620,10 +692,12 @@ export type MessageTemplateSelectScalar = {
   name?: boolean
   content?: boolean
   category?: boolean
+  imageUrl?: boolean
+  videoUrl?: boolean
   createdAt?: boolean
 }
 
-export type MessageTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "content" | "category" | "createdAt", ExtArgs["result"]["messageTemplate"]>
+export type MessageTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "content" | "category" | "imageUrl" | "videoUrl" | "createdAt", ExtArgs["result"]["messageTemplate"]>
 export type MessageTemplateInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Broadcasts?: boolean | Prisma.MessageTemplate$BroadcastsArgs<ExtArgs>
@@ -648,6 +722,8 @@ export type $MessageTemplatePayload<ExtArgs extends runtime.Types.Extensions.Int
     name: string
     content: string
     category: string | null
+    imageUrl: string | null
+    videoUrl: string | null
     createdAt: Date
   }, ExtArgs["result"]["messageTemplate"]>
   composites: {}
@@ -1079,6 +1155,8 @@ export interface MessageTemplateFieldRefs {
   readonly name: Prisma.FieldRef<"MessageTemplate", 'String'>
   readonly content: Prisma.FieldRef<"MessageTemplate", 'String'>
   readonly category: Prisma.FieldRef<"MessageTemplate", 'String'>
+  readonly imageUrl: Prisma.FieldRef<"MessageTemplate", 'String'>
+  readonly videoUrl: Prisma.FieldRef<"MessageTemplate", 'String'>
   readonly createdAt: Prisma.FieldRef<"MessageTemplate", 'DateTime'>
 }
     

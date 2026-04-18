@@ -9,6 +9,8 @@ export async function updateTemplateController(request: FastifyRequest, reply: F
     name: z.string().min(1).optional(),
     content: z.string().min(1).optional(),
     category: z.string().optional(),
+    imageUrl: z.string().url().optional().nullable(),
+    videoUrl: z.string().url().optional().nullable(),
   })
   const { id } = paramsSchema.parse(request.params)
   const body = bodySchema.parse(request.body)

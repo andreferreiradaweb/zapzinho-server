@@ -1,4 +1,4 @@
-import { Prisma, LeadStatus, Product, Lead, LeadOption } from '@/lib/prisma'
+import { Prisma, LeadStatus, Product, Lead } from '@/lib/prisma'
 import { LeadRepository } from '../lead'
 import { prisma } from '@/lib/prisma'
 
@@ -80,16 +80,22 @@ export class PrismaLeadRepository implements LeadRepository {
     limit: number,
     search: string,
     status?: LeadStatus,
-    option?: LeadOption,
     startDate?: string,
     endDate?: string,
     phone?: string,
+    productId?: string,
+    categoryId?: string,
   ) {
     const where: Prisma.LeadWhereInput = { userId }
 
     if (status) where.Status = { equals: status }
-    if (option) where.Option = { equals: option }
-    if (search) where.productId = { equals: search }
+    if (search) where.OR = [
+      { nome: { contains: search, mode: 'insensitive' } },
+      { email: { contains: search, mode: 'insensitive' } },
+      { telefone: { contains: search } },
+    ]
+    if (productId) where.productId = { equals: productId }
+    if (categoryId) where.Product = { categoryId }
     if (phone) where.telefone = { contains: phone.replace(/\D/g, '') }
     if (startDate && endDate) {
       where.createdAt = { gte: new Date(startDate), lte: new Date(endDate) }
@@ -107,17 +113,23 @@ export class PrismaLeadRepository implements LeadRepository {
   async countByUserId(
     userId: string,
     search: string,
-    status: LeadStatus,
-    option: LeadOption,
+    status?: LeadStatus,
     startDate?: string,
     endDate?: string,
     phone?: string,
+    productId?: string,
+    categoryId?: string,
   ) {
     const where: Prisma.LeadWhereInput = { userId }
 
     if (status) where.Status = { equals: status }
-    if (option) where.Option = { equals: option }
-    if (search) where.productId = { equals: search }
+    if (search) where.OR = [
+      { nome: { contains: search, mode: 'insensitive' } },
+      { email: { contains: search, mode: 'insensitive' } },
+      { telefone: { contains: search } },
+    ]
+    if (productId) where.productId = { equals: productId }
+    if (categoryId) where.Product = { categoryId }
     if (phone) where.telefone = { contains: phone.replace(/\D/g, '') }
     if (startDate && endDate) {
       where.createdAt = { gte: new Date(startDate), lte: new Date(endDate) }
@@ -147,7 +159,7 @@ export class PrismaLeadRepository implements LeadRepository {
     })
   }
 
-  async findAllForBroadcast(userId: string, productId?: string, status?: LeadStatus, lastMessageRange?: string, lastBroadcastRange?: string) {
+  async findAllForBroadcast(userId: string, productId?: string, status?: LeadStatus, lastMessageRange?: string, lastBroadcastRange?: string, categoryId?: string) {
     const lastMessageFilter = lastMessageRange ? buildLastMessageFilter(lastMessageRange) : undefined
     const lastBroadcastFilter = lastBroadcastRange ? buildLastBroadcastFilter(lastBroadcastRange) : undefined
 
@@ -155,6 +167,7 @@ export class PrismaLeadRepository implements LeadRepository {
       where: {
         userId,
         ...(productId ? { productId } : {}),
+        ...(categoryId ? { Product: { categoryId } } : {}),
         ...(status ? { Status: status } : {}),
         ...(lastMessageFilter ? { lastClientMessageAt: lastMessageFilter } : {}),
         ...(lastBroadcastFilter ? { lastBroadcastAt: lastBroadcastFilter } : {}),

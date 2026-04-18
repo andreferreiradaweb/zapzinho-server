@@ -1,4 +1,4 @@
-import { Lead, LeadOption, LeadStatus } from '@/lib/prisma'
+import { Lead, LeadStatus } from '@/lib/prisma'
 import { LeadRepository } from '@/repositories/lead'
 import { ResourceNotFound } from '../../error/resource-not-found'
 import { UserRepository } from '@/repositories/user'
@@ -10,7 +10,6 @@ interface CreateLeadUseCaseRequest {
   telefone: string
   message: string
   Status: LeadStatus
-  Option: LeadOption
   userId: string
   id?: string
   createdAt?: Date
@@ -37,7 +36,6 @@ export class CreateLeadUseCase {
     id,
     createdAt,
     productId,
-    Option
   }: CreateLeadUseCaseRequest): Promise<CreateLeadUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
     if (!findedUser) {
@@ -60,7 +58,6 @@ export class CreateLeadUseCase {
       id,
       createdAt,
       productId,
-      Option
     })
 
     return { lead }

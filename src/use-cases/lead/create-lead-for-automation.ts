@@ -1,4 +1,4 @@
-import { Lead, LeadOption, LeadStatus } from '@/lib/prisma'
+import { Lead, LeadStatus } from '@/lib/prisma'
 import { LeadRepository } from '@/repositories/lead'
 import { ResourceNotFound } from '../../error/resource-not-found'
 import { UserRepository } from '@/repositories/user'
@@ -9,7 +9,6 @@ interface CreateLeadForAutomationUseCaseRequest {
   telefone: string
   message: string
   Status: LeadStatus
-  Option: LeadOption
   userId: string
   productId?: string
 }
@@ -31,7 +30,6 @@ export class CreateLeadForAutomationUseCase {
     telefone,
     message,
     Status,
-    Option,
     productId,
     userId,
   }: CreateLeadForAutomationUseCaseRequest): Promise<CreateLeadForAutomationUseCaseResponse> {
@@ -56,7 +54,6 @@ export class CreateLeadForAutomationUseCase {
       telefone,
       message,
       Status,
-      Option,
       productId,
       userId: findedUser.id,
     })

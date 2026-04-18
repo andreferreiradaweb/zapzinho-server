@@ -42,6 +42,7 @@ export type BroadcastMinAggregateOutputType = {
   templateId: string | null
   name: string | null
   message: string | null
+  videoUrl: string | null
   status: $Enums.BroadcastStatus | null
   scheduledAt: Date | null
   startedAt: Date | null
@@ -57,6 +58,7 @@ export type BroadcastMaxAggregateOutputType = {
   templateId: string | null
   name: string | null
   message: string | null
+  videoUrl: string | null
   status: $Enums.BroadcastStatus | null
   scheduledAt: Date | null
   startedAt: Date | null
@@ -72,6 +74,8 @@ export type BroadcastCountAggregateOutputType = {
   templateId: number
   name: number
   message: number
+  imageUrls: number
+  videoUrl: number
   status: number
   scheduledAt: number
   startedAt: number
@@ -99,6 +103,7 @@ export type BroadcastMinAggregateInputType = {
   templateId?: true
   name?: true
   message?: true
+  videoUrl?: true
   status?: true
   scheduledAt?: true
   startedAt?: true
@@ -114,6 +119,7 @@ export type BroadcastMaxAggregateInputType = {
   templateId?: true
   name?: true
   message?: true
+  videoUrl?: true
   status?: true
   scheduledAt?: true
   startedAt?: true
@@ -129,6 +135,8 @@ export type BroadcastCountAggregateInputType = {
   templateId?: true
   name?: true
   message?: true
+  imageUrls?: true
+  videoUrl?: true
   status?: true
   scheduledAt?: true
   startedAt?: true
@@ -231,6 +239,8 @@ export type BroadcastGroupByOutputType = {
   templateId: string | null
   name: string
   message: string
+  imageUrls: string[]
+  videoUrl: string | null
   status: $Enums.BroadcastStatus
   scheduledAt: Date | null
   startedAt: Date | null
@@ -269,6 +279,8 @@ export type BroadcastWhereInput = {
   templateId?: Prisma.StringNullableFilter<"Broadcast"> | string | null
   name?: Prisma.StringFilter<"Broadcast"> | string
   message?: Prisma.StringFilter<"Broadcast"> | string
+  imageUrls?: Prisma.StringNullableListFilter<"Broadcast">
+  videoUrl?: Prisma.StringNullableFilter<"Broadcast"> | string | null
   status?: Prisma.EnumBroadcastStatusFilter<"Broadcast"> | $Enums.BroadcastStatus
   scheduledAt?: Prisma.DateTimeNullableFilter<"Broadcast"> | Date | string | null
   startedAt?: Prisma.DateTimeNullableFilter<"Broadcast"> | Date | string | null
@@ -287,6 +299,8 @@ export type BroadcastOrderByWithRelationInput = {
   templateId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  imageUrls?: Prisma.SortOrder
+  videoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   scheduledAt?: Prisma.SortOrderInput | Prisma.SortOrder
   startedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -308,6 +322,8 @@ export type BroadcastWhereUniqueInput = Prisma.AtLeast<{
   templateId?: Prisma.StringNullableFilter<"Broadcast"> | string | null
   name?: Prisma.StringFilter<"Broadcast"> | string
   message?: Prisma.StringFilter<"Broadcast"> | string
+  imageUrls?: Prisma.StringNullableListFilter<"Broadcast">
+  videoUrl?: Prisma.StringNullableFilter<"Broadcast"> | string | null
   status?: Prisma.EnumBroadcastStatusFilter<"Broadcast"> | $Enums.BroadcastStatus
   scheduledAt?: Prisma.DateTimeNullableFilter<"Broadcast"> | Date | string | null
   startedAt?: Prisma.DateTimeNullableFilter<"Broadcast"> | Date | string | null
@@ -326,6 +342,8 @@ export type BroadcastOrderByWithAggregationInput = {
   templateId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  imageUrls?: Prisma.SortOrder
+  videoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   scheduledAt?: Prisma.SortOrderInput | Prisma.SortOrder
   startedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -349,6 +367,8 @@ export type BroadcastScalarWhereWithAggregatesInput = {
   templateId?: Prisma.StringNullableWithAggregatesFilter<"Broadcast"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"Broadcast"> | string
   message?: Prisma.StringWithAggregatesFilter<"Broadcast"> | string
+  imageUrls?: Prisma.StringNullableListFilter<"Broadcast">
+  videoUrl?: Prisma.StringNullableWithAggregatesFilter<"Broadcast"> | string | null
   status?: Prisma.EnumBroadcastStatusWithAggregatesFilter<"Broadcast"> | $Enums.BroadcastStatus
   scheduledAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Broadcast"> | Date | string | null
   startedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Broadcast"> | Date | string | null
@@ -362,6 +382,8 @@ export type BroadcastCreateInput = {
   id?: string
   name: string
   message: string
+  imageUrls?: Prisma.BroadcastCreateimageUrlsInput | string[]
+  videoUrl?: string | null
   status?: $Enums.BroadcastStatus
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
@@ -380,6 +402,8 @@ export type BroadcastUncheckedCreateInput = {
   templateId?: string | null
   name: string
   message: string
+  imageUrls?: Prisma.BroadcastCreateimageUrlsInput | string[]
+  videoUrl?: string | null
   status?: $Enums.BroadcastStatus
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
@@ -394,6 +418,8 @@ export type BroadcastUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrls?: Prisma.BroadcastUpdateimageUrlsInput | string[]
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -412,6 +438,8 @@ export type BroadcastUncheckedUpdateInput = {
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrls?: Prisma.BroadcastUpdateimageUrlsInput | string[]
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -428,6 +456,8 @@ export type BroadcastCreateManyInput = {
   templateId?: string | null
   name: string
   message: string
+  imageUrls?: Prisma.BroadcastCreateimageUrlsInput | string[]
+  videoUrl?: string | null
   status?: $Enums.BroadcastStatus
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
@@ -441,6 +471,8 @@ export type BroadcastUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrls?: Prisma.BroadcastUpdateimageUrlsInput | string[]
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -456,6 +488,8 @@ export type BroadcastUncheckedUpdateManyInput = {
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrls?: Prisma.BroadcastUpdateimageUrlsInput | string[]
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -481,6 +515,8 @@ export type BroadcastCountOrderByAggregateInput = {
   templateId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  imageUrls?: Prisma.SortOrder
+  videoUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   scheduledAt?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
@@ -501,6 +537,7 @@ export type BroadcastMaxOrderByAggregateInput = {
   templateId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  videoUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   scheduledAt?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
@@ -516,6 +553,7 @@ export type BroadcastMinOrderByAggregateInput = {
   templateId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  videoUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   scheduledAt?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
@@ -619,6 +657,15 @@ export type BroadcastUncheckedUpdateManyWithoutTemplateNestedInput = {
   deleteMany?: Prisma.BroadcastScalarWhereInput | Prisma.BroadcastScalarWhereInput[]
 }
 
+export type BroadcastCreateimageUrlsInput = {
+  set: string[]
+}
+
+export type BroadcastUpdateimageUrlsInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
 export type EnumBroadcastStatusFieldUpdateOperationsInput = {
   set?: $Enums.BroadcastStatus
 }
@@ -649,6 +696,8 @@ export type BroadcastCreateWithoutUserInput = {
   id?: string
   name: string
   message: string
+  imageUrls?: Prisma.BroadcastCreateimageUrlsInput | string[]
+  videoUrl?: string | null
   status?: $Enums.BroadcastStatus
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
@@ -665,6 +714,8 @@ export type BroadcastUncheckedCreateWithoutUserInput = {
   templateId?: string | null
   name: string
   message: string
+  imageUrls?: Prisma.BroadcastCreateimageUrlsInput | string[]
+  videoUrl?: string | null
   status?: $Enums.BroadcastStatus
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
@@ -710,6 +761,8 @@ export type BroadcastScalarWhereInput = {
   templateId?: Prisma.StringNullableFilter<"Broadcast"> | string | null
   name?: Prisma.StringFilter<"Broadcast"> | string
   message?: Prisma.StringFilter<"Broadcast"> | string
+  imageUrls?: Prisma.StringNullableListFilter<"Broadcast">
+  videoUrl?: Prisma.StringNullableFilter<"Broadcast"> | string | null
   status?: Prisma.EnumBroadcastStatusFilter<"Broadcast"> | $Enums.BroadcastStatus
   scheduledAt?: Prisma.DateTimeNullableFilter<"Broadcast"> | Date | string | null
   startedAt?: Prisma.DateTimeNullableFilter<"Broadcast"> | Date | string | null
@@ -723,6 +776,8 @@ export type BroadcastCreateWithoutTemplateInput = {
   id?: string
   name: string
   message: string
+  imageUrls?: Prisma.BroadcastCreateimageUrlsInput | string[]
+  videoUrl?: string | null
   status?: $Enums.BroadcastStatus
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
@@ -739,6 +794,8 @@ export type BroadcastUncheckedCreateWithoutTemplateInput = {
   userId: string
   name: string
   message: string
+  imageUrls?: Prisma.BroadcastCreateimageUrlsInput | string[]
+  videoUrl?: string | null
   status?: $Enums.BroadcastStatus
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
@@ -779,6 +836,8 @@ export type BroadcastCreateWithoutBroadcastLeadsInput = {
   id?: string
   name: string
   message: string
+  imageUrls?: Prisma.BroadcastCreateimageUrlsInput | string[]
+  videoUrl?: string | null
   status?: $Enums.BroadcastStatus
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
@@ -796,6 +855,8 @@ export type BroadcastUncheckedCreateWithoutBroadcastLeadsInput = {
   templateId?: string | null
   name: string
   message: string
+  imageUrls?: Prisma.BroadcastCreateimageUrlsInput | string[]
+  videoUrl?: string | null
   status?: $Enums.BroadcastStatus
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
@@ -825,6 +886,8 @@ export type BroadcastUpdateWithoutBroadcastLeadsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrls?: Prisma.BroadcastUpdateimageUrlsInput | string[]
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -842,6 +905,8 @@ export type BroadcastUncheckedUpdateWithoutBroadcastLeadsInput = {
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrls?: Prisma.BroadcastUpdateimageUrlsInput | string[]
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -856,6 +921,8 @@ export type BroadcastCreateManyUserInput = {
   templateId?: string | null
   name: string
   message: string
+  imageUrls?: Prisma.BroadcastCreateimageUrlsInput | string[]
+  videoUrl?: string | null
   status?: $Enums.BroadcastStatus
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
@@ -869,6 +936,8 @@ export type BroadcastUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrls?: Prisma.BroadcastUpdateimageUrlsInput | string[]
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -885,6 +954,8 @@ export type BroadcastUncheckedUpdateWithoutUserInput = {
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrls?: Prisma.BroadcastUpdateimageUrlsInput | string[]
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -900,6 +971,8 @@ export type BroadcastUncheckedUpdateManyWithoutUserInput = {
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrls?: Prisma.BroadcastUpdateimageUrlsInput | string[]
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -914,6 +987,8 @@ export type BroadcastCreateManyTemplateInput = {
   userId: string
   name: string
   message: string
+  imageUrls?: Prisma.BroadcastCreateimageUrlsInput | string[]
+  videoUrl?: string | null
   status?: $Enums.BroadcastStatus
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
@@ -927,6 +1002,8 @@ export type BroadcastUpdateWithoutTemplateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrls?: Prisma.BroadcastUpdateimageUrlsInput | string[]
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -943,6 +1020,8 @@ export type BroadcastUncheckedUpdateWithoutTemplateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrls?: Prisma.BroadcastUpdateimageUrlsInput | string[]
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -958,6 +1037,8 @@ export type BroadcastUncheckedUpdateManyWithoutTemplateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrls?: Prisma.BroadcastUpdateimageUrlsInput | string[]
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1004,6 +1085,8 @@ export type BroadcastSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   templateId?: boolean
   name?: boolean
   message?: boolean
+  imageUrls?: boolean
+  videoUrl?: boolean
   status?: boolean
   scheduledAt?: boolean
   startedAt?: boolean
@@ -1023,6 +1106,8 @@ export type BroadcastSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   templateId?: boolean
   name?: boolean
   message?: boolean
+  imageUrls?: boolean
+  videoUrl?: boolean
   status?: boolean
   scheduledAt?: boolean
   startedAt?: boolean
@@ -1040,6 +1125,8 @@ export type BroadcastSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   templateId?: boolean
   name?: boolean
   message?: boolean
+  imageUrls?: boolean
+  videoUrl?: boolean
   status?: boolean
   scheduledAt?: boolean
   startedAt?: boolean
@@ -1057,6 +1144,8 @@ export type BroadcastSelectScalar = {
   templateId?: boolean
   name?: boolean
   message?: boolean
+  imageUrls?: boolean
+  videoUrl?: boolean
   status?: boolean
   scheduledAt?: boolean
   startedAt?: boolean
@@ -1066,7 +1155,7 @@ export type BroadcastSelectScalar = {
   createdAt?: boolean
 }
 
-export type BroadcastOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "templateId" | "name" | "message" | "status" | "scheduledAt" | "startedAt" | "finishedAt" | "totalSent" | "totalFailed" | "createdAt", ExtArgs["result"]["broadcast"]>
+export type BroadcastOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "templateId" | "name" | "message" | "imageUrls" | "videoUrl" | "status" | "scheduledAt" | "startedAt" | "finishedAt" | "totalSent" | "totalFailed" | "createdAt", ExtArgs["result"]["broadcast"]>
 export type BroadcastInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Template?: boolean | Prisma.Broadcast$TemplateArgs<ExtArgs>
@@ -1095,6 +1184,8 @@ export type $BroadcastPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     templateId: string | null
     name: string
     message: string
+    imageUrls: string[]
+    videoUrl: string | null
     status: $Enums.BroadcastStatus
     scheduledAt: Date | null
     startedAt: Date | null
@@ -1533,6 +1624,8 @@ export interface BroadcastFieldRefs {
   readonly templateId: Prisma.FieldRef<"Broadcast", 'String'>
   readonly name: Prisma.FieldRef<"Broadcast", 'String'>
   readonly message: Prisma.FieldRef<"Broadcast", 'String'>
+  readonly imageUrls: Prisma.FieldRef<"Broadcast", 'String[]'>
+  readonly videoUrl: Prisma.FieldRef<"Broadcast", 'String'>
   readonly status: Prisma.FieldRef<"Broadcast", 'BroadcastStatus'>
   readonly scheduledAt: Prisma.FieldRef<"Broadcast", 'DateTime'>
   readonly startedAt: Prisma.FieldRef<"Broadcast", 'DateTime'>

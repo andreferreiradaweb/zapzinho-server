@@ -48,7 +48,6 @@ export class HandleIncomingMessageUseCase {
       email: null,
       message,
       Status: 'NOVO_INTERESSE',
-      Option: 'ATENDIMENTO_HUMANO',
       productId: null,
       lastClientMessageAt: new Date(),
     })

@@ -8,7 +8,9 @@ import { productRoutes } from './http/controllers/product/routes'
 import { leadRoutes } from './http/controllers/lead/routes'
 import { messageTemplateRoutes } from './http/controllers/message-template/routes'
 import { broadcastRoutes } from './http/controllers/broadcast/routes'
+import { broadcastBlockRoutes } from './http/controllers/broadcast-block/routes'
 import { webhookRoutes } from './http/controllers/webhook/routes'
+import { productCategoryRoutes } from './http/controllers/product-category/routes'
 
 export const app = fastify()
 
@@ -30,7 +32,9 @@ app.register(leadRoutes)
 app.register(productRoutes)
 app.register(messageTemplateRoutes)
 app.register(broadcastRoutes)
+app.register(broadcastBlockRoutes)
 app.register(webhookRoutes)
+app.register(productCategoryRoutes)
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {

@@ -9,11 +9,13 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User.js'
+export type * from './models/ProductCategory.js'
 export type * from './models/Product.js'
 export type * from './models/Lead.js'
 export type * from './models/MessageTemplate.js'
 export type * from './models/Broadcast.js'
 export type * from './models/BroadcastLead.js'
+export type * from './models/BroadcastBlock.js'
 export type * from './models/MessageLog.js'
 export type * from './models/Customer.js'
 export type * from './models/Address.js'

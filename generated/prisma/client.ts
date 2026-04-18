@@ -45,6 +45,11 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
+ * Model ProductCategory
+ * 
+ */
+export type ProductCategory = Prisma.ProductCategoryModel
+/**
  * Model Product
  * 
  */
@@ -69,6 +74,11 @@ export type Broadcast = Prisma.BroadcastModel
  * 
  */
 export type BroadcastLead = Prisma.BroadcastLeadModel
+/**
+ * Model BroadcastBlock
+ * 
+ */
+export type BroadcastBlock = Prisma.BroadcastBlockModel
 /**
  * Model MessageLog
  * 

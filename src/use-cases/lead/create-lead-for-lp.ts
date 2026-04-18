@@ -1,4 +1,4 @@
-import { Lead, LeadOption, LeadStatus } from '@/lib/prisma'
+import { Lead, LeadStatus } from '@/lib/prisma'
 import { LeadRepository } from '@/repositories/lead'
 import { ResourceNotFound } from '../../error/resource-not-found'
 import { WaitAMoment } from '@/error/wait-a-moment'
@@ -14,7 +14,6 @@ interface CreateLeadForLpUseCaseRequest {
   telefone: string
   message: string
   Status: LeadStatus
-  Option: LeadOption
   userId: string
   productId: string
   ip: string
@@ -37,7 +36,6 @@ export class CreateLeadForLpUseCase {
     telefone,
     message,
     Status,
-    Option,
     productId,
     userId,
     ip,
@@ -66,7 +64,6 @@ export class CreateLeadForLpUseCase {
       telefone,
       message,
       Status,
-      Option,
       productId,
       userId: findedUser.id,
     })

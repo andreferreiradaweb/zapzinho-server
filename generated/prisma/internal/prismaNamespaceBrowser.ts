@@ -52,11 +52,13 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  ProductCategory: 'ProductCategory',
   Product: 'Product',
   Lead: 'Lead',
   MessageTemplate: 'MessageTemplate',
   Broadcast: 'Broadcast',
   BroadcastLead: 'BroadcastLead',
+  BroadcastBlock: 'BroadcastBlock',
   MessageLog: 'MessageLog',
   Customer: 'Customer',
   Address: 'Address',
@@ -101,6 +103,16 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const ProductCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type ProductCategoryScalarFieldEnum = (typeof ProductCategoryScalarFieldEnum)[keyof typeof ProductCategoryScalarFieldEnum]
+
+
 export const ProductScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
@@ -110,7 +122,8 @@ export const ProductScalarFieldEnum = {
   price: 'price',
   condition: 'condition',
   photos: 'photos',
-  userId: 'userId'
+  userId: 'userId',
+  categoryId: 'categoryId'
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
@@ -125,7 +138,6 @@ export const LeadScalarFieldEnum = {
   productId: 'productId',
   userId: 'userId',
   Status: 'Status',
-  Option: 'Option',
   createdAt: 'createdAt',
   lastBroadcastAt: 'lastBroadcastAt',
   lastClientMessageAt: 'lastClientMessageAt'
@@ -140,6 +152,8 @@ export const MessageTemplateScalarFieldEnum = {
   name: 'name',
   content: 'content',
   category: 'category',
+  imageUrl: 'imageUrl',
+  videoUrl: 'videoUrl',
   createdAt: 'createdAt'
 } as const
 
@@ -152,6 +166,8 @@ export const BroadcastScalarFieldEnum = {
   templateId: 'templateId',
   name: 'name',
   message: 'message',
+  imageUrls: 'imageUrls',
+  videoUrl: 'videoUrl',
   status: 'status',
   scheduledAt: 'scheduledAt',
   startedAt: 'startedAt',
@@ -174,6 +190,16 @@ export const BroadcastLeadScalarFieldEnum = {
 } as const
 
 export type BroadcastLeadScalarFieldEnum = (typeof BroadcastLeadScalarFieldEnum)[keyof typeof BroadcastLeadScalarFieldEnum]
+
+
+export const BroadcastBlockScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  leadId: 'leadId',
+  createdAt: 'createdAt'
+} as const
+
+export type BroadcastBlockScalarFieldEnum = (typeof BroadcastBlockScalarFieldEnum)[keyof typeof BroadcastBlockScalarFieldEnum]
 
 
 export const MessageLogScalarFieldEnum = {

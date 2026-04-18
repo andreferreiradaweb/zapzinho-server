@@ -49,6 +49,98 @@ export async function sendWhatsAppMessage({
   }
 }
 
+interface SendImageParams {
+  phone: string
+  imageUrl: string
+  caption?: string
+}
+
+/**
+ * Sends a WhatsApp image message with caption via W-API.
+ */
+export async function sendWhatsAppImage({
+  phone,
+  imageUrl,
+  caption,
+}: SendImageParams): Promise<SendMessageResult> {
+  const normalizedPhone = phone.replace(/\D/g, '')
+
+  try {
+    const url = `${env.WAPI_BASE_URL}/message/send-image?instanceId=${env.WAPI_INSTANCE_ID}`
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${env.WAPI_TOKEN}`,
+      },
+      body: JSON.stringify({
+        phone: normalizedPhone,
+        image: imageUrl,
+        ...(caption ? { caption } : {}),
+        delayMessage: 0,
+      }),
+    })
+
+    if (!response.ok) {
+      const body = await response.text()
+      return { success: false, error: `HTTP ${response.status}: ${body}` }
+    }
+
+    return { success: true }
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error)
+    console.error('[W-API] Error sending image:', msg)
+    return { success: false, error: msg }
+  }
+}
+
+interface SendVideoParams {
+  phone: string
+  videoUrl: string
+  caption?: string
+}
+
+/**
+ * Sends a WhatsApp video message with optional caption via W-API.
+ */
+export async function sendWhatsAppVideo({
+  phone,
+  videoUrl,
+  caption,
+}: SendVideoParams): Promise<SendMessageResult> {
+  const normalizedPhone = phone.replace(/\D/g, '')
+
+  try {
+    const url = `${env.WAPI_BASE_URL}/message/send-video?instanceId=${env.WAPI_INSTANCE_ID}`
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${env.WAPI_TOKEN}`,
+      },
+      body: JSON.stringify({
+        phone: normalizedPhone,
+        video: videoUrl,
+        ...(caption ? { caption } : {}),
+        delayMessage: 0,
+      }),
+    })
+
+    if (!response.ok) {
+      const body = await response.text()
+      return { success: false, error: `HTTP ${response.status}: ${body}` }
+    }
+
+    return { success: true }
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error)
+    console.error('[W-API] Error sending video:', msg)
+    return { success: false, error: msg }
+  }
+}
+
 /**
  * Delay helper used between broadcast sends to avoid WhatsApp rate limiting.
  */

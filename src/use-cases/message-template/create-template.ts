@@ -7,6 +7,8 @@ interface CreateTemplateRequest {
   name: string
   content: string
   category?: string
+  imageUrl?: string | null
+  videoUrl?: string | null
 }
 
 export class CreateTemplateUseCase {

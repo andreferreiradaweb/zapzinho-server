@@ -15,6 +15,7 @@ interface UpdateProductUseCaseRequest {
   condition?: string
   photos: string[]
   userId: string
+  categoryId?: string
 }
 
 interface UpdateProductUseCaseResponse {
@@ -36,6 +37,7 @@ export class UpdateProductUseCase {
     condition,
     photos,
     userId,
+    categoryId,
   }: UpdateProductUseCaseRequest): Promise<UpdateProductUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
 
@@ -66,6 +68,7 @@ export class UpdateProductUseCase {
       condition,
       photos,
       userId,
+      categoryId,
       createdAt: new Date(),
     })
 

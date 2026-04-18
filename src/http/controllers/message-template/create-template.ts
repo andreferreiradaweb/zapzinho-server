@@ -8,6 +8,8 @@ export async function createTemplateController(request: FastifyRequest, reply: F
     name: z.string().min(1),
     content: z.string().min(1),
     category: z.string().optional(),
+    imageUrl: z.string().url().optional().nullable(),
+    videoUrl: z.string().url().optional().nullable(),
   })
   const body = schema.parse(request.body)
   const { sub: userId } = request.user

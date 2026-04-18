@@ -9,6 +9,10 @@ interface ListProductsForOptionsUseCaseRequest {
 interface ProductForOptions {
   id: string
   title: string
+  description: string | null
+  price: string | null
+  condition: string | null
+  photos: string[]
 }
 
 interface ListProductsUseCaseResponse {

@@ -5,12 +5,14 @@ import { ProductRepository } from '../product'
 export class PrismaProductRepository implements ProductRepository {
   async getAllProductsForOptions(userId: string) {
     return prisma.product.findMany({
-      where: {
-        userId,
-      },
+      where: { userId },
       select: {
         id: true,
         title: true,
+        description: true,
+        price: true,
+        condition: true,
+        photos: true,
       },
     })
   }

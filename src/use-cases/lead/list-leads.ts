@@ -1,4 +1,4 @@
-import { Lead, LeadOption, LeadStatus, Product } from '@/lib/prisma'
+import { Lead, LeadStatus, Product } from '@/lib/prisma'
 import { UserNotFound } from '../../error/user-not-found'
 import { UserRepository } from '@/repositories/user'
 import { LeadRepository } from '@/repositories/lead'
@@ -9,10 +9,11 @@ interface ListLeadsUseCaseRequest {
   limit?: number
   search?: string
   status?: LeadStatus
-  option?: LeadOption
   startDate?: string
   endDate?: string
   phone?: string
+  productId?: string
+  categoryId?: string
 }
 
 interface ListLeadsUseCaseResponse {
@@ -34,10 +35,11 @@ export class ListLeadsUseCase {
     limit = 10,
     search = '',
     status,
-    option,
     startDate,
     endDate,
     phone,
+    productId,
+    categoryId,
   }: ListLeadsUseCaseRequest): Promise<ListLeadsUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
 
@@ -49,10 +51,11 @@ export class ListLeadsUseCase {
       findedUser.id,
       search,
       status,
-      option,
       startDate,
       endDate,
       phone,
+      productId,
+      categoryId,
     )
 
     const offset = (page - 1) * limit
@@ -63,10 +66,11 @@ export class ListLeadsUseCase {
       limit,
       search,
       status,
-      option,
       startDate,
       endDate,
       phone,
+      productId,
+      categoryId,
     )
 
     return {

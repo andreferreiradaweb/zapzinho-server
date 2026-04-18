@@ -1,4 +1,4 @@
-import { LeadStatus, LeadOption } from '@/lib/prisma'
+import { LeadStatus } from '@/lib/prisma'
 import { UserRepository } from '@/repositories/user'
 import { InvalidCredentialsError } from '../../error/invalid-credentials-error'
 import { LeadRepository } from '@/repositories/lead'
@@ -6,7 +6,6 @@ import { LeadRepository } from '@/repositories/lead'
 interface ListLeadsUseCaseRequest {
     userId: string
     status?: LeadStatus
-    option?: LeadOption
     startDate?: string
     endDate?: string
 }
@@ -24,7 +23,6 @@ export class ListLeadsUseCase {
     async execute({
         userId,
         status,
-        option,
         startDate,
         endDate,
     }: ListLeadsUseCaseRequest): Promise<ListLeadsUseCaseResponse> {
@@ -38,7 +36,6 @@ export class ListLeadsUseCase {
             findedUser.id,
             '',
             status,
-            option,
             startDate,
             endDate,
         )

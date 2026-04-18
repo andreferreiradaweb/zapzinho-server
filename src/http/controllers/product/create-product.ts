@@ -15,6 +15,7 @@ export async function CreateProductController(
     price: z.string().nullish(),
     condition: z.string().nullish(),
     photos: z.array(z.string()),
+    categoryId: z.string().uuid().nullish(),
   })
 
   const {
@@ -25,6 +26,7 @@ export async function CreateProductController(
     price,
     condition,
     photos,
+    categoryId,
   } = createProductBodySchema.parse(request.body)
 
   try {
@@ -41,6 +43,7 @@ export async function CreateProductController(
       condition: condition ?? undefined,
       photos,
       userId: sub,
+      categoryId: categoryId ?? undefined,
     })
 
     return reply.status(201).send(createdProduct)

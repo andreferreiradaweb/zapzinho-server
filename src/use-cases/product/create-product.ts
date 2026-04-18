@@ -13,6 +13,7 @@ interface CreateProductUseCaseRequest {
   condition?: string
   photos: string[]
   userId: string
+  categoryId?: string
 }
 
 
@@ -36,6 +37,7 @@ export class CreateProductUseCase {
     condition,
     photos,
     userId,
+    categoryId,
   }: CreateProductUseCaseRequest): Promise<CreateProductUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
 
@@ -56,6 +58,7 @@ export class CreateProductUseCase {
       condition,
       photos,
       userId,
+      categoryId,
     })
 
     return { product }

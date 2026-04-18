@@ -1,4 +1,4 @@
-import { Lead, LeadOption, LeadStatus } from '@/lib/prisma'
+import { Lead, LeadStatus } from '@/lib/prisma'
 import { LeadRepository } from '@/repositories/lead'
 import { ResourceNotFound } from '../../error/resource-not-found'
 import { InvalidCredentialsError } from '@/error/invalid-credentials-error'
@@ -7,7 +7,6 @@ import { UserRepository } from '@/repositories/user'
 interface UpdateLeadUseCaseRequest {
   id: string
   Status: LeadStatus
-  Option: LeadOption
   userId: string
   nome?: string
   email?: string
@@ -35,7 +34,6 @@ export class UpdateLeadUseCase {
     productId,
     Status,
     message,
-    Option
   }: UpdateLeadUseCaseRequest): Promise<UpdateLeadUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
 
@@ -62,7 +60,6 @@ export class UpdateLeadUseCase {
       Status,
       createdAt: new Date(),
       message,
-      Option
     })
 
     return { lead: updatedLead }

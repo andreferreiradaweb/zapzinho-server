@@ -36,14 +36,6 @@ export const LeadStatus = {
 export type LeadStatus = (typeof LeadStatus)[keyof typeof LeadStatus]
 
 
-export const LeadOption = {
-  ATEMDIMENTO_IA: 'ATEMDIMENTO_IA',
-  ATENDIMENTO_HUMANO: 'ATENDIMENTO_HUMANO'
-} as const
-
-export type LeadOption = (typeof LeadOption)[keyof typeof LeadOption]
-
-
 export const BroadcastStatus = {
   DRAFT: 'DRAFT',
   SCHEDULED: 'SCHEDULED',

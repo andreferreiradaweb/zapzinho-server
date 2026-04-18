@@ -15,6 +15,7 @@ export async function UpdateProductController(
     price: z.string().nullish(),
     condition: z.string().nullish(),
     photos: z.array(z.string()),
+    categoryId: z.string().uuid().nullish(),
   })
 
   const {
@@ -25,6 +26,7 @@ export async function UpdateProductController(
     price,
     condition,
     photos,
+    categoryId,
   } = updateProductBodySchema.parse(request.body)
   try {
     const { sub } = request.user
@@ -38,6 +40,7 @@ export async function UpdateProductController(
       condition: condition ?? undefined,
       photos,
       userId: sub,
+      categoryId: categoryId ?? undefined,
     })
     return reply.status(204).send(updatedProduct)
   } catch (error) {

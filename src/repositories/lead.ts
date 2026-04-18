@@ -1,4 +1,4 @@
-import { Prisma, Lead, LeadStatus, LeadOption } from '@/lib/prisma'
+import { Prisma, Lead, LeadStatus } from '@/lib/prisma'
 
 
 export interface LeadRepository {
@@ -8,10 +8,11 @@ export interface LeadRepository {
     userId: string,
     search: string,
     status?: LeadStatus,
-    option?: LeadOption,
     startDate?: string,
     endDate?: string,
     phone?: string,
+    productId?: string,
+    categoryId?: string,
   ): Promise<number>
   filterManyByUserId(
     userId: string,
@@ -19,13 +20,14 @@ export interface LeadRepository {
     limit: number,
     search: string,
     status?: LeadStatus,
-    option?: LeadOption,
     startDate?: string,
     endDate?: string,
     phone?: string,
+    productId?: string,
+    categoryId?: string,
   ): Promise<Lead[]>
   delete(id: string): Promise<Lead>
   create(data: Prisma.LeadUncheckedCreateInput): Promise<Lead>
   update(data: Prisma.LeadUncheckedUpdateInput): Promise<Lead>
-  findAllForBroadcast(userId: string, productId?: string, status?: LeadStatus, lastMessageRange?: string, lastBroadcastRange?: string): Promise<Lead[]>
+  findAllForBroadcast(userId: string, productId?: string, status?: LeadStatus, lastMessageRange?: string, lastBroadcastRange?: string, categoryId?: string): Promise<Lead[]>
 }

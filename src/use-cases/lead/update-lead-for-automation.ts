@@ -1,4 +1,4 @@
-import { Lead, LeadOption, LeadStatus } from '@/lib/prisma'
+import { Lead, LeadStatus } from '@/lib/prisma'
 import { LeadRepository } from '@/repositories/lead'
 import { ResourceNotFound } from '../../error/resource-not-found'
 import NodeCache from 'node-cache'
@@ -9,7 +9,6 @@ const cache = new NodeCache()
 interface CreateLeadForLpUseCaseRequest {
   id: string
   Status: LeadStatus
-  Option: LeadOption
   userId: string
   nome?: string
   email?: string
@@ -34,7 +33,6 @@ export class CreateLeadForLpUseCase {
     telefone,
     message,
     Status,
-    Option,
     productId,
     userId,
   }: CreateLeadForLpUseCaseRequest): Promise<CreateLeadForLpUseCaseResponse> {
@@ -50,7 +48,6 @@ export class CreateLeadForLpUseCase {
       telefone,
       message,
       Status,
-      Option,
       productId,
       userId: findedUser.id,
     })

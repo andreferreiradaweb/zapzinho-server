@@ -23,10 +23,12 @@ model User {
   wapiToken                String?
   createdAt                DateTime  @default(now())
   Products                 Product[]
+  ProductCategories        ProductCategory[]
   Leads                    Lead[]
   MessageTemplates         MessageTemplate[]
   Broadcasts               Broadcast[]
   MessageLogs              MessageLog[]
+  BroadcastBlocks          BroadcastBlock[]
 }
 
 enum Role {
@@ -39,17 +41,28 @@ enum CustomerType {
   B2B
 }
 
+model ProductCategory {
+  id        String    @id @default(uuid())
+  name      String
+  userId    String
+  createdAt DateTime  @default(now())
+  User      User      @relation(fields: [userId], references: [id])
+  Products  Product[]
+}
+
 model Product {
-  id          String      @id @default(uuid())
-  createdAt   DateTime    @default(now())
+  id          String           @id @default(uuid())
+  createdAt   DateTime         @default(now())
   title       String
   description String?
   code        String?
   price       String?
   condition   String?
   photos      String[]
-  User        User        @relation(fields: [userId], references: [id])
+  User        User             @relation(fields: [userId], references: [id])
   userId      String
+  Category    ProductCategory? @relation(fields: [categoryId], references: [id])
+  categoryId  String?
   Leads       Lead[]
   OrderItems  OrderItem[]
 }
@@ -65,12 +78,12 @@ model Lead {
   User            User            @relation(fields: [userId], references: [id])
   userId          String
   Status          LeadStatus
-  Option          LeadOption
   createdAt       DateTime        @default(now())
   lastBroadcastAt     DateTime?
   lastClientMessageAt DateTime?
   BroadcastLeads  BroadcastLead[]
   MessageLogs     MessageLog[]
+  BroadcastBlocks BroadcastBlock[]
 }
 
 enum LeadStatus {
@@ -81,11 +94,6 @@ enum LeadStatus {
   NAO_INTERESSADO
 }
 
-enum LeadOption {
-  ATEMDIMENTO_IA
-  ATENDIMENTO_HUMANO
-}
-
 // Message templates for reuse
 model MessageTemplate {
   id         String      @id @default(uuid())
@@ -93,6 +101,8 @@ model MessageTemplate {
   name       String
   content    String
   category   String?
+  imageUrl   String?
+  videoUrl   String?
   createdAt  DateTime    @default(now())
   User       User        @relation(fields: [userId], references: [id])
   Broadcasts Broadcast[]
@@ -105,6 +115,8 @@ model Broadcast {
   templateId     String?
   name           String
   message        String
+  imageUrls      String[]
+  videoUrl       String?
   status         BroadcastStatus @default(DRAFT)
   scheduledAt    DateTime?
   startedAt      DateTime?
@@ -135,6 +147,18 @@ model BroadcastLead {
   errorMsg    String?
   Broadcast   Broadcast     @relation(fields: [broadcastId], references: [id])
   Lead        Lead          @relation(fields: [leadId], references: [id])
+}
+
+// Leads blocked from receiving broadcast messages
+model BroadcastBlock {
+  id        String   @id @default(uuid())
+  userId    String
+  leadId    String
+  createdAt DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id])
+  Lead      Lead     @relation(fields: [leadId], references: [id])
+
+  @@unique([userId, leadId])
 }
 
 // Full log of every WhatsApp message dispatched by the system
