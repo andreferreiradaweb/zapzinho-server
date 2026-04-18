@@ -9,13 +9,16 @@ async function seed() {
 
   const admin = await prisma.user.upsert({
     where: { email: 'admin@zapzinho.com' },
-    update: {},
+    update: {
+      wapiInstanceId: env.WAPI_INSTANCE_ID || null,
+    },
     create: {
       email: 'admin@zapzinho.com',
       Role: Role.ADMIN,
       CustomerType: CustomerType.B2C,
       passwordHash: adminHash,
       isActive: true,
+      wapiInstanceId: env.WAPI_INSTANCE_ID || null,
     },
   })
 
