@@ -9,7 +9,7 @@ interface PendingClassification {
 }
 
 const buffer = new Map<string, PendingClassification>()
-const WINDOW_MS = 15_000
+const WINDOW_MS = 30_000
 const MAX_MESSAGES = 3
 
 const tag = '[LeadClassification]'
