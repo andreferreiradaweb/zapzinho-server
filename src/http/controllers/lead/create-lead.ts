@@ -1,13 +1,14 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { handleSpecificError } from '@/helpers/handleSpecificError'
+import { normalizePhone } from '@/helpers/normalizePhone'
 import { LeadStatus } from '@/lib/prisma'
 import { CreateLeadFactory } from '@/factory/lead/create-lead'
 
 const createLeadBodySchema = z.object({
   nome: z.string(),
   email: z.string().email(),
-  telefone: z.string().transform(v => v.replace(/\D/g, '')),
+  telefone: z.string().transform(v => normalizePhone(v)),
   message: z.string(),
   Status: z.nativeEnum(LeadStatus),
   id: z.string().uuid().optional(),

@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { makeHandleIncomingMessage } from '@/factory/webhook/make-handle-incoming-message'
 import { env } from '@/config/validatedEnv'
 import { addMessage as addClassificationMessage } from '@/services/lead-classification'
+import { normalizePhone } from '@/helpers/normalizePhone'
 
 /**
  * POST /webhook/whatsapp
@@ -71,7 +72,7 @@ export async function whatsappWebhookController(
     return reply.status(200).send({ ok: true, reason: 'group_message_ignored' })
   }
 
-  const phone = chat.id.replace(/\D/g, '')
+  const phone = normalizePhone(chat.id)
   const name = sender?.pushName ?? phone
   const message = msgContent?.conversation ?? ''
 

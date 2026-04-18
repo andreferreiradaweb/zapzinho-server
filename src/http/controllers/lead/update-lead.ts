@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { handleSpecificError } from '@/helpers/handleSpecificError'
+import { normalizePhone } from '@/helpers/normalizePhone'
 import { LeadStatus } from '@/lib/prisma'
 import { UpdateLeadFactory } from '@/factory/lead/update-lead'
 
@@ -9,7 +10,7 @@ const updatedLeadBodySchema = z.object({
   Status: z.nativeEnum(LeadStatus),
   nome: z.string().optional(),
   email: z.string().email().optional(),
-  telefone: z.string().transform(v => v.replace(/\D/g, '')).optional(),
+  telefone: z.string().transform(v => normalizePhone(v)).optional(),
   productId: z.string().optional().or(z.literal('')).transform(v => v || undefined),
   categoryId: z.string().optional().or(z.literal('')).transform(v => v || undefined),
   message: z.string().optional(),
