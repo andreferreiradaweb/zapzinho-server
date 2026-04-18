@@ -35,9 +35,10 @@ async function classify(leadId: string, userId: string, messages: string[]) {
   }
 
   const prompt = `Você é um assistente de CRM para uma loja no WhatsApp (Brasil).
-Analise as mensagens abaixo de um novo cliente e identifique:
-1. Qual categoria melhor corresponde ao interesse dele (ou null se nenhuma se encaixar)
-2. Qual produto específico ele mencionou ou demonstrou interesse (ou null se nenhum se encaixar)
+Analise as mensagens abaixo de um novo cliente e responda:
+
+1. CATEGORIA: qual categoria melhor representa o interesse geral do cliente (ou null se nenhuma se encaixar).
+2. PRODUTO: somente retorne um produto se o cliente mencionou explicitamente um produto específico pelo nome ou código. Se o cliente falou de forma genérica (ex: "quero uma garrafa", "tem mochila?"), retorne null — não adivinhe qual produto ele quer.
 
 Mensagens do cliente:
 ${messages.map(m => `- "${m}"`).join('\n')}
@@ -48,7 +49,7 @@ Produtos disponíveis: ${JSON.stringify(products.map(p => p.title))}
 Responda APENAS em JSON válido:
 {
   "categoryName": "<nome exato de uma das categorias ou null>",
-  "productTitle": "<título exato de um dos produtos ou null>"
+  "productTitle": "<título exato de um dos produtos — somente se explicitamente mencionado pelo cliente, senão null>"
 }`
 
   console.log(`${tag} 🤖 Chamando Gemini...`)
