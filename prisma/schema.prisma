@@ -15,6 +15,7 @@ model User {
   phoneNumber              String?
   address                  String?
   isActive                 Boolean
+  emailVerified            Boolean   @default(false)
   Role                     Role
   CustomerType             CustomerType
   trialExpiresAt           DateTime?

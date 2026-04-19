@@ -11,6 +11,12 @@ import { DeleteUserController } from './delete-user'
 import { GetInstanceQrCodeController } from './get-instance-qrcode'
 import { GetInstanceStatusController } from './get-instance-status'
 import { DisconnectInstanceController } from './disconnect-instance'
+import { ForgotPasswordController } from './forgot-password'
+import { ResetPasswordController } from './reset-password'
+import { VerifyResetCodeController } from './verify-reset-code'
+import { SignupUserController } from './signup-user'
+import { SendVerificationEmailController } from './send-verification-email'
+import { VerifyEmailController } from './verify-email'
 
 export async function usersRoutes(app: FastifyInstance) {
   app.post(
@@ -33,7 +39,13 @@ export async function usersRoutes(app: FastifyInstance) {
     { onRequest: [verifyJwt] },
     SelfUpdateUserController,
   )
+  app.post('/user/signup', SignupUserController)
   app.post('/user/signin', AuthenticateController)
+  app.post('/user/send-verification-email', SendVerificationEmailController)
+  app.post('/user/verify-email', VerifyEmailController)
+  app.post('/user/forgot-password', ForgotPasswordController)
+  app.post('/user/verify-reset-code', VerifyResetCodeController)
+  app.post('/user/reset-password', ResetPasswordController)
   app.get('/user/:id', { onRequest: [verifyJwt] }, GetOneUserController)
   app.get(
     '/user/:id/instance/qrcode',

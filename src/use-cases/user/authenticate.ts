@@ -1,5 +1,6 @@
 import { UserRepository } from '@/repositories/user'
 import { InvalidCredentialsError } from '../../error/invalid-credentials-error'
+import { EmailNotVerifiedError } from '../../error/email-not-verified'
 import { compare } from 'bcrypt'
 import { User } from '@/lib/prisma'
 
@@ -29,6 +30,10 @@ export class AuthenticateUseCase {
 
     if (!doesPasswordMatches) {
       throw new InvalidCredentialsError()
+    }
+
+    if (!findedUser.emailVerified) {
+      throw new EmailNotVerifiedError()
     }
 
     return { user: findedUser }
