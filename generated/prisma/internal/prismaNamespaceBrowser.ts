@@ -92,6 +92,7 @@ export const UserScalarFieldEnum = {
   phoneNumber: 'phoneNumber',
   address: 'address',
   isActive: 'isActive',
+  emailVerified: 'emailVerified',
   Role: 'Role',
   CustomerType: 'CustomerType',
   trialExpiresAt: 'trialExpiresAt',

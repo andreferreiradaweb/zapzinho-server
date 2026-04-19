@@ -32,7 +32,7 @@ export class AuthenticateUseCase {
       throw new InvalidCredentialsError()
     }
 
-    if (!findedUser.emailVerified) {
+    if (findedUser.Role === 'CLIENT' && !findedUser.emailVerified) {
       throw new EmailNotVerifiedError()
     }
 

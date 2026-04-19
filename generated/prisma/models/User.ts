@@ -32,6 +32,7 @@ export type UserMinAggregateOutputType = {
   phoneNumber: string | null
   address: string | null
   isActive: boolean | null
+  emailVerified: boolean | null
   Role: $Enums.Role | null
   CustomerType: $Enums.CustomerType | null
   trialExpiresAt: Date | null
@@ -49,6 +50,7 @@ export type UserMaxAggregateOutputType = {
   phoneNumber: string | null
   address: string | null
   isActive: boolean | null
+  emailVerified: boolean | null
   Role: $Enums.Role | null
   CustomerType: $Enums.CustomerType | null
   trialExpiresAt: Date | null
@@ -66,6 +68,7 @@ export type UserCountAggregateOutputType = {
   phoneNumber: number
   address: number
   isActive: number
+  emailVerified: number
   Role: number
   CustomerType: number
   trialExpiresAt: number
@@ -85,6 +88,7 @@ export type UserMinAggregateInputType = {
   phoneNumber?: true
   address?: true
   isActive?: true
+  emailVerified?: true
   Role?: true
   CustomerType?: true
   trialExpiresAt?: true
@@ -102,6 +106,7 @@ export type UserMaxAggregateInputType = {
   phoneNumber?: true
   address?: true
   isActive?: true
+  emailVerified?: true
   Role?: true
   CustomerType?: true
   trialExpiresAt?: true
@@ -119,6 +124,7 @@ export type UserCountAggregateInputType = {
   phoneNumber?: true
   address?: true
   isActive?: true
+  emailVerified?: true
   Role?: true
   CustomerType?: true
   trialExpiresAt?: true
@@ -209,6 +215,7 @@ export type UserGroupByOutputType = {
   phoneNumber: string | null
   address: string | null
   isActive: boolean
+  emailVerified: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt: Date | null
@@ -247,6 +254,7 @@ export type UserWhereInput = {
   phoneNumber?: Prisma.StringNullableFilter<"User"> | string | null
   address?: Prisma.StringNullableFilter<"User"> | string | null
   isActive?: Prisma.BoolFilter<"User"> | boolean
+  emailVerified?: Prisma.BoolFilter<"User"> | boolean
   Role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFilter<"User"> | $Enums.CustomerType
   trialExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -272,6 +280,7 @@ export type UserOrderByWithRelationInput = {
   phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -301,6 +310,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   phoneNumber?: Prisma.StringNullableFilter<"User"> | string | null
   address?: Prisma.StringNullableFilter<"User"> | string | null
   isActive?: Prisma.BoolFilter<"User"> | boolean
+  emailVerified?: Prisma.BoolFilter<"User"> | boolean
   Role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFilter<"User"> | $Enums.CustomerType
   trialExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -325,6 +335,7 @@ export type UserOrderByWithAggregationInput = {
   phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -348,6 +359,7 @@ export type UserScalarWhereWithAggregatesInput = {
   phoneNumber?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  emailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   Role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeWithAggregatesFilter<"User"> | $Enums.CustomerType
   trialExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -365,6 +377,7 @@ export type UserCreateInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -390,6 +403,7 @@ export type UserUncheckedCreateInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -415,6 +429,7 @@ export type UserUpdateInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -440,6 +455,7 @@ export type UserUncheckedUpdateInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -465,6 +481,7 @@ export type UserCreateManyInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -482,6 +499,7 @@ export type UserUpdateManyMutationInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -499,6 +517,7 @@ export type UserUncheckedUpdateManyInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -516,6 +535,7 @@ export type UserCountOrderByAggregateInput = {
   phoneNumber?: Prisma.SortOrder
   address?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrder
@@ -533,6 +553,7 @@ export type UserMaxOrderByAggregateInput = {
   phoneNumber?: Prisma.SortOrder
   address?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrder
@@ -550,6 +571,7 @@ export type UserMinOrderByAggregateInput = {
   phoneNumber?: Prisma.SortOrder
   address?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
   Role?: Prisma.SortOrder
   CustomerType?: Prisma.SortOrder
   trialExpiresAt?: Prisma.SortOrder
@@ -712,6 +734,7 @@ export type UserCreateWithoutProductCategoriesInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -736,6 +759,7 @@ export type UserUncheckedCreateWithoutProductCategoriesInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -776,6 +800,7 @@ export type UserUpdateWithoutProductCategoriesInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -800,6 +825,7 @@ export type UserUncheckedUpdateWithoutProductCategoriesInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -824,6 +850,7 @@ export type UserCreateWithoutProductsInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -848,6 +875,7 @@ export type UserUncheckedCreateWithoutProductsInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -888,6 +916,7 @@ export type UserUpdateWithoutProductsInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -912,6 +941,7 @@ export type UserUncheckedUpdateWithoutProductsInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -936,6 +966,7 @@ export type UserCreateWithoutLeadsInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -960,6 +991,7 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -1000,6 +1032,7 @@ export type UserUpdateWithoutLeadsInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1024,6 +1057,7 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1048,6 +1082,7 @@ export type UserCreateWithoutMessageTemplatesInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -1072,6 +1107,7 @@ export type UserUncheckedCreateWithoutMessageTemplatesInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -1112,6 +1148,7 @@ export type UserUpdateWithoutMessageTemplatesInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1136,6 +1173,7 @@ export type UserUncheckedUpdateWithoutMessageTemplatesInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1160,6 +1198,7 @@ export type UserCreateWithoutBroadcastsInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -1184,6 +1223,7 @@ export type UserUncheckedCreateWithoutBroadcastsInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -1224,6 +1264,7 @@ export type UserUpdateWithoutBroadcastsInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1248,6 +1289,7 @@ export type UserUncheckedUpdateWithoutBroadcastsInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1272,6 +1314,7 @@ export type UserCreateWithoutAutomationsInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -1296,6 +1339,7 @@ export type UserUncheckedCreateWithoutAutomationsInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -1336,6 +1380,7 @@ export type UserUpdateWithoutAutomationsInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1360,6 +1405,7 @@ export type UserUncheckedUpdateWithoutAutomationsInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1384,6 +1430,7 @@ export type UserCreateWithoutBroadcastBlocksInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -1408,6 +1455,7 @@ export type UserUncheckedCreateWithoutBroadcastBlocksInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -1448,6 +1496,7 @@ export type UserUpdateWithoutBroadcastBlocksInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1472,6 +1521,7 @@ export type UserUncheckedUpdateWithoutBroadcastBlocksInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1496,6 +1546,7 @@ export type UserCreateWithoutMessageLogsInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -1520,6 +1571,7 @@ export type UserUncheckedCreateWithoutMessageLogsInput = {
   phoneNumber?: string | null
   address?: string | null
   isActive: boolean
+  emailVerified?: boolean
   Role: $Enums.Role
   CustomerType: $Enums.CustomerType
   trialExpiresAt?: Date | string | null
@@ -1560,6 +1612,7 @@ export type UserUpdateWithoutMessageLogsInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1584,6 +1637,7 @@ export type UserUncheckedUpdateWithoutMessageLogsInput = {
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
   trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1702,6 +1756,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   phoneNumber?: boolean
   address?: boolean
   isActive?: boolean
+  emailVerified?: boolean
   Role?: boolean
   CustomerType?: boolean
   trialExpiresAt?: boolean
@@ -1728,6 +1783,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   phoneNumber?: boolean
   address?: boolean
   isActive?: boolean
+  emailVerified?: boolean
   Role?: boolean
   CustomerType?: boolean
   trialExpiresAt?: boolean
@@ -1745,6 +1801,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   phoneNumber?: boolean
   address?: boolean
   isActive?: boolean
+  emailVerified?: boolean
   Role?: boolean
   CustomerType?: boolean
   trialExpiresAt?: boolean
@@ -1762,6 +1819,7 @@ export type UserSelectScalar = {
   phoneNumber?: boolean
   address?: boolean
   isActive?: boolean
+  emailVerified?: boolean
   Role?: boolean
   CustomerType?: boolean
   trialExpiresAt?: boolean
@@ -1771,7 +1829,7 @@ export type UserSelectScalar = {
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "phoneNumber" | "address" | "isActive" | "Role" | "CustomerType" | "trialExpiresAt" | "onboardingMessageSentAt" | "wapiInstanceId" | "wapiToken" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "phoneNumber" | "address" | "isActive" | "emailVerified" | "Role" | "CustomerType" | "trialExpiresAt" | "onboardingMessageSentAt" | "wapiInstanceId" | "wapiToken" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Products?: boolean | Prisma.User$ProductsArgs<ExtArgs>
   ProductCategories?: boolean | Prisma.User$ProductCategoriesArgs<ExtArgs>
@@ -1806,6 +1864,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     phoneNumber: string | null
     address: string | null
     isActive: boolean
+    emailVerified: boolean
     Role: $Enums.Role
     CustomerType: $Enums.CustomerType
     trialExpiresAt: Date | null
@@ -2251,6 +2310,7 @@ export interface UserFieldRefs {
   readonly phoneNumber: Prisma.FieldRef<"User", 'String'>
   readonly address: Prisma.FieldRef<"User", 'String'>
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
+  readonly emailVerified: Prisma.FieldRef<"User", 'Boolean'>
   readonly Role: Prisma.FieldRef<"User", 'Role'>
   readonly CustomerType: Prisma.FieldRef<"User", 'CustomerType'>
   readonly trialExpiresAt: Prisma.FieldRef<"User", 'DateTime'>
