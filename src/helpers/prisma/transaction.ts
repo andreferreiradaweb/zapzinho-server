@@ -1,21 +1,11 @@
-import { PrismaClient, Prisma } from '@/lib/prisma'
+import { Prisma } from '@/lib/prisma'
 import { TransactionProvider } from '../transaction-provider'
 
 export class PrismaTransactionProvider implements TransactionProvider {
-  private prisma: PrismaClient
-
-  constructor() {
-    this.prisma = new PrismaClient({ adapter: undefined as never })
-  }
-
   async runTransaction(
     operation: () => Promise<void>,
-    isolationLevel?: Prisma.TransactionIsolationLevel,
+    _isolationLevel?: Prisma.TransactionIsolationLevel,
   ): Promise<void> {
-    try {
-      await this.prisma.$transaction(operation, { isolationLevel })
-    } finally {
-      await this.prisma.$disconnect()
-    }
+    await operation()
   }
 }

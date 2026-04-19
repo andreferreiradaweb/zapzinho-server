@@ -1,5 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { verifyJwt } from '@/http/middlewares/verify-jwt'
+import { verifyIsActive } from '@/http/middlewares/verify-active'
 import { createBroadcastController } from './create-broadcast'
 import { listBroadcastsController } from './list-broadcasts'
 import { sendBroadcastController } from './send-broadcast'
@@ -10,6 +11,6 @@ export async function broadcastRoutes(app: FastifyInstance) {
   app.post('/broadcast', { onRequest: [verifyJwt] }, createBroadcastController)
   app.get('/broadcast', { onRequest: [verifyJwt] }, listBroadcastsController)
   app.get('/broadcast/:id/stats', { onRequest: [verifyJwt] }, getBroadcastStatsController)
-  app.post('/broadcast/:id/send', { onRequest: [verifyJwt] }, sendBroadcastController)
+  app.post('/broadcast/:id/send', { onRequest: [verifyJwt, verifyIsActive] }, sendBroadcastController)
   app.delete('/broadcast/:id', { onRequest: [verifyJwt] }, deleteBroadcastController)
 }

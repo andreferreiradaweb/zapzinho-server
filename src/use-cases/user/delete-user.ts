@@ -31,7 +31,7 @@ export class DeleteUserUseCase {
       throw new UserNotFound()
     }
 
-    if (findedUser.Role !== Role.ADMIN) {
+    if (findedUser.Role === Role.ADMIN) {
       throw new InvalidCredentialsError()
     }
 

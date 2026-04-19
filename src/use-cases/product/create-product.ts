@@ -2,7 +2,8 @@ import { Product } from '@/lib/prisma'
 import { ProductRepository } from '@/repositories/product'
 import { UserRepository } from '@/repositories/user'
 import { UserNotFound } from '../../error/user-not-found'
-import { InactiveUser } from '@/error/inactive-user'
+import { checkInactiveLimit } from '@/helpers/checkInactiveLimit'
+import { prisma } from '@/lib/prisma'
 
 interface CreateProductUseCaseRequest {
   id?: string
@@ -45,9 +46,9 @@ export class CreateProductUseCase {
       throw new UserNotFound()
     }
 
-    if (!findedUser.isActive) {
-      throw new InactiveUser()
-    }
+    await checkInactiveLimit(userId, () =>
+      prisma.product.count({ where: { userId } }),
+    )
 
     const product = await this.productRepository.create({
       id,
