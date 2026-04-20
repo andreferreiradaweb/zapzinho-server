@@ -13,6 +13,7 @@ import { webhookRoutes } from './http/controllers/webhook/routes'
 import { productCategoryRoutes } from './http/controllers/product-category/routes'
 import { automationRoutes } from './http/controllers/automation/routes'
 import { dashboardRoutes } from './http/controllers/dashboard/routes'
+import { leadSaleRoutes } from './http/controllers/lead-sale/routes'
 
 export const app = fastify()
 
@@ -39,6 +40,7 @@ app.register(webhookRoutes)
 app.register(productCategoryRoutes)
 app.register(automationRoutes)
 app.register(dashboardRoutes)
+app.register(leadSaleRoutes)
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {

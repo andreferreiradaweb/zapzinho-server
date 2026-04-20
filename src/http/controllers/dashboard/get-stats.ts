@@ -46,6 +46,7 @@ export async function GetDashboardStatsController(
     topCategories,
     topProducts,
     vendidoLeads,
+    saleItems,
     recentLeads,
   ] = await Promise.all([
     prisma.lead.count({ where }),
@@ -72,11 +73,18 @@ export async function GetDashboardStatsController(
     }),
     prisma.lead.findMany({
       where: { ...where, Status: LeadStatus.VENDIDO },
-      select: {
-        createdAt: true,
-        updatedAt: true,
-        LeadItems: { select: { quantity: true, Product: { select: { price: true } } } },
+      select: { createdAt: true, updatedAt: true },
+    }),
+    prisma.leadSaleItem.findMany({
+      where: {
+        Sale: {
+          userId,
+          createdAt: { gte: from, lte: to },
+          ...(productId ? { Lead: { productId } } : {}),
+          ...(categoryId ? { Lead: { categoryId } } : {}),
+        },
       },
+      select: { price: true, quantity: true },
     }),
     prisma.lead.findMany({
       where: { userId },
@@ -128,13 +136,10 @@ export async function GetDashboardStatsController(
         )
       : null
 
-  const totalRevenue = vendidoLeads.reduce((acc, l) => {
-    const itemsRevenue = l.LeadItems.reduce((sum, item) => {
-      const price = parseFloat(item.Product?.price?.replace(',', '.') ?? '0') || 0
-      return sum + price * item.quantity
-    }, 0)
-    return acc + itemsRevenue
-  }, 0)
+  const totalRevenue = saleItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0,
+  )
 
   return reply.status(200).send({
     totalLeads,
