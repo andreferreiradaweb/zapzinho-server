@@ -115,6 +115,7 @@ export class PrismaLeadRepository implements LeadRepository {
         Product: { include: { Category: true } },
         Category: true,
         LeadItems: { include: { Product: true } },
+        LeadSales: { select: { id: true } },
         BroadcastLeads: {
           where: { status: 'SENT' },
           orderBy: { sentAt: 'desc' },
