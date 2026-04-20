@@ -38,30 +38,57 @@ export async function GetDashboardStatsController(
     ...(categoryId ? { categoryId } : {}),
   }
 
-  const [totalLeads, totalVendidos, leadsByStatus, topCategories, topProducts] =
-    await Promise.all([
-      prisma.lead.count({ where }),
-      prisma.lead.count({ where: { ...where, Status: LeadStatus.VENDIDO } }),
-      prisma.lead.groupBy({
-        by: ['Status'],
-        where,
-        _count: { _all: true },
-      }),
-      prisma.lead.groupBy({
-        by: ['categoryId'],
-        where: { ...where, categoryId: { not: null } },
-        _count: { _all: true },
-        orderBy: { _count: { categoryId: 'desc' } },
-        take: 5,
-      }),
-      prisma.lead.groupBy({
-        by: ['productId'],
-        where: { ...where, productId: { not: null } },
-        _count: { _all: true },
-        orderBy: { _count: { productId: 'desc' } },
-        take: 5,
-      }),
-    ])
+  const [
+    totalLeads,
+    totalVendidos,
+    leadsWithoutProduct,
+    leadsByStatus,
+    topCategories,
+    topProducts,
+    vendidoLeads,
+    recentLeads,
+  ] = await Promise.all([
+    prisma.lead.count({ where }),
+    prisma.lead.count({ where: { ...where, Status: LeadStatus.VENDIDO } }),
+    prisma.lead.count({ where: { ...where, productId: null } }),
+    prisma.lead.groupBy({
+      by: ['Status'],
+      where,
+      _count: { _all: true },
+    }),
+    prisma.lead.groupBy({
+      by: ['categoryId'],
+      where: { ...where, categoryId: { not: null } },
+      _count: { _all: true },
+      orderBy: { _count: { categoryId: 'desc' } },
+      take: 5,
+    }),
+    prisma.lead.groupBy({
+      by: ['productId'],
+      where: { ...where, productId: { not: null } },
+      _count: { _all: true },
+      orderBy: { _count: { productId: 'desc' } },
+      take: 5,
+    }),
+    prisma.lead.findMany({
+      where: { ...where, Status: LeadStatus.VENDIDO },
+      select: { createdAt: true, updatedAt: true },
+    }),
+    prisma.lead.findMany({
+      where: { userId },
+      orderBy: { createdAt: 'desc' },
+      take: 5,
+      select: {
+        id: true,
+        nome: true,
+        telefone: true,
+        Status: true,
+        createdAt: true,
+        Category: { select: { name: true } },
+        Product: { select: { title: true } },
+      },
+    }),
+  ])
 
   const categoryIds = topCategories
     .map((c) => c.categoryId)
@@ -84,10 +111,25 @@ export async function GetDashboardStatsController(
   const conversionRate =
     totalLeads > 0 ? Math.round((totalVendidos / totalLeads) * 100) : 0
 
+  const avgConversionDays =
+    vendidoLeads.length > 0
+      ? Math.round(
+          vendidoLeads.reduce((acc, l) => {
+            const diff =
+              (l.updatedAt.getTime() - l.createdAt.getTime()) /
+              (1000 * 60 * 60 * 24)
+            return acc + diff
+          }, 0) / vendidoLeads.length,
+        )
+      : null
+
   return reply.status(200).send({
     totalLeads,
     totalVendidos,
     conversionRate,
+    leadsWithoutProduct,
+    avgConversionDays,
+    recentLeads,
     leadsByStatus: leadsByStatus.map((s) => ({
       status: s.Status,
       count: s._count._all,

@@ -86,6 +86,7 @@ model Lead {
   userId          String
   Status          LeadStatus
   createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
   lastBroadcastAt     DateTime?
   lastClientMessageAt DateTime?
   BroadcastLeads  BroadcastLead[]
