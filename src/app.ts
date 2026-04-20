@@ -12,6 +12,7 @@ import { broadcastBlockRoutes } from './http/controllers/broadcast-block/routes'
 import { webhookRoutes } from './http/controllers/webhook/routes'
 import { productCategoryRoutes } from './http/controllers/product-category/routes'
 import { automationRoutes } from './http/controllers/automation/routes'
+import { dashboardRoutes } from './http/controllers/dashboard/routes'
 
 export const app = fastify()
 
@@ -37,6 +38,7 @@ app.register(broadcastBlockRoutes)
 app.register(webhookRoutes)
 app.register(productCategoryRoutes)
 app.register(automationRoutes)
+app.register(dashboardRoutes)
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
