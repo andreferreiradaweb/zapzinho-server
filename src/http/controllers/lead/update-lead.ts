@@ -9,10 +9,10 @@ const updatedLeadBodySchema = z.object({
   id: z.string(),
   Status: z.nativeEnum(LeadStatus),
   nome: z.string().optional(),
-  email: z.string().email().optional(),
+  email: z.string().email().nullable().optional(),
   telefone: z.string().transform(v => normalizePhone(v)).optional(),
-  productId: z.string().optional().or(z.literal('')).transform(v => v || undefined),
-  categoryId: z.string().optional().or(z.literal('')).transform(v => v || undefined),
+  productId: z.string().nullable().optional().or(z.literal('')).transform(v => v || undefined),
+  categoryId: z.string().nullable().optional().or(z.literal('')).transform(v => v || undefined),
   message: z.string().optional(),
 })
 
