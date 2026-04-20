@@ -60,6 +60,21 @@ export type Product = Prisma.ProductModel
  */
 export type Lead = Prisma.LeadModel
 /**
+ * Model LeadSale
+ * 
+ */
+export type LeadSale = Prisma.LeadSaleModel
+/**
+ * Model LeadSaleItem
+ * 
+ */
+export type LeadSaleItem = Prisma.LeadSaleItemModel
+/**
+ * Model LeadItem
+ * 
+ */
+export type LeadItem = Prisma.LeadItemModel
+/**
  * Model MessageTemplate
  * 
  */

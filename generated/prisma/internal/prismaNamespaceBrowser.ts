@@ -55,6 +55,9 @@ export const ModelName = {
   ProductCategory: 'ProductCategory',
   Product: 'Product',
   Lead: 'Lead',
+  LeadSale: 'LeadSale',
+  LeadSaleItem: 'LeadSaleItem',
+  LeadItem: 'LeadItem',
   MessageTemplate: 'MessageTemplate',
   Broadcast: 'Broadcast',
   BroadcastLead: 'BroadcastLead',
@@ -148,6 +151,37 @@ export const LeadScalarFieldEnum = {
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
+
+
+export const LeadSaleScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type LeadSaleScalarFieldEnum = (typeof LeadSaleScalarFieldEnum)[keyof typeof LeadSaleScalarFieldEnum]
+
+
+export const LeadSaleItemScalarFieldEnum = {
+  id: 'id',
+  saleId: 'saleId',
+  productId: 'productId',
+  quantity: 'quantity',
+  price: 'price'
+} as const
+
+export type LeadSaleItemScalarFieldEnum = (typeof LeadSaleItemScalarFieldEnum)[keyof typeof LeadSaleItemScalarFieldEnum]
+
+
+export const LeadItemScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  productId: 'productId',
+  quantity: 'quantity'
+} as const
+
+export type LeadItemScalarFieldEnum = (typeof LeadItemScalarFieldEnum)[keyof typeof LeadItemScalarFieldEnum]
 
 
 export const MessageTemplateScalarFieldEnum = {

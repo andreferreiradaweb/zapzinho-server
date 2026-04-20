@@ -388,6 +388,9 @@ export const ModelName = {
   ProductCategory: 'ProductCategory',
   Product: 'Product',
   Lead: 'Lead',
+  LeadSale: 'LeadSale',
+  LeadSaleItem: 'LeadSaleItem',
+  LeadItem: 'LeadItem',
   MessageTemplate: 'MessageTemplate',
   Broadcast: 'Broadcast',
   BroadcastLead: 'BroadcastLead',
@@ -414,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "productCategory" | "product" | "lead" | "messageTemplate" | "broadcast" | "broadcastLead" | "automation" | "broadcastBlock" | "messageLog" | "customer" | "address" | "order" | "orderItem" | "payment"
+    modelProps: "user" | "productCategory" | "product" | "lead" | "leadSale" | "leadSaleItem" | "leadItem" | "messageTemplate" | "broadcast" | "broadcastLead" | "automation" | "broadcastBlock" | "messageLog" | "customer" | "address" | "order" | "orderItem" | "payment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -711,6 +714,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.LeadCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.LeadCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadSale: {
+      payload: Prisma.$LeadSalePayload<ExtArgs>
+      fields: Prisma.LeadSaleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadSaleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSalePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadSaleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSalePayload>
+        }
+        findFirst: {
+          args: Prisma.LeadSaleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSalePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadSaleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSalePayload>
+        }
+        findMany: {
+          args: Prisma.LeadSaleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSalePayload>[]
+        }
+        create: {
+          args: Prisma.LeadSaleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSalePayload>
+        }
+        createMany: {
+          args: Prisma.LeadSaleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadSaleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSalePayload>[]
+        }
+        delete: {
+          args: Prisma.LeadSaleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSalePayload>
+        }
+        update: {
+          args: Prisma.LeadSaleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSalePayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadSaleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadSaleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadSaleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSalePayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadSaleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSalePayload>
+        }
+        aggregate: {
+          args: Prisma.LeadSaleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadSale>
+        }
+        groupBy: {
+          args: Prisma.LeadSaleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadSaleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadSaleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadSaleCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadSaleItem: {
+      payload: Prisma.$LeadSaleItemPayload<ExtArgs>
+      fields: Prisma.LeadSaleItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadSaleItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSaleItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadSaleItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSaleItemPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadSaleItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSaleItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadSaleItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSaleItemPayload>
+        }
+        findMany: {
+          args: Prisma.LeadSaleItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSaleItemPayload>[]
+        }
+        create: {
+          args: Prisma.LeadSaleItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSaleItemPayload>
+        }
+        createMany: {
+          args: Prisma.LeadSaleItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadSaleItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSaleItemPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadSaleItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSaleItemPayload>
+        }
+        update: {
+          args: Prisma.LeadSaleItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSaleItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadSaleItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadSaleItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadSaleItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSaleItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadSaleItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSaleItemPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadSaleItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadSaleItem>
+        }
+        groupBy: {
+          args: Prisma.LeadSaleItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadSaleItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadSaleItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadSaleItemCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadItem: {
+      payload: Prisma.$LeadItemPayload<ExtArgs>
+      fields: Prisma.LeadItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadItemPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadItemPayload>
+        }
+        findMany: {
+          args: Prisma.LeadItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadItemPayload>[]
+        }
+        create: {
+          args: Prisma.LeadItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadItemPayload>
+        }
+        createMany: {
+          args: Prisma.LeadItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadItemPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadItemPayload>
+        }
+        update: {
+          args: Prisma.LeadItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadItemPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadItem>
+        }
+        groupBy: {
+          args: Prisma.LeadItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadItemCountAggregateOutputType> | number
         }
       }
     }
@@ -1633,6 +1858,37 @@ export const LeadScalarFieldEnum = {
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
 
 
+export const LeadSaleScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type LeadSaleScalarFieldEnum = (typeof LeadSaleScalarFieldEnum)[keyof typeof LeadSaleScalarFieldEnum]
+
+
+export const LeadSaleItemScalarFieldEnum = {
+  id: 'id',
+  saleId: 'saleId',
+  productId: 'productId',
+  quantity: 'quantity',
+  price: 'price'
+} as const
+
+export type LeadSaleItemScalarFieldEnum = (typeof LeadSaleItemScalarFieldEnum)[keyof typeof LeadSaleItemScalarFieldEnum]
+
+
+export const LeadItemScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  productId: 'productId',
+  quantity: 'quantity'
+} as const
+
+export type LeadItemScalarFieldEnum = (typeof LeadItemScalarFieldEnum)[keyof typeof LeadItemScalarFieldEnum]
+
+
 export const MessageTemplateScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -1894,20 +2150,6 @@ export type ListEnumLeadStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
- * Reference to a field of type 'BroadcastStatus'
- */
-export type EnumBroadcastStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BroadcastStatus'>
-    
-
-
-/**
- * Reference to a field of type 'BroadcastStatus[]'
- */
-export type ListEnumBroadcastStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BroadcastStatus[]'>
-    
-
-
-/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -1918,6 +2160,34 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BroadcastStatus'
+ */
+export type EnumBroadcastStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BroadcastStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'BroadcastStatus[]'
+ */
+export type ListEnumBroadcastStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BroadcastStatus[]'>
     
 
 
@@ -1960,20 +2230,6 @@ export type EnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
  * Reference to a field of type 'OrderStatus[]'
  */
 export type ListEnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'Float'
- */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-/**
- * Reference to a field of type 'Float[]'
- */
-export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -2103,6 +2359,9 @@ export type GlobalOmitConfig = {
   productCategory?: Prisma.ProductCategoryOmit
   product?: Prisma.ProductOmit
   lead?: Prisma.LeadOmit
+  leadSale?: Prisma.LeadSaleOmit
+  leadSaleItem?: Prisma.LeadSaleItemOmit
+  leadItem?: Prisma.LeadItemOmit
   messageTemplate?: Prisma.MessageTemplateOmit
   broadcast?: Prisma.BroadcastOmit
   broadcastLead?: Prisma.BroadcastLeadOmit

@@ -670,14 +670,6 @@ export type EnumBroadcastStatusFieldUpdateOperationsInput = {
   set?: $Enums.BroadcastStatus
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type BroadcastCreateNestedOneWithoutBroadcastLeadsInput = {
   create?: Prisma.XOR<Prisma.BroadcastCreateWithoutBroadcastLeadsInput, Prisma.BroadcastUncheckedCreateWithoutBroadcastLeadsInput>
   connectOrCreate?: Prisma.BroadcastCreateOrConnectWithoutBroadcastLeadsInput
