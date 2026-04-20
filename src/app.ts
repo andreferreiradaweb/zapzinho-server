@@ -1,6 +1,7 @@
 import fastify from 'fastify'
 import fastifyJwt from '@fastify/jwt'
 import fastifyCors from '@fastify/cors'
+import multipart from '@fastify/multipart'
 import { ZodError } from 'zod'
 import { env } from './config/validatedEnv'
 import { usersRoutes } from './http/controllers/user/routes'
@@ -14,8 +15,13 @@ import { productCategoryRoutes } from './http/controllers/product-category/route
 import { automationRoutes } from './http/controllers/automation/routes'
 import { dashboardRoutes } from './http/controllers/dashboard/routes'
 import { leadSaleRoutes } from './http/controllers/lead-sale/routes'
+import { uploadRoutes } from './http/controllers/upload/routes'
 
 export const app = fastify()
+
+app.register(multipart, {
+  limits: { fileSize: 20 * 1024 * 1024 }, // 20 MB limite bruto no multipart
+})
 
 app.register(fastifyCors, {
   origin: true,
@@ -41,6 +47,7 @@ app.register(productCategoryRoutes)
 app.register(automationRoutes)
 app.register(dashboardRoutes)
 app.register(leadSaleRoutes)
+app.register(uploadRoutes)
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {

@@ -16,6 +16,9 @@ const envSchema = z.object({
   WAPI_WEBHOOK_SECRET: z.string().default(''),
   GEMINI_API_KEY: z.string().default(''),
   RESEND_API_KEY: z.string(),
+  CLOUDINARY_CLOUD_NAME: z.string().default(''),
+  CLOUDINARY_API_KEY: z.string().default(''),
+  CLOUDINARY_API_SECRET: z.string().default(''),
 })
 
 const _env = envSchema.safeParse(process.env)
