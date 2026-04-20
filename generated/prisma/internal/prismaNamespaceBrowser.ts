@@ -142,6 +142,7 @@ export const LeadScalarFieldEnum = {
   userId: 'userId',
   Status: 'Status',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   lastBroadcastAt: 'lastBroadcastAt',
   lastClientMessageAt: 'lastClientMessageAt'
 } as const
