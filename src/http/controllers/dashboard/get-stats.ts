@@ -72,7 +72,12 @@ export async function GetDashboardStatsController(
     }),
     prisma.lead.findMany({
       where: { ...where, Status: LeadStatus.VENDIDO },
-      select: { createdAt: true, updatedAt: true },
+      select: {
+        createdAt: true,
+        updatedAt: true,
+        quantity: true,
+        Product: { select: { price: true } },
+      },
     }),
     prisma.lead.findMany({
       where: { userId },
@@ -83,6 +88,7 @@ export async function GetDashboardStatsController(
         nome: true,
         telefone: true,
         Status: true,
+        quantity: true,
         createdAt: true,
         Category: { select: { name: true } },
         Product: { select: { title: true } },
@@ -123,12 +129,18 @@ export async function GetDashboardStatsController(
         )
       : null
 
+  const totalRevenue = vendidoLeads.reduce((acc, l) => {
+    const price = parseFloat(l.Product?.price?.replace(',', '.') ?? '0') || 0
+    return acc + price * (l.quantity ?? 1)
+  }, 0)
+
   return reply.status(200).send({
     totalLeads,
     totalVendidos,
     conversionRate,
     leadsWithoutProduct,
     avgConversionDays,
+    totalRevenue,
     recentLeads,
     leadsByStatus: leadsByStatus.map((s) => ({
       status: s.Status,

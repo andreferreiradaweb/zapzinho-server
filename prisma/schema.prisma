@@ -85,6 +85,7 @@ model Lead {
   User            User            @relation(fields: [userId], references: [id])
   userId          String
   Status          LeadStatus
+  quantity        Int             @default(1)
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
   lastBroadcastAt     DateTime?

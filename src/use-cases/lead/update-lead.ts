@@ -9,11 +9,12 @@ interface UpdateLeadUseCaseRequest {
   Status: LeadStatus
   userId: string
   nome?: string
-  email?: string
+  email?: string | null
   telefone?: string
   productId?: string
   categoryId?: string
   message?: string
+  quantity?: number
 }
 
 interface UpdateLeadUseCaseResponse {
@@ -36,6 +37,7 @@ export class UpdateLeadUseCase {
     categoryId,
     Status,
     message,
+    quantity,
   }: UpdateLeadUseCaseRequest): Promise<UpdateLeadUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
 
@@ -63,6 +65,7 @@ export class UpdateLeadUseCase {
       Status,
       createdAt: new Date(),
       message,
+      quantity,
     })
 
     return { lead: updatedLead }
