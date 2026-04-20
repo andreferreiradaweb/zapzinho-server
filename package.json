@@ -27,6 +27,7 @@
   "devDependencies": {
     "@rocketseat/eslint-config": "2.1.0",
     "@types/bcrypt": "5.0.2",
+    "@types/busboy": "^1.5.4",
     "@types/jsonwebtoken": "9.0.5",
     "@types/node": "^20.19.0",
     "@types/pg": "^8.16.0",
@@ -44,11 +45,13 @@
   "dependencies": {
     "@fastify/cors": "8.4.2",
     "@fastify/jwt": "7.2.4",
+    "@fastify/multipart": "^8.3.1",
     "@google/generative-ai": "^0.24.1",
     "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "^7.2.0",
     "@types/node-cron": "^3.0.11",
     "bcrypt": "^5.1.1",
+    "cloudinary": "^2.9.0",
     "dotenv": "^17.4.2",
     "fastify": "4.24.3",
     "jsonwebtoken": "9.0.2",
