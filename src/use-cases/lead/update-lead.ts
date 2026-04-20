@@ -1,5 +1,5 @@
 import { Lead, LeadStatus } from '@/lib/prisma'
-import { LeadRepository } from '@/repositories/lead'
+import { LeadRepository, LeadItemInput } from '@/repositories/lead'
 import { ResourceNotFound } from '../../error/resource-not-found'
 import { InvalidCredentialsError } from '@/error/invalid-credentials-error'
 import { UserRepository } from '@/repositories/user'
@@ -14,7 +14,7 @@ interface UpdateLeadUseCaseRequest {
   productId?: string
   categoryId?: string
   message?: string
-  quantity?: number
+  items?: LeadItemInput[]
 }
 
 interface UpdateLeadUseCaseResponse {
@@ -37,7 +37,7 @@ export class UpdateLeadUseCase {
     categoryId,
     Status,
     message,
-    quantity,
+    items,
   }: UpdateLeadUseCaseRequest): Promise<UpdateLeadUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
 
@@ -55,18 +55,23 @@ export class UpdateLeadUseCase {
       throw new InvalidCredentialsError()
     }
 
+    const primaryProductId = items && items.length > 0 ? items[0].productId : productId
+
     const updatedLead = await this.leadRepository.update({
       id,
       nome,
       email,
       telefone,
-      productId,
+      productId: primaryProductId,
       categoryId,
       Status,
       createdAt: new Date(),
       message,
-      quantity,
     })
+
+    if (items !== undefined) {
+      await this.leadRepository.setItems(id, items)
+    }
 
     return { lead: updatedLead }
   }

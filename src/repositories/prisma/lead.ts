@@ -1,5 +1,5 @@
 import { Prisma, LeadStatus, Product, Lead } from '@/lib/prisma'
-import { LeadRepository } from '../lead'
+import { LeadRepository, LeadItemInput } from '../lead'
 import { prisma } from '@/lib/prisma'
 
 /**
@@ -114,6 +114,7 @@ export class PrismaLeadRepository implements LeadRepository {
       include: {
         Product: { include: { Category: true } },
         Category: true,
+        LeadItems: { include: { Product: true } },
         BroadcastLeads: {
           where: { status: 'SENT' },
           orderBy: { sentAt: 'desc' },
@@ -177,6 +178,22 @@ export class PrismaLeadRepository implements LeadRepository {
       },
       data,
     })
+  }
+
+  async setItems(leadId: string, items: LeadItemInput[]): Promise<void> {
+    await prisma.$transaction([
+      prisma.leadItem.deleteMany({ where: { leadId } }),
+      ...(items.length > 0
+        ? [prisma.leadItem.createMany({
+            data: items.map((item) => ({
+              id: require('crypto').randomUUID(),
+              leadId,
+              productId: item.productId,
+              quantity: item.quantity,
+            })),
+          })]
+        : []),
+    ])
   }
 
   async findAllForBroadcast(userId: string, productId?: string, status?: LeadStatus, lastMessageRange?: string, lastBroadcastRange?: string, categoryId?: string) {

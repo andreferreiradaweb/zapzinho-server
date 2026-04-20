@@ -1,5 +1,5 @@
 import { Lead, LeadStatus } from '@/lib/prisma'
-import { LeadRepository } from '@/repositories/lead'
+import { LeadRepository, LeadItemInput } from '@/repositories/lead'
 import { ResourceNotFound } from '../../error/resource-not-found'
 import { UserRepository } from '@/repositories/user'
 import { UserAlreadyExistsError } from '@/error/user-already-exists-error'
@@ -13,8 +13,9 @@ interface CreateLeadUseCaseRequest {
   userId: string
   id?: string
   createdAt?: Date
-  productId: string
+  productId?: string
   categoryId?: string
+  items?: LeadItemInput[]
 }
 
 interface CreateLeadUseCaseResponse {
@@ -38,6 +39,7 @@ export class CreateLeadUseCase {
     createdAt,
     productId,
     categoryId,
+    items,
   }: CreateLeadUseCaseRequest): Promise<CreateLeadUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
     if (!findedUser) {
@@ -50,6 +52,8 @@ export class CreateLeadUseCase {
       throw new UserAlreadyExistsError()
     }
 
+    const primaryProductId = items && items.length > 0 ? items[0].productId : productId
+
     const lead = await this.leadRepository.create({
       nome,
       email,
@@ -59,9 +63,13 @@ export class CreateLeadUseCase {
       userId: findedUser.id,
       id,
       createdAt,
-      productId,
+      productId: primaryProductId,
       categoryId,
     })
+
+    if (items && items.length > 0) {
+      await this.leadRepository.setItems(lead.id, items)
+    }
 
     return { lead }
   }
