@@ -19,9 +19,10 @@ export async function SelfUpdateUserController(
       .optional(),
     prospectingInstanceId: z.string().nullish(),
     prospectingToken: z.string().nullish(),
+    name: z.string().nullish(),
   })
   const { sub } = request.user
-  const { password, phoneNumber, newPassword, prospectingInstanceId, prospectingToken } =
+  const { password, phoneNumber, newPassword, prospectingInstanceId, prospectingToken, name } =
     updateBodySchema.parse(request.body)
 
   try {
@@ -34,6 +35,7 @@ export async function SelfUpdateUserController(
       password,
       phoneNumber,
       newPassword,
+      name: name ?? undefined,
       prospectingInstanceId: isAdmin ? prospectingInstanceId : undefined,
       prospectingToken: isAdmin ? prospectingToken : undefined,
     })

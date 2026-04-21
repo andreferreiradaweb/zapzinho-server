@@ -9,6 +9,7 @@ interface SelfUpdateUserUseCaseRequest {
   phoneNumber?: string
   password?: string
   newPassword?: string
+  name?: string
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
 }
@@ -25,6 +26,7 @@ export class SelfUpdateUserUseCase {
     newPassword,
     id,
     phoneNumber,
+    name,
     prospectingInstanceId,
     prospectingToken,
   }: SelfUpdateUserUseCaseRequest): Promise<SelfUpdateUserUseCaseResponse> {
@@ -60,6 +62,7 @@ export class SelfUpdateUserUseCase {
       await this.userRepository.update({
         id,
         phoneNumber,
+        name: name !== undefined ? name : findedUser.name,
         email: findedUser.email,
         Role: findedUser.Role,
         passwordHash: hashedPassword,
