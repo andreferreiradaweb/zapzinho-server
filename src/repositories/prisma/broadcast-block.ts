@@ -5,7 +5,6 @@ export class PrismaBroadcastBlockRepository implements BroadcastBlockRepository 
   async findByUserId(userId: string, offset: number, limit: number) {
     return prisma.broadcastBlock.findMany({
       where: { userId },
-      include: { Lead: true },
       orderBy: { createdAt: 'desc' },
       skip: offset,
       take: limit,
@@ -16,23 +15,23 @@ export class PrismaBroadcastBlockRepository implements BroadcastBlockRepository 
     return prisma.broadcastBlock.count({ where: { userId } })
   }
 
-  async add(userId: string, leadId: string) {
+  async add(userId: string, phone: string) {
     return prisma.broadcastBlock.upsert({
-      where: { userId_leadId: { userId, leadId } },
-      create: { userId, leadId },
+      where: { userId_phone: { userId, phone } },
+      create: { userId, phone },
       update: {},
     })
   }
 
-  async remove(userId: string, leadId: string) {
-    await prisma.broadcastBlock.deleteMany({ where: { userId, leadId } })
+  async remove(userId: string, id: string) {
+    await prisma.broadcastBlock.deleteMany({ where: { userId, id } })
   }
 
-  async findBlockedLeadIds(userId: string) {
+  async findBlockedPhones(userId: string) {
     const blocks = await prisma.broadcastBlock.findMany({
       where: { userId },
-      select: { leadId: true },
+      select: { phone: true },
     })
-    return blocks.map((b) => b.leadId)
+    return blocks.map((b) => b.phone)
   }
 }

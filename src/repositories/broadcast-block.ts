@@ -1,11 +1,9 @@
-import { BroadcastBlock, Lead } from '@/lib/prisma'
-
-export type BroadcastBlockWithLead = BroadcastBlock & { Lead: Lead }
+import { BroadcastBlock } from '@/lib/prisma'
 
 export interface BroadcastBlockRepository {
-  findByUserId(userId: string, offset: number, limit: number): Promise<BroadcastBlockWithLead[]>
+  findByUserId(userId: string, offset: number, limit: number): Promise<BroadcastBlock[]>
   countByUserId(userId: string): Promise<number>
-  add(userId: string, leadId: string): Promise<BroadcastBlock>
-  remove(userId: string, leadId: string): Promise<void>
-  findBlockedLeadIds(userId: string): Promise<string[]>
+  add(userId: string, phone: string): Promise<BroadcastBlock>
+  remove(userId: string, id: string): Promise<void>
+  findBlockedPhones(userId: string): Promise<string[]>
 }

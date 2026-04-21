@@ -106,7 +106,6 @@ model Lead {
   lastClientMessageAt DateTime?
   BroadcastLeads  BroadcastLead[]
   MessageLogs     MessageLog[]
-  BroadcastBlocks BroadcastBlock[]
   LeadItems       LeadItem[]
   LeadSales       LeadSale[]
 
@@ -232,12 +231,11 @@ model Automation {
 model BroadcastBlock {
   id        String   @id @default(uuid())
   userId    String
-  leadId    String
+  phone     String
   createdAt DateTime @default(now())
   User      User     @relation(fields: [userId], references: [id])
-  Lead      Lead     @relation(fields: [leadId], references: [id])
 
-  @@unique([userId, leadId])
+  @@unique([userId, phone])
 }
 
 // Full log of every WhatsApp message dispatched by the system

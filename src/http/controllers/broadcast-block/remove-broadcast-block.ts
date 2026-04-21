@@ -6,13 +6,13 @@ export async function removeBroadcastBlockController(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const { leadId } = z
-    .object({ leadId: z.string().uuid() })
+  const { id } = z
+    .object({ id: z.string().uuid() })
     .parse(request.params)
 
   const { sub: userId } = request.user
 
-  await makeRemoveBroadcastBlock().execute(userId, leadId)
+  await makeRemoveBroadcastBlock().execute(userId, id)
 
   return reply.status(204).send()
 }

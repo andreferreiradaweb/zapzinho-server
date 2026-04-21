@@ -38,14 +38,14 @@ export class SendBroadcastUseCase {
     })
     if (!full) return
 
-    const blockedIds = new Set(await this.blockRepository.findBlockedLeadIds(userId))
+    const blockedPhones = new Set(await this.blockRepository.findBlockedPhones(userId))
 
     console.log(`[Broadcast] Iniciando envio: id=${full.id} | destinatários=${full.BroadcastLeads.length}`)
 
     for (const bl of full.BroadcastLeads) {
       if (bl.status === 'SENT') continue
-      if (blockedIds.has(bl.leadId)) {
-        console.log(`[Broadcast] Lead bloqueado, pulando: ${bl.Lead.nome}`)
+      if (blockedPhones.has(bl.Lead.telefone)) {
+        console.log(`[Broadcast] Número bloqueado, pulando: ${bl.Lead.nome}`)
         continue
       }
 
