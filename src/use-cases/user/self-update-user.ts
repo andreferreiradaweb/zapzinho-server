@@ -9,6 +9,8 @@ interface SelfUpdateUserUseCaseRequest {
   phoneNumber?: string
   password?: string
   newPassword?: string
+  prospectingInstanceId?: string | null
+  prospectingToken?: string | null
 }
 
 interface SelfUpdateUserUseCaseResponse {
@@ -23,6 +25,8 @@ export class SelfUpdateUserUseCase {
     newPassword,
     id,
     phoneNumber,
+    prospectingInstanceId,
+    prospectingToken,
   }: SelfUpdateUserUseCaseRequest): Promise<SelfUpdateUserUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(id)
 
@@ -62,6 +66,14 @@ export class SelfUpdateUserUseCase {
         isActive: findedUser.isActive,
         CustomerType: findedUser.CustomerType,
         wapiInstanceId: findedUser.wapiInstanceId,
+        prospectingInstanceId:
+          prospectingInstanceId !== undefined
+            ? prospectingInstanceId
+            : findedUser.prospectingInstanceId,
+        prospectingToken:
+          prospectingToken !== undefined
+            ? prospectingToken
+            : findedUser.prospectingToken,
       })
 
     const newUser = {
