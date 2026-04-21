@@ -12,6 +12,7 @@ const envSchema = z.object({
   WAPI_BASE_URL: z.string().default('https://api.w-api.app/v1'),
   WAPI_TOKEN: z.string().default(''),
   WAPI_INSTANCE_ID: z.string().default(''),
+  WAPI_DELAY_MS: z.coerce.number().default(1500),
   WAPI_DELAY_MIN_MS: z.coerce.number().default(5000),
   WAPI_DELAY_MAX_MS: z.coerce.number().default(12000),
   WAPI_WEBHOOK_SECRET: z.string().default(''),
