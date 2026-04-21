@@ -161,6 +161,7 @@ export class PrismaLeadRepository implements LeadRepository {
   }
 
   async delete(id: string) {
+    await prisma.broadcastBlock.deleteMany({ where: { leadId: id } })
     await prisma.broadcastLead.deleteMany({ where: { leadId: id } })
     await prisma.messageLog.updateMany({ where: { leadId: id }, data: { leadId: null } })
     return prisma.lead.delete({ where: { id } })
