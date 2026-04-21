@@ -109,6 +109,8 @@ model Lead {
   BroadcastBlocks BroadcastBlock[]
   LeadItems       LeadItem[]
   LeadSales       LeadSale[]
+
+  @@unique([userId, telefone])
 }
 
 model LeadSale {

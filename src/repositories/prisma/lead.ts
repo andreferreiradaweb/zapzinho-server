@@ -167,6 +167,33 @@ export class PrismaLeadRepository implements LeadRepository {
     return prisma.lead.delete({ where: { id } })
   }
 
+  async upsertByPhone({ userId, phone, name, message }: { userId: string; phone: string; name: string; message: string }): Promise<{ lead: Lead; created: boolean }> {
+    const existing = await prisma.lead.findFirst({
+      where: { userId, telefone: phone },
+    })
+    if (existing) {
+      const lead = await prisma.lead.update({
+        where: { id: existing.id },
+        data: { lastClientMessageAt: new Date() },
+      })
+      return { lead, created: false }
+    }
+    const lead = await prisma.lead.create({
+      data: {
+        id: require('crypto').randomUUID(),
+        userId,
+        nome: name,
+        telefone: phone,
+        email: null,
+        message,
+        Status: 'NOVO_INTERESSE',
+        productId: null,
+        lastClientMessageAt: new Date(),
+      },
+    })
+    return { lead, created: true }
+  }
+
   async create(data: Prisma.LeadUncheckedCreateInput) {
     return prisma.lead.create({
       data,

@@ -2,6 +2,7 @@ import { Lead } from '@/lib/prisma'
 import { UserRepository } from '@/repositories/user'
 import { LeadRepository } from '@/repositories/lead'
 import { ResourceNotFound } from '@/error/resource-not-found'
+import { Prisma } from '@/lib/prisma'
 import { v4 as uuid } from 'uuid'
 
 interface HandleIncomingMessageRequest {
@@ -37,27 +38,27 @@ export class HandleIncomingMessageUseCase {
 
     if (!user) throw new ResourceNotFound()
 
-    const existing = await this.leadRepository.findLeadWhereUserByNumber(user.id, phone)
-    if (existing) {
-      const updated = await this.leadRepository.update({
-        id: existing.id,
-        lastClientMessageAt: new Date(),
+    try {
+      const { lead, created } = await this.leadRepository.upsertByPhone({
+        userId: user.id,
+        phone,
+        name: name || phone,
+        message,
       })
-      return { lead: updated, created: false }
+      return { lead, created }
+    } catch (err) {
+      // Fallback for unique constraint race: find the already-created lead
+      if (err instanceof Prisma.PrismaClientKnownRequestError && (err as Prisma.PrismaClientKnownRequestError).code === 'P2002') {
+        const existing = await this.leadRepository.findLeadWhereUserByNumber(user.id, phone)
+        if (existing) {
+          const updated = await this.leadRepository.update({
+            id: existing.id,
+            lastClientMessageAt: new Date(),
+          })
+          return { lead: updated, created: false }
+        }
+      }
+      throw err
     }
-
-    const lead = await this.leadRepository.create({
-      id: uuid(),
-      userId: user.id,
-      nome: name || phone,
-      telefone: phone,
-      email: null,
-      message,
-      Status: 'NOVO_INTERESSE',
-      productId: null,
-      lastClientMessageAt: new Date(),
-    })
-
-    return { lead, created: true }
   }
 }
