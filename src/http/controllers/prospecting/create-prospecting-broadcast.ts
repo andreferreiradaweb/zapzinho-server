@@ -7,6 +7,7 @@ const bodySchema = z.object({
   name: z.string().min(1),
   warmupMessage: z.string().min(1),
   templateMessage: z.string().min(1),
+  categoryFilter: z.string().optional(),
 })
 
 export async function createProspectingBroadcastController(

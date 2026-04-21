@@ -48,7 +48,9 @@ export class SendProspectingBroadcastUseCase {
     if (!broadcast) return
 
     const contacts = broadcast.ContactList.Contacts.filter(
-      (c) => c.status === 'PENDING' || c.status === 'FAILED',
+      (c) =>
+        (c.status === 'PENDING' || c.status === 'FAILED') &&
+        (!broadcast.categoryFilter || c.category === broadcast.categoryFilter),
     )
 
     console.log(

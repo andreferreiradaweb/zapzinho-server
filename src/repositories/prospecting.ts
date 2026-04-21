@@ -33,6 +33,8 @@ export interface ContactListRepository {
     limit: number,
   ): Promise<ImportedContact[]>
   countContacts(contactListId: string): Promise<number>
+  countContactsByCategory(contactListId: string, category: string): Promise<number>
+  getDistinctCategories(contactListId: string): Promise<string[]>
 }
 
 export interface ProspectingBroadcastRepository {

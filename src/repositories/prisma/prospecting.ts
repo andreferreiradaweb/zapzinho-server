@@ -86,6 +86,20 @@ export class PrismaContactListRepository implements ContactListRepository {
   async countContacts(contactListId: string) {
     return prisma.importedContact.count({ where: { contactListId } })
   }
+
+  async countContactsByCategory(contactListId: string, category: string) {
+    return prisma.importedContact.count({ where: { contactListId, category } })
+  }
+
+  async getDistinctCategories(contactListId: string) {
+    const rows = await prisma.importedContact.findMany({
+      where: { contactListId, category: { not: null } },
+      select: { category: true },
+      distinct: ['category'],
+      orderBy: { category: 'asc' },
+    })
+    return rows.map((r) => r.category as string)
+  }
 }
 
 export class PrismaProspectingBroadcastRepository

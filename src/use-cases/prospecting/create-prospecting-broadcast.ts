@@ -13,6 +13,7 @@ interface CreateProspectingBroadcastRequest {
   name: string
   warmupMessage: string
   templateMessage: string
+  categoryFilter?: string
 }
 
 interface CreateProspectingBroadcastResponse {
@@ -40,10 +41,13 @@ export class CreateProspectingBroadcastUseCase {
       name: data.name,
       warmupMessage: data.warmupMessage,
       templateMessage: data.templateMessage,
+      categoryFilter: data.categoryFilter ?? null,
       status: 'DRAFT',
     })
 
-    const recipientCount = await this.contactListRepository.countContacts(data.contactListId)
+    const recipientCount = data.categoryFilter
+      ? await this.contactListRepository.countContactsByCategory(data.contactListId, data.categoryFilter)
+      : await this.contactListRepository.countContacts(data.contactListId)
 
     return { broadcast, recipientCount }
   }
