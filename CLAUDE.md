@@ -24,7 +24,8 @@ Controller → Factory → UseCase → Repository (interface) → PrismaReposito
 
 ## Key Rules for Claude
 
-1. **Always use Zod** to validate request body/params before calling use-cases.
+1. **Check library compatibility** — before installing or upgrading any package, verify it is compatible with the current Fastify version (4.x). Example: `@fastify/rate-limit@^9` for Fastify 4, `@fastify/rate-limit@^10` for Fastify 5. Same applies to all `@fastify/*` plugins.
+2. **Always use Zod** to validate request body/params before calling use-cases.
 2. **Typed errors only** — throw from `src/error/` (e.g. `ResourceNotFound`, `UserAlreadyExistsError`). Never throw raw strings.
 3. **Factory pattern** — every controller must call a `Make*` factory, never instantiate repos directly.
 4. **No business logic in controllers** — controllers only parse, call use-case, return reply.
