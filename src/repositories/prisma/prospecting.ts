@@ -33,7 +33,7 @@ export class PrismaContactListRepository implements ContactListRepository {
 
   async addContacts(
     contactListId: string,
-    contacts: Array<{ name: string; phone: string; email?: string }>,
+    contacts: Array<{ name: string; phone: string; email?: string; website?: string; address?: string; category?: string }>,
   ) {
     await prisma.importedContact.createMany({
       data: contacts.map((c) => ({
@@ -41,6 +41,9 @@ export class PrismaContactListRepository implements ContactListRepository {
         name: c.name,
         phone: c.phone,
         email: c.email ?? null,
+        website: c.website ?? null,
+        address: c.address ?? null,
+        category: c.category ?? null,
       })),
     })
   }

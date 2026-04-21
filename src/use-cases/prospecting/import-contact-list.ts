@@ -5,7 +5,7 @@ import { v4 as uuid } from 'uuid'
 interface ImportContactListRequest {
   userId: string
   name: string
-  contacts: Array<{ name: string; phone: string; email?: string }>
+  contacts: Array<{ name: string; phone: string; email?: string; website?: string; address?: string; category?: string }>
 }
 
 interface ImportContactListResponse {
@@ -33,7 +33,7 @@ export class ImportContactListUseCase {
   }
 
   private deduplicateByPhone(
-    contacts: Array<{ name: string; phone: string; email?: string }>,
+    contacts: Array<{ name: string; phone: string; email?: string; website?: string; address?: string; category?: string }>,
   ) {
     const seen = new Set<string>()
     return contacts.filter((c) => {

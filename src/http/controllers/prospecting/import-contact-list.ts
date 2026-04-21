@@ -6,6 +6,9 @@ const contactSchema = z.object({
   name: z.string().min(1),
   phone: z.string().min(8),
   email: z.string().email().optional(),
+  website: z.string().optional(),
+  address: z.string().optional(),
+  category: z.string().optional(),
 })
 
 const bodySchema = z.object({

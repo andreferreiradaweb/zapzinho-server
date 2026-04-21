@@ -30,6 +30,9 @@ export type ImportedContactMinAggregateOutputType = {
   name: string | null
   phone: string | null
   email: string | null
+  website: string | null
+  address: string | null
+  category: string | null
   status: $Enums.ImportedContactStatus | null
   warmupSentAt: Date | null
   repliedAt: Date | null
@@ -45,6 +48,9 @@ export type ImportedContactMaxAggregateOutputType = {
   name: string | null
   phone: string | null
   email: string | null
+  website: string | null
+  address: string | null
+  category: string | null
   status: $Enums.ImportedContactStatus | null
   warmupSentAt: Date | null
   repliedAt: Date | null
@@ -60,6 +66,9 @@ export type ImportedContactCountAggregateOutputType = {
   name: number
   phone: number
   email: number
+  website: number
+  address: number
+  category: number
   status: number
   warmupSentAt: number
   repliedAt: number
@@ -77,6 +86,9 @@ export type ImportedContactMinAggregateInputType = {
   name?: true
   phone?: true
   email?: true
+  website?: true
+  address?: true
+  category?: true
   status?: true
   warmupSentAt?: true
   repliedAt?: true
@@ -92,6 +104,9 @@ export type ImportedContactMaxAggregateInputType = {
   name?: true
   phone?: true
   email?: true
+  website?: true
+  address?: true
+  category?: true
   status?: true
   warmupSentAt?: true
   repliedAt?: true
@@ -107,6 +122,9 @@ export type ImportedContactCountAggregateInputType = {
   name?: true
   phone?: true
   email?: true
+  website?: true
+  address?: true
+  category?: true
   status?: true
   warmupSentAt?: true
   repliedAt?: true
@@ -195,6 +213,9 @@ export type ImportedContactGroupByOutputType = {
   name: string
   phone: string
   email: string | null
+  website: string | null
+  address: string | null
+  category: string | null
   status: $Enums.ImportedContactStatus
   warmupSentAt: Date | null
   repliedAt: Date | null
@@ -231,6 +252,9 @@ export type ImportedContactWhereInput = {
   name?: Prisma.StringFilter<"ImportedContact"> | string
   phone?: Prisma.StringFilter<"ImportedContact"> | string
   email?: Prisma.StringNullableFilter<"ImportedContact"> | string | null
+  website?: Prisma.StringNullableFilter<"ImportedContact"> | string | null
+  address?: Prisma.StringNullableFilter<"ImportedContact"> | string | null
+  category?: Prisma.StringNullableFilter<"ImportedContact"> | string | null
   status?: Prisma.EnumImportedContactStatusFilter<"ImportedContact"> | $Enums.ImportedContactStatus
   warmupSentAt?: Prisma.DateTimeNullableFilter<"ImportedContact"> | Date | string | null
   repliedAt?: Prisma.DateTimeNullableFilter<"ImportedContact"> | Date | string | null
@@ -247,6 +271,9 @@ export type ImportedContactOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
+  website?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   warmupSentAt?: Prisma.SortOrderInput | Prisma.SortOrder
   repliedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -266,6 +293,9 @@ export type ImportedContactWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"ImportedContact"> | string
   phone?: Prisma.StringFilter<"ImportedContact"> | string
   email?: Prisma.StringNullableFilter<"ImportedContact"> | string | null
+  website?: Prisma.StringNullableFilter<"ImportedContact"> | string | null
+  address?: Prisma.StringNullableFilter<"ImportedContact"> | string | null
+  category?: Prisma.StringNullableFilter<"ImportedContact"> | string | null
   status?: Prisma.EnumImportedContactStatusFilter<"ImportedContact"> | $Enums.ImportedContactStatus
   warmupSentAt?: Prisma.DateTimeNullableFilter<"ImportedContact"> | Date | string | null
   repliedAt?: Prisma.DateTimeNullableFilter<"ImportedContact"> | Date | string | null
@@ -282,6 +312,9 @@ export type ImportedContactOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
+  website?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   warmupSentAt?: Prisma.SortOrderInput | Prisma.SortOrder
   repliedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -303,6 +336,9 @@ export type ImportedContactScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"ImportedContact"> | string
   phone?: Prisma.StringWithAggregatesFilter<"ImportedContact"> | string
   email?: Prisma.StringNullableWithAggregatesFilter<"ImportedContact"> | string | null
+  website?: Prisma.StringNullableWithAggregatesFilter<"ImportedContact"> | string | null
+  address?: Prisma.StringNullableWithAggregatesFilter<"ImportedContact"> | string | null
+  category?: Prisma.StringNullableWithAggregatesFilter<"ImportedContact"> | string | null
   status?: Prisma.EnumImportedContactStatusWithAggregatesFilter<"ImportedContact"> | $Enums.ImportedContactStatus
   warmupSentAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ImportedContact"> | Date | string | null
   repliedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ImportedContact"> | Date | string | null
@@ -317,6 +353,9 @@ export type ImportedContactCreateInput = {
   name: string
   phone: string
   email?: string | null
+  website?: string | null
+  address?: string | null
+  category?: string | null
   status?: $Enums.ImportedContactStatus
   warmupSentAt?: Date | string | null
   repliedAt?: Date | string | null
@@ -333,6 +372,9 @@ export type ImportedContactUncheckedCreateInput = {
   name: string
   phone: string
   email?: string | null
+  website?: string | null
+  address?: string | null
+  category?: string | null
   status?: $Enums.ImportedContactStatus
   warmupSentAt?: Date | string | null
   repliedAt?: Date | string | null
@@ -347,6 +389,9 @@ export type ImportedContactUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumImportedContactStatusFieldUpdateOperationsInput | $Enums.ImportedContactStatus
   warmupSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -363,6 +408,9 @@ export type ImportedContactUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumImportedContactStatusFieldUpdateOperationsInput | $Enums.ImportedContactStatus
   warmupSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -378,6 +426,9 @@ export type ImportedContactCreateManyInput = {
   name: string
   phone: string
   email?: string | null
+  website?: string | null
+  address?: string | null
+  category?: string | null
   status?: $Enums.ImportedContactStatus
   warmupSentAt?: Date | string | null
   repliedAt?: Date | string | null
@@ -392,6 +443,9 @@ export type ImportedContactUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumImportedContactStatusFieldUpdateOperationsInput | $Enums.ImportedContactStatus
   warmupSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -407,6 +461,9 @@ export type ImportedContactUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumImportedContactStatusFieldUpdateOperationsInput | $Enums.ImportedContactStatus
   warmupSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -432,6 +489,9 @@ export type ImportedContactCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   status?: Prisma.SortOrder
   warmupSentAt?: Prisma.SortOrder
   repliedAt?: Prisma.SortOrder
@@ -447,6 +507,9 @@ export type ImportedContactMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   status?: Prisma.SortOrder
   warmupSentAt?: Prisma.SortOrder
   repliedAt?: Prisma.SortOrder
@@ -462,6 +525,9 @@ export type ImportedContactMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   status?: Prisma.SortOrder
   warmupSentAt?: Prisma.SortOrder
   repliedAt?: Prisma.SortOrder
@@ -522,6 +588,9 @@ export type ImportedContactCreateWithoutContactListInput = {
   name: string
   phone: string
   email?: string | null
+  website?: string | null
+  address?: string | null
+  category?: string | null
   status?: $Enums.ImportedContactStatus
   warmupSentAt?: Date | string | null
   repliedAt?: Date | string | null
@@ -536,6 +605,9 @@ export type ImportedContactUncheckedCreateWithoutContactListInput = {
   name: string
   phone: string
   email?: string | null
+  website?: string | null
+  address?: string | null
+  category?: string | null
   status?: $Enums.ImportedContactStatus
   warmupSentAt?: Date | string | null
   repliedAt?: Date | string | null
@@ -580,6 +652,9 @@ export type ImportedContactScalarWhereInput = {
   name?: Prisma.StringFilter<"ImportedContact"> | string
   phone?: Prisma.StringFilter<"ImportedContact"> | string
   email?: Prisma.StringNullableFilter<"ImportedContact"> | string | null
+  website?: Prisma.StringNullableFilter<"ImportedContact"> | string | null
+  address?: Prisma.StringNullableFilter<"ImportedContact"> | string | null
+  category?: Prisma.StringNullableFilter<"ImportedContact"> | string | null
   status?: Prisma.EnumImportedContactStatusFilter<"ImportedContact"> | $Enums.ImportedContactStatus
   warmupSentAt?: Prisma.DateTimeNullableFilter<"ImportedContact"> | Date | string | null
   repliedAt?: Prisma.DateTimeNullableFilter<"ImportedContact"> | Date | string | null
@@ -594,6 +669,9 @@ export type ImportedContactCreateManyContactListInput = {
   name: string
   phone: string
   email?: string | null
+  website?: string | null
+  address?: string | null
+  category?: string | null
   status?: $Enums.ImportedContactStatus
   warmupSentAt?: Date | string | null
   repliedAt?: Date | string | null
@@ -608,6 +686,9 @@ export type ImportedContactUpdateWithoutContactListInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumImportedContactStatusFieldUpdateOperationsInput | $Enums.ImportedContactStatus
   warmupSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -622,6 +703,9 @@ export type ImportedContactUncheckedUpdateWithoutContactListInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumImportedContactStatusFieldUpdateOperationsInput | $Enums.ImportedContactStatus
   warmupSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -636,6 +720,9 @@ export type ImportedContactUncheckedUpdateManyWithoutContactListInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumImportedContactStatusFieldUpdateOperationsInput | $Enums.ImportedContactStatus
   warmupSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -653,6 +740,9 @@ export type ImportedContactSelect<ExtArgs extends runtime.Types.Extensions.Inter
   name?: boolean
   phone?: boolean
   email?: boolean
+  website?: boolean
+  address?: boolean
+  category?: boolean
   status?: boolean
   warmupSentAt?: boolean
   repliedAt?: boolean
@@ -669,6 +759,9 @@ export type ImportedContactSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   name?: boolean
   phone?: boolean
   email?: boolean
+  website?: boolean
+  address?: boolean
+  category?: boolean
   status?: boolean
   warmupSentAt?: boolean
   repliedAt?: boolean
@@ -685,6 +778,9 @@ export type ImportedContactSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   name?: boolean
   phone?: boolean
   email?: boolean
+  website?: boolean
+  address?: boolean
+  category?: boolean
   status?: boolean
   warmupSentAt?: boolean
   repliedAt?: boolean
@@ -701,6 +797,9 @@ export type ImportedContactSelectScalar = {
   name?: boolean
   phone?: boolean
   email?: boolean
+  website?: boolean
+  address?: boolean
+  category?: boolean
   status?: boolean
   warmupSentAt?: boolean
   repliedAt?: boolean
@@ -710,7 +809,7 @@ export type ImportedContactSelectScalar = {
   createdAt?: boolean
 }
 
-export type ImportedContactOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "contactListId" | "name" | "phone" | "email" | "status" | "warmupSentAt" | "repliedAt" | "templateSentAt" | "convertedLeadId" | "errorMsg" | "createdAt", ExtArgs["result"]["importedContact"]>
+export type ImportedContactOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "contactListId" | "name" | "phone" | "email" | "website" | "address" | "category" | "status" | "warmupSentAt" | "repliedAt" | "templateSentAt" | "convertedLeadId" | "errorMsg" | "createdAt", ExtArgs["result"]["importedContact"]>
 export type ImportedContactInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ContactList?: boolean | Prisma.ContactListDefaultArgs<ExtArgs>
 }
@@ -732,6 +831,9 @@ export type $ImportedContactPayload<ExtArgs extends runtime.Types.Extensions.Int
     name: string
     phone: string
     email: string | null
+    website: string | null
+    address: string | null
+    category: string | null
     status: $Enums.ImportedContactStatus
     warmupSentAt: Date | null
     repliedAt: Date | null
@@ -1168,6 +1270,9 @@ export interface ImportedContactFieldRefs {
   readonly name: Prisma.FieldRef<"ImportedContact", 'String'>
   readonly phone: Prisma.FieldRef<"ImportedContact", 'String'>
   readonly email: Prisma.FieldRef<"ImportedContact", 'String'>
+  readonly website: Prisma.FieldRef<"ImportedContact", 'String'>
+  readonly address: Prisma.FieldRef<"ImportedContact", 'String'>
+  readonly category: Prisma.FieldRef<"ImportedContact", 'String'>
   readonly status: Prisma.FieldRef<"ImportedContact", 'ImportedContactStatus'>
   readonly warmupSentAt: Prisma.FieldRef<"ImportedContact", 'DateTime'>
   readonly repliedAt: Prisma.FieldRef<"ImportedContact", 'DateTime'>

@@ -18,7 +18,7 @@ export interface ContactListRepository {
   findById(id: string): Promise<(ContactList & { Contacts: ImportedContact[] }) | null>
   addContacts(
     contactListId: string,
-    contacts: Array<{ name: string; phone: string; email?: string }>,
+    contacts: Array<{ name: string; phone: string; email?: string; website?: string; address?: string; category?: string }>,
   ): Promise<void>
   findContactByPhone(userId: string, phone: string): Promise<ImportedContact | null>
   updateContactStatus(
