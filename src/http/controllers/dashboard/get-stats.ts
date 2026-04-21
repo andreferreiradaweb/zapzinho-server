@@ -84,7 +84,7 @@ export async function GetDashboardStatsController(
           ...(categoryId ? { Lead: { categoryId } } : {}),
         },
       },
-      select: { price: true, quantity: true },
+      select: { price: true, quantity: true, Product: { select: { costPrice: true } } },
     }),
     prisma.lead.findMany({
       where: { userId },
@@ -141,6 +141,12 @@ export async function GetDashboardStatsController(
     0,
   )
 
+  const totalProfit = saleItems.reduce((acc, item) => {
+    const cost = item.Product?.costPrice ? parseFloat(item.Product.costPrice) : null
+    if (cost === null || isNaN(cost)) return acc
+    return acc + (item.price - cost) * item.quantity
+  }, 0)
+
   return reply.status(200).send({
     totalLeads,
     totalVendidos,
@@ -148,6 +154,7 @@ export async function GetDashboardStatsController(
     leadsWithoutProduct,
     avgConversionDays,
     totalRevenue,
+    totalProfit,
     recentLeads,
     leadsByStatus: leadsByStatus.map((s) => ({
       status: s.Status,

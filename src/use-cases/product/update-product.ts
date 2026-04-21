@@ -12,6 +12,7 @@ interface UpdateProductUseCaseRequest {
   description?: string
   code?: string
   price?: string
+  costPrice?: string
   condition?: string
   photos: string[]
   userId: string
@@ -34,6 +35,7 @@ export class UpdateProductUseCase {
     description,
     code,
     price,
+    costPrice,
     condition,
     photos,
     userId,
@@ -65,6 +67,7 @@ export class UpdateProductUseCase {
       description,
       code,
       price,
+      costPrice,
       condition,
       photos,
       userId,

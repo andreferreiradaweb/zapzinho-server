@@ -11,6 +11,7 @@ interface CreateProductUseCaseRequest {
   description?: string
   code?: string
   price?: string
+  costPrice?: string
   condition?: string
   photos: string[]
   userId: string
@@ -35,6 +36,7 @@ export class CreateProductUseCase {
     description,
     code,
     price,
+    costPrice,
     condition,
     photos,
     userId,
@@ -56,6 +58,7 @@ export class CreateProductUseCase {
       description,
       code,
       price,
+      costPrice,
       condition,
       photos,
       userId,
