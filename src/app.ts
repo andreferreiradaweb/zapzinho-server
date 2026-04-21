@@ -1,6 +1,7 @@
 import fastify from 'fastify'
 import fastifyJwt from '@fastify/jwt'
 import fastifyCors from '@fastify/cors'
+import fastifyRateLimit from '@fastify/rate-limit'
 import multipart from '@fastify/multipart'
 import { ZodError } from 'zod'
 import { env } from './config/validatedEnv'
@@ -24,9 +25,17 @@ app.register(multipart, {
 })
 
 app.register(fastifyCors, {
-  origin: true,
+  origin:
+    env.NODE_ENV === 'production'
+      ? [env.FRONTEND_URL, /localhost:\d+$/]
+      : true,
   methods: ['GET', 'PUT', 'POST', 'DELETE'],
   credentials: true,
+})
+
+app.register(fastifyRateLimit, {
+  max: 120,
+  timeWindow: '1 minute',
 })
 
 app.register(fastifyJwt, {

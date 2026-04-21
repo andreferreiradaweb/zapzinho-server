@@ -39,13 +39,16 @@ export async function usersRoutes(app: FastifyInstance) {
     { onRequest: [verifyJwt] },
     SelfUpdateUserController,
   )
-  app.post('/user/signup', SignupUserController)
-  app.post('/user/signin', AuthenticateController)
-  app.post('/user/send-verification-email', SendVerificationEmailController)
-  app.post('/user/verify-email', VerifyEmailController)
-  app.post('/user/forgot-password', ForgotPasswordController)
-  app.post('/user/verify-reset-code', VerifyResetCodeController)
-  app.post('/user/reset-password', ResetPasswordController)
+  const authLimit = { config: { rateLimit: { max: 10, timeWindow: '15 minutes' } } }
+  const verifyLimit = { config: { rateLimit: { max: 5, timeWindow: '15 minutes' } } }
+
+  app.post('/user/signup', authLimit, SignupUserController)
+  app.post('/user/signin', authLimit, AuthenticateController)
+  app.post('/user/send-verification-email', authLimit, SendVerificationEmailController)
+  app.post('/user/verify-email', verifyLimit, VerifyEmailController)
+  app.post('/user/forgot-password', authLimit, ForgotPasswordController)
+  app.post('/user/verify-reset-code', verifyLimit, VerifyResetCodeController)
+  app.post('/user/reset-password', verifyLimit, ResetPasswordController)
   app.get('/user/:id', { onRequest: [verifyJwt] }, GetOneUserController)
   app.get(
     '/user/:id/instance/qrcode',
