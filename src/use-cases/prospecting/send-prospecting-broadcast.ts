@@ -6,7 +6,7 @@ import { MessageLogRepository } from '@/repositories/message-log'
 import { UserRepository } from '@/repositories/user'
 import { ResourceNotFound } from '@/error/resource-not-found'
 import { InvalidCredentialsError } from '@/error/invalid-credentials-error'
-import { sendWhatsAppMessageWithCredentials, wapiDelay } from '@/services/wapi'
+import { sendWhatsAppMessageWithCredentials, wapiProspectingDelay } from '@/services/wapi'
 import { v4 as uuid } from 'uuid'
 
 export class SendProspectingBroadcastUseCase {
@@ -103,7 +103,7 @@ export class SendProspectingBroadcastUseCase {
         contact.phone,
         broadcast.warmupMessage,
       )
-      await wapiDelay()
+      await wapiProspectingDelay()
 
       if (result.success) {
         await this.contactListRepository.updateContactStatus(contact.id, 'WARMUP_SENT', {
