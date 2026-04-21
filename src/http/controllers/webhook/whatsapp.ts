@@ -90,7 +90,7 @@ export async function whatsappWebhookController(
       message,
     })
 
-    if (message) {
+    if (message && created) {
       addClassificationMessage(lead.id, lead.userId, message, created)
     }
 
