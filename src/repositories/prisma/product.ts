@@ -103,6 +103,8 @@ export class PrismaProductRepository implements ProductRepository {
   }
 
   async delete(productId: string) {
+    await prisma.leadItem.deleteMany({ where: { productId } })
+    await prisma.leadSaleItem.deleteMany({ where: { productId } })
     const product = await prisma.product.delete({ where: { id: productId } })
     return product
   }
