@@ -5,7 +5,7 @@ import { makeGetContactList } from '@/factory/prospecting/make-get-contact-list'
 const paramsSchema = z.object({ id: z.string().uuid() })
 const querySchema = z.object({
   page: z.coerce.number().min(1).default(1),
-  limit: z.coerce.number().min(1).max(100).default(50),
+  limit: z.coerce.number().min(1).max(5000).default(50),
 })
 
 export async function getContactListController(
