@@ -1,22 +1,12 @@
 import { UserRepository } from '@/repositories/user'
 import { UserNotFound } from '../../error/user-not-found'
-import { Role } from '@/lib/prisma'
 
 interface GetOneUserUseCaseRequest {
   userId: string
 }
 
-type User = {
-  id: string
-  email: string
-  phoneNumber: string | null
-  isActive: boolean
-  Role: Role
-  createdAt: Date
-}
-
 interface GetOneUserUseCaseResponse {
-  user: User | null
+  user: object | null
 }
 
 export class GetOneUserUseCase {
@@ -34,10 +24,18 @@ export class GetOneUserUseCase {
     const newUser = {
       id: findedUser.id,
       Role: findedUser.Role,
+      Plan: findedUser.Plan,
       createdAt: findedUser.createdAt,
       email: findedUser.email,
       isActive: findedUser.isActive,
       phoneNumber: findedUser.phoneNumber,
+      name: findedUser.name,
+      address: findedUser.address,
+      wapiInstanceId: findedUser.wapiInstanceId,
+      wapiToken: findedUser.wapiToken,
+      prospectingInstanceId: findedUser.prospectingInstanceId,
+      prospectingToken: findedUser.prospectingToken,
+      emailVerified: findedUser.emailVerified,
     }
 
     return { user: newUser }

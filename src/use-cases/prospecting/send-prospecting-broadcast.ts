@@ -51,14 +51,38 @@ export class SendProspectingBroadcastUseCase {
       ? broadcast.categoryFilter.split(',').map((s) => s.trim())
       : null
 
-    const contacts = broadcast.ContactList.Contacts.filter(
-      (c) =>
-        (c.status === 'PENDING' || c.status === 'FAILED') &&
-        (!allowedCategories || (c.category !== null && allowedCategories.includes(c.category))),
+    const allEligible = broadcast.ContactList.Contacts.filter(
+      (c) => !allowedCategories || (c.category !== null && allowedCategories.includes(c.category)),
     )
 
+    const contacts = allEligible.filter(
+      (c) => c.status === 'PENDING' || c.status === 'FAILED',
+    )
+
+    const alreadyReceived = allEligible.filter(
+      (c) => !['PENDING', 'FAILED'].includes(c.status),
+    )
+
+    if (alreadyReceived.length > 0) {
+      for (const contact of alreadyReceived) {
+        const logId = uuid()
+        await this.messageLogRepository.create({
+          id: logId,
+          userId,
+          leadId: null,
+          phone: contact.phone,
+          message: broadcast.warmupMessage,
+          type: 'BROADCAST',
+          status: 'PENDING',
+        })
+        await this.messageLogRepository.markFailed(logId, 'Número já recebeu mensagem em disparo anterior')
+      }
+      await this.prospectingBroadcastRepository.incrementFailedCount(broadcast.id, alreadyReceived.length)
+      console.log(`[ProspectingBroadcast] ${alreadyReceived.length} contatos bloqueados (já receberam)`)
+    }
+
     console.log(
-      `[ProspectingBroadcast] Iniciando id=${broadcast.id} | contatos=${contacts.length}`,
+      `[ProspectingBroadcast] Iniciando id=${broadcast.id} | contatos=${contacts.length} | bloqueados=${alreadyReceived.length}`,
     )
 
     for (const contact of contacts) {

@@ -49,11 +49,17 @@ export class PrismaContactListRepository implements ContactListRepository {
   }
 
   async findContactByPhone(userId: string, phone: string) {
+    const digitsOnly = phone.replace(/\D/g, '')
+    const withoutCountry = digitsOnly.startsWith('55') ? digitsOnly.slice(2) : digitsOnly
     return prisma.importedContact.findFirst({
       where: {
-        phone,
         status: 'WARMUP_SENT',
         ContactList: { userId },
+        OR: [
+          { phone: digitsOnly },
+          { phone: withoutCountry },
+          { phone: `55${withoutCountry}` },
+        ],
       },
       orderBy: { warmupSentAt: 'desc' },
     })
@@ -144,6 +150,20 @@ export class PrismaProspectingBroadcastRepository
     await prisma.prospectingBroadcast.update({
       where: { id },
       data: { [field]: { increment: 1 } },
+    })
+  }
+
+  async findSentByContactListId(contactListId: string) {
+    return prisma.prospectingBroadcast.findFirst({
+      where: { contactListId, status: { in: ['SENT', 'SENDING'] } },
+    })
+  }
+
+  async incrementFailedCount(id: string, amount: number) {
+    if (amount <= 0) return
+    await prisma.prospectingBroadcast.update({
+      where: { id },
+      data: { totalFailed: { increment: amount } },
     })
   }
 }

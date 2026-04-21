@@ -52,4 +52,6 @@ export interface ProspectingBroadcastRepository {
     extra?: Partial<ProspectingBroadcast>,
   ): Promise<void>
   incrementCount(id: string, field: 'totalSent' | 'totalFailed'): Promise<void>
+  findSentByContactListId(contactListId: string): Promise<ProspectingBroadcast | null>
+  incrementFailedCount(id: string, amount: number): Promise<void>
 }

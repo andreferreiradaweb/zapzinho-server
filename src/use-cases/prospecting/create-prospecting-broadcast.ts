@@ -34,6 +34,11 @@ export class CreateProspectingBroadcastUseCase {
     if (!list) throw new ResourceNotFound()
     if (list.userId !== data.userId) throw new InvalidCredentialsError()
 
+    const existing = await this.prospectingBroadcastRepository.findSentByContactListId(data.contactListId)
+    if (existing) {
+      throw new Error('Esta lista já possui um disparo enviado. Crie uma nova lista para disparar novamente.')
+    }
+
     const broadcast = await this.prospectingBroadcastRepository.create({
       id: uuid(),
       userId: data.userId,

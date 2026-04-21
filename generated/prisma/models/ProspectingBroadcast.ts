@@ -43,6 +43,7 @@ export type ProspectingBroadcastMinAggregateOutputType = {
   name: string | null
   warmupMessage: string | null
   templateMessage: string | null
+  categoryFilter: string | null
   status: $Enums.BroadcastStatus | null
   startedAt: Date | null
   finishedAt: Date | null
@@ -58,6 +59,7 @@ export type ProspectingBroadcastMaxAggregateOutputType = {
   name: string | null
   warmupMessage: string | null
   templateMessage: string | null
+  categoryFilter: string | null
   status: $Enums.BroadcastStatus | null
   startedAt: Date | null
   finishedAt: Date | null
@@ -73,6 +75,7 @@ export type ProspectingBroadcastCountAggregateOutputType = {
   name: number
   warmupMessage: number
   templateMessage: number
+  categoryFilter: number
   status: number
   startedAt: number
   finishedAt: number
@@ -100,6 +103,7 @@ export type ProspectingBroadcastMinAggregateInputType = {
   name?: true
   warmupMessage?: true
   templateMessage?: true
+  categoryFilter?: true
   status?: true
   startedAt?: true
   finishedAt?: true
@@ -115,6 +119,7 @@ export type ProspectingBroadcastMaxAggregateInputType = {
   name?: true
   warmupMessage?: true
   templateMessage?: true
+  categoryFilter?: true
   status?: true
   startedAt?: true
   finishedAt?: true
@@ -130,6 +135,7 @@ export type ProspectingBroadcastCountAggregateInputType = {
   name?: true
   warmupMessage?: true
   templateMessage?: true
+  categoryFilter?: true
   status?: true
   startedAt?: true
   finishedAt?: true
@@ -232,6 +238,7 @@ export type ProspectingBroadcastGroupByOutputType = {
   name: string
   warmupMessage: string
   templateMessage: string
+  categoryFilter: string | null
   status: $Enums.BroadcastStatus
   startedAt: Date | null
   finishedAt: Date | null
@@ -270,6 +277,7 @@ export type ProspectingBroadcastWhereInput = {
   name?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   warmupMessage?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   templateMessage?: Prisma.StringFilter<"ProspectingBroadcast"> | string
+  categoryFilter?: Prisma.StringNullableFilter<"ProspectingBroadcast"> | string | null
   status?: Prisma.EnumBroadcastStatusFilter<"ProspectingBroadcast"> | $Enums.BroadcastStatus
   startedAt?: Prisma.DateTimeNullableFilter<"ProspectingBroadcast"> | Date | string | null
   finishedAt?: Prisma.DateTimeNullableFilter<"ProspectingBroadcast"> | Date | string | null
@@ -287,6 +295,7 @@ export type ProspectingBroadcastOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   warmupMessage?: Prisma.SortOrder
   templateMessage?: Prisma.SortOrder
+  categoryFilter?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   startedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   finishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -307,6 +316,7 @@ export type ProspectingBroadcastWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   warmupMessage?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   templateMessage?: Prisma.StringFilter<"ProspectingBroadcast"> | string
+  categoryFilter?: Prisma.StringNullableFilter<"ProspectingBroadcast"> | string | null
   status?: Prisma.EnumBroadcastStatusFilter<"ProspectingBroadcast"> | $Enums.BroadcastStatus
   startedAt?: Prisma.DateTimeNullableFilter<"ProspectingBroadcast"> | Date | string | null
   finishedAt?: Prisma.DateTimeNullableFilter<"ProspectingBroadcast"> | Date | string | null
@@ -324,6 +334,7 @@ export type ProspectingBroadcastOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   warmupMessage?: Prisma.SortOrder
   templateMessage?: Prisma.SortOrder
+  categoryFilter?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   startedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   finishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -347,6 +358,7 @@ export type ProspectingBroadcastScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"ProspectingBroadcast"> | string
   warmupMessage?: Prisma.StringWithAggregatesFilter<"ProspectingBroadcast"> | string
   templateMessage?: Prisma.StringWithAggregatesFilter<"ProspectingBroadcast"> | string
+  categoryFilter?: Prisma.StringNullableWithAggregatesFilter<"ProspectingBroadcast"> | string | null
   status?: Prisma.EnumBroadcastStatusWithAggregatesFilter<"ProspectingBroadcast"> | $Enums.BroadcastStatus
   startedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ProspectingBroadcast"> | Date | string | null
   finishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ProspectingBroadcast"> | Date | string | null
@@ -360,6 +372,7 @@ export type ProspectingBroadcastCreateInput = {
   name: string
   warmupMessage: string
   templateMessage: string
+  categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
   startedAt?: Date | string | null
   finishedAt?: Date | string | null
@@ -377,6 +390,7 @@ export type ProspectingBroadcastUncheckedCreateInput = {
   name: string
   warmupMessage: string
   templateMessage: string
+  categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
   startedAt?: Date | string | null
   finishedAt?: Date | string | null
@@ -390,6 +404,7 @@ export type ProspectingBroadcastUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -407,6 +422,7 @@ export type ProspectingBroadcastUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -422,6 +438,7 @@ export type ProspectingBroadcastCreateManyInput = {
   name: string
   warmupMessage: string
   templateMessage: string
+  categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
   startedAt?: Date | string | null
   finishedAt?: Date | string | null
@@ -435,6 +452,7 @@ export type ProspectingBroadcastUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -450,6 +468,7 @@ export type ProspectingBroadcastUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -475,6 +494,7 @@ export type ProspectingBroadcastCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   warmupMessage?: Prisma.SortOrder
   templateMessage?: Prisma.SortOrder
+  categoryFilter?: Prisma.SortOrder
   status?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
   finishedAt?: Prisma.SortOrder
@@ -495,6 +515,7 @@ export type ProspectingBroadcastMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   warmupMessage?: Prisma.SortOrder
   templateMessage?: Prisma.SortOrder
+  categoryFilter?: Prisma.SortOrder
   status?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
   finishedAt?: Prisma.SortOrder
@@ -510,6 +531,7 @@ export type ProspectingBroadcastMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   warmupMessage?: Prisma.SortOrder
   templateMessage?: Prisma.SortOrder
+  categoryFilter?: Prisma.SortOrder
   status?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
   finishedAt?: Prisma.SortOrder
@@ -612,6 +634,7 @@ export type ProspectingBroadcastCreateWithoutUserInput = {
   name: string
   warmupMessage: string
   templateMessage: string
+  categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
   startedAt?: Date | string | null
   finishedAt?: Date | string | null
@@ -627,6 +650,7 @@ export type ProspectingBroadcastUncheckedCreateWithoutUserInput = {
   name: string
   warmupMessage: string
   templateMessage: string
+  categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
   startedAt?: Date | string | null
   finishedAt?: Date | string | null
@@ -671,6 +695,7 @@ export type ProspectingBroadcastScalarWhereInput = {
   name?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   warmupMessage?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   templateMessage?: Prisma.StringFilter<"ProspectingBroadcast"> | string
+  categoryFilter?: Prisma.StringNullableFilter<"ProspectingBroadcast"> | string | null
   status?: Prisma.EnumBroadcastStatusFilter<"ProspectingBroadcast"> | $Enums.BroadcastStatus
   startedAt?: Prisma.DateTimeNullableFilter<"ProspectingBroadcast"> | Date | string | null
   finishedAt?: Prisma.DateTimeNullableFilter<"ProspectingBroadcast"> | Date | string | null
@@ -684,6 +709,7 @@ export type ProspectingBroadcastCreateWithoutContactListInput = {
   name: string
   warmupMessage: string
   templateMessage: string
+  categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
   startedAt?: Date | string | null
   finishedAt?: Date | string | null
@@ -699,6 +725,7 @@ export type ProspectingBroadcastUncheckedCreateWithoutContactListInput = {
   name: string
   warmupMessage: string
   templateMessage: string
+  categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
   startedAt?: Date | string | null
   finishedAt?: Date | string | null
@@ -739,6 +766,7 @@ export type ProspectingBroadcastCreateManyUserInput = {
   name: string
   warmupMessage: string
   templateMessage: string
+  categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
   startedAt?: Date | string | null
   finishedAt?: Date | string | null
@@ -752,6 +780,7 @@ export type ProspectingBroadcastUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -767,6 +796,7 @@ export type ProspectingBroadcastUncheckedUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -781,6 +811,7 @@ export type ProspectingBroadcastUncheckedUpdateManyWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -795,6 +826,7 @@ export type ProspectingBroadcastCreateManyContactListInput = {
   name: string
   warmupMessage: string
   templateMessage: string
+  categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
   startedAt?: Date | string | null
   finishedAt?: Date | string | null
@@ -808,6 +840,7 @@ export type ProspectingBroadcastUpdateWithoutContactListInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -823,6 +856,7 @@ export type ProspectingBroadcastUncheckedUpdateWithoutContactListInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -837,6 +871,7 @@ export type ProspectingBroadcastUncheckedUpdateManyWithoutContactListInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -854,6 +889,7 @@ export type ProspectingBroadcastSelect<ExtArgs extends runtime.Types.Extensions.
   name?: boolean
   warmupMessage?: boolean
   templateMessage?: boolean
+  categoryFilter?: boolean
   status?: boolean
   startedAt?: boolean
   finishedAt?: boolean
@@ -871,6 +907,7 @@ export type ProspectingBroadcastSelectCreateManyAndReturn<ExtArgs extends runtim
   name?: boolean
   warmupMessage?: boolean
   templateMessage?: boolean
+  categoryFilter?: boolean
   status?: boolean
   startedAt?: boolean
   finishedAt?: boolean
@@ -888,6 +925,7 @@ export type ProspectingBroadcastSelectUpdateManyAndReturn<ExtArgs extends runtim
   name?: boolean
   warmupMessage?: boolean
   templateMessage?: boolean
+  categoryFilter?: boolean
   status?: boolean
   startedAt?: boolean
   finishedAt?: boolean
@@ -905,6 +943,7 @@ export type ProspectingBroadcastSelectScalar = {
   name?: boolean
   warmupMessage?: boolean
   templateMessage?: boolean
+  categoryFilter?: boolean
   status?: boolean
   startedAt?: boolean
   finishedAt?: boolean
@@ -913,7 +952,7 @@ export type ProspectingBroadcastSelectScalar = {
   createdAt?: boolean
 }
 
-export type ProspectingBroadcastOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "contactListId" | "name" | "warmupMessage" | "templateMessage" | "status" | "startedAt" | "finishedAt" | "totalSent" | "totalFailed" | "createdAt", ExtArgs["result"]["prospectingBroadcast"]>
+export type ProspectingBroadcastOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "contactListId" | "name" | "warmupMessage" | "templateMessage" | "categoryFilter" | "status" | "startedAt" | "finishedAt" | "totalSent" | "totalFailed" | "createdAt", ExtArgs["result"]["prospectingBroadcast"]>
 export type ProspectingBroadcastInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   ContactList?: boolean | Prisma.ContactListDefaultArgs<ExtArgs>
@@ -940,6 +979,7 @@ export type $ProspectingBroadcastPayload<ExtArgs extends runtime.Types.Extension
     name: string
     warmupMessage: string
     templateMessage: string
+    categoryFilter: string | null
     status: $Enums.BroadcastStatus
     startedAt: Date | null
     finishedAt: Date | null
@@ -1377,6 +1417,7 @@ export interface ProspectingBroadcastFieldRefs {
   readonly name: Prisma.FieldRef<"ProspectingBroadcast", 'String'>
   readonly warmupMessage: Prisma.FieldRef<"ProspectingBroadcast", 'String'>
   readonly templateMessage: Prisma.FieldRef<"ProspectingBroadcast", 'String'>
+  readonly categoryFilter: Prisma.FieldRef<"ProspectingBroadcast", 'String'>
   readonly status: Prisma.FieldRef<"ProspectingBroadcast", 'BroadcastStatus'>
   readonly startedAt: Prisma.FieldRef<"ProspectingBroadcast", 'DateTime'>
   readonly finishedAt: Prisma.FieldRef<"ProspectingBroadcast", 'DateTime'>

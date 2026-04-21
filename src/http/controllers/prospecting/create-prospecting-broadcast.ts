@@ -17,6 +17,11 @@ export async function createProspectingBroadcastController(
   const data = bodySchema.parse(request.body)
   const userId = request.user.sub
 
-  const result = await makeCreateProspectingBroadcast().execute({ userId, ...data })
-  return reply.status(201).send(result)
+  try {
+    const result = await makeCreateProspectingBroadcast().execute({ userId, ...data })
+    return reply.status(201).send(result)
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Erro ao criar disparo'
+    return reply.status(409).send({ message })
+  }
 }

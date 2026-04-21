@@ -76,8 +76,13 @@ export class PrismaUserRepository implements UserRepository {
   }
 
   async findUserByInstanceId(instanceId: string) {
-    const user = await prisma.user.findUnique({
-      where: { wapiInstanceId: instanceId },
+    const user = await prisma.user.findFirst({
+      where: {
+        OR: [
+          { wapiInstanceId: instanceId },
+          { prospectingInstanceId: instanceId },
+        ],
+      },
     })
     return user || null
   }

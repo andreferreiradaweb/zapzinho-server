@@ -1,5 +1,6 @@
 import { ContactList } from '@/lib/prisma'
 import { ContactListRepository } from '@/repositories/prospecting'
+import { normalizePhone } from '@/helpers/normalizePhone'
 import { v4 as uuid } from 'uuid'
 
 interface ImportContactListRequest {
@@ -23,7 +24,11 @@ export class ImportContactListUseCase {
       name: data.name,
     })
 
-    const unique = this.deduplicateByPhone(data.contacts)
+    const normalized = data.contacts
+      .map((c) => ({ ...c, phone: normalizePhone(c.phone) }))
+      .filter((c) => c.phone.length >= 10)
+
+    const unique = this.deduplicateByPhone(normalized)
 
     if (unique.length > 0) {
       await this.contactListRepository.addContacts(contactList.id, unique)

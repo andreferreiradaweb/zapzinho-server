@@ -2248,6 +2248,7 @@ export const ProspectingBroadcastScalarFieldEnum = {
   name: 'name',
   warmupMessage: 'warmupMessage',
   templateMessage: 'templateMessage',
+  categoryFilter: 'categoryFilter',
   status: 'status',
   startedAt: 'startedAt',
   finishedAt: 'finishedAt',

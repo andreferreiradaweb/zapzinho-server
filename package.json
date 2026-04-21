@@ -13,6 +13,7 @@
     "db:migrate:prod": "prisma migrate deploy",
     "lint": "eslint src --ext .ts --fix",
     "seeds": "npx tsx prisma/seeds.ts",
+    "db:clear": "npx tsx prisma/clear-prospecting.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
