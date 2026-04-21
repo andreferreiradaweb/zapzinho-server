@@ -3,9 +3,9 @@ import { UserRepository } from '@/repositories/user'
 import { UserNotFound } from '../../error/user-not-found'
 import { ResourceNotFound } from '../../error/resource-not-found'
 import { InvalidCredentialsError } from '../../error/invalid-credentials-error'
-
 import { ProductRepository } from '@/repositories/product'
 import { InactiveUser } from '@/error/inactive-user'
+import { deleteManyFromCloudinary } from '@/services/cloudinary'
 
 interface DeleteProductUseCaseRequest {
   id: string
@@ -47,6 +47,10 @@ export class DeleteProductUseCase {
     }
 
     const product = await this.productRepository.delete(id)
+
+    if (findedProduct.photos.length > 0) {
+      await deleteManyFromCloudinary(findedProduct.photos)
+    }
 
     return { product }
   }

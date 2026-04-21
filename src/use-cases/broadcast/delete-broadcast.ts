@@ -1,6 +1,7 @@
 import { BroadcastRepository } from '@/repositories/broadcast'
 import { ResourceNotFound } from '@/error/resource-not-found'
 import { InvalidCredentialsError } from '@/error/invalid-credentials-error'
+import { deleteManyFromCloudinary } from '@/services/cloudinary'
 
 export class DeleteBroadcastUseCase {
   constructor(private broadcastRepository: BroadcastRepository) {}
@@ -10,5 +11,8 @@ export class DeleteBroadcastUseCase {
     if (!broadcast) throw new ResourceNotFound()
     if (broadcast.userId !== userId) throw new InvalidCredentialsError()
     await this.broadcastRepository.delete(id)
+
+    const mediaUrls = [...broadcast.imageUrls, broadcast.videoUrl].filter(Boolean) as string[]
+    if (mediaUrls.length > 0) await deleteManyFromCloudinary(mediaUrls)
   }
 }
