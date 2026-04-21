@@ -9,6 +9,15 @@
 * 🟢 You can import this file directly.
 */
 
+export const UserPlan = {
+  PADRAO: 'PADRAO',
+  EXPERT: 'EXPERT',
+  VIP: 'VIP'
+} as const
+
+export type UserPlan = (typeof UserPlan)[keyof typeof UserPlan]
+
+
 export const Role = {
   ADMIN: 'ADMIN',
   CLIENT: 'CLIENT'
@@ -67,6 +76,18 @@ export const MessageType = {
 } as const
 
 export type MessageType = (typeof MessageType)[keyof typeof MessageType]
+
+
+export const ImportedContactStatus = {
+  PENDING: 'PENDING',
+  WARMUP_SENT: 'WARMUP_SENT',
+  REPLIED: 'REPLIED',
+  TEMPLATE_SENT: 'TEMPLATE_SENT',
+  CONVERTED: 'CONVERTED',
+  FAILED: 'FAILED'
+} as const
+
+export type ImportedContactStatus = (typeof ImportedContactStatus)[keyof typeof ImportedContactStatus]
 
 
 export const OrderStatus = {

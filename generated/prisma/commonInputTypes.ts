@@ -63,6 +63,13 @@ export type EnumCustomerTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumCustomerTypeFilter<$PrismaModel> | $Enums.CustomerType
 }
 
+export type EnumUserPlanFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserPlan | Prisma.EnumUserPlanFieldRefInput<$PrismaModel>
+  in?: $Enums.UserPlan[] | Prisma.ListEnumUserPlanFieldRefInput<$PrismaModel>
+  notIn?: $Enums.UserPlan[] | Prisma.ListEnumUserPlanFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumUserPlanFilter<$PrismaModel> | $Enums.UserPlan
+}
+
 export type DateTimeNullableFilter<$PrismaModel = never> = {
   equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
   in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -152,6 +159,16 @@ export type EnumCustomerTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumCustomerTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumCustomerTypeFilter<$PrismaModel>
+}
+
+export type EnumUserPlanWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserPlan | Prisma.EnumUserPlanFieldRefInput<$PrismaModel>
+  in?: $Enums.UserPlan[] | Prisma.ListEnumUserPlanFieldRefInput<$PrismaModel>
+  notIn?: $Enums.UserPlan[] | Prisma.ListEnumUserPlanFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumUserPlanWithAggregatesFilter<$PrismaModel> | $Enums.UserPlan
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumUserPlanFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumUserPlanFilter<$PrismaModel>
 }
 
 export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -321,6 +338,23 @@ export type EnumMessageTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumMessageTypeFilter<$PrismaModel>
 }
 
+export type EnumImportedContactStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ImportedContactStatus | Prisma.EnumImportedContactStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ImportedContactStatus[] | Prisma.ListEnumImportedContactStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ImportedContactStatus[] | Prisma.ListEnumImportedContactStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumImportedContactStatusFilter<$PrismaModel> | $Enums.ImportedContactStatus
+}
+
+export type EnumImportedContactStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ImportedContactStatus | Prisma.EnumImportedContactStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ImportedContactStatus[] | Prisma.ListEnumImportedContactStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ImportedContactStatus[] | Prisma.ListEnumImportedContactStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumImportedContactStatusWithAggregatesFilter<$PrismaModel> | $Enums.ImportedContactStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumImportedContactStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumImportedContactStatusFilter<$PrismaModel>
+}
+
 export type EnumOrderStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.OrderStatus | Prisma.EnumOrderStatusFieldRefInput<$PrismaModel>
   in?: $Enums.OrderStatus[] | Prisma.ListEnumOrderStatusFieldRefInput<$PrismaModel>
@@ -417,6 +451,13 @@ export type NestedEnumCustomerTypeFilter<$PrismaModel = never> = {
   in?: $Enums.CustomerType[] | Prisma.ListEnumCustomerTypeFieldRefInput<$PrismaModel>
   notIn?: $Enums.CustomerType[] | Prisma.ListEnumCustomerTypeFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumCustomerTypeFilter<$PrismaModel> | $Enums.CustomerType
+}
+
+export type NestedEnumUserPlanFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserPlan | Prisma.EnumUserPlanFieldRefInput<$PrismaModel>
+  in?: $Enums.UserPlan[] | Prisma.ListEnumUserPlanFieldRefInput<$PrismaModel>
+  notIn?: $Enums.UserPlan[] | Prisma.ListEnumUserPlanFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumUserPlanFilter<$PrismaModel> | $Enums.UserPlan
 }
 
 export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -523,6 +564,16 @@ export type NestedEnumCustomerTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumCustomerTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumCustomerTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumUserPlanWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserPlan | Prisma.EnumUserPlanFieldRefInput<$PrismaModel>
+  in?: $Enums.UserPlan[] | Prisma.ListEnumUserPlanFieldRefInput<$PrismaModel>
+  notIn?: $Enums.UserPlan[] | Prisma.ListEnumUserPlanFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumUserPlanWithAggregatesFilter<$PrismaModel> | $Enums.UserPlan
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumUserPlanFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumUserPlanFilter<$PrismaModel>
 }
 
 export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -679,6 +730,23 @@ export type NestedEnumMessageTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumMessageTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumMessageTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumImportedContactStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ImportedContactStatus | Prisma.EnumImportedContactStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ImportedContactStatus[] | Prisma.ListEnumImportedContactStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ImportedContactStatus[] | Prisma.ListEnumImportedContactStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumImportedContactStatusFilter<$PrismaModel> | $Enums.ImportedContactStatus
+}
+
+export type NestedEnumImportedContactStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ImportedContactStatus | Prisma.EnumImportedContactStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ImportedContactStatus[] | Prisma.ListEnumImportedContactStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ImportedContactStatus[] | Prisma.ListEnumImportedContactStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumImportedContactStatusWithAggregatesFilter<$PrismaModel> | $Enums.ImportedContactStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumImportedContactStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumImportedContactStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumOrderStatusFilter<$PrismaModel = never> = {

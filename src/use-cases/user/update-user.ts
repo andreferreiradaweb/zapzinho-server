@@ -1,4 +1,4 @@
-import { CustomerType, Role, User } from '@/lib/prisma'
+import { CustomerType, Role, User, UserPlan } from '@/lib/prisma'
 import { hash } from 'bcrypt'
 import { UserRepository } from '@/repositories/user'
 import { ResourceNotFound } from '@/error/resource-not-found'
@@ -10,12 +10,15 @@ interface UpdateUserUseCaseRequest {
   phoneNumber: string
   password?: string
   role: Role
+  plan?: UserPlan
   isActive: boolean
   customerType?: CustomerType
   name?: string
   address?: string
   wapiInstanceId?: string | null
   wapiToken?: string | null
+  prospectingInstanceId?: string | null
+  prospectingToken?: string | null
 }
 
 interface UpdateUserUseCaseResponse {
@@ -28,6 +31,7 @@ export class UpdateUserUseCase {
   async execute({
     password,
     role,
+    plan,
     isActive,
     id,
     phoneNumber,
@@ -37,6 +41,8 @@ export class UpdateUserUseCase {
     address,
     wapiInstanceId,
     wapiToken,
+    prospectingInstanceId,
+    prospectingToken,
   }: UpdateUserUseCaseRequest): Promise<UpdateUserUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(id)
 
@@ -69,8 +75,11 @@ export class UpdateUserUseCase {
       CustomerType: customerType || findedUser.CustomerType,
       name: name ?? findedUser.name,
       address: address ?? findedUser.address,
+      Plan: plan ?? findedUser.Plan,
       wapiInstanceId: wapiInstanceId !== undefined ? wapiInstanceId : findedUser.wapiInstanceId,
       wapiToken: wapiToken !== undefined ? wapiToken : findedUser.wapiToken,
+      prospectingInstanceId: prospectingInstanceId !== undefined ? prospectingInstanceId : findedUser.prospectingInstanceId,
+      prospectingToken: prospectingToken !== undefined ? prospectingToken : findedUser.prospectingToken,
     })
 
     return { user }

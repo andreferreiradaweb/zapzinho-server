@@ -67,6 +67,7 @@ export class SelfUpdateUserUseCase {
     const newUser = {
       phoneNumber: phoneNumber || findedUser.phoneNumber,
       Role,
+      Plan: findedUser.Plan,
       createdAt,
       email,
       isActive,
@@ -74,6 +75,12 @@ export class SelfUpdateUserUseCase {
       trialExpiresAt,
       onboardingMessageSentAt,
       wapiInstanceId,
+      wapiToken: findedUser.wapiToken,
+      prospectingInstanceId: findedUser.prospectingInstanceId,
+      prospectingToken: findedUser.prospectingToken,
+      name: findedUser.name,
+      address: findedUser.address,
+      emailVerified: findedUser.emailVerified,
     }
 
     return { user: newUser }

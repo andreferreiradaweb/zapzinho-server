@@ -105,6 +105,21 @@ export type BroadcastBlock = Prisma.BroadcastBlockModel
  */
 export type MessageLog = Prisma.MessageLogModel
 /**
+ * Model ContactList
+ * 
+ */
+export type ContactList = Prisma.ContactListModel
+/**
+ * Model ImportedContact
+ * 
+ */
+export type ImportedContact = Prisma.ImportedContactModel
+/**
+ * Model ProspectingBroadcast
+ * 
+ */
+export type ProspectingBroadcast = Prisma.ProspectingBroadcastModel
+/**
  * Model Customer
  * 
  */

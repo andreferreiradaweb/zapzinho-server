@@ -397,6 +397,9 @@ export const ModelName = {
   Automation: 'Automation',
   BroadcastBlock: 'BroadcastBlock',
   MessageLog: 'MessageLog',
+  ContactList: 'ContactList',
+  ImportedContact: 'ImportedContact',
+  ProspectingBroadcast: 'ProspectingBroadcast',
   Customer: 'Customer',
   Address: 'Address',
   Order: 'Order',
@@ -417,7 +420,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "productCategory" | "product" | "lead" | "leadSale" | "leadSaleItem" | "leadItem" | "messageTemplate" | "broadcast" | "broadcastLead" | "automation" | "broadcastBlock" | "messageLog" | "customer" | "address" | "order" | "orderItem" | "payment"
+    modelProps: "user" | "productCategory" | "product" | "lead" | "leadSale" | "leadSaleItem" | "leadItem" | "messageTemplate" | "broadcast" | "broadcastLead" | "automation" | "broadcastBlock" | "messageLog" | "contactList" | "importedContact" | "prospectingBroadcast" | "customer" | "address" | "order" | "orderItem" | "payment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1383,6 +1386,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ContactList: {
+      payload: Prisma.$ContactListPayload<ExtArgs>
+      fields: Prisma.ContactListFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ContactListFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactListPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ContactListFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactListPayload>
+        }
+        findFirst: {
+          args: Prisma.ContactListFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactListPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ContactListFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactListPayload>
+        }
+        findMany: {
+          args: Prisma.ContactListFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactListPayload>[]
+        }
+        create: {
+          args: Prisma.ContactListCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactListPayload>
+        }
+        createMany: {
+          args: Prisma.ContactListCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ContactListCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactListPayload>[]
+        }
+        delete: {
+          args: Prisma.ContactListDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactListPayload>
+        }
+        update: {
+          args: Prisma.ContactListUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactListPayload>
+        }
+        deleteMany: {
+          args: Prisma.ContactListDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ContactListUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ContactListUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactListPayload>[]
+        }
+        upsert: {
+          args: Prisma.ContactListUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactListPayload>
+        }
+        aggregate: {
+          args: Prisma.ContactListAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateContactList>
+        }
+        groupBy: {
+          args: Prisma.ContactListGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactListGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ContactListCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactListCountAggregateOutputType> | number
+        }
+      }
+    }
+    ImportedContact: {
+      payload: Prisma.$ImportedContactPayload<ExtArgs>
+      fields: Prisma.ImportedContactFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ImportedContactFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportedContactPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ImportedContactFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportedContactPayload>
+        }
+        findFirst: {
+          args: Prisma.ImportedContactFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportedContactPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ImportedContactFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportedContactPayload>
+        }
+        findMany: {
+          args: Prisma.ImportedContactFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportedContactPayload>[]
+        }
+        create: {
+          args: Prisma.ImportedContactCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportedContactPayload>
+        }
+        createMany: {
+          args: Prisma.ImportedContactCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ImportedContactCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportedContactPayload>[]
+        }
+        delete: {
+          args: Prisma.ImportedContactDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportedContactPayload>
+        }
+        update: {
+          args: Prisma.ImportedContactUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportedContactPayload>
+        }
+        deleteMany: {
+          args: Prisma.ImportedContactDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ImportedContactUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ImportedContactUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportedContactPayload>[]
+        }
+        upsert: {
+          args: Prisma.ImportedContactUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImportedContactPayload>
+        }
+        aggregate: {
+          args: Prisma.ImportedContactAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateImportedContact>
+        }
+        groupBy: {
+          args: Prisma.ImportedContactGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ImportedContactGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ImportedContactCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ImportedContactCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProspectingBroadcast: {
+      payload: Prisma.$ProspectingBroadcastPayload<ExtArgs>
+      fields: Prisma.ProspectingBroadcastFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProspectingBroadcastFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProspectingBroadcastPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProspectingBroadcastFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProspectingBroadcastPayload>
+        }
+        findFirst: {
+          args: Prisma.ProspectingBroadcastFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProspectingBroadcastPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProspectingBroadcastFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProspectingBroadcastPayload>
+        }
+        findMany: {
+          args: Prisma.ProspectingBroadcastFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProspectingBroadcastPayload>[]
+        }
+        create: {
+          args: Prisma.ProspectingBroadcastCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProspectingBroadcastPayload>
+        }
+        createMany: {
+          args: Prisma.ProspectingBroadcastCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProspectingBroadcastCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProspectingBroadcastPayload>[]
+        }
+        delete: {
+          args: Prisma.ProspectingBroadcastDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProspectingBroadcastPayload>
+        }
+        update: {
+          args: Prisma.ProspectingBroadcastUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProspectingBroadcastPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProspectingBroadcastDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProspectingBroadcastUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProspectingBroadcastUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProspectingBroadcastPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProspectingBroadcastUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProspectingBroadcastPayload>
+        }
+        aggregate: {
+          args: Prisma.ProspectingBroadcastAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProspectingBroadcast>
+        }
+        groupBy: {
+          args: Prisma.ProspectingBroadcastGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProspectingBroadcastGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProspectingBroadcastCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProspectingBroadcastCountAggregateOutputType> | number
+        }
+      }
+    }
     Customer: {
       payload: Prisma.$CustomerPayload<ExtArgs>
       fields: Prisma.CustomerFieldRefs
@@ -1803,10 +2028,13 @@ export const UserScalarFieldEnum = {
   emailVerified: 'emailVerified',
   Role: 'Role',
   CustomerType: 'CustomerType',
+  Plan: 'Plan',
   trialExpiresAt: 'trialExpiresAt',
   onboardingMessageSentAt: 'onboardingMessageSentAt',
   wapiInstanceId: 'wapiInstanceId',
   wapiToken: 'wapiToken',
+  prospectingInstanceId: 'prospectingInstanceId',
+  prospectingToken: 'prospectingToken',
   createdAt: 'createdAt'
 } as const
 
@@ -1830,6 +2058,7 @@ export const ProductScalarFieldEnum = {
   description: 'description',
   code: 'code',
   price: 'price',
+  costPrice: 'costPrice',
   condition: 'condition',
   photos: 'photos',
   userId: 'userId',
@@ -1981,6 +2210,52 @@ export const MessageLogScalarFieldEnum = {
 export type MessageLogScalarFieldEnum = (typeof MessageLogScalarFieldEnum)[keyof typeof MessageLogScalarFieldEnum]
 
 
+export const ContactListScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  createdAt: 'createdAt'
+} as const
+
+export type ContactListScalarFieldEnum = (typeof ContactListScalarFieldEnum)[keyof typeof ContactListScalarFieldEnum]
+
+
+export const ImportedContactScalarFieldEnum = {
+  id: 'id',
+  contactListId: 'contactListId',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  status: 'status',
+  warmupSentAt: 'warmupSentAt',
+  repliedAt: 'repliedAt',
+  templateSentAt: 'templateSentAt',
+  convertedLeadId: 'convertedLeadId',
+  errorMsg: 'errorMsg',
+  createdAt: 'createdAt'
+} as const
+
+export type ImportedContactScalarFieldEnum = (typeof ImportedContactScalarFieldEnum)[keyof typeof ImportedContactScalarFieldEnum]
+
+
+export const ProspectingBroadcastScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  contactListId: 'contactListId',
+  name: 'name',
+  warmupMessage: 'warmupMessage',
+  templateMessage: 'templateMessage',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  totalSent: 'totalSent',
+  totalFailed: 'totalFailed',
+  createdAt: 'createdAt'
+} as const
+
+export type ProspectingBroadcastScalarFieldEnum = (typeof ProspectingBroadcastScalarFieldEnum)[keyof typeof ProspectingBroadcastScalarFieldEnum]
+
+
 export const CustomerScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -2122,6 +2397,20 @@ export type ListEnumCustomerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
+ * Reference to a field of type 'UserPlan'
+ */
+export type EnumUserPlanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserPlan'>
+    
+
+
+/**
+ * Reference to a field of type 'UserPlan[]'
+ */
+export type ListEnumUserPlanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserPlan[]'>
+    
+
+
+/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -2216,6 +2505,20 @@ export type EnumMessageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
  * Reference to a field of type 'MessageType[]'
  */
 export type ListEnumMessageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ImportedContactStatus'
+ */
+export type EnumImportedContactStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ImportedContactStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ImportedContactStatus[]'
+ */
+export type ListEnumImportedContactStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ImportedContactStatus[]'>
     
 
 
@@ -2368,6 +2671,9 @@ export type GlobalOmitConfig = {
   automation?: Prisma.AutomationOmit
   broadcastBlock?: Prisma.BroadcastBlockOmit
   messageLog?: Prisma.MessageLogOmit
+  contactList?: Prisma.ContactListOmit
+  importedContact?: Prisma.ImportedContactOmit
+  prospectingBroadcast?: Prisma.ProspectingBroadcastOmit
   customer?: Prisma.CustomerOmit
   address?: Prisma.AddressOmit
   order?: Prisma.OrderOmit

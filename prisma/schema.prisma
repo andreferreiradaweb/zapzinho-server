@@ -8,30 +8,41 @@ datasource db {
 }
 
 model User {
-  id                       String    @id @default(uuid())
-  email                    String    @unique
-  passwordHash             String
-  name                     String?
-  phoneNumber              String?
-  address                  String?
-  isActive                 Boolean
-  emailVerified            Boolean   @default(false)
-  Role                     Role
-  CustomerType             CustomerType
-  trialExpiresAt           DateTime?
-  onboardingMessageSentAt  DateTime?
-  wapiInstanceId           String?   @unique
-  wapiToken                String?
-  createdAt                DateTime  @default(now())
-  Products                 Product[]
-  ProductCategories        ProductCategory[]
-  Leads                    Lead[]
-  MessageTemplates         MessageTemplate[]
-  Broadcasts               Broadcast[]
-  Automations              Automation[]
-  MessageLogs              MessageLog[]
-  BroadcastBlocks          BroadcastBlock[]
-  LeadSales                LeadSale[]
+  id                           String    @id @default(uuid())
+  email                        String    @unique
+  passwordHash                 String
+  name                         String?
+  phoneNumber                  String?
+  address                      String?
+  isActive                     Boolean
+  emailVerified                Boolean   @default(false)
+  Role                         Role
+  CustomerType                 CustomerType
+  Plan                         UserPlan  @default(PADRAO)
+  trialExpiresAt               DateTime?
+  onboardingMessageSentAt      DateTime?
+  wapiInstanceId               String?   @unique
+  wapiToken                    String?
+  prospectingInstanceId        String?
+  prospectingToken             String?
+  createdAt                    DateTime  @default(now())
+  Products                     Product[]
+  ProductCategories            ProductCategory[]
+  Leads                        Lead[]
+  MessageTemplates             MessageTemplate[]
+  Broadcasts                   Broadcast[]
+  Automations                  Automation[]
+  MessageLogs                  MessageLog[]
+  BroadcastBlocks              BroadcastBlock[]
+  LeadSales                    LeadSale[]
+  ContactLists                 ContactList[]
+  ProspectingBroadcasts        ProspectingBroadcast[]
+}
+
+enum UserPlan {
+  PADRAO
+  EXPERT
+  VIP
 }
 
 enum Role {
@@ -62,6 +73,7 @@ model Product {
   description String?
   code        String?
   price       String?
+  costPrice   String?
   condition   String?
   photos      String[]
   User        User             @relation(fields: [userId], references: [id])
@@ -256,6 +268,60 @@ enum MessageType {
   BROADCAST
   AUTOMATION
   MANUAL
+}
+
+// --- Prospecting (mass import + two-step messaging) ---
+
+model ContactList {
+  id                    String                 @id @default(uuid())
+  userId                String
+  name                  String
+  createdAt             DateTime               @default(now())
+  User                  User                   @relation(fields: [userId], references: [id])
+  Contacts              ImportedContact[]
+  ProspectingBroadcasts ProspectingBroadcast[]
+}
+
+model ImportedContact {
+  id              String                @id @default(uuid())
+  contactListId   String
+  name            String
+  phone           String
+  email           String?
+  status          ImportedContactStatus @default(PENDING)
+  warmupSentAt    DateTime?
+  repliedAt       DateTime?
+  templateSentAt  DateTime?
+  convertedLeadId String?
+  errorMsg        String?
+  createdAt       DateTime              @default(now())
+  ContactList     ContactList           @relation(fields: [contactListId], references: [id], onDelete: Cascade)
+}
+
+enum ImportedContactStatus {
+  PENDING
+  WARMUP_SENT
+  REPLIED
+  TEMPLATE_SENT
+  CONVERTED
+  FAILED
+}
+
+model ProspectingBroadcast {
+  id              String          @id @default(uuid())
+  userId          String
+  contactListId   String
+  name            String
+  warmupMessage   String
+  templateMessage String
+  status          BroadcastStatus @default(DRAFT)
+  startedAt       DateTime?
+  finishedAt      DateTime?
+  totalSent       Int             @default(0)
+  totalFailed     Int             @default(0)
+  createdAt       DateTime        @default(now())
+  User            User            @relation(fields: [userId], references: [id])
+  ContactList     ContactList     @relation(fields: [contactListId], references: [id])
 }
 
 // --- E-commerce models (existing) ---

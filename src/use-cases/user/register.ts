@@ -67,12 +67,20 @@ export class RegisterUserUseCase {
       email,
       phoneNumber: phoneNumber ?? null,
       Role: role,
+      Plan: 'PADRAO',
       isActive,
       id: newUserId,
       createdAt: newDate,
       CustomerType: customerType ?? CustomerType.B2C,
       trialExpiresAt: null,
       onboardingMessageSentAt: null,
+      name: name ?? null,
+      address: address ?? null,
+      wapiInstanceId: null,
+      wapiToken: null,
+      prospectingInstanceId: null,
+      prospectingToken: null,
+      emailVerified: false,
     }
 
     // Send onboarding WhatsApp message if the new user has a phone number

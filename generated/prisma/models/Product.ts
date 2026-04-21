@@ -31,6 +31,7 @@ export type ProductMinAggregateOutputType = {
   description: string | null
   code: string | null
   price: string | null
+  costPrice: string | null
   condition: string | null
   userId: string | null
   categoryId: string | null
@@ -43,6 +44,7 @@ export type ProductMaxAggregateOutputType = {
   description: string | null
   code: string | null
   price: string | null
+  costPrice: string | null
   condition: string | null
   userId: string | null
   categoryId: string | null
@@ -55,6 +57,7 @@ export type ProductCountAggregateOutputType = {
   description: number
   code: number
   price: number
+  costPrice: number
   condition: number
   photos: number
   userId: number
@@ -70,6 +73,7 @@ export type ProductMinAggregateInputType = {
   description?: true
   code?: true
   price?: true
+  costPrice?: true
   condition?: true
   userId?: true
   categoryId?: true
@@ -82,6 +86,7 @@ export type ProductMaxAggregateInputType = {
   description?: true
   code?: true
   price?: true
+  costPrice?: true
   condition?: true
   userId?: true
   categoryId?: true
@@ -94,6 +99,7 @@ export type ProductCountAggregateInputType = {
   description?: true
   code?: true
   price?: true
+  costPrice?: true
   condition?: true
   photos?: true
   userId?: true
@@ -180,6 +186,7 @@ export type ProductGroupByOutputType = {
   description: string | null
   code: string | null
   price: string | null
+  costPrice: string | null
   condition: string | null
   photos: string[]
   userId: string
@@ -214,6 +221,7 @@ export type ProductWhereInput = {
   description?: Prisma.StringNullableFilter<"Product"> | string | null
   code?: Prisma.StringNullableFilter<"Product"> | string | null
   price?: Prisma.StringNullableFilter<"Product"> | string | null
+  costPrice?: Prisma.StringNullableFilter<"Product"> | string | null
   condition?: Prisma.StringNullableFilter<"Product"> | string | null
   photos?: Prisma.StringNullableListFilter<"Product">
   userId?: Prisma.StringFilter<"Product"> | string
@@ -234,6 +242,7 @@ export type ProductOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   code?: Prisma.SortOrderInput | Prisma.SortOrder
   price?: Prisma.SortOrderInput | Prisma.SortOrder
+  costPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   condition?: Prisma.SortOrderInput | Prisma.SortOrder
   photos?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -257,6 +266,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Product"> | string | null
   code?: Prisma.StringNullableFilter<"Product"> | string | null
   price?: Prisma.StringNullableFilter<"Product"> | string | null
+  costPrice?: Prisma.StringNullableFilter<"Product"> | string | null
   condition?: Prisma.StringNullableFilter<"Product"> | string | null
   photos?: Prisma.StringNullableListFilter<"Product">
   userId?: Prisma.StringFilter<"Product"> | string
@@ -277,6 +287,7 @@ export type ProductOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   code?: Prisma.SortOrderInput | Prisma.SortOrder
   price?: Prisma.SortOrderInput | Prisma.SortOrder
+  costPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   condition?: Prisma.SortOrderInput | Prisma.SortOrder
   photos?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -296,6 +307,7 @@ export type ProductScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   code?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   price?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  costPrice?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   condition?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   photos?: Prisma.StringNullableListFilter<"Product">
   userId?: Prisma.StringWithAggregatesFilter<"Product"> | string
@@ -309,6 +321,7 @@ export type ProductCreateInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   User: Prisma.UserCreateNestedOneWithoutProductsInput
@@ -327,6 +340,7 @@ export type ProductUncheckedCreateInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   userId: string
@@ -345,6 +359,7 @@ export type ProductUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   User?: Prisma.UserUpdateOneRequiredWithoutProductsNestedInput
@@ -363,6 +378,7 @@ export type ProductUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -381,6 +397,7 @@ export type ProductCreateManyInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   userId: string
@@ -394,6 +411,7 @@ export type ProductUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
 }
@@ -405,6 +423,7 @@ export type ProductUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -436,6 +455,7 @@ export type ProductCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   code?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
   condition?: Prisma.SortOrder
   photos?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -449,6 +469,7 @@ export type ProductMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   code?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
   condition?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
@@ -461,6 +482,7 @@ export type ProductMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   code?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
   condition?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
@@ -650,6 +672,7 @@ export type ProductCreateWithoutUserInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   Category?: Prisma.ProductCategoryCreateNestedOneWithoutProductsInput
@@ -667,6 +690,7 @@ export type ProductUncheckedCreateWithoutUserInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   categoryId?: string | null
@@ -713,6 +737,7 @@ export type ProductScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Product"> | string | null
   code?: Prisma.StringNullableFilter<"Product"> | string | null
   price?: Prisma.StringNullableFilter<"Product"> | string | null
+  costPrice?: Prisma.StringNullableFilter<"Product"> | string | null
   condition?: Prisma.StringNullableFilter<"Product"> | string | null
   photos?: Prisma.StringNullableListFilter<"Product">
   userId?: Prisma.StringFilter<"Product"> | string
@@ -726,6 +751,7 @@ export type ProductCreateWithoutCategoryInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   User: Prisma.UserCreateNestedOneWithoutProductsInput
@@ -743,6 +769,7 @@ export type ProductUncheckedCreateWithoutCategoryInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   userId: string
@@ -786,6 +813,7 @@ export type ProductCreateWithoutLeadsInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   User: Prisma.UserCreateNestedOneWithoutProductsInput
@@ -803,6 +831,7 @@ export type ProductUncheckedCreateWithoutLeadsInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   userId: string
@@ -836,6 +865,7 @@ export type ProductUpdateWithoutLeadsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   User?: Prisma.UserUpdateOneRequiredWithoutProductsNestedInput
@@ -853,6 +883,7 @@ export type ProductUncheckedUpdateWithoutLeadsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -870,6 +901,7 @@ export type ProductCreateWithoutLeadSaleItemsInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   User: Prisma.UserCreateNestedOneWithoutProductsInput
@@ -887,6 +919,7 @@ export type ProductUncheckedCreateWithoutLeadSaleItemsInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   userId: string
@@ -920,6 +953,7 @@ export type ProductUpdateWithoutLeadSaleItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   User?: Prisma.UserUpdateOneRequiredWithoutProductsNestedInput
@@ -937,6 +971,7 @@ export type ProductUncheckedUpdateWithoutLeadSaleItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -954,6 +989,7 @@ export type ProductCreateWithoutLeadItemsInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   User: Prisma.UserCreateNestedOneWithoutProductsInput
@@ -971,6 +1007,7 @@ export type ProductUncheckedCreateWithoutLeadItemsInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   userId: string
@@ -1004,6 +1041,7 @@ export type ProductUpdateWithoutLeadItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   User?: Prisma.UserUpdateOneRequiredWithoutProductsNestedInput
@@ -1021,6 +1059,7 @@ export type ProductUncheckedUpdateWithoutLeadItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1038,6 +1077,7 @@ export type ProductCreateWithoutAutomationsInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   User: Prisma.UserCreateNestedOneWithoutProductsInput
@@ -1055,6 +1095,7 @@ export type ProductUncheckedCreateWithoutAutomationsInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   userId: string
@@ -1088,6 +1129,7 @@ export type ProductUpdateWithoutAutomationsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   User?: Prisma.UserUpdateOneRequiredWithoutProductsNestedInput
@@ -1105,6 +1147,7 @@ export type ProductUncheckedUpdateWithoutAutomationsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1122,6 +1165,7 @@ export type ProductCreateWithoutOrderItemsInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   User: Prisma.UserCreateNestedOneWithoutProductsInput
@@ -1139,6 +1183,7 @@ export type ProductUncheckedCreateWithoutOrderItemsInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   userId: string
@@ -1172,6 +1217,7 @@ export type ProductUpdateWithoutOrderItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   User?: Prisma.UserUpdateOneRequiredWithoutProductsNestedInput
@@ -1189,6 +1235,7 @@ export type ProductUncheckedUpdateWithoutOrderItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1206,6 +1253,7 @@ export type ProductCreateManyUserInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   categoryId?: string | null
@@ -1218,6 +1266,7 @@ export type ProductUpdateWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   Category?: Prisma.ProductCategoryUpdateOneWithoutProductsNestedInput
@@ -1235,6 +1284,7 @@ export type ProductUncheckedUpdateWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1252,6 +1302,7 @@ export type ProductUncheckedUpdateManyWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1264,6 +1315,7 @@ export type ProductCreateManyCategoryInput = {
   description?: string | null
   code?: string | null
   price?: string | null
+  costPrice?: string | null
   condition?: string | null
   photos?: Prisma.ProductCreatephotosInput | string[]
   userId: string
@@ -1276,6 +1328,7 @@ export type ProductUpdateWithoutCategoryInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   User?: Prisma.UserUpdateOneRequiredWithoutProductsNestedInput
@@ -1293,6 +1346,7 @@ export type ProductUncheckedUpdateWithoutCategoryInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1310,6 +1364,7 @@ export type ProductUncheckedUpdateManyWithoutCategoryInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costPrice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   condition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   photos?: Prisma.ProductUpdatephotosInput | string[]
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1389,6 +1444,7 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   description?: boolean
   code?: boolean
   price?: boolean
+  costPrice?: boolean
   condition?: boolean
   photos?: boolean
   userId?: boolean
@@ -1410,6 +1466,7 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   description?: boolean
   code?: boolean
   price?: boolean
+  costPrice?: boolean
   condition?: boolean
   photos?: boolean
   userId?: boolean
@@ -1425,6 +1482,7 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   description?: boolean
   code?: boolean
   price?: boolean
+  costPrice?: boolean
   condition?: boolean
   photos?: boolean
   userId?: boolean
@@ -1440,13 +1498,14 @@ export type ProductSelectScalar = {
   description?: boolean
   code?: boolean
   price?: boolean
+  costPrice?: boolean
   condition?: boolean
   photos?: boolean
   userId?: boolean
   categoryId?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "title" | "description" | "code" | "price" | "condition" | "photos" | "userId" | "categoryId", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "title" | "description" | "code" | "price" | "costPrice" | "condition" | "photos" | "userId" | "categoryId", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Category?: boolean | Prisma.Product$CategoryArgs<ExtArgs>
@@ -1484,6 +1543,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     description: string | null
     code: string | null
     price: string | null
+    costPrice: string | null
     condition: string | null
     photos: string[]
     userId: string
@@ -1924,6 +1984,7 @@ export interface ProductFieldRefs {
   readonly description: Prisma.FieldRef<"Product", 'String'>
   readonly code: Prisma.FieldRef<"Product", 'String'>
   readonly price: Prisma.FieldRef<"Product", 'String'>
+  readonly costPrice: Prisma.FieldRef<"Product", 'String'>
   readonly condition: Prisma.FieldRef<"Product", 'String'>
   readonly photos: Prisma.FieldRef<"Product", 'String[]'>
   readonly userId: Prisma.FieldRef<"Product", 'String'>

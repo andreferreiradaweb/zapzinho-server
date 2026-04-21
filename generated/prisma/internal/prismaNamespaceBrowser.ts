@@ -64,6 +64,9 @@ export const ModelName = {
   Automation: 'Automation',
   BroadcastBlock: 'BroadcastBlock',
   MessageLog: 'MessageLog',
+  ContactList: 'ContactList',
+  ImportedContact: 'ImportedContact',
+  ProspectingBroadcast: 'ProspectingBroadcast',
   Customer: 'Customer',
   Address: 'Address',
   Order: 'Order',
@@ -98,10 +101,13 @@ export const UserScalarFieldEnum = {
   emailVerified: 'emailVerified',
   Role: 'Role',
   CustomerType: 'CustomerType',
+  Plan: 'Plan',
   trialExpiresAt: 'trialExpiresAt',
   onboardingMessageSentAt: 'onboardingMessageSentAt',
   wapiInstanceId: 'wapiInstanceId',
   wapiToken: 'wapiToken',
+  prospectingInstanceId: 'prospectingInstanceId',
+  prospectingToken: 'prospectingToken',
   createdAt: 'createdAt'
 } as const
 
@@ -125,6 +131,7 @@ export const ProductScalarFieldEnum = {
   description: 'description',
   code: 'code',
   price: 'price',
+  costPrice: 'costPrice',
   condition: 'condition',
   photos: 'photos',
   userId: 'userId',
@@ -274,6 +281,52 @@ export const MessageLogScalarFieldEnum = {
 } as const
 
 export type MessageLogScalarFieldEnum = (typeof MessageLogScalarFieldEnum)[keyof typeof MessageLogScalarFieldEnum]
+
+
+export const ContactListScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  createdAt: 'createdAt'
+} as const
+
+export type ContactListScalarFieldEnum = (typeof ContactListScalarFieldEnum)[keyof typeof ContactListScalarFieldEnum]
+
+
+export const ImportedContactScalarFieldEnum = {
+  id: 'id',
+  contactListId: 'contactListId',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  status: 'status',
+  warmupSentAt: 'warmupSentAt',
+  repliedAt: 'repliedAt',
+  templateSentAt: 'templateSentAt',
+  convertedLeadId: 'convertedLeadId',
+  errorMsg: 'errorMsg',
+  createdAt: 'createdAt'
+} as const
+
+export type ImportedContactScalarFieldEnum = (typeof ImportedContactScalarFieldEnum)[keyof typeof ImportedContactScalarFieldEnum]
+
+
+export const ProspectingBroadcastScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  contactListId: 'contactListId',
+  name: 'name',
+  warmupMessage: 'warmupMessage',
+  templateMessage: 'templateMessage',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  totalSent: 'totalSent',
+  totalFailed: 'totalFailed',
+  createdAt: 'createdAt'
+} as const
+
+export type ProspectingBroadcastScalarFieldEnum = (typeof ProspectingBroadcastScalarFieldEnum)[keyof typeof ProspectingBroadcastScalarFieldEnum]
 
 
 export const CustomerScalarFieldEnum = {

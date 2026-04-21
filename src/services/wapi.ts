@@ -142,6 +142,37 @@ export async function sendWhatsAppVideo({
 }
 
 /**
+ * Sends a WhatsApp text message using custom instance credentials (for prospecting).
+ */
+export async function sendWhatsAppMessageWithCredentials(
+  instanceId: string,
+  token: string,
+  phone: string,
+  message: string,
+): Promise<SendMessageResult> {
+  const normalizedPhone = phone.replace(/\D/g, '')
+  try {
+    const url = `${env.WAPI_BASE_URL}/message/send-text?instanceId=${instanceId}`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ phone: normalizedPhone, message, delayMessage: 0 }),
+    })
+    if (!response.ok) {
+      const body = await response.text()
+      return { success: false, error: `HTTP ${response.status}: ${body}` }
+    }
+    return { success: true }
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error)
+    return { success: false, error: msg }
+  }
+}
+
+/**
  * Delay helper used between broadcast sends to avoid WhatsApp rate limiting.
  */
 export function wapiDelay(): Promise<void> {

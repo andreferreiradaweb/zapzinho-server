@@ -1,0 +1,45 @@
+import { ContactList } from '@/lib/prisma'
+import { ContactListRepository } from '@/repositories/prospecting'
+import { v4 as uuid } from 'uuid'
+
+interface ImportContactListRequest {
+  userId: string
+  name: string
+  contacts: Array<{ name: string; phone: string; email?: string }>
+}
+
+interface ImportContactListResponse {
+  contactList: ContactList
+  importedCount: number
+}
+
+export class ImportContactListUseCase {
+  constructor(private contactListRepository: ContactListRepository) {}
+
+  async execute(data: ImportContactListRequest): Promise<ImportContactListResponse> {
+    const contactList = await this.contactListRepository.create({
+      id: uuid(),
+      userId: data.userId,
+      name: data.name,
+    })
+
+    const unique = this.deduplicateByPhone(data.contacts)
+
+    if (unique.length > 0) {
+      await this.contactListRepository.addContacts(contactList.id, unique)
+    }
+
+    return { contactList, importedCount: unique.length }
+  }
+
+  private deduplicateByPhone(
+    contacts: Array<{ name: string; phone: string; email?: string }>,
+  ) {
+    const seen = new Set<string>()
+    return contacts.filter((c) => {
+      if (seen.has(c.phone)) return false
+      seen.add(c.phone)
+      return true
+    })
+  }
+}

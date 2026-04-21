@@ -4,6 +4,12 @@ import { makeHandleIncomingMessage } from '@/factory/webhook/make-handle-incomin
 import { env } from '@/config/validatedEnv'
 import { addMessage as addClassificationMessage } from '@/services/lead-classification'
 import { normalizePhone } from '@/helpers/normalizePhone'
+import { PrismaContactListRepository } from '@/repositories/prisma/prospecting'
+import { PrismaMessageLogRepository } from '@/repositories/prisma/message-log'
+import { PrismaUserRepository } from '@/repositories/prisma/user'
+import { sendWhatsAppMessageWithCredentials } from '@/services/wapi'
+import { prisma } from '@/lib/prisma'
+import { v4 as uuid } from 'uuid'
 
 /**
  * POST /webhook/whatsapp
@@ -88,9 +94,64 @@ export async function whatsappWebhookController(
       addClassificationMessage(lead.id, lead.userId, message, created)
     }
 
+    // Check if this phone belongs to a prospecting contact waiting for a reply
+    handleProspectingReply(instanceId, phone, lead.userId).catch((err) =>
+      console.error('[Webhook] Prospecting reply error:', err),
+    )
+
     return reply.status(200).send({ ok: true, created, leadId: lead.id })
   } catch (err) {
     console.error('[Webhook] Error:', err)
     return reply.status(200).send({ ok: false, reason: 'instance_not_found' })
+  }
+}
+
+async function handleProspectingReply(_instanceId: string, phone: string, userId: string) {
+  const contactListRepo = new PrismaContactListRepository()
+  const contact = await contactListRepo.findContactByPhone(userId, phone)
+  if (!contact) return
+
+  await contactListRepo.updateContactStatus(contact.id, 'REPLIED', { repliedAt: new Date() })
+
+  const broadcast = await prisma.prospectingBroadcast.findFirst({
+    where: { contactListId: contact.contactListId, status: 'SENT' },
+    orderBy: { createdAt: 'desc' },
+  })
+  if (!broadcast) return
+
+  // Use the user's prospecting credentials
+  const userRepo = new PrismaUserRepository()
+  const user = await userRepo.findUserById(userId)
+  if (!user?.prospectingInstanceId || !user?.prospectingToken) return
+
+  const logRepo = new PrismaMessageLogRepository()
+  const logId = uuid()
+
+  await logRepo.create({
+    id: logId,
+    userId,
+    leadId: null,
+    phone,
+    message: broadcast.templateMessage,
+    type: 'BROADCAST',
+    status: 'PENDING',
+  })
+
+  const result = await sendWhatsAppMessageWithCredentials(
+    user.prospectingInstanceId,
+    user.prospectingToken,
+    phone,
+    broadcast.templateMessage,
+  )
+
+  if (result.success) {
+    await contactListRepo.updateContactStatus(contact.id, 'TEMPLATE_SENT', {
+      templateSentAt: new Date(),
+    })
+    await logRepo.markSent(logId)
+    console.log(`[Prospecting] ✓ Template enviado para ${phone}`)
+  } else {
+    await logRepo.markFailed(logId, result.error ?? 'unknown error')
+    console.error(`[Prospecting] ✗ Falha ao enviar template para ${phone}: ${result.error}`)
   }
 }
