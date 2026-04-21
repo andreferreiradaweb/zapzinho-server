@@ -11,6 +11,11 @@ export async function sendProspectingBroadcastController(
   const { id } = paramsSchema.parse(request.params)
   const userId = request.user.sub
 
-  await makeSendProspectingBroadcast().execute(id, userId)
-  return reply.status(200).send({ message: 'Disparo de prospecção iniciado' })
+  try {
+    await makeSendProspectingBroadcast().execute(id, userId)
+    return reply.status(200).send({ message: 'Disparo de prospecção iniciado' })
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Erro ao iniciar disparo'
+    return reply.status(400).send({ message })
+  }
 }

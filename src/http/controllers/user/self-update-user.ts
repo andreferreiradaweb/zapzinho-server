@@ -11,7 +11,7 @@ export async function SelfUpdateUserController(
 ) {
   const updateBodySchema = z.object({
     password: z.string().min(6).optional(),
-    phoneNumber: z.string().optional(),
+    phoneNumber: z.string().nullish(),
     newPassword: z
       .string()
       .min(6)
@@ -22,10 +22,10 @@ export async function SelfUpdateUserController(
     name: z.string().nullish(),
   })
   const { sub } = request.user
-  const { password, phoneNumber, newPassword, prospectingInstanceId, prospectingToken, name } =
-    updateBodySchema.parse(request.body)
 
   try {
+    const { password, phoneNumber, newPassword, prospectingInstanceId, prospectingToken, name } =
+      updateBodySchema.parse(request.body)
     const requestingUser = await prisma.user.findUnique({ where: { id: sub } })
     const isAdmin = requestingUser?.Role === Role.ADMIN
 

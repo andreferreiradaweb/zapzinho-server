@@ -6,7 +6,7 @@ import { User } from '@/lib/prisma'
 
 interface SelfUpdateUserUseCaseRequest {
   id: string
-  phoneNumber?: string
+  phoneNumber?: string | null
   password?: string
   newPassword?: string
   name?: string
@@ -61,7 +61,7 @@ export class SelfUpdateUserUseCase {
     const { Role, createdAt, email, isActive, CustomerType, trialExpiresAt, onboardingMessageSentAt, wapiInstanceId } =
       await this.userRepository.update({
         id,
-        phoneNumber,
+        phoneNumber: phoneNumber || findedUser.phoneNumber,
         name: name !== undefined ? name : findedUser.name,
         email: findedUser.email,
         Role: findedUser.Role,

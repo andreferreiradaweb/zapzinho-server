@@ -45,9 +45,16 @@ export class CreateProspectingBroadcastUseCase {
       status: 'DRAFT',
     })
 
-    const recipientCount = data.categoryFilter
-      ? await this.contactListRepository.countContactsByCategory(data.contactListId, data.categoryFilter)
-      : await this.contactListRepository.countContacts(data.contactListId)
+    let recipientCount: number
+    if (data.categoryFilter) {
+      const cats = data.categoryFilter.split(',').map((s) => s.trim())
+      const counts = await Promise.all(
+        cats.map((cat) => this.contactListRepository.countContactsByCategory(data.contactListId, cat)),
+      )
+      recipientCount = counts.reduce((a, b) => a + b, 0)
+    } else {
+      recipientCount = await this.contactListRepository.countContacts(data.contactListId)
+    }
 
     return { broadcast, recipientCount }
   }

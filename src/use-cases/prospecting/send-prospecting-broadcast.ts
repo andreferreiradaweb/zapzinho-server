@@ -47,10 +47,14 @@ export class SendProspectingBroadcastUseCase {
   ) {
     if (!broadcast) return
 
+    const allowedCategories = broadcast.categoryFilter
+      ? broadcast.categoryFilter.split(',').map((s) => s.trim())
+      : null
+
     const contacts = broadcast.ContactList.Contacts.filter(
       (c) =>
         (c.status === 'PENDING' || c.status === 'FAILED') &&
-        (!broadcast.categoryFilter || c.category === broadcast.categoryFilter),
+        (!allowedCategories || (c.category !== null && allowedCategories.includes(c.category))),
     )
 
     console.log(
