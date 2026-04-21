@@ -176,7 +176,10 @@ export async function sendWhatsAppMessageWithCredentials(
  * Delay helper used between broadcast sends to avoid WhatsApp rate limiting.
  */
 export function wapiDelay(): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, env.WAPI_DELAY_MS))
+  const ms =
+    Math.floor(Math.random() * (env.WAPI_DELAY_MAX_MS - env.WAPI_DELAY_MIN_MS + 1)) +
+    env.WAPI_DELAY_MIN_MS
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
 interface GetQrCodeResult {
