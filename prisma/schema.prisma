@@ -95,6 +95,7 @@ model Lead {
   telefone        String
   email           String?
   message         String?
+  sellerNote      String?
   Product         Product?        @relation(fields: [productId], references: [id])
   productId       String?
   Category        ProductCategory? @relation(fields: [categoryId], references: [id])
@@ -110,8 +111,6 @@ model Lead {
   MessageLogs     MessageLog[]
   LeadItems       LeadItem[]
   LeadSales       LeadSale[]
-
-  @@unique([userId, telefone])
 }
 
 model LeadSale {
