@@ -117,6 +117,7 @@ model LeadSale {
   id        String         @id @default(uuid())
   leadId    String
   userId    String
+  discount  Float          @default(0)
   createdAt DateTime       @default(now())
   Lead      Lead           @relation(fields: [leadId], references: [id], onDelete: Cascade)
   User      User           @relation(fields: [userId], references: [id])

@@ -9,6 +9,7 @@ import { randomUUID } from 'crypto'
 interface CreateLeadSaleRequest {
   leadId: string
   userId: string
+  discount: number
   items: { productId: string; quantity: number }[]
 }
 
@@ -18,7 +19,7 @@ export class CreateLeadSaleUseCase {
     private leadRepository: LeadRepository,
   ) {}
 
-  async execute({ leadId, userId, items }: CreateLeadSaleRequest): Promise<LeadSale> {
+  async execute({ leadId, userId, discount, items }: CreateLeadSaleRequest): Promise<LeadSale> {
     const lead = await this.leadRepository.findLeadById(leadId)
     if (!lead) throw new ResourceNotFound()
     if (lead.userId !== userId) throw new InvalidCredentialsError()
@@ -46,6 +47,7 @@ export class CreateLeadSaleUseCase {
       id: randomUUID(),
       leadId,
       userId,
+      discount,
       items: saleItems,
     })
 

@@ -75,16 +75,17 @@ export async function GetDashboardStatsController(
       where: { ...where, Status: LeadStatus.VENDIDO },
       select: { createdAt: true, updatedAt: true },
     }),
-    prisma.leadSaleItem.findMany({
+    prisma.leadSale.findMany({
       where: {
-        Sale: {
-          userId,
-          createdAt: { gte: from, lte: to },
-          ...(productId ? { Lead: { productId } } : {}),
-          ...(categoryId ? { Lead: { categoryId } } : {}),
-        },
+        userId,
+        createdAt: { gte: from, lte: to },
+        ...(productId ? { Lead: { productId } } : {}),
+        ...(categoryId ? { Lead: { categoryId } } : {}),
       },
-      select: { price: true, quantity: true, Product: { select: { costPrice: true } } },
+      select: {
+        discount: true,
+        Items: { select: { price: true, quantity: true, Product: { select: { costPrice: true } } } },
+      },
     }),
     prisma.lead.findMany({
       where: { userId },
@@ -136,16 +137,26 @@ export async function GetDashboardStatsController(
         )
       : null
 
-  const totalRevenue = saleItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
+  const sales = saleItems
+
+  const totalGrossRevenue = sales.reduce(
+    (acc, sale) => acc + sale.Items.reduce((s, item) => s + item.price * item.quantity, 0),
     0,
   )
 
-  const totalProfit = saleItems.reduce((acc, item) => {
-    const cost = item.Product?.costPrice ? parseFloat(item.Product.costPrice) : null
-    if (cost === null || isNaN(cost)) return acc
-    return acc + (item.price - cost) * item.quantity
+  const totalDiscount = sales.reduce((acc, sale) => acc + sale.discount, 0)
+
+  const totalRevenue = totalGrossRevenue - totalDiscount
+
+  const totalCost = sales.reduce((acc, sale) => {
+    return acc + sale.Items.reduce((s, item) => {
+      const cost = item.Product?.costPrice ? parseFloat(item.Product.costPrice) : null
+      if (cost === null || isNaN(cost)) return s
+      return s + cost * item.quantity
+    }, 0)
   }, 0)
+
+  const totalProfit = totalCost > 0 ? totalRevenue - totalCost : 0
 
   return reply.status(200).send({
     totalLeads,
@@ -154,6 +165,8 @@ export async function GetDashboardStatsController(
     leadsWithoutProduct,
     avgConversionDays,
     totalRevenue,
+    totalCost,
+    totalDiscount,
     totalProfit,
     recentLeads,
     leadsByStatus: leadsByStatus.map((s) => ({

@@ -20,14 +20,25 @@ export type LeadSaleModel = runtime.Types.Result.DefaultSelection<Prisma.$LeadSa
 
 export type AggregateLeadSale = {
   _count: LeadSaleCountAggregateOutputType | null
+  _avg: LeadSaleAvgAggregateOutputType | null
+  _sum: LeadSaleSumAggregateOutputType | null
   _min: LeadSaleMinAggregateOutputType | null
   _max: LeadSaleMaxAggregateOutputType | null
+}
+
+export type LeadSaleAvgAggregateOutputType = {
+  discount: number | null
+}
+
+export type LeadSaleSumAggregateOutputType = {
+  discount: number | null
 }
 
 export type LeadSaleMinAggregateOutputType = {
   id: string | null
   leadId: string | null
   userId: string | null
+  discount: number | null
   createdAt: Date | null
 }
 
@@ -35,6 +46,7 @@ export type LeadSaleMaxAggregateOutputType = {
   id: string | null
   leadId: string | null
   userId: string | null
+  discount: number | null
   createdAt: Date | null
 }
 
@@ -42,15 +54,25 @@ export type LeadSaleCountAggregateOutputType = {
   id: number
   leadId: number
   userId: number
+  discount: number
   createdAt: number
   _all: number
 }
 
 
+export type LeadSaleAvgAggregateInputType = {
+  discount?: true
+}
+
+export type LeadSaleSumAggregateInputType = {
+  discount?: true
+}
+
 export type LeadSaleMinAggregateInputType = {
   id?: true
   leadId?: true
   userId?: true
+  discount?: true
   createdAt?: true
 }
 
@@ -58,6 +80,7 @@ export type LeadSaleMaxAggregateInputType = {
   id?: true
   leadId?: true
   userId?: true
+  discount?: true
   createdAt?: true
 }
 
@@ -65,6 +88,7 @@ export type LeadSaleCountAggregateInputType = {
   id?: true
   leadId?: true
   userId?: true
+  discount?: true
   createdAt?: true
   _all?: true
 }
@@ -107,6 +131,18 @@ export type LeadSaleAggregateArgs<ExtArgs extends runtime.Types.Extensions.Inter
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: LeadSaleAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: LeadSaleSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: LeadSaleMinAggregateInputType
@@ -137,6 +173,8 @@ export type LeadSaleGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   _count?: LeadSaleCountAggregateInputType | true
+  _avg?: LeadSaleAvgAggregateInputType
+  _sum?: LeadSaleSumAggregateInputType
   _min?: LeadSaleMinAggregateInputType
   _max?: LeadSaleMaxAggregateInputType
 }
@@ -145,8 +183,11 @@ export type LeadSaleGroupByOutputType = {
   id: string
   leadId: string
   userId: string
+  discount: number
   createdAt: Date
   _count: LeadSaleCountAggregateOutputType | null
+  _avg: LeadSaleAvgAggregateOutputType | null
+  _sum: LeadSaleSumAggregateOutputType | null
   _min: LeadSaleMinAggregateOutputType | null
   _max: LeadSaleMaxAggregateOutputType | null
 }
@@ -173,6 +214,7 @@ export type LeadSaleWhereInput = {
   id?: Prisma.StringFilter<"LeadSale"> | string
   leadId?: Prisma.StringFilter<"LeadSale"> | string
   userId?: Prisma.StringFilter<"LeadSale"> | string
+  discount?: Prisma.FloatFilter<"LeadSale"> | number
   createdAt?: Prisma.DateTimeFilter<"LeadSale"> | Date | string
   Lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -183,6 +225,7 @@ export type LeadSaleOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   Lead?: Prisma.LeadOrderByWithRelationInput
   User?: Prisma.UserOrderByWithRelationInput
@@ -196,6 +239,7 @@ export type LeadSaleWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.LeadSaleWhereInput | Prisma.LeadSaleWhereInput[]
   leadId?: Prisma.StringFilter<"LeadSale"> | string
   userId?: Prisma.StringFilter<"LeadSale"> | string
+  discount?: Prisma.FloatFilter<"LeadSale"> | number
   createdAt?: Prisma.DateTimeFilter<"LeadSale"> | Date | string
   Lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -206,10 +250,13 @@ export type LeadSaleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.LeadSaleCountOrderByAggregateInput
+  _avg?: Prisma.LeadSaleAvgOrderByAggregateInput
   _max?: Prisma.LeadSaleMaxOrderByAggregateInput
   _min?: Prisma.LeadSaleMinOrderByAggregateInput
+  _sum?: Prisma.LeadSaleSumOrderByAggregateInput
 }
 
 export type LeadSaleScalarWhereWithAggregatesInput = {
@@ -219,11 +266,13 @@ export type LeadSaleScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"LeadSale"> | string
   leadId?: Prisma.StringWithAggregatesFilter<"LeadSale"> | string
   userId?: Prisma.StringWithAggregatesFilter<"LeadSale"> | string
+  discount?: Prisma.FloatWithAggregatesFilter<"LeadSale"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"LeadSale"> | Date | string
 }
 
 export type LeadSaleCreateInput = {
   id?: string
+  discount?: number
   createdAt?: Date | string
   Lead: Prisma.LeadCreateNestedOneWithoutLeadSalesInput
   User: Prisma.UserCreateNestedOneWithoutLeadSalesInput
@@ -234,12 +283,14 @@ export type LeadSaleUncheckedCreateInput = {
   id?: string
   leadId: string
   userId: string
+  discount?: number
   createdAt?: Date | string
   Items?: Prisma.LeadSaleItemUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type LeadSaleUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Lead?: Prisma.LeadUpdateOneRequiredWithoutLeadSalesNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadSalesNestedInput
@@ -250,6 +301,7 @@ export type LeadSaleUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Items?: Prisma.LeadSaleItemUncheckedUpdateManyWithoutSaleNestedInput
 }
@@ -258,11 +310,13 @@ export type LeadSaleCreateManyInput = {
   id?: string
   leadId: string
   userId: string
+  discount?: number
   createdAt?: Date | string
 }
 
 export type LeadSaleUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -270,6 +324,7 @@ export type LeadSaleUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -287,13 +342,19 @@ export type LeadSaleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type LeadSaleAvgOrderByAggregateInput = {
+  discount?: Prisma.SortOrder
 }
 
 export type LeadSaleMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -301,7 +362,12 @@ export type LeadSaleMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type LeadSaleSumOrderByAggregateInput = {
+  discount?: Prisma.SortOrder
 }
 
 export type LeadSaleScalarRelationFilter = {
@@ -393,6 +459,14 @@ export type LeadSaleUncheckedUpdateManyWithoutLeadNestedInput = {
   deleteMany?: Prisma.LeadSaleScalarWhereInput | Prisma.LeadSaleScalarWhereInput[]
 }
 
+export type FloatFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type LeadSaleCreateNestedOneWithoutItemsInput = {
   create?: Prisma.XOR<Prisma.LeadSaleCreateWithoutItemsInput, Prisma.LeadSaleUncheckedCreateWithoutItemsInput>
   connectOrCreate?: Prisma.LeadSaleCreateOrConnectWithoutItemsInput
@@ -409,6 +483,7 @@ export type LeadSaleUpdateOneRequiredWithoutItemsNestedInput = {
 
 export type LeadSaleCreateWithoutUserInput = {
   id?: string
+  discount?: number
   createdAt?: Date | string
   Lead: Prisma.LeadCreateNestedOneWithoutLeadSalesInput
   Items?: Prisma.LeadSaleItemCreateNestedManyWithoutSaleInput
@@ -417,6 +492,7 @@ export type LeadSaleCreateWithoutUserInput = {
 export type LeadSaleUncheckedCreateWithoutUserInput = {
   id?: string
   leadId: string
+  discount?: number
   createdAt?: Date | string
   Items?: Prisma.LeadSaleItemUncheckedCreateNestedManyWithoutSaleInput
 }
@@ -454,11 +530,13 @@ export type LeadSaleScalarWhereInput = {
   id?: Prisma.StringFilter<"LeadSale"> | string
   leadId?: Prisma.StringFilter<"LeadSale"> | string
   userId?: Prisma.StringFilter<"LeadSale"> | string
+  discount?: Prisma.FloatFilter<"LeadSale"> | number
   createdAt?: Prisma.DateTimeFilter<"LeadSale"> | Date | string
 }
 
 export type LeadSaleCreateWithoutLeadInput = {
   id?: string
+  discount?: number
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutLeadSalesInput
   Items?: Prisma.LeadSaleItemCreateNestedManyWithoutSaleInput
@@ -467,6 +545,7 @@ export type LeadSaleCreateWithoutLeadInput = {
 export type LeadSaleUncheckedCreateWithoutLeadInput = {
   id?: string
   userId: string
+  discount?: number
   createdAt?: Date | string
   Items?: Prisma.LeadSaleItemUncheckedCreateNestedManyWithoutSaleInput
 }
@@ -499,6 +578,7 @@ export type LeadSaleUpdateManyWithWhereWithoutLeadInput = {
 
 export type LeadSaleCreateWithoutItemsInput = {
   id?: string
+  discount?: number
   createdAt?: Date | string
   Lead: Prisma.LeadCreateNestedOneWithoutLeadSalesInput
   User: Prisma.UserCreateNestedOneWithoutLeadSalesInput
@@ -508,6 +588,7 @@ export type LeadSaleUncheckedCreateWithoutItemsInput = {
   id?: string
   leadId: string
   userId: string
+  discount?: number
   createdAt?: Date | string
 }
 
@@ -529,6 +610,7 @@ export type LeadSaleUpdateToOneWithWhereWithoutItemsInput = {
 
 export type LeadSaleUpdateWithoutItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Lead?: Prisma.LeadUpdateOneRequiredWithoutLeadSalesNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadSalesNestedInput
@@ -538,17 +620,20 @@ export type LeadSaleUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadSaleCreateManyUserInput = {
   id?: string
   leadId: string
+  discount?: number
   createdAt?: Date | string
 }
 
 export type LeadSaleUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Lead?: Prisma.LeadUpdateOneRequiredWithoutLeadSalesNestedInput
   Items?: Prisma.LeadSaleItemUpdateManyWithoutSaleNestedInput
@@ -557,6 +642,7 @@ export type LeadSaleUpdateWithoutUserInput = {
 export type LeadSaleUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Items?: Prisma.LeadSaleItemUncheckedUpdateManyWithoutSaleNestedInput
 }
@@ -564,17 +650,20 @@ export type LeadSaleUncheckedUpdateWithoutUserInput = {
 export type LeadSaleUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadSaleCreateManyLeadInput = {
   id?: string
   userId: string
+  discount?: number
   createdAt?: Date | string
 }
 
 export type LeadSaleUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutLeadSalesNestedInput
   Items?: Prisma.LeadSaleItemUpdateManyWithoutSaleNestedInput
@@ -583,6 +672,7 @@ export type LeadSaleUpdateWithoutLeadInput = {
 export type LeadSaleUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Items?: Prisma.LeadSaleItemUncheckedUpdateManyWithoutSaleNestedInput
 }
@@ -590,6 +680,7 @@ export type LeadSaleUncheckedUpdateWithoutLeadInput = {
 export type LeadSaleUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -628,6 +719,7 @@ export type LeadSaleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   id?: boolean
   leadId?: boolean
   userId?: boolean
+  discount?: boolean
   createdAt?: boolean
   Lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -639,6 +731,7 @@ export type LeadSaleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   leadId?: boolean
   userId?: boolean
+  discount?: boolean
   createdAt?: boolean
   Lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -648,6 +741,7 @@ export type LeadSaleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   leadId?: boolean
   userId?: boolean
+  discount?: boolean
   createdAt?: boolean
   Lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -657,10 +751,11 @@ export type LeadSaleSelectScalar = {
   id?: boolean
   leadId?: boolean
   userId?: boolean
+  discount?: boolean
   createdAt?: boolean
 }
 
-export type LeadSaleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "userId" | "createdAt", ExtArgs["result"]["leadSale"]>
+export type LeadSaleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "userId" | "discount" | "createdAt", ExtArgs["result"]["leadSale"]>
 export type LeadSaleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -687,6 +782,7 @@ export type $LeadSalePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     id: string
     leadId: string
     userId: string
+    discount: number
     createdAt: Date
   }, ExtArgs["result"]["leadSale"]>
   composites: {}
@@ -1117,6 +1213,7 @@ export interface LeadSaleFieldRefs {
   readonly id: Prisma.FieldRef<"LeadSale", 'String'>
   readonly leadId: Prisma.FieldRef<"LeadSale", 'String'>
   readonly userId: Prisma.FieldRef<"LeadSale", 'String'>
+  readonly discount: Prisma.FieldRef<"LeadSale", 'Float'>
   readonly createdAt: Prisma.FieldRef<"LeadSale", 'DateTime'>
 }
     

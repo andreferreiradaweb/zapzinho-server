@@ -167,6 +167,7 @@ export const LeadSaleScalarFieldEnum = {
   id: 'id',
   leadId: 'leadId',
   userId: 'userId',
+  discount: 'discount',
   createdAt: 'createdAt'
 } as const
 

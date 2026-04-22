@@ -5,6 +5,7 @@ import { CreateLeadSaleFactory } from '@/factory/lead-sale/create-lead-sale'
 
 const bodySchema = z.object({
   leadId: z.string().uuid(),
+  discount: z.number().min(0).default(0),
   items: z.array(z.object({
     productId: z.string().uuid(),
     quantity: z.number().int().min(1).default(1),
@@ -17,9 +18,9 @@ export async function CreateLeadSaleController(
 ) {
   try {
     const { sub } = request.user
-    const { leadId, items } = bodySchema.parse(request.body)
+    const { leadId, items, discount } = bodySchema.parse(request.body)
     const useCase = CreateLeadSaleFactory()
-    const sale = await useCase.execute({ leadId, userId: sub, items })
+    const sale = await useCase.execute({ leadId, userId: sub, items, discount })
     return reply.status(201).send(sale)
   } catch (error) {
     handleSpecificError(error, reply)

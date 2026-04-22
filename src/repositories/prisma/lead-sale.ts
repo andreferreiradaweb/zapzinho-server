@@ -6,6 +6,7 @@ export class PrismaLeadSaleRepository implements LeadSaleRepository {
     id: string
     leadId: string
     userId: string
+    discount: number
     items: LeadSaleItemInput[]
   }) {
     return prisma.leadSale.create({
@@ -13,6 +14,7 @@ export class PrismaLeadSaleRepository implements LeadSaleRepository {
         id: data.id,
         leadId: data.leadId,
         userId: data.userId,
+        discount: data.discount,
         Items: {
           create: data.items.map((item) => ({
             id: require('crypto').randomUUID(),
@@ -32,10 +34,55 @@ export class PrismaLeadSaleRepository implements LeadSaleRepository {
       include: {
         Items: {
           include: {
-            Product: { select: { title: true, price: true } },
+            Product: { select: { title: true, price: true, costPrice: true } },
           },
         },
       },
     }) as Promise<LeadSaleWithItems[]>
+  }
+
+  async findById(id: string): Promise<LeadSaleWithItems | null> {
+    return prisma.leadSale.findUnique({
+      where: { id },
+      include: {
+        Items: {
+          include: {
+            Product: { select: { title: true, price: true, costPrice: true } },
+          },
+        },
+      },
+    }) as Promise<LeadSaleWithItems | null>
+  }
+
+  async update(data: {
+    id: string
+    userId: string
+    discount: number
+    items: LeadSaleItemInput[]
+  }): Promise<LeadSaleWithItems> {
+    return prisma.$transaction(async (tx) => {
+      await tx.leadSaleItem.deleteMany({ where: { saleId: data.id } })
+      return tx.leadSale.update({
+        where: { id: data.id, userId: data.userId },
+        data: {
+          discount: data.discount,
+          Items: {
+            create: data.items.map((item) => ({
+              id: require('crypto').randomUUID(),
+              productId: item.productId,
+              quantity: item.quantity,
+              price: item.price,
+            })),
+          },
+        },
+        include: {
+          Items: {
+            include: {
+              Product: { select: { title: true, price: true, costPrice: true } },
+            },
+          },
+        },
+      })
+    }) as Promise<LeadSaleWithItems>
   }
 }
