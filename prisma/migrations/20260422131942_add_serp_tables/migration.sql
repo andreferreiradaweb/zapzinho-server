@@ -27,9 +27,6 @@ CREATE TABLE "SerpSearchOffset" (
 -- CreateIndex
 CREATE UNIQUE INDEX "SerpSearchOffset_userId_queryKey_key" ON "SerpSearchOffset"("userId", "queryKey");
 
--- CreateIndex
-CREATE UNIQUE INDEX "Lead_userId_telefone_key" ON "Lead"("userId", "telefone");
-
 -- AddForeignKey
 ALTER TABLE "SerpSearchLog" ADD CONSTRAINT "SerpSearchLog_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
