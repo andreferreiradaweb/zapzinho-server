@@ -144,3 +144,13 @@ export type OrderItem = Prisma.OrderItemModel
  * 
  */
 export type Payment = Prisma.PaymentModel
+/**
+ * Model SerpSearchLog
+ * 
+ */
+export type SerpSearchLog = Prisma.SerpSearchLogModel
+/**
+ * Model SerpSearchOffset
+ * 
+ */
+export type SerpSearchOffset = Prisma.SerpSearchOffsetModel

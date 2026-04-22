@@ -71,7 +71,9 @@ export const ModelName = {
   Address: 'Address',
   Order: 'Order',
   OrderItem: 'OrderItem',
-  Payment: 'Payment'
+  Payment: 'Payment',
+  SerpSearchLog: 'SerpSearchLog',
+  SerpSearchOffset: 'SerpSearchOffset'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -260,7 +262,8 @@ export type AutomationScalarFieldEnum = (typeof AutomationScalarFieldEnum)[keyof
 export const BroadcastBlockScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  leadId: 'leadId',
+  phone: 'phone',
+  name: 'name',
   createdAt: 'createdAt'
 } as const
 
@@ -392,6 +395,26 @@ export const PaymentScalarFieldEnum = {
 } as const
 
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const SerpSearchLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type SerpSearchLogScalarFieldEnum = (typeof SerpSearchLogScalarFieldEnum)[keyof typeof SerpSearchLogScalarFieldEnum]
+
+
+export const SerpSearchOffsetScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  queryKey: 'queryKey',
+  nextStart: 'nextStart',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SerpSearchOffsetScalarFieldEnum = (typeof SerpSearchOffsetScalarFieldEnum)[keyof typeof SerpSearchOffsetScalarFieldEnum]
 
 
 export const SortOrder = {

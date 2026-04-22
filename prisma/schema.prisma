@@ -37,6 +37,8 @@ model User {
   LeadSales                    LeadSale[]
   ContactLists                 ContactList[]
   ProspectingBroadcasts        ProspectingBroadcast[]
+  SerpSearchLogs               SerpSearchLog[]
+  SerpSearchOffsets            SerpSearchOffset[]
 }
 
 enum UserPlan {
@@ -277,6 +279,8 @@ model ContactList {
   id                    String                 @id @default(uuid())
   userId                String
   name                  String
+  serpQuery             String?
+  serpLocation          String?
   createdAt             DateTime               @default(now())
   User                  User                   @relation(fields: [userId], references: [id])
   Contacts              ImportedContact[]
@@ -404,4 +408,22 @@ enum PaymentStatus {
   PENDENTE
   APROVADO
   RECUSADO
+}
+
+model SerpSearchLog {
+  id        String   @id @default(uuid())
+  userId    String
+  createdAt DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id])
+}
+
+model SerpSearchOffset {
+  id        String   @id @default(uuid())
+  userId    String
+  queryKey  String
+  nextStart Int      @default(0)
+  updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, queryKey])
 }

@@ -10,9 +10,11 @@ import { deleteContactListController } from './delete-contact-list'
 import { createProspectingBroadcastController } from './create-prospecting-broadcast'
 import { sendProspectingBroadcastController } from './send-prospecting-broadcast'
 import { listProspectingBroadcastsController } from './list-prospecting-broadcasts'
+import { searchContactsController } from './search-contacts'
 
 export async function prospectingRoutes(app: FastifyInstance) {
   // Contact lists
+  app.get('/contact-list/search', { onRequest: [verifyJwt] }, searchContactsController)
   app.post('/contact-list', { onRequest: [verifyJwt] }, importContactListController)
   app.get('/contact-list', { onRequest: [verifyJwt] }, listContactListsController)
   app.get('/contact-list/:id', { onRequest: [verifyJwt] }, getContactListController)

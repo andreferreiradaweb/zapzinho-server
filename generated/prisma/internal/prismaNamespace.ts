@@ -404,7 +404,9 @@ export const ModelName = {
   Address: 'Address',
   Order: 'Order',
   OrderItem: 'OrderItem',
-  Payment: 'Payment'
+  Payment: 'Payment',
+  SerpSearchLog: 'SerpSearchLog',
+  SerpSearchOffset: 'SerpSearchOffset'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -420,7 +422,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "productCategory" | "product" | "lead" | "leadSale" | "leadSaleItem" | "leadItem" | "messageTemplate" | "broadcast" | "broadcastLead" | "automation" | "broadcastBlock" | "messageLog" | "contactList" | "importedContact" | "prospectingBroadcast" | "customer" | "address" | "order" | "orderItem" | "payment"
+    modelProps: "user" | "productCategory" | "product" | "lead" | "leadSale" | "leadSaleItem" | "leadItem" | "messageTemplate" | "broadcast" | "broadcastLead" | "automation" | "broadcastBlock" | "messageLog" | "contactList" | "importedContact" | "prospectingBroadcast" | "customer" | "address" | "order" | "orderItem" | "payment" | "serpSearchLog" | "serpSearchOffset"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1978,6 +1980,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SerpSearchLog: {
+      payload: Prisma.$SerpSearchLogPayload<ExtArgs>
+      fields: Prisma.SerpSearchLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SerpSearchLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SerpSearchLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchLogPayload>
+        }
+        findFirst: {
+          args: Prisma.SerpSearchLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SerpSearchLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchLogPayload>
+        }
+        findMany: {
+          args: Prisma.SerpSearchLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchLogPayload>[]
+        }
+        create: {
+          args: Prisma.SerpSearchLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchLogPayload>
+        }
+        createMany: {
+          args: Prisma.SerpSearchLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SerpSearchLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchLogPayload>[]
+        }
+        delete: {
+          args: Prisma.SerpSearchLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchLogPayload>
+        }
+        update: {
+          args: Prisma.SerpSearchLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.SerpSearchLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SerpSearchLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SerpSearchLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.SerpSearchLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchLogPayload>
+        }
+        aggregate: {
+          args: Prisma.SerpSearchLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSerpSearchLog>
+        }
+        groupBy: {
+          args: Prisma.SerpSearchLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SerpSearchLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SerpSearchLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SerpSearchLogCountAggregateOutputType> | number
+        }
+      }
+    }
+    SerpSearchOffset: {
+      payload: Prisma.$SerpSearchOffsetPayload<ExtArgs>
+      fields: Prisma.SerpSearchOffsetFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SerpSearchOffsetFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchOffsetPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SerpSearchOffsetFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchOffsetPayload>
+        }
+        findFirst: {
+          args: Prisma.SerpSearchOffsetFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchOffsetPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SerpSearchOffsetFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchOffsetPayload>
+        }
+        findMany: {
+          args: Prisma.SerpSearchOffsetFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchOffsetPayload>[]
+        }
+        create: {
+          args: Prisma.SerpSearchOffsetCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchOffsetPayload>
+        }
+        createMany: {
+          args: Prisma.SerpSearchOffsetCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SerpSearchOffsetCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchOffsetPayload>[]
+        }
+        delete: {
+          args: Prisma.SerpSearchOffsetDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchOffsetPayload>
+        }
+        update: {
+          args: Prisma.SerpSearchOffsetUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchOffsetPayload>
+        }
+        deleteMany: {
+          args: Prisma.SerpSearchOffsetDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SerpSearchOffsetUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SerpSearchOffsetUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchOffsetPayload>[]
+        }
+        upsert: {
+          args: Prisma.SerpSearchOffsetUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SerpSearchOffsetPayload>
+        }
+        aggregate: {
+          args: Prisma.SerpSearchOffsetAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSerpSearchOffset>
+        }
+        groupBy: {
+          args: Prisma.SerpSearchOffsetGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SerpSearchOffsetGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SerpSearchOffsetCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SerpSearchOffsetCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2187,7 +2337,8 @@ export type AutomationScalarFieldEnum = (typeof AutomationScalarFieldEnum)[keyof
 export const BroadcastBlockScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  leadId: 'leadId',
+  phone: 'phone',
+  name: 'name',
   createdAt: 'createdAt'
 } as const
 
@@ -2319,6 +2470,26 @@ export const PaymentScalarFieldEnum = {
 } as const
 
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const SerpSearchLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type SerpSearchLogScalarFieldEnum = (typeof SerpSearchLogScalarFieldEnum)[keyof typeof SerpSearchLogScalarFieldEnum]
+
+
+export const SerpSearchOffsetScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  queryKey: 'queryKey',
+  nextStart: 'nextStart',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SerpSearchOffsetScalarFieldEnum = (typeof SerpSearchOffsetScalarFieldEnum)[keyof typeof SerpSearchOffsetScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2683,6 +2854,8 @@ export type GlobalOmitConfig = {
   order?: Prisma.OrderOmit
   orderItem?: Prisma.OrderItemOmit
   payment?: Prisma.PaymentOmit
+  serpSearchLog?: Prisma.SerpSearchLogOmit
+  serpSearchOffset?: Prisma.SerpSearchOffsetOmit
 }
 
 /* Types for Logging */

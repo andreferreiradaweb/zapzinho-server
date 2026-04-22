@@ -22,6 +22,9 @@ const envSchema = z.object({
   CLOUDINARY_CLOUD_NAME: z.string().default(''),
   CLOUDINARY_API_KEY: z.string().default(''),
   CLOUDINARY_API_SECRET: z.string().default(''),
+  SERP_API_KEY: z.string().default(''),
+  SERP_DAILY_LIMIT: z.coerce.number().default(3),
+  CONTACT_LIST_MAX: z.coerce.number().default(300),
 })
 
 const _env = envSchema.safeParse(process.env)

@@ -27,21 +27,24 @@ export type AggregateBroadcastBlock = {
 export type BroadcastBlockMinAggregateOutputType = {
   id: string | null
   userId: string | null
-  leadId: string | null
+  phone: string | null
+  name: string | null
   createdAt: Date | null
 }
 
 export type BroadcastBlockMaxAggregateOutputType = {
   id: string | null
   userId: string | null
-  leadId: string | null
+  phone: string | null
+  name: string | null
   createdAt: Date | null
 }
 
 export type BroadcastBlockCountAggregateOutputType = {
   id: number
   userId: number
-  leadId: number
+  phone: number
+  name: number
   createdAt: number
   _all: number
 }
@@ -50,21 +53,24 @@ export type BroadcastBlockCountAggregateOutputType = {
 export type BroadcastBlockMinAggregateInputType = {
   id?: true
   userId?: true
-  leadId?: true
+  phone?: true
+  name?: true
   createdAt?: true
 }
 
 export type BroadcastBlockMaxAggregateInputType = {
   id?: true
   userId?: true
-  leadId?: true
+  phone?: true
+  name?: true
   createdAt?: true
 }
 
 export type BroadcastBlockCountAggregateInputType = {
   id?: true
   userId?: true
-  leadId?: true
+  phone?: true
+  name?: true
   createdAt?: true
   _all?: true
 }
@@ -144,7 +150,8 @@ export type BroadcastBlockGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 export type BroadcastBlockGroupByOutputType = {
   id: string
   userId: string
-  leadId: string
+  phone: string
+  name: string | null
   createdAt: Date
   _count: BroadcastBlockCountAggregateOutputType | null
   _min: BroadcastBlockMinAggregateOutputType | null
@@ -172,38 +179,39 @@ export type BroadcastBlockWhereInput = {
   NOT?: Prisma.BroadcastBlockWhereInput | Prisma.BroadcastBlockWhereInput[]
   id?: Prisma.StringFilter<"BroadcastBlock"> | string
   userId?: Prisma.StringFilter<"BroadcastBlock"> | string
-  leadId?: Prisma.StringFilter<"BroadcastBlock"> | string
+  phone?: Prisma.StringFilter<"BroadcastBlock"> | string
+  name?: Prisma.StringNullableFilter<"BroadcastBlock"> | string | null
   createdAt?: Prisma.DateTimeFilter<"BroadcastBlock"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  Lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
 }
 
 export type BroadcastBlockOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  leadId?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  name?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   User?: Prisma.UserOrderByWithRelationInput
-  Lead?: Prisma.LeadOrderByWithRelationInput
 }
 
 export type BroadcastBlockWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  userId_leadId?: Prisma.BroadcastBlockUserIdLeadIdCompoundUniqueInput
+  userId_phone?: Prisma.BroadcastBlockUserIdPhoneCompoundUniqueInput
   AND?: Prisma.BroadcastBlockWhereInput | Prisma.BroadcastBlockWhereInput[]
   OR?: Prisma.BroadcastBlockWhereInput[]
   NOT?: Prisma.BroadcastBlockWhereInput | Prisma.BroadcastBlockWhereInput[]
   userId?: Prisma.StringFilter<"BroadcastBlock"> | string
-  leadId?: Prisma.StringFilter<"BroadcastBlock"> | string
+  phone?: Prisma.StringFilter<"BroadcastBlock"> | string
+  name?: Prisma.StringNullableFilter<"BroadcastBlock"> | string | null
   createdAt?: Prisma.DateTimeFilter<"BroadcastBlock"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  Lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
-}, "id" | "userId_leadId">
+}, "id" | "userId_phone">
 
 export type BroadcastBlockOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  leadId?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  name?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.BroadcastBlockCountOrderByAggregateInput
   _max?: Prisma.BroadcastBlockMaxOrderByAggregateInput
@@ -216,54 +224,63 @@ export type BroadcastBlockScalarWhereWithAggregatesInput = {
   NOT?: Prisma.BroadcastBlockScalarWhereWithAggregatesInput | Prisma.BroadcastBlockScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"BroadcastBlock"> | string
   userId?: Prisma.StringWithAggregatesFilter<"BroadcastBlock"> | string
-  leadId?: Prisma.StringWithAggregatesFilter<"BroadcastBlock"> | string
+  phone?: Prisma.StringWithAggregatesFilter<"BroadcastBlock"> | string
+  name?: Prisma.StringNullableWithAggregatesFilter<"BroadcastBlock"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"BroadcastBlock"> | Date | string
 }
 
 export type BroadcastBlockCreateInput = {
   id?: string
+  phone: string
+  name?: string | null
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutBroadcastBlocksInput
-  Lead: Prisma.LeadCreateNestedOneWithoutBroadcastBlocksInput
 }
 
 export type BroadcastBlockUncheckedCreateInput = {
   id?: string
   userId: string
-  leadId: string
+  phone: string
+  name?: string | null
   createdAt?: Date | string
 }
 
 export type BroadcastBlockUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutBroadcastBlocksNestedInput
-  Lead?: Prisma.LeadUpdateOneRequiredWithoutBroadcastBlocksNestedInput
 }
 
 export type BroadcastBlockUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  leadId?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BroadcastBlockCreateManyInput = {
   id?: string
   userId: string
-  leadId: string
+  phone: string
+  name?: string | null
   createdAt?: Date | string
 }
 
 export type BroadcastBlockUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BroadcastBlockUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  leadId?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -277,29 +294,32 @@ export type BroadcastBlockOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type BroadcastBlockUserIdLeadIdCompoundUniqueInput = {
+export type BroadcastBlockUserIdPhoneCompoundUniqueInput = {
   userId: string
-  leadId: string
+  phone: string
 }
 
 export type BroadcastBlockCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  leadId?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type BroadcastBlockMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  leadId?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type BroadcastBlockMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  leadId?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -345,57 +365,17 @@ export type BroadcastBlockUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.BroadcastBlockScalarWhereInput | Prisma.BroadcastBlockScalarWhereInput[]
 }
 
-export type BroadcastBlockCreateNestedManyWithoutLeadInput = {
-  create?: Prisma.XOR<Prisma.BroadcastBlockCreateWithoutLeadInput, Prisma.BroadcastBlockUncheckedCreateWithoutLeadInput> | Prisma.BroadcastBlockCreateWithoutLeadInput[] | Prisma.BroadcastBlockUncheckedCreateWithoutLeadInput[]
-  connectOrCreate?: Prisma.BroadcastBlockCreateOrConnectWithoutLeadInput | Prisma.BroadcastBlockCreateOrConnectWithoutLeadInput[]
-  createMany?: Prisma.BroadcastBlockCreateManyLeadInputEnvelope
-  connect?: Prisma.BroadcastBlockWhereUniqueInput | Prisma.BroadcastBlockWhereUniqueInput[]
-}
-
-export type BroadcastBlockUncheckedCreateNestedManyWithoutLeadInput = {
-  create?: Prisma.XOR<Prisma.BroadcastBlockCreateWithoutLeadInput, Prisma.BroadcastBlockUncheckedCreateWithoutLeadInput> | Prisma.BroadcastBlockCreateWithoutLeadInput[] | Prisma.BroadcastBlockUncheckedCreateWithoutLeadInput[]
-  connectOrCreate?: Prisma.BroadcastBlockCreateOrConnectWithoutLeadInput | Prisma.BroadcastBlockCreateOrConnectWithoutLeadInput[]
-  createMany?: Prisma.BroadcastBlockCreateManyLeadInputEnvelope
-  connect?: Prisma.BroadcastBlockWhereUniqueInput | Prisma.BroadcastBlockWhereUniqueInput[]
-}
-
-export type BroadcastBlockUpdateManyWithoutLeadNestedInput = {
-  create?: Prisma.XOR<Prisma.BroadcastBlockCreateWithoutLeadInput, Prisma.BroadcastBlockUncheckedCreateWithoutLeadInput> | Prisma.BroadcastBlockCreateWithoutLeadInput[] | Prisma.BroadcastBlockUncheckedCreateWithoutLeadInput[]
-  connectOrCreate?: Prisma.BroadcastBlockCreateOrConnectWithoutLeadInput | Prisma.BroadcastBlockCreateOrConnectWithoutLeadInput[]
-  upsert?: Prisma.BroadcastBlockUpsertWithWhereUniqueWithoutLeadInput | Prisma.BroadcastBlockUpsertWithWhereUniqueWithoutLeadInput[]
-  createMany?: Prisma.BroadcastBlockCreateManyLeadInputEnvelope
-  set?: Prisma.BroadcastBlockWhereUniqueInput | Prisma.BroadcastBlockWhereUniqueInput[]
-  disconnect?: Prisma.BroadcastBlockWhereUniqueInput | Prisma.BroadcastBlockWhereUniqueInput[]
-  delete?: Prisma.BroadcastBlockWhereUniqueInput | Prisma.BroadcastBlockWhereUniqueInput[]
-  connect?: Prisma.BroadcastBlockWhereUniqueInput | Prisma.BroadcastBlockWhereUniqueInput[]
-  update?: Prisma.BroadcastBlockUpdateWithWhereUniqueWithoutLeadInput | Prisma.BroadcastBlockUpdateWithWhereUniqueWithoutLeadInput[]
-  updateMany?: Prisma.BroadcastBlockUpdateManyWithWhereWithoutLeadInput | Prisma.BroadcastBlockUpdateManyWithWhereWithoutLeadInput[]
-  deleteMany?: Prisma.BroadcastBlockScalarWhereInput | Prisma.BroadcastBlockScalarWhereInput[]
-}
-
-export type BroadcastBlockUncheckedUpdateManyWithoutLeadNestedInput = {
-  create?: Prisma.XOR<Prisma.BroadcastBlockCreateWithoutLeadInput, Prisma.BroadcastBlockUncheckedCreateWithoutLeadInput> | Prisma.BroadcastBlockCreateWithoutLeadInput[] | Prisma.BroadcastBlockUncheckedCreateWithoutLeadInput[]
-  connectOrCreate?: Prisma.BroadcastBlockCreateOrConnectWithoutLeadInput | Prisma.BroadcastBlockCreateOrConnectWithoutLeadInput[]
-  upsert?: Prisma.BroadcastBlockUpsertWithWhereUniqueWithoutLeadInput | Prisma.BroadcastBlockUpsertWithWhereUniqueWithoutLeadInput[]
-  createMany?: Prisma.BroadcastBlockCreateManyLeadInputEnvelope
-  set?: Prisma.BroadcastBlockWhereUniqueInput | Prisma.BroadcastBlockWhereUniqueInput[]
-  disconnect?: Prisma.BroadcastBlockWhereUniqueInput | Prisma.BroadcastBlockWhereUniqueInput[]
-  delete?: Prisma.BroadcastBlockWhereUniqueInput | Prisma.BroadcastBlockWhereUniqueInput[]
-  connect?: Prisma.BroadcastBlockWhereUniqueInput | Prisma.BroadcastBlockWhereUniqueInput[]
-  update?: Prisma.BroadcastBlockUpdateWithWhereUniqueWithoutLeadInput | Prisma.BroadcastBlockUpdateWithWhereUniqueWithoutLeadInput[]
-  updateMany?: Prisma.BroadcastBlockUpdateManyWithWhereWithoutLeadInput | Prisma.BroadcastBlockUpdateManyWithWhereWithoutLeadInput[]
-  deleteMany?: Prisma.BroadcastBlockScalarWhereInput | Prisma.BroadcastBlockScalarWhereInput[]
-}
-
 export type BroadcastBlockCreateWithoutUserInput = {
   id?: string
+  phone: string
+  name?: string | null
   createdAt?: Date | string
-  Lead: Prisma.LeadCreateNestedOneWithoutBroadcastBlocksInput
 }
 
 export type BroadcastBlockUncheckedCreateWithoutUserInput = {
   id?: string
-  leadId: string
+  phone: string
+  name?: string | null
   createdAt?: Date | string
 }
 
@@ -431,93 +411,36 @@ export type BroadcastBlockScalarWhereInput = {
   NOT?: Prisma.BroadcastBlockScalarWhereInput | Prisma.BroadcastBlockScalarWhereInput[]
   id?: Prisma.StringFilter<"BroadcastBlock"> | string
   userId?: Prisma.StringFilter<"BroadcastBlock"> | string
-  leadId?: Prisma.StringFilter<"BroadcastBlock"> | string
+  phone?: Prisma.StringFilter<"BroadcastBlock"> | string
+  name?: Prisma.StringNullableFilter<"BroadcastBlock"> | string | null
   createdAt?: Prisma.DateTimeFilter<"BroadcastBlock"> | Date | string
-}
-
-export type BroadcastBlockCreateWithoutLeadInput = {
-  id?: string
-  createdAt?: Date | string
-  User: Prisma.UserCreateNestedOneWithoutBroadcastBlocksInput
-}
-
-export type BroadcastBlockUncheckedCreateWithoutLeadInput = {
-  id?: string
-  userId: string
-  createdAt?: Date | string
-}
-
-export type BroadcastBlockCreateOrConnectWithoutLeadInput = {
-  where: Prisma.BroadcastBlockWhereUniqueInput
-  create: Prisma.XOR<Prisma.BroadcastBlockCreateWithoutLeadInput, Prisma.BroadcastBlockUncheckedCreateWithoutLeadInput>
-}
-
-export type BroadcastBlockCreateManyLeadInputEnvelope = {
-  data: Prisma.BroadcastBlockCreateManyLeadInput | Prisma.BroadcastBlockCreateManyLeadInput[]
-  skipDuplicates?: boolean
-}
-
-export type BroadcastBlockUpsertWithWhereUniqueWithoutLeadInput = {
-  where: Prisma.BroadcastBlockWhereUniqueInput
-  update: Prisma.XOR<Prisma.BroadcastBlockUpdateWithoutLeadInput, Prisma.BroadcastBlockUncheckedUpdateWithoutLeadInput>
-  create: Prisma.XOR<Prisma.BroadcastBlockCreateWithoutLeadInput, Prisma.BroadcastBlockUncheckedCreateWithoutLeadInput>
-}
-
-export type BroadcastBlockUpdateWithWhereUniqueWithoutLeadInput = {
-  where: Prisma.BroadcastBlockWhereUniqueInput
-  data: Prisma.XOR<Prisma.BroadcastBlockUpdateWithoutLeadInput, Prisma.BroadcastBlockUncheckedUpdateWithoutLeadInput>
-}
-
-export type BroadcastBlockUpdateManyWithWhereWithoutLeadInput = {
-  where: Prisma.BroadcastBlockScalarWhereInput
-  data: Prisma.XOR<Prisma.BroadcastBlockUpdateManyMutationInput, Prisma.BroadcastBlockUncheckedUpdateManyWithoutLeadInput>
 }
 
 export type BroadcastBlockCreateManyUserInput = {
   id?: string
-  leadId: string
+  phone: string
+  name?: string | null
   createdAt?: Date | string
 }
 
 export type BroadcastBlockUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Lead?: Prisma.LeadUpdateOneRequiredWithoutBroadcastBlocksNestedInput
 }
 
 export type BroadcastBlockUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  leadId?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BroadcastBlockUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  leadId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type BroadcastBlockCreateManyLeadInput = {
-  id?: string
-  userId: string
-  createdAt?: Date | string
-}
-
-export type BroadcastBlockUpdateWithoutLeadInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  User?: Prisma.UserUpdateOneRequiredWithoutBroadcastBlocksNestedInput
-}
-
-export type BroadcastBlockUncheckedUpdateWithoutLeadInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type BroadcastBlockUncheckedUpdateManyWithoutLeadInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -526,61 +449,59 @@ export type BroadcastBlockUncheckedUpdateManyWithoutLeadInput = {
 export type BroadcastBlockSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  leadId?: boolean
+  phone?: boolean
+  name?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  Lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["broadcastBlock"]>
 
 export type BroadcastBlockSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  leadId?: boolean
+  phone?: boolean
+  name?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  Lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["broadcastBlock"]>
 
 export type BroadcastBlockSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  leadId?: boolean
+  phone?: boolean
+  name?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  Lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["broadcastBlock"]>
 
 export type BroadcastBlockSelectScalar = {
   id?: boolean
   userId?: boolean
-  leadId?: boolean
+  phone?: boolean
+  name?: boolean
   createdAt?: boolean
 }
 
-export type BroadcastBlockOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "leadId" | "createdAt", ExtArgs["result"]["broadcastBlock"]>
+export type BroadcastBlockOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "phone" | "name" | "createdAt", ExtArgs["result"]["broadcastBlock"]>
 export type BroadcastBlockInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  Lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }
 export type BroadcastBlockIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  Lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }
 export type BroadcastBlockIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  Lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }
 
 export type $BroadcastBlockPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BroadcastBlock"
   objects: {
     User: Prisma.$UserPayload<ExtArgs>
-    Lead: Prisma.$LeadPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
-    leadId: string
+    phone: string
+    name: string | null
     createdAt: Date
   }, ExtArgs["result"]["broadcastBlock"]>
   composites: {}
@@ -977,7 +898,6 @@ readonly fields: BroadcastBlockFieldRefs;
 export interface Prisma__BroadcastBlockClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  Lead<T extends Prisma.LeadDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1009,7 +929,8 @@ export interface Prisma__BroadcastBlockClient<T, Null = never, ExtArgs extends r
 export interface BroadcastBlockFieldRefs {
   readonly id: Prisma.FieldRef<"BroadcastBlock", 'String'>
   readonly userId: Prisma.FieldRef<"BroadcastBlock", 'String'>
-  readonly leadId: Prisma.FieldRef<"BroadcastBlock", 'String'>
+  readonly phone: Prisma.FieldRef<"BroadcastBlock", 'String'>
+  readonly name: Prisma.FieldRef<"BroadcastBlock", 'String'>
   readonly createdAt: Prisma.FieldRef<"BroadcastBlock", 'DateTime'>
 }
     

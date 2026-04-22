@@ -6,6 +6,8 @@ import { v4 as uuid } from 'uuid'
 interface ImportContactListRequest {
   userId: string
   name: string
+  serpQuery?: string
+  serpLocation?: string
   contacts: Array<{ name: string; phone: string; email?: string; website?: string; address?: string; category?: string }>
 }
 
@@ -22,6 +24,8 @@ export class ImportContactListUseCase {
       id: uuid(),
       userId: data.userId,
       name: data.name,
+      serpQuery: data.serpQuery,
+      serpLocation: data.serpLocation,
     })
 
     const normalized = data.contacts
