@@ -224,6 +224,10 @@ export class PrismaLeadRepository implements LeadRepository {
     ])
   }
 
+  async findLeadsByIds(ids: string[]) {
+    return prisma.lead.findMany({ where: { id: { in: ids } } })
+  }
+
   async findAllForBroadcast(userId: string, productId?: string, status?: LeadStatus, lastMessageRange?: string, lastBroadcastRange?: string, categoryId?: string) {
     const lastMessageFilter = lastMessageRange ? buildLastMessageFilter(lastMessageRange) : undefined
     const lastBroadcastFilter = lastBroadcastRange ? buildLastBroadcastFilter(lastBroadcastRange) : undefined

@@ -47,21 +47,20 @@ export class CreateBroadcastUseCase {
 
     let leadIds: string[] = data.leadIds ?? []
 
-    if (leadIds.length === 0) {
-      const leads = await this.leadRepository.findAllForBroadcast(
-        data.userId,
-        data.productId,
-        data.status,
-        data.lastMessageRange,
-        data.lastBroadcastRange,
-        data.categoryId,
-      )
-      leadIds = leads.map((l) => l.id)
-    }
+    const leads = leadIds.length === 0
+      ? await this.leadRepository.findAllForBroadcast(
+          data.userId,
+          data.productId,
+          data.status,
+          data.lastMessageRange,
+          data.lastBroadcastRange,
+          data.categoryId,
+        )
+      : await this.leadRepository.findLeadsByIds(leadIds)
 
-    const blockedIds = await this.blockRepository.findBlockedLeadIds(data.userId)
-    const blockedSet = new Set(blockedIds)
-    leadIds = leadIds.filter((id) => !blockedSet.has(id))
+    const blockedPhones = new Set(await this.blockRepository.findBlockedPhones(data.userId))
+    const filteredLeads = leads.filter((l) => !blockedPhones.has(l.telefone))
+    leadIds = filteredLeads.map((l) => l.id)
 
     if (leadIds.length > 0) {
       await this.broadcastRepository.addLeads(broadcast.id, leadIds)

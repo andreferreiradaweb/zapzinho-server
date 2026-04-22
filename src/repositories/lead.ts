@@ -33,4 +33,5 @@ export interface LeadRepository {
   update(data: Prisma.LeadUncheckedUpdateInput): Promise<Lead>
   setItems(leadId: string, items: LeadItemInput[]): Promise<void>
   findAllForBroadcast(userId: string, productId?: string, status?: LeadStatus, lastMessageRange?: string, lastBroadcastRange?: string, categoryId?: string): Promise<Lead[]>
+  findLeadsByIds(ids: string[]): Promise<Lead[]>
 }
