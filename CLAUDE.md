@@ -61,6 +61,58 @@ WAPI_DELAY_MS             # delay between broadcast messages (default 1500)
 
 > N8N was removed — lead notifications now go through W-API only.
 
+## Processo obrigatório para alterações no banco (Prisma)
+
+Seguir este processo **sempre**, sem exceção. Nunca criar migration manualmente.
+
+### Antes de qualquer mudança no schema.prisma
+
+```bash
+# 1. Verificar se há migrations pendentes no banco local
+DATABASE_URL="postgresql://zapzinho_user:kb312978@localhost:5432/zapzinho_database" npx prisma migrate status
+```
+
+Se houver pendentes, aplicar antes de continuar:
+```bash
+DATABASE_URL="postgresql://zapzinho_user:kb312978@localhost:5432/zapzinho_database" npx prisma migrate deploy
+```
+
+### Criar migration
+
+```bash
+# 2. Fazer a alteração no schema.prisma, depois gerar a migration
+DATABASE_URL="postgresql://zapzinho_user:kb312978@localhost:5432/zapzinho_database" npx prisma migrate dev --name descricao_clara_da_mudanca
+```
+
+### Revisar o SQL gerado — OBRIGATÓRIO
+
+```bash
+# 3. Ler o arquivo gerado em prisma/migrations/<timestamp>_<name>/migration.sql
+# Verificar se contém APENAS as mudanças esperadas
+# Se houver algo inesperado (índice, coluna, tabela que não foi solicitada), investigar antes de continuar
+```
+
+### Commitar e deployar
+
+```bash
+# 4. Commitar a migration gerada
+git add prisma/migrations/ prisma/schema.prisma generated/
+git commit -m "chore: migration <nome>"
+git push
+# 5. Deploy no Render — o migrate deploy aplica automaticamente
+```
+
+### Recuperação de migration falha em prod
+
+```bash
+# Marcar como rolled back
+DATABASE_URL="<url_externa_render>" npx prisma migrate resolve --rolled-back <nome_da_migration>
+# Corrigir o problema (SQL, dados duplicados, etc.)
+# Commitar correção e fazer novo deploy
+```
+
+---
+
 ## Broadcast Flow
 1. Create broadcast (DRAFT) with message + contact IDs or tag filter
 2. Call `POST /broadcast/:id/send` → status → SENDING
