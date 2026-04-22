@@ -2224,6 +2224,7 @@ export const LeadScalarFieldEnum = {
   telefone: 'telefone',
   email: 'email',
   message: 'message',
+  sellerNote: 'sellerNote',
   productId: 'productId',
   categoryId: 'categoryId',
   userId: 'userId',
@@ -2365,6 +2366,8 @@ export const ContactListScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   name: 'name',
+  serpQuery: 'serpQuery',
+  serpLocation: 'serpLocation',
   createdAt: 'createdAt'
 } as const
 

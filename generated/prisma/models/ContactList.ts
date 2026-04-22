@@ -28,6 +28,8 @@ export type ContactListMinAggregateOutputType = {
   id: string | null
   userId: string | null
   name: string | null
+  serpQuery: string | null
+  serpLocation: string | null
   createdAt: Date | null
 }
 
@@ -35,6 +37,8 @@ export type ContactListMaxAggregateOutputType = {
   id: string | null
   userId: string | null
   name: string | null
+  serpQuery: string | null
+  serpLocation: string | null
   createdAt: Date | null
 }
 
@@ -42,6 +46,8 @@ export type ContactListCountAggregateOutputType = {
   id: number
   userId: number
   name: number
+  serpQuery: number
+  serpLocation: number
   createdAt: number
   _all: number
 }
@@ -51,6 +57,8 @@ export type ContactListMinAggregateInputType = {
   id?: true
   userId?: true
   name?: true
+  serpQuery?: true
+  serpLocation?: true
   createdAt?: true
 }
 
@@ -58,6 +66,8 @@ export type ContactListMaxAggregateInputType = {
   id?: true
   userId?: true
   name?: true
+  serpQuery?: true
+  serpLocation?: true
   createdAt?: true
 }
 
@@ -65,6 +75,8 @@ export type ContactListCountAggregateInputType = {
   id?: true
   userId?: true
   name?: true
+  serpQuery?: true
+  serpLocation?: true
   createdAt?: true
   _all?: true
 }
@@ -145,6 +157,8 @@ export type ContactListGroupByOutputType = {
   id: string
   userId: string
   name: string
+  serpQuery: string | null
+  serpLocation: string | null
   createdAt: Date
   _count: ContactListCountAggregateOutputType | null
   _min: ContactListMinAggregateOutputType | null
@@ -173,6 +187,8 @@ export type ContactListWhereInput = {
   id?: Prisma.StringFilter<"ContactList"> | string
   userId?: Prisma.StringFilter<"ContactList"> | string
   name?: Prisma.StringFilter<"ContactList"> | string
+  serpQuery?: Prisma.StringNullableFilter<"ContactList"> | string | null
+  serpLocation?: Prisma.StringNullableFilter<"ContactList"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ContactList"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Contacts?: Prisma.ImportedContactListRelationFilter
@@ -183,6 +199,8 @@ export type ContactListOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  serpQuery?: Prisma.SortOrderInput | Prisma.SortOrder
+  serpLocation?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   User?: Prisma.UserOrderByWithRelationInput
   Contacts?: Prisma.ImportedContactOrderByRelationAggregateInput
@@ -196,6 +214,8 @@ export type ContactListWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ContactListWhereInput | Prisma.ContactListWhereInput[]
   userId?: Prisma.StringFilter<"ContactList"> | string
   name?: Prisma.StringFilter<"ContactList"> | string
+  serpQuery?: Prisma.StringNullableFilter<"ContactList"> | string | null
+  serpLocation?: Prisma.StringNullableFilter<"ContactList"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ContactList"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Contacts?: Prisma.ImportedContactListRelationFilter
@@ -206,6 +226,8 @@ export type ContactListOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  serpQuery?: Prisma.SortOrderInput | Prisma.SortOrder
+  serpLocation?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ContactListCountOrderByAggregateInput
   _max?: Prisma.ContactListMaxOrderByAggregateInput
@@ -219,12 +241,16 @@ export type ContactListScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"ContactList"> | string
   userId?: Prisma.StringWithAggregatesFilter<"ContactList"> | string
   name?: Prisma.StringWithAggregatesFilter<"ContactList"> | string
+  serpQuery?: Prisma.StringNullableWithAggregatesFilter<"ContactList"> | string | null
+  serpLocation?: Prisma.StringNullableWithAggregatesFilter<"ContactList"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ContactList"> | Date | string
 }
 
 export type ContactListCreateInput = {
   id?: string
   name: string
+  serpQuery?: string | null
+  serpLocation?: string | null
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutContactListsInput
   Contacts?: Prisma.ImportedContactCreateNestedManyWithoutContactListInput
@@ -235,6 +261,8 @@ export type ContactListUncheckedCreateInput = {
   id?: string
   userId: string
   name: string
+  serpQuery?: string | null
+  serpLocation?: string | null
   createdAt?: Date | string
   Contacts?: Prisma.ImportedContactUncheckedCreateNestedManyWithoutContactListInput
   ProspectingBroadcasts?: Prisma.ProspectingBroadcastUncheckedCreateNestedManyWithoutContactListInput
@@ -243,6 +271,8 @@ export type ContactListUncheckedCreateInput = {
 export type ContactListUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  serpQuery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serpLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutContactListsNestedInput
   Contacts?: Prisma.ImportedContactUpdateManyWithoutContactListNestedInput
@@ -253,6 +283,8 @@ export type ContactListUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  serpQuery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serpLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Contacts?: Prisma.ImportedContactUncheckedUpdateManyWithoutContactListNestedInput
   ProspectingBroadcasts?: Prisma.ProspectingBroadcastUncheckedUpdateManyWithoutContactListNestedInput
@@ -262,12 +294,16 @@ export type ContactListCreateManyInput = {
   id?: string
   userId: string
   name: string
+  serpQuery?: string | null
+  serpLocation?: string | null
   createdAt?: Date | string
 }
 
 export type ContactListUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  serpQuery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serpLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -275,6 +311,8 @@ export type ContactListUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  serpQuery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serpLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -292,6 +330,8 @@ export type ContactListCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  serpQuery?: Prisma.SortOrder
+  serpLocation?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -299,6 +339,8 @@ export type ContactListMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  serpQuery?: Prisma.SortOrder
+  serpLocation?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -306,6 +348,8 @@ export type ContactListMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  serpQuery?: Prisma.SortOrder
+  serpLocation?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -387,6 +431,8 @@ export type ContactListUpdateOneRequiredWithoutProspectingBroadcastsNestedInput 
 export type ContactListCreateWithoutUserInput = {
   id?: string
   name: string
+  serpQuery?: string | null
+  serpLocation?: string | null
   createdAt?: Date | string
   Contacts?: Prisma.ImportedContactCreateNestedManyWithoutContactListInput
   ProspectingBroadcasts?: Prisma.ProspectingBroadcastCreateNestedManyWithoutContactListInput
@@ -395,6 +441,8 @@ export type ContactListCreateWithoutUserInput = {
 export type ContactListUncheckedCreateWithoutUserInput = {
   id?: string
   name: string
+  serpQuery?: string | null
+  serpLocation?: string | null
   createdAt?: Date | string
   Contacts?: Prisma.ImportedContactUncheckedCreateNestedManyWithoutContactListInput
   ProspectingBroadcasts?: Prisma.ProspectingBroadcastUncheckedCreateNestedManyWithoutContactListInput
@@ -433,12 +481,16 @@ export type ContactListScalarWhereInput = {
   id?: Prisma.StringFilter<"ContactList"> | string
   userId?: Prisma.StringFilter<"ContactList"> | string
   name?: Prisma.StringFilter<"ContactList"> | string
+  serpQuery?: Prisma.StringNullableFilter<"ContactList"> | string | null
+  serpLocation?: Prisma.StringNullableFilter<"ContactList"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ContactList"> | Date | string
 }
 
 export type ContactListCreateWithoutContactsInput = {
   id?: string
   name: string
+  serpQuery?: string | null
+  serpLocation?: string | null
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutContactListsInput
   ProspectingBroadcasts?: Prisma.ProspectingBroadcastCreateNestedManyWithoutContactListInput
@@ -448,6 +500,8 @@ export type ContactListUncheckedCreateWithoutContactsInput = {
   id?: string
   userId: string
   name: string
+  serpQuery?: string | null
+  serpLocation?: string | null
   createdAt?: Date | string
   ProspectingBroadcasts?: Prisma.ProspectingBroadcastUncheckedCreateNestedManyWithoutContactListInput
 }
@@ -471,6 +525,8 @@ export type ContactListUpdateToOneWithWhereWithoutContactsInput = {
 export type ContactListUpdateWithoutContactsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  serpQuery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serpLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutContactListsNestedInput
   ProspectingBroadcasts?: Prisma.ProspectingBroadcastUpdateManyWithoutContactListNestedInput
@@ -480,6 +536,8 @@ export type ContactListUncheckedUpdateWithoutContactsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  serpQuery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serpLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ProspectingBroadcasts?: Prisma.ProspectingBroadcastUncheckedUpdateManyWithoutContactListNestedInput
 }
@@ -487,6 +545,8 @@ export type ContactListUncheckedUpdateWithoutContactsInput = {
 export type ContactListCreateWithoutProspectingBroadcastsInput = {
   id?: string
   name: string
+  serpQuery?: string | null
+  serpLocation?: string | null
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutContactListsInput
   Contacts?: Prisma.ImportedContactCreateNestedManyWithoutContactListInput
@@ -496,6 +556,8 @@ export type ContactListUncheckedCreateWithoutProspectingBroadcastsInput = {
   id?: string
   userId: string
   name: string
+  serpQuery?: string | null
+  serpLocation?: string | null
   createdAt?: Date | string
   Contacts?: Prisma.ImportedContactUncheckedCreateNestedManyWithoutContactListInput
 }
@@ -519,6 +581,8 @@ export type ContactListUpdateToOneWithWhereWithoutProspectingBroadcastsInput = {
 export type ContactListUpdateWithoutProspectingBroadcastsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  serpQuery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serpLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutContactListsNestedInput
   Contacts?: Prisma.ImportedContactUpdateManyWithoutContactListNestedInput
@@ -528,6 +592,8 @@ export type ContactListUncheckedUpdateWithoutProspectingBroadcastsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  serpQuery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serpLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Contacts?: Prisma.ImportedContactUncheckedUpdateManyWithoutContactListNestedInput
 }
@@ -535,12 +601,16 @@ export type ContactListUncheckedUpdateWithoutProspectingBroadcastsInput = {
 export type ContactListCreateManyUserInput = {
   id?: string
   name: string
+  serpQuery?: string | null
+  serpLocation?: string | null
   createdAt?: Date | string
 }
 
 export type ContactListUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  serpQuery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serpLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Contacts?: Prisma.ImportedContactUpdateManyWithoutContactListNestedInput
   ProspectingBroadcasts?: Prisma.ProspectingBroadcastUpdateManyWithoutContactListNestedInput
@@ -549,6 +619,8 @@ export type ContactListUpdateWithoutUserInput = {
 export type ContactListUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  serpQuery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serpLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Contacts?: Prisma.ImportedContactUncheckedUpdateManyWithoutContactListNestedInput
   ProspectingBroadcasts?: Prisma.ProspectingBroadcastUncheckedUpdateManyWithoutContactListNestedInput
@@ -557,6 +629,8 @@ export type ContactListUncheckedUpdateWithoutUserInput = {
 export type ContactListUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  serpQuery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serpLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -604,6 +678,8 @@ export type ContactListSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   id?: boolean
   userId?: boolean
   name?: boolean
+  serpQuery?: boolean
+  serpLocation?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Contacts?: boolean | Prisma.ContactList$ContactsArgs<ExtArgs>
@@ -615,6 +691,8 @@ export type ContactListSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   userId?: boolean
   name?: boolean
+  serpQuery?: boolean
+  serpLocation?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["contactList"]>
@@ -623,6 +701,8 @@ export type ContactListSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   userId?: boolean
   name?: boolean
+  serpQuery?: boolean
+  serpLocation?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["contactList"]>
@@ -631,10 +711,12 @@ export type ContactListSelectScalar = {
   id?: boolean
   userId?: boolean
   name?: boolean
+  serpQuery?: boolean
+  serpLocation?: boolean
   createdAt?: boolean
 }
 
-export type ContactListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "createdAt", ExtArgs["result"]["contactList"]>
+export type ContactListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "serpQuery" | "serpLocation" | "createdAt", ExtArgs["result"]["contactList"]>
 export type ContactListInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Contacts?: boolean | Prisma.ContactList$ContactsArgs<ExtArgs>
@@ -659,6 +741,8 @@ export type $ContactListPayload<ExtArgs extends runtime.Types.Extensions.Interna
     id: string
     userId: string
     name: string
+    serpQuery: string | null
+    serpLocation: string | null
     createdAt: Date
   }, ExtArgs["result"]["contactList"]>
   composites: {}
@@ -1089,6 +1173,8 @@ export interface ContactListFieldRefs {
   readonly id: Prisma.FieldRef<"ContactList", 'String'>
   readonly userId: Prisma.FieldRef<"ContactList", 'String'>
   readonly name: Prisma.FieldRef<"ContactList", 'String'>
+  readonly serpQuery: Prisma.FieldRef<"ContactList", 'String'>
+  readonly serpLocation: Prisma.FieldRef<"ContactList", 'String'>
   readonly createdAt: Prisma.FieldRef<"ContactList", 'DateTime'>
 }
     
