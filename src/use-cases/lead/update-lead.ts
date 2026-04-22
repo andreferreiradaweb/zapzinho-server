@@ -57,7 +57,10 @@ export class UpdateLeadUseCase {
       throw new InvalidCredentialsError()
     }
 
-    const primaryProductId = items && items.length > 0 ? items[0].productId : productId
+    const primaryProductId =
+      items !== undefined
+        ? items.length > 0 ? items[0].productId : null
+        : productId
 
     const updatedLead = await this.leadRepository.update({
       id,
