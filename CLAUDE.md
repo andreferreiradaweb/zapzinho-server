@@ -22,6 +22,14 @@ Controller → Factory → UseCase → Repository (interface) → PrismaReposito
 - **Prisma repos** (`src/repositories/prisma/<domain>.ts`): Prisma implementations
 - **Factories** (`src/factory/<domain>/`): wire use-case + repos together
 
+## Regras de ambiente local
+
+- **Após qualquer comando que suba o servidor** (`npm run dev`, `node`, `tsx`, etc.), sempre matar o processo na porta 3333 ao final:
+  ```powershell
+  Stop-Process -Id (Get-NetTCPConnection -LocalPort 3333 -State Listen).OwningProcess -Force
+  ```
+- Nunca deixar a porta 3333 ocupada após testes ou execuções pontuais.
+
 ## Key Rules for Claude
 
 1. **Check library compatibility** — before installing or upgrading any package, verify it is compatible with the current Fastify version (4.x). Example: `@fastify/rate-limit@^9` for Fastify 4, `@fastify/rate-limit@^10` for Fastify 5. Same applies to all `@fastify/*` plugins.
