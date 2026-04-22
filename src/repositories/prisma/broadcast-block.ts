@@ -15,11 +15,11 @@ export class PrismaBroadcastBlockRepository implements BroadcastBlockRepository 
     return prisma.broadcastBlock.count({ where: { userId } })
   }
 
-  async add(userId: string, phone: string) {
+  async add(userId: string, phone: string, name?: string) {
     return prisma.broadcastBlock.upsert({
       where: { userId_phone: { userId, phone } },
-      create: { userId, phone },
-      update: {},
+      create: { userId, phone, name },
+      update: { name },
     })
   }
 

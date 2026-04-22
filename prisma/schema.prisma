@@ -232,6 +232,7 @@ model BroadcastBlock {
   id        String   @id @default(uuid())
   userId    String
   phone     String
+  name      String?
   createdAt DateTime @default(now())
   User      User     @relation(fields: [userId], references: [id])
 

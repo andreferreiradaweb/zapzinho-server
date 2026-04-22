@@ -6,12 +6,18 @@ export async function addBroadcastBlockController(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const { phone } = z
-    .object({ phone: z.string().min(8).max(20) })
+  const { phone, name } = z
+    .object({
+      phone: z.string().min(8).max(20),
+      name: z.string().optional(),
+    })
     .parse(request.body)
 
   const { sub: userId } = request.user
 
-  const { block } = await makeAddBroadcastBlock().execute(userId, phone)
+  const digits = phone.replace(/\D/g, '')
+  const normalized = digits.startsWith('55') ? digits : `55${digits}`
+
+  const { block } = await makeAddBroadcastBlock().execute(userId, normalized, name)
   return reply.status(201).send({ block })
 }
