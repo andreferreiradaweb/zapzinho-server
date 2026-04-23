@@ -6,7 +6,7 @@ import { UserAlreadyExistsError } from '@/error/user-already-exists-error'
 
 interface CreateLeadUseCaseRequest {
   nome: string
-  email: string
+  email?: string
   telefone: string
   message: string
   Status: LeadStatus
