@@ -20,6 +20,7 @@ export interface LeadSaleRepository {
     discount: number
     items: LeadSaleItemInput[]
   }): Promise<LeadSaleWithItems>
+  delete(id: string): Promise<void>
 }
 
 export type LeadSaleWithItems = {

@@ -61,6 +61,13 @@ export class PrismaLeadSaleRepository implements LeadSaleRepository {
     }) as Promise<LeadSaleWithItems | null>
   }
 
+  async delete(id: string): Promise<void> {
+    await prisma.$transaction(async (tx) => {
+      await tx.leadSaleItem.deleteMany({ where: { saleId: id } })
+      await tx.leadSale.delete({ where: { id } })
+    })
+  }
+
   async update(data: {
     id: string
     userId: string
