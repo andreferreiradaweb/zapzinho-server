@@ -1,5 +1,3 @@
-import { LeadSale } from '@/lib/prisma'
-
 export type LeadSaleItemInput = {
   productId: string
   quantity: number
@@ -13,7 +11,7 @@ export interface LeadSaleRepository {
     userId: string
     discount: number
     items: LeadSaleItemInput[]
-  }): Promise<LeadSale>
+  }): Promise<LeadSaleWithItems>
   findByLeadId(leadId: string): Promise<LeadSaleWithItems[]>
   findById(id: string): Promise<LeadSaleWithItems | null>
   update(data: {

@@ -1,5 +1,5 @@
-import { LeadSale, LeadStatus } from '@/lib/prisma'
-import { LeadSaleRepository } from '@/repositories/lead-sale'
+import { LeadStatus } from '@/lib/prisma'
+import { LeadSaleRepository, LeadSaleWithItems } from '@/repositories/lead-sale'
 import { LeadRepository, LeadItemInput } from '@/repositories/lead'
 import { ResourceNotFound } from '@/error/resource-not-found'
 import { InvalidCredentialsError } from '@/error/invalid-credentials-error'
@@ -19,7 +19,7 @@ export class CreateLeadSaleUseCase {
     private leadRepository: LeadRepository,
   ) {}
 
-  async execute({ leadId, userId, discount, items }: CreateLeadSaleRequest): Promise<LeadSale> {
+  async execute({ leadId, userId, discount, items }: CreateLeadSaleRequest): Promise<LeadSaleWithItems> {
     const lead = await this.leadRepository.findLeadById(leadId)
     if (!lead) throw new ResourceNotFound()
     if (lead.userId !== userId) throw new InvalidCredentialsError()

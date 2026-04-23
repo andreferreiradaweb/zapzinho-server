@@ -24,7 +24,14 @@ export class PrismaLeadSaleRepository implements LeadSaleRepository {
           })),
         },
       },
-    })
+      include: {
+        Items: {
+          include: {
+            Product: { select: { title: true, price: true, costPrice: true } },
+          },
+        },
+      },
+    }) as unknown as LeadSaleWithItems
   }
 
   async findByLeadId(leadId: string): Promise<LeadSaleWithItems[]> {
