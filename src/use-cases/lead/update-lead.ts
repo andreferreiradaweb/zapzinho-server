@@ -16,6 +16,8 @@ interface UpdateLeadUseCaseRequest {
   message?: string
   sellerNote?: string | null
   items?: LeadItemInput[]
+  deliveryDate?: string | null
+  delivered?: boolean
 }
 
 interface UpdateLeadUseCaseResponse {
@@ -40,6 +42,8 @@ export class UpdateLeadUseCase {
     message,
     sellerNote,
     items,
+    deliveryDate,
+    delivered,
   }: UpdateLeadUseCaseRequest): Promise<UpdateLeadUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
 
@@ -73,6 +77,8 @@ export class UpdateLeadUseCase {
       createdAt: new Date(),
       message,
       sellerNote,
+      deliveryDate: deliveryDate !== undefined ? (deliveryDate ? new Date(deliveryDate) : null) : undefined,
+      delivered,
     })
 
     if (items !== undefined) {

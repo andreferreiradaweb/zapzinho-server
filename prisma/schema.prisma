@@ -107,6 +107,8 @@ model Lead {
   updatedAt       DateTime        @updatedAt
   lastBroadcastAt     DateTime?
   lastClientMessageAt DateTime?
+  deliveryDate        DateTime?
+  delivered           Boolean         @default(false)
   BroadcastLeads  BroadcastLead[]
   MessageLogs     MessageLog[]
   LeadItems       LeadItem[]

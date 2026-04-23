@@ -39,6 +39,8 @@ export type LeadMinAggregateOutputType = {
   updatedAt: Date | null
   lastBroadcastAt: Date | null
   lastClientMessageAt: Date | null
+  deliveryDate: Date | null
+  delivered: boolean | null
 }
 
 export type LeadMaxAggregateOutputType = {
@@ -56,6 +58,8 @@ export type LeadMaxAggregateOutputType = {
   updatedAt: Date | null
   lastBroadcastAt: Date | null
   lastClientMessageAt: Date | null
+  deliveryDate: Date | null
+  delivered: boolean | null
 }
 
 export type LeadCountAggregateOutputType = {
@@ -73,6 +77,8 @@ export type LeadCountAggregateOutputType = {
   updatedAt: number
   lastBroadcastAt: number
   lastClientMessageAt: number
+  deliveryDate: number
+  delivered: number
   _all: number
 }
 
@@ -92,6 +98,8 @@ export type LeadMinAggregateInputType = {
   updatedAt?: true
   lastBroadcastAt?: true
   lastClientMessageAt?: true
+  deliveryDate?: true
+  delivered?: true
 }
 
 export type LeadMaxAggregateInputType = {
@@ -109,6 +117,8 @@ export type LeadMaxAggregateInputType = {
   updatedAt?: true
   lastBroadcastAt?: true
   lastClientMessageAt?: true
+  deliveryDate?: true
+  delivered?: true
 }
 
 export type LeadCountAggregateInputType = {
@@ -126,6 +136,8 @@ export type LeadCountAggregateInputType = {
   updatedAt?: true
   lastBroadcastAt?: true
   lastClientMessageAt?: true
+  deliveryDate?: true
+  delivered?: true
   _all?: true
 }
 
@@ -216,6 +228,8 @@ export type LeadGroupByOutputType = {
   updatedAt: Date
   lastBroadcastAt: Date | null
   lastClientMessageAt: Date | null
+  deliveryDate: Date | null
+  delivered: boolean
   _count: LeadCountAggregateOutputType | null
   _min: LeadMinAggregateOutputType | null
   _max: LeadMaxAggregateOutputType | null
@@ -254,6 +268,8 @@ export type LeadWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
   lastBroadcastAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   lastClientMessageAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  deliveryDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  delivered?: Prisma.BoolFilter<"Lead"> | boolean
   Product?: Prisma.XOR<Prisma.ProductNullableScalarRelationFilter, Prisma.ProductWhereInput> | null
   Category?: Prisma.XOR<Prisma.ProductCategoryNullableScalarRelationFilter, Prisma.ProductCategoryWhereInput> | null
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -278,6 +294,8 @@ export type LeadOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   lastBroadcastAt?: Prisma.SortOrderInput | Prisma.SortOrder
   lastClientMessageAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deliveryDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  delivered?: Prisma.SortOrder
   Product?: Prisma.ProductOrderByWithRelationInput
   Category?: Prisma.ProductCategoryOrderByWithRelationInput
   User?: Prisma.UserOrderByWithRelationInput
@@ -305,6 +323,8 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
   lastBroadcastAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   lastClientMessageAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  deliveryDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  delivered?: Prisma.BoolFilter<"Lead"> | boolean
   Product?: Prisma.XOR<Prisma.ProductNullableScalarRelationFilter, Prisma.ProductWhereInput> | null
   Category?: Prisma.XOR<Prisma.ProductCategoryNullableScalarRelationFilter, Prisma.ProductCategoryWhereInput> | null
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -329,6 +349,8 @@ export type LeadOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   lastBroadcastAt?: Prisma.SortOrderInput | Prisma.SortOrder
   lastClientMessageAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deliveryDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  delivered?: Prisma.SortOrder
   _count?: Prisma.LeadCountOrderByAggregateInput
   _max?: Prisma.LeadMaxOrderByAggregateInput
   _min?: Prisma.LeadMinOrderByAggregateInput
@@ -352,6 +374,8 @@ export type LeadScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Lead"> | Date | string
   lastBroadcastAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
   lastClientMessageAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
+  deliveryDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
+  delivered?: Prisma.BoolWithAggregatesFilter<"Lead"> | boolean
 }
 
 export type LeadCreateInput = {
@@ -366,6 +390,8 @@ export type LeadCreateInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   Product?: Prisma.ProductCreateNestedOneWithoutLeadsInput
   Category?: Prisma.ProductCategoryCreateNestedOneWithoutLeadsInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
@@ -390,6 +416,8 @@ export type LeadUncheckedCreateInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   BroadcastLeads?: Prisma.BroadcastLeadUncheckedCreateNestedManyWithoutLeadInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutLeadInput
   LeadItems?: Prisma.LeadItemUncheckedCreateNestedManyWithoutLeadInput
@@ -408,6 +436,8 @@ export type LeadUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Product?: Prisma.ProductUpdateOneWithoutLeadsNestedInput
   Category?: Prisma.ProductCategoryUpdateOneWithoutLeadsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
@@ -432,6 +462,8 @@ export type LeadUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   BroadcastLeads?: Prisma.BroadcastLeadUncheckedUpdateManyWithoutLeadNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutLeadNestedInput
   LeadItems?: Prisma.LeadItemUncheckedUpdateManyWithoutLeadNestedInput
@@ -453,6 +485,8 @@ export type LeadCreateManyInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
 }
 
 export type LeadUpdateManyMutationInput = {
@@ -467,6 +501,8 @@ export type LeadUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type LeadUncheckedUpdateManyInput = {
@@ -484,6 +520,8 @@ export type LeadUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type LeadListRelationFilter = {
@@ -511,6 +549,8 @@ export type LeadCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   lastBroadcastAt?: Prisma.SortOrder
   lastClientMessageAt?: Prisma.SortOrder
+  deliveryDate?: Prisma.SortOrder
+  delivered?: Prisma.SortOrder
 }
 
 export type LeadMaxOrderByAggregateInput = {
@@ -528,6 +568,8 @@ export type LeadMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   lastBroadcastAt?: Prisma.SortOrder
   lastClientMessageAt?: Prisma.SortOrder
+  deliveryDate?: Prisma.SortOrder
+  delivered?: Prisma.SortOrder
 }
 
 export type LeadMinOrderByAggregateInput = {
@@ -545,6 +587,8 @@ export type LeadMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   lastBroadcastAt?: Prisma.SortOrder
   lastClientMessageAt?: Prisma.SortOrder
+  deliveryDate?: Prisma.SortOrder
+  delivered?: Prisma.SortOrder
 }
 
 export type LeadScalarRelationFilter = {
@@ -757,6 +801,8 @@ export type LeadCreateWithoutUserInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   Product?: Prisma.ProductCreateNestedOneWithoutLeadsInput
   Category?: Prisma.ProductCategoryCreateNestedOneWithoutLeadsInput
   BroadcastLeads?: Prisma.BroadcastLeadCreateNestedManyWithoutLeadInput
@@ -779,6 +825,8 @@ export type LeadUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   BroadcastLeads?: Prisma.BroadcastLeadUncheckedCreateNestedManyWithoutLeadInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutLeadInput
   LeadItems?: Prisma.LeadItemUncheckedCreateNestedManyWithoutLeadInput
@@ -829,6 +877,8 @@ export type LeadScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
   lastBroadcastAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   lastClientMessageAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  deliveryDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  delivered?: Prisma.BoolFilter<"Lead"> | boolean
 }
 
 export type LeadCreateWithoutCategoryInput = {
@@ -843,6 +893,8 @@ export type LeadCreateWithoutCategoryInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   Product?: Prisma.ProductCreateNestedOneWithoutLeadsInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
   BroadcastLeads?: Prisma.BroadcastLeadCreateNestedManyWithoutLeadInput
@@ -865,6 +917,8 @@ export type LeadUncheckedCreateWithoutCategoryInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   BroadcastLeads?: Prisma.BroadcastLeadUncheckedCreateNestedManyWithoutLeadInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutLeadInput
   LeadItems?: Prisma.LeadItemUncheckedCreateNestedManyWithoutLeadInput
@@ -909,6 +963,8 @@ export type LeadCreateWithoutProductInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   Category?: Prisma.ProductCategoryCreateNestedOneWithoutLeadsInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
   BroadcastLeads?: Prisma.BroadcastLeadCreateNestedManyWithoutLeadInput
@@ -931,6 +987,8 @@ export type LeadUncheckedCreateWithoutProductInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   BroadcastLeads?: Prisma.BroadcastLeadUncheckedCreateNestedManyWithoutLeadInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutLeadInput
   LeadItems?: Prisma.LeadItemUncheckedCreateNestedManyWithoutLeadInput
@@ -975,6 +1033,8 @@ export type LeadCreateWithoutLeadSalesInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   Product?: Prisma.ProductCreateNestedOneWithoutLeadsInput
   Category?: Prisma.ProductCategoryCreateNestedOneWithoutLeadsInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
@@ -998,6 +1058,8 @@ export type LeadUncheckedCreateWithoutLeadSalesInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   BroadcastLeads?: Prisma.BroadcastLeadUncheckedCreateNestedManyWithoutLeadInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutLeadInput
   LeadItems?: Prisma.LeadItemUncheckedCreateNestedManyWithoutLeadInput
@@ -1031,6 +1093,8 @@ export type LeadUpdateWithoutLeadSalesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Product?: Prisma.ProductUpdateOneWithoutLeadsNestedInput
   Category?: Prisma.ProductCategoryUpdateOneWithoutLeadsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
@@ -1054,6 +1118,8 @@ export type LeadUncheckedUpdateWithoutLeadSalesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   BroadcastLeads?: Prisma.BroadcastLeadUncheckedUpdateManyWithoutLeadNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutLeadNestedInput
   LeadItems?: Prisma.LeadItemUncheckedUpdateManyWithoutLeadNestedInput
@@ -1071,6 +1137,8 @@ export type LeadCreateWithoutLeadItemsInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   Product?: Prisma.ProductCreateNestedOneWithoutLeadsInput
   Category?: Prisma.ProductCategoryCreateNestedOneWithoutLeadsInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
@@ -1094,6 +1162,8 @@ export type LeadUncheckedCreateWithoutLeadItemsInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   BroadcastLeads?: Prisma.BroadcastLeadUncheckedCreateNestedManyWithoutLeadInput
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutLeadInput
   LeadSales?: Prisma.LeadSaleUncheckedCreateNestedManyWithoutLeadInput
@@ -1127,6 +1197,8 @@ export type LeadUpdateWithoutLeadItemsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Product?: Prisma.ProductUpdateOneWithoutLeadsNestedInput
   Category?: Prisma.ProductCategoryUpdateOneWithoutLeadsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
@@ -1150,6 +1222,8 @@ export type LeadUncheckedUpdateWithoutLeadItemsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   BroadcastLeads?: Prisma.BroadcastLeadUncheckedUpdateManyWithoutLeadNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutLeadNestedInput
   LeadSales?: Prisma.LeadSaleUncheckedUpdateManyWithoutLeadNestedInput
@@ -1167,6 +1241,8 @@ export type LeadCreateWithoutBroadcastLeadsInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   Product?: Prisma.ProductCreateNestedOneWithoutLeadsInput
   Category?: Prisma.ProductCategoryCreateNestedOneWithoutLeadsInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
@@ -1190,6 +1266,8 @@ export type LeadUncheckedCreateWithoutBroadcastLeadsInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutLeadInput
   LeadItems?: Prisma.LeadItemUncheckedCreateNestedManyWithoutLeadInput
   LeadSales?: Prisma.LeadSaleUncheckedCreateNestedManyWithoutLeadInput
@@ -1223,6 +1301,8 @@ export type LeadUpdateWithoutBroadcastLeadsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Product?: Prisma.ProductUpdateOneWithoutLeadsNestedInput
   Category?: Prisma.ProductCategoryUpdateOneWithoutLeadsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
@@ -1246,6 +1326,8 @@ export type LeadUncheckedUpdateWithoutBroadcastLeadsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutLeadNestedInput
   LeadItems?: Prisma.LeadItemUncheckedUpdateManyWithoutLeadNestedInput
   LeadSales?: Prisma.LeadSaleUncheckedUpdateManyWithoutLeadNestedInput
@@ -1263,6 +1345,8 @@ export type LeadCreateWithoutMessageLogsInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   Product?: Prisma.ProductCreateNestedOneWithoutLeadsInput
   Category?: Prisma.ProductCategoryCreateNestedOneWithoutLeadsInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
@@ -1286,6 +1370,8 @@ export type LeadUncheckedCreateWithoutMessageLogsInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
   BroadcastLeads?: Prisma.BroadcastLeadUncheckedCreateNestedManyWithoutLeadInput
   LeadItems?: Prisma.LeadItemUncheckedCreateNestedManyWithoutLeadInput
   LeadSales?: Prisma.LeadSaleUncheckedCreateNestedManyWithoutLeadInput
@@ -1319,6 +1405,8 @@ export type LeadUpdateWithoutMessageLogsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Product?: Prisma.ProductUpdateOneWithoutLeadsNestedInput
   Category?: Prisma.ProductCategoryUpdateOneWithoutLeadsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
@@ -1342,6 +1430,8 @@ export type LeadUncheckedUpdateWithoutMessageLogsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   BroadcastLeads?: Prisma.BroadcastLeadUncheckedUpdateManyWithoutLeadNestedInput
   LeadItems?: Prisma.LeadItemUncheckedUpdateManyWithoutLeadNestedInput
   LeadSales?: Prisma.LeadSaleUncheckedUpdateManyWithoutLeadNestedInput
@@ -1361,6 +1451,8 @@ export type LeadCreateManyUserInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
 }
 
 export type LeadUpdateWithoutUserInput = {
@@ -1375,6 +1467,8 @@ export type LeadUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Product?: Prisma.ProductUpdateOneWithoutLeadsNestedInput
   Category?: Prisma.ProductCategoryUpdateOneWithoutLeadsNestedInput
   BroadcastLeads?: Prisma.BroadcastLeadUpdateManyWithoutLeadNestedInput
@@ -1397,6 +1491,8 @@ export type LeadUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   BroadcastLeads?: Prisma.BroadcastLeadUncheckedUpdateManyWithoutLeadNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutLeadNestedInput
   LeadItems?: Prisma.LeadItemUncheckedUpdateManyWithoutLeadNestedInput
@@ -1417,6 +1513,8 @@ export type LeadUncheckedUpdateManyWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type LeadCreateManyCategoryInput = {
@@ -1433,6 +1531,8 @@ export type LeadCreateManyCategoryInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
 }
 
 export type LeadUpdateWithoutCategoryInput = {
@@ -1447,6 +1547,8 @@ export type LeadUpdateWithoutCategoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Product?: Prisma.ProductUpdateOneWithoutLeadsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
   BroadcastLeads?: Prisma.BroadcastLeadUpdateManyWithoutLeadNestedInput
@@ -1469,6 +1571,8 @@ export type LeadUncheckedUpdateWithoutCategoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   BroadcastLeads?: Prisma.BroadcastLeadUncheckedUpdateManyWithoutLeadNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutLeadNestedInput
   LeadItems?: Prisma.LeadItemUncheckedUpdateManyWithoutLeadNestedInput
@@ -1489,6 +1593,8 @@ export type LeadUncheckedUpdateManyWithoutCategoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type LeadCreateManyProductInput = {
@@ -1505,6 +1611,8 @@ export type LeadCreateManyProductInput = {
   updatedAt?: Date | string
   lastBroadcastAt?: Date | string | null
   lastClientMessageAt?: Date | string | null
+  deliveryDate?: Date | string | null
+  delivered?: boolean
 }
 
 export type LeadUpdateWithoutProductInput = {
@@ -1519,6 +1627,8 @@ export type LeadUpdateWithoutProductInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Category?: Prisma.ProductCategoryUpdateOneWithoutLeadsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
   BroadcastLeads?: Prisma.BroadcastLeadUpdateManyWithoutLeadNestedInput
@@ -1541,6 +1651,8 @@ export type LeadUncheckedUpdateWithoutProductInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   BroadcastLeads?: Prisma.BroadcastLeadUncheckedUpdateManyWithoutLeadNestedInput
   MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutLeadNestedInput
   LeadItems?: Prisma.LeadItemUncheckedUpdateManyWithoutLeadNestedInput
@@ -1561,6 +1673,8 @@ export type LeadUncheckedUpdateManyWithoutProductInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastBroadcastAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastClientMessageAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  delivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -1636,6 +1750,8 @@ export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   lastBroadcastAt?: boolean
   lastClientMessageAt?: boolean
+  deliveryDate?: boolean
+  delivered?: boolean
   Product?: boolean | Prisma.Lead$ProductArgs<ExtArgs>
   Category?: boolean | Prisma.Lead$CategoryArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1661,6 +1777,8 @@ export type LeadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   lastBroadcastAt?: boolean
   lastClientMessageAt?: boolean
+  deliveryDate?: boolean
+  delivered?: boolean
   Product?: boolean | Prisma.Lead$ProductArgs<ExtArgs>
   Category?: boolean | Prisma.Lead$CategoryArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1681,6 +1799,8 @@ export type LeadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   lastBroadcastAt?: boolean
   lastClientMessageAt?: boolean
+  deliveryDate?: boolean
+  delivered?: boolean
   Product?: boolean | Prisma.Lead$ProductArgs<ExtArgs>
   Category?: boolean | Prisma.Lead$CategoryArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1701,9 +1821,11 @@ export type LeadSelectScalar = {
   updatedAt?: boolean
   lastBroadcastAt?: boolean
   lastClientMessageAt?: boolean
+  deliveryDate?: boolean
+  delivered?: boolean
 }
 
-export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "telefone" | "email" | "message" | "sellerNote" | "productId" | "categoryId" | "userId" | "Status" | "createdAt" | "updatedAt" | "lastBroadcastAt" | "lastClientMessageAt", ExtArgs["result"]["lead"]>
+export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "telefone" | "email" | "message" | "sellerNote" | "productId" | "categoryId" | "userId" | "Status" | "createdAt" | "updatedAt" | "lastBroadcastAt" | "lastClientMessageAt" | "deliveryDate" | "delivered", ExtArgs["result"]["lead"]>
 export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Product?: boolean | Prisma.Lead$ProductArgs<ExtArgs>
   Category?: boolean | Prisma.Lead$CategoryArgs<ExtArgs>
@@ -1751,6 +1873,8 @@ export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     updatedAt: Date
     lastBroadcastAt: Date | null
     lastClientMessageAt: Date | null
+    deliveryDate: Date | null
+    delivered: boolean
   }, ExtArgs["result"]["lead"]>
   composites: {}
 }
@@ -2195,6 +2319,8 @@ export interface LeadFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"Lead", 'DateTime'>
   readonly lastBroadcastAt: Prisma.FieldRef<"Lead", 'DateTime'>
   readonly lastClientMessageAt: Prisma.FieldRef<"Lead", 'DateTime'>
+  readonly deliveryDate: Prisma.FieldRef<"Lead", 'DateTime'>
+  readonly delivered: Prisma.FieldRef<"Lead", 'Boolean'>
 }
     
 

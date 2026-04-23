@@ -157,7 +157,9 @@ export const LeadScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   lastBroadcastAt: 'lastBroadcastAt',
-  lastClientMessageAt: 'lastClientMessageAt'
+  lastClientMessageAt: 'lastClientMessageAt',
+  deliveryDate: 'deliveryDate',
+  delivered: 'delivered'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
