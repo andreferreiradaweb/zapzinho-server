@@ -22,6 +22,17 @@ Controller → Factory → UseCase → Repository (interface) → PrismaReposito
 - **Prisma repos** (`src/repositories/prisma/<domain>.ts`): Prisma implementations
 - **Factories** (`src/factory/<domain>/`): wire use-case + repos together
 
+## Testes — Obrigatório a cada mudança
+
+**Após qualquer alteração (feature, bug, style, correção), sempre rodar:**
+```bash
+npm test
+```
+- Todos os 39 testes devem passar antes de marcar a tarefa como concluída
+- Se algum teste quebrar: investigar e corrigir antes de reportar
+- Arquivos: `src/tests/unit/` (unitários) e `src/tests/integration/` (HTTP)
+- Repositórios in-memory em `src/tests/repositories/` para isolar da DB
+
 ## Regras de ambiente local
 
 - **Após qualquer comando que suba o servidor** (`npm run dev`, `node`, `tsx`, etc.), sempre matar o processo na porta 3333 ao final:
