@@ -13,6 +13,7 @@ interface ProductForOptions {
   price: string | null
   condition: string | null
   photos: string[]
+  categoryId: string | null
 }
 
 interface ListProductsUseCaseResponse {
