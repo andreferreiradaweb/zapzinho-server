@@ -40,6 +40,10 @@ export class PrismaUserRepository implements UserRepository {
       },
       skip: Number(offset),
       take: Number(limit),
+      include: {
+        Leads: { select: { id: true } },
+        Products: { select: { id: true } },
+      },
     })
     return users || []
   }
