@@ -39,8 +39,9 @@ export class InMemoryUserRepository implements UserRepository {
   }
 
   async findUserByPhone(phone: string): Promise<any> {
-    const digits = phone.replace(/\D/g, '').slice(-11)
-    return this.items.find((u) => u.phoneNumber?.replace(/\D/g, '').includes(digits)) ?? null
+    const last8 = phone.replace(/\D/g, '').slice(-8)
+    if (last8.length < 8) return null
+    return this.items.find((u) => (u.phoneNumber ?? '').replace(/\D/g, '').endsWith(last8)) ?? null
   }
 
   async findAdminUser(): Promise<any> {
