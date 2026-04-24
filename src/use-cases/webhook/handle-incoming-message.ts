@@ -3,7 +3,6 @@ import { UserRepository } from '@/repositories/user'
 import { LeadRepository } from '@/repositories/lead'
 import { ResourceNotFound } from '@/error/resource-not-found'
 import { Prisma } from '@/lib/prisma'
-import { v4 as uuid } from 'uuid'
 
 interface HandleIncomingMessageRequest {
   instanceId: string
@@ -15,6 +14,17 @@ interface HandleIncomingMessageRequest {
 interface HandleIncomingMessageResponse {
   lead: Lead
   created: boolean     // true = novo lead, false = já existia
+}
+
+/**
+ * Extracts the value for a given variable code from message text.
+ * Matches lines like "CODE: VALUE" (case-insensitive, trims whitespace).
+ */
+function extractMsgVar(message: string, code: string): string | null {
+  if (!code || !message) return null
+  const escaped = code.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const match = message.match(new RegExp(`(?:^|\\n)${escaped}:\\s*(.+)`, 'i'))
+  return match ? match[1].trim() : null
 }
 
 export class HandleIncomingMessageUseCase {
@@ -38,18 +48,31 @@ export class HandleIncomingMessageUseCase {
 
     if (!user) throw new ResourceNotFound()
 
+    // If the user has configured LP variable codes, try to extract phone/name from the message
+    const extractedPhone = user.lpPhoneParam
+      ? extractMsgVar(message, user.lpPhoneParam)
+      : null
+    const extractedName = user.lpNameParam
+      ? extractMsgVar(message, user.lpNameParam)
+      : null
+
+    const resolvedPhone = extractedPhone
+      ? extractedPhone.replace(/\D/g, '')
+      : phone
+    const resolvedName = extractedName || name || phone
+
     try {
       const { lead, created } = await this.leadRepository.upsertByPhone({
         userId: user.id,
-        phone,
-        name: name || phone,
+        phone: resolvedPhone,
+        name: resolvedName,
         message,
       })
       return { lead, created }
     } catch (err) {
       // Fallback for unique constraint race: find the already-created lead
       if (err instanceof Prisma.PrismaClientKnownRequestError && (err as Prisma.PrismaClientKnownRequestError).code === 'P2002') {
-        const existing = await this.leadRepository.findLeadWhereUserByNumber(user.id, phone)
+        const existing = await this.leadRepository.findLeadWhereUserByNumber(user.id, resolvedPhone)
         if (existing) {
           const updated = await this.leadRepository.update({
             id: existing.id,

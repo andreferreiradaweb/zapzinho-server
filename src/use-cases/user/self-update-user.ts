@@ -12,6 +12,8 @@ interface SelfUpdateUserUseCaseRequest {
   name?: string
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
+  lpPhoneParam?: string | null
+  lpNameParam?: string | null
 }
 
 interface SelfUpdateUserUseCaseResponse {
@@ -29,6 +31,8 @@ export class SelfUpdateUserUseCase {
     name,
     prospectingInstanceId,
     prospectingToken,
+    lpPhoneParam,
+    lpNameParam,
   }: SelfUpdateUserUseCaseRequest): Promise<SelfUpdateUserUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(id)
 
@@ -77,6 +81,10 @@ export class SelfUpdateUserUseCase {
           prospectingToken !== undefined
             ? prospectingToken
             : findedUser.prospectingToken,
+        lpPhoneParam:
+          lpPhoneParam !== undefined ? lpPhoneParam : findedUser.lpPhoneParam,
+        lpNameParam:
+          lpNameParam !== undefined ? lpNameParam : findedUser.lpNameParam,
       })
 
     const newUser = {

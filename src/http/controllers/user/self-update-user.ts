@@ -20,11 +20,13 @@ export async function SelfUpdateUserController(
     prospectingInstanceId: z.string().nullish(),
     prospectingToken: z.string().nullish(),
     name: z.string().nullish(),
+    lpPhoneParam: z.string().nullish(),
+    lpNameParam: z.string().nullish(),
   })
   const { sub } = request.user
 
   try {
-    const { password, phoneNumber, newPassword, prospectingInstanceId, prospectingToken, name } =
+    const { password, phoneNumber, newPassword, prospectingInstanceId, prospectingToken, name, lpPhoneParam, lpNameParam } =
       updateBodySchema.parse(request.body)
     const requestingUser = await prisma.user.findUnique({ where: { id: sub } })
     const isAdmin = requestingUser?.Role === Role.ADMIN
@@ -38,6 +40,8 @@ export async function SelfUpdateUserController(
       name: name ?? undefined,
       prospectingInstanceId: isAdmin ? prospectingInstanceId : undefined,
       prospectingToken: isAdmin ? prospectingToken : undefined,
+      lpPhoneParam: lpPhoneParam ?? undefined,
+      lpNameParam: lpNameParam ?? undefined,
     })
     return reply.status(201).send(user)
   } catch (error) {
