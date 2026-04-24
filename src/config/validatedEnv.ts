@@ -18,7 +18,7 @@ const envSchema = z.object({
   WAPI_WEBHOOK_SECRET: z.string().default(''),
   GEMINI_API_KEY: z.string().default(''),
   FRONTEND_URL: z.string().default('https://zapzinho.vercel.app'),
-  LP_URL: z.string().default(''),
+  WEBHOOK_CALLERS: z.string().default(''),
   RESEND_API_KEY: z.string(),
   CLOUDINARY_CLOUD_NAME: z.string().default(''),
   CLOUDINARY_API_KEY: z.string().default(''),

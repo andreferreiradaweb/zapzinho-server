@@ -28,7 +28,7 @@ app.register(multipart, {
 app.register(fastifyCors, {
   origin:
     env.NODE_ENV === 'production'
-      ? [env.FRONTEND_URL, ...(env.LP_URL ? [env.LP_URL] : []), /localhost:\d+$/]
+      ? [env.FRONTEND_URL, ...env.WEBHOOK_CALLERS.split(',').map((s) => s.trim()).filter(Boolean), /localhost:\d+$/]
       : true,
   methods: ['GET', 'PUT', 'POST', 'DELETE'],
   credentials: true,
