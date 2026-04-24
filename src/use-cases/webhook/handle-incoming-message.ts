@@ -75,6 +75,8 @@ export class HandleIncomingMessageUseCase {
       const resolvedPhone = extractedPhone ? extractedPhone.replace(/\D/g, '') : phone
       const resolvedName = extractedName || name || phone
 
+      if (!resolvedPhone) return { skipped: true }
+
       return this.upsert(user.id, resolvedPhone, resolvedName, message)
     }
 
