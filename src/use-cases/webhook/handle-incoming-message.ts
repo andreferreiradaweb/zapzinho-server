@@ -14,6 +14,11 @@ interface HandleIncomingMessageRequest {
 interface HandleIncomingMessageResponse {
   lead: Lead
   created: boolean     // true = novo lead, false = já existia
+  skipped?: never
+}
+
+interface HandleIncomingMessageSkipped {
+  skipped: true
 }
 
 /**
@@ -47,7 +52,7 @@ export class HandleIncomingMessageUseCase {
     phone,
     name,
     message,
-  }: HandleIncomingMessageRequest): Promise<HandleIncomingMessageResponse> {
+  }: HandleIncomingMessageRequest): Promise<HandleIncomingMessageResponse | HandleIncomingMessageSkipped> {
     let user = await this.userRepository.findUserByInstanceId(instanceId)
 
     if (!user && instanceId === this.adminInstanceId) {
@@ -56,13 +61,22 @@ export class HandleIncomingMessageUseCase {
 
     if (!user) throw new ResourceNotFound()
 
-    // If the user has configured LP variable codes, try to extract phone/name from the message
-    const extractedPhone = user.lpPhoneParam
-      ? extractMsgVar(message, user.lpPhoneParam)
-      : null
-    const extractedName = user.lpNameParam
-      ? extractMsgVar(message, user.lpNameParam)
-      : null
+    const hasVar1 = !!user.lpPhoneParam
+    const hasVar2 = !!user.lpNameParam
+
+    const extractedPhone = hasVar1 ? extractMsgVar(message, user.lpPhoneParam!) : null
+    const extractedName = hasVar2 ? extractMsgVar(message, user.lpNameParam!) : null
+
+    // When variables are configured, all configured ones must appear in the same message
+    if (hasVar1 && hasVar2 && (!extractedPhone || !extractedName)) {
+      return { skipped: true }
+    }
+    if (hasVar1 && !hasVar2 && !extractedPhone) {
+      return { skipped: true }
+    }
+    if (!hasVar1 && hasVar2 && !extractedName) {
+      return { skipped: true }
+    }
 
     const resolvedPhone = extractedPhone
       ? extractedPhone.replace(/\D/g, '')

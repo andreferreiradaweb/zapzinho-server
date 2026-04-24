@@ -83,12 +83,18 @@ export async function whatsappWebhookController(
   const message = msgContent?.conversation ?? ''
 
   try {
-    const { lead, created } = await makeHandleIncomingMessage().execute({
+    const result = await makeHandleIncomingMessage().execute({
       instanceId,
       phone,
       name,
       message,
     })
+
+    if ('skipped' in result) {
+      return reply.status(200).send({ ok: true, reason: 'vars_not_found_in_message' })
+    }
+
+    const { lead, created } = result
 
     if (message) {
       addClassificationMessage(lead.id, lead.userId, message, created)
