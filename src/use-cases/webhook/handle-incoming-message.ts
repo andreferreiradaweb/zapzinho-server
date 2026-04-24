@@ -6,36 +6,14 @@ import { Prisma } from '@/lib/prisma'
 
 interface HandleIncomingMessageRequest {
   instanceId: string
-  phone: string        // digits only, e.g. 5511999999999
+  phone: string
   name: string
   message: string
-  fromMe: boolean
 }
 
 interface HandleIncomingMessageResponse {
   lead: Lead
-  created: boolean     // true = novo lead, false = já existia
-  skipped?: never
-}
-
-interface HandleIncomingMessageSkipped {
-  skipped: true
-}
-
-/**
- * Extracts the value for a given variable code from message text.
- * Supports two formats:
- *   - "CODE: VALUE"  (line-separated, added by ShareButton)
- *   - "CODE=VALUE"   (URL query-param style, e.g. when customer pastes the URL directly)
- */
-export function extractMsgVar(message: string, code: string): string | null {
-  if (!code || !message) return null
-  const escaped = code.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-
-  const equalsMatch = message.match(new RegExp(`(?:^|[?&\\s])${escaped}=([^&\\s]+)`, 'im'))
-  if (equalsMatch) return decodeURIComponent(equalsMatch[1].replace(/\+/g, ' '))
-
-  return null
+  created: boolean
 }
 
 export class HandleIncomingMessageUseCase {
@@ -50,8 +28,7 @@ export class HandleIncomingMessageUseCase {
     phone,
     name,
     message,
-    fromMe,
-  }: HandleIncomingMessageRequest): Promise<HandleIncomingMessageResponse | HandleIncomingMessageSkipped> {
+  }: HandleIncomingMessageRequest): Promise<HandleIncomingMessageResponse> {
     let user = await this.userRepository.findUserByInstanceId(instanceId)
 
     if (!user && instanceId === this.adminInstanceId) {
@@ -60,44 +37,6 @@ export class HandleIncomingMessageUseCase {
 
     if (!user) throw new ResourceNotFound()
 
-    // Variable detection only applies to self-sent messages (fromMe)
-    if (fromMe) {
-      const hasVar1 = !!user.msgVar1
-      const hasVar2 = !!user.msgVar2
-
-      const val1 = hasVar1 ? extractMsgVar(message, user.msgVar1!) : null
-      const val2 = hasVar2 ? extractMsgVar(message, user.msgVar2!) : null
-
-      if (hasVar1 && hasVar2 && (!val1 || !val2)) return { skipped: true }
-      if (hasVar1 && !hasVar2 && !val1) return { skipped: true }
-      if (!hasVar1 && hasVar2 && !val2) return { skipped: true }
-
-      const looksLikePhone = (v: string) => /^\d{7,}$/.test(v.replace(/\D/g, ''))
-
-      let resolvedPhone: string
-      let resolvedName: string
-
-      if (val1 && val2) {
-        // Auto-detect which value is the phone regardless of variable order
-        if (!looksLikePhone(val1) && looksLikePhone(val2)) {
-          resolvedPhone = val2.replace(/\D/g, '')
-          resolvedName = val1
-        } else {
-          resolvedPhone = val1.replace(/\D/g, '')
-          resolvedName = val2
-        }
-      } else {
-        const single = (val1 || val2)!
-        resolvedPhone = single.replace(/\D/g, '') || phone
-        resolvedName = name || phone
-      }
-
-      if (!resolvedPhone) return { skipped: true }
-
-      return this.upsert(user.id, resolvedPhone, resolvedName, message)
-    }
-
-    // Regular incoming message — upsert lead by sender's phone (original behaviour)
     return this.upsert(user.id, phone, name, message)
   }
 

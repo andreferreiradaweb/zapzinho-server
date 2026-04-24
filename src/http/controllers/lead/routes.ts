@@ -7,7 +7,6 @@ import { DeleteLeadController } from './delete-lead'
 import { CreateLeadController } from './create-lead'
 import { CreateLeadForAutomationController } from './create-lead-for-automation'
 import { CreateLeadFromWhatsappController } from './create-lead-from-whatsapp'
-import { GetLpConfigController } from './get-lp-config'
 
 export async function leadRoutes(app: FastifyInstance) {
   app.post(
@@ -24,6 +23,5 @@ export async function leadRoutes(app: FastifyInstance) {
   app.delete('/lead/:id', { onRequest: [verifyJwt] }, DeleteLeadController)
   app.post('/lp/lead', CreateLeadForLpController)
   app.post('/lead/whatsapp', CreateLeadFromWhatsappController)
-  app.get('/lp/config/:userId', GetLpConfigController)
   app.post('/automation/lead', CreateLeadForAutomationController)
 }

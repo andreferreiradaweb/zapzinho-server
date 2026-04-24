@@ -42,8 +42,6 @@ export type UserMinAggregateOutputType = {
   wapiToken: string | null
   prospectingInstanceId: string | null
   prospectingToken: string | null
-  msgVar1: string | null
-  msgVar2: string | null
   createdAt: Date | null
 }
 
@@ -65,8 +63,6 @@ export type UserMaxAggregateOutputType = {
   wapiToken: string | null
   prospectingInstanceId: string | null
   prospectingToken: string | null
-  msgVar1: string | null
-  msgVar2: string | null
   createdAt: Date | null
 }
 
@@ -88,8 +84,6 @@ export type UserCountAggregateOutputType = {
   wapiToken: number
   prospectingInstanceId: number
   prospectingToken: number
-  msgVar1: number
-  msgVar2: number
   createdAt: number
   _all: number
 }
@@ -113,8 +107,6 @@ export type UserMinAggregateInputType = {
   wapiToken?: true
   prospectingInstanceId?: true
   prospectingToken?: true
-  msgVar1?: true
-  msgVar2?: true
   createdAt?: true
 }
 
@@ -136,8 +128,6 @@ export type UserMaxAggregateInputType = {
   wapiToken?: true
   prospectingInstanceId?: true
   prospectingToken?: true
-  msgVar1?: true
-  msgVar2?: true
   createdAt?: true
 }
 
@@ -159,8 +149,6 @@ export type UserCountAggregateInputType = {
   wapiToken?: true
   prospectingInstanceId?: true
   prospectingToken?: true
-  msgVar1?: true
-  msgVar2?: true
   createdAt?: true
   _all?: true
 }
@@ -255,8 +243,6 @@ export type UserGroupByOutputType = {
   wapiToken: string | null
   prospectingInstanceId: string | null
   prospectingToken: string | null
-  msgVar1: string | null
-  msgVar2: string | null
   createdAt: Date
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
@@ -299,8 +285,6 @@ export type UserWhereInput = {
   wapiToken?: Prisma.StringNullableFilter<"User"> | string | null
   prospectingInstanceId?: Prisma.StringNullableFilter<"User"> | string | null
   prospectingToken?: Prisma.StringNullableFilter<"User"> | string | null
-  msgVar1?: Prisma.StringNullableFilter<"User"> | string | null
-  msgVar2?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   Products?: Prisma.ProductListRelationFilter
   ProductCategories?: Prisma.ProductCategoryListRelationFilter
@@ -335,8 +319,6 @@ export type UserOrderByWithRelationInput = {
   wapiToken?: Prisma.SortOrderInput | Prisma.SortOrder
   prospectingInstanceId?: Prisma.SortOrderInput | Prisma.SortOrder
   prospectingToken?: Prisma.SortOrderInput | Prisma.SortOrder
-  msgVar1?: Prisma.SortOrderInput | Prisma.SortOrder
-  msgVar2?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   Products?: Prisma.ProductOrderByRelationAggregateInput
   ProductCategories?: Prisma.ProductCategoryOrderByRelationAggregateInput
@@ -374,8 +356,6 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   wapiToken?: Prisma.StringNullableFilter<"User"> | string | null
   prospectingInstanceId?: Prisma.StringNullableFilter<"User"> | string | null
   prospectingToken?: Prisma.StringNullableFilter<"User"> | string | null
-  msgVar1?: Prisma.StringNullableFilter<"User"> | string | null
-  msgVar2?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   Products?: Prisma.ProductListRelationFilter
   ProductCategories?: Prisma.ProductCategoryListRelationFilter
@@ -410,8 +390,6 @@ export type UserOrderByWithAggregationInput = {
   wapiToken?: Prisma.SortOrderInput | Prisma.SortOrder
   prospectingInstanceId?: Prisma.SortOrderInput | Prisma.SortOrder
   prospectingToken?: Prisma.SortOrderInput | Prisma.SortOrder
-  msgVar1?: Prisma.SortOrderInput | Prisma.SortOrder
-  msgVar2?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -439,8 +417,6 @@ export type UserScalarWhereWithAggregatesInput = {
   wapiToken?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   prospectingInstanceId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   prospectingToken?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  msgVar1?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  msgVar2?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
@@ -462,8 +438,6 @@ export type UserCreateInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -498,8 +472,6 @@ export type UserUncheckedCreateInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -534,8 +506,6 @@ export type UserUpdateInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -570,8 +540,6 @@ export type UserUncheckedUpdateInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -606,8 +574,6 @@ export type UserCreateManyInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
 }
 
@@ -629,8 +595,6 @@ export type UserUpdateManyMutationInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -652,8 +616,6 @@ export type UserUncheckedUpdateManyInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -675,8 +637,6 @@ export type UserCountOrderByAggregateInput = {
   wapiToken?: Prisma.SortOrder
   prospectingInstanceId?: Prisma.SortOrder
   prospectingToken?: Prisma.SortOrder
-  msgVar1?: Prisma.SortOrder
-  msgVar2?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -698,8 +658,6 @@ export type UserMaxOrderByAggregateInput = {
   wapiToken?: Prisma.SortOrder
   prospectingInstanceId?: Prisma.SortOrder
   prospectingToken?: Prisma.SortOrder
-  msgVar1?: Prisma.SortOrder
-  msgVar2?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -721,8 +679,6 @@ export type UserMinOrderByAggregateInput = {
   wapiToken?: Prisma.SortOrder
   prospectingInstanceId?: Prisma.SortOrder
   prospectingToken?: Prisma.SortOrder
-  msgVar1?: Prisma.SortOrder
-  msgVar2?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -963,8 +919,6 @@ export type UserCreateWithoutProductCategoriesInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -998,8 +952,6 @@ export type UserUncheckedCreateWithoutProductCategoriesInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -1049,8 +1001,6 @@ export type UserUpdateWithoutProductCategoriesInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -1084,8 +1034,6 @@ export type UserUncheckedUpdateWithoutProductCategoriesInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -1119,8 +1067,6 @@ export type UserCreateWithoutProductsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -1154,8 +1100,6 @@ export type UserUncheckedCreateWithoutProductsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -1205,8 +1149,6 @@ export type UserUpdateWithoutProductsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -1240,8 +1182,6 @@ export type UserUncheckedUpdateWithoutProductsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -1275,8 +1215,6 @@ export type UserCreateWithoutLeadsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -1310,8 +1248,6 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -1361,8 +1297,6 @@ export type UserUpdateWithoutLeadsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -1396,8 +1330,6 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -1431,8 +1363,6 @@ export type UserCreateWithoutLeadSalesInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -1466,8 +1396,6 @@ export type UserUncheckedCreateWithoutLeadSalesInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -1517,8 +1445,6 @@ export type UserUpdateWithoutLeadSalesInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -1552,8 +1478,6 @@ export type UserUncheckedUpdateWithoutLeadSalesInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -1587,8 +1511,6 @@ export type UserCreateWithoutMessageTemplatesInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -1622,8 +1544,6 @@ export type UserUncheckedCreateWithoutMessageTemplatesInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -1673,8 +1593,6 @@ export type UserUpdateWithoutMessageTemplatesInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -1708,8 +1626,6 @@ export type UserUncheckedUpdateWithoutMessageTemplatesInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -1743,8 +1659,6 @@ export type UserCreateWithoutBroadcastsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -1778,8 +1692,6 @@ export type UserUncheckedCreateWithoutBroadcastsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -1829,8 +1741,6 @@ export type UserUpdateWithoutBroadcastsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -1864,8 +1774,6 @@ export type UserUncheckedUpdateWithoutBroadcastsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -1899,8 +1807,6 @@ export type UserCreateWithoutAutomationsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -1934,8 +1840,6 @@ export type UserUncheckedCreateWithoutAutomationsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -1985,8 +1889,6 @@ export type UserUpdateWithoutAutomationsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -2020,8 +1922,6 @@ export type UserUncheckedUpdateWithoutAutomationsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -2055,8 +1955,6 @@ export type UserCreateWithoutBroadcastBlocksInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -2090,8 +1988,6 @@ export type UserUncheckedCreateWithoutBroadcastBlocksInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -2141,8 +2037,6 @@ export type UserUpdateWithoutBroadcastBlocksInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -2176,8 +2070,6 @@ export type UserUncheckedUpdateWithoutBroadcastBlocksInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -2211,8 +2103,6 @@ export type UserCreateWithoutMessageLogsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -2246,8 +2136,6 @@ export type UserUncheckedCreateWithoutMessageLogsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -2297,8 +2185,6 @@ export type UserUpdateWithoutMessageLogsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -2332,8 +2218,6 @@ export type UserUncheckedUpdateWithoutMessageLogsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -2367,8 +2251,6 @@ export type UserCreateWithoutContactListsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -2402,8 +2284,6 @@ export type UserUncheckedCreateWithoutContactListsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -2453,8 +2333,6 @@ export type UserUpdateWithoutContactListsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -2488,8 +2366,6 @@ export type UserUncheckedUpdateWithoutContactListsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -2523,8 +2399,6 @@ export type UserCreateWithoutProspectingBroadcastsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -2558,8 +2432,6 @@ export type UserUncheckedCreateWithoutProspectingBroadcastsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -2609,8 +2481,6 @@ export type UserUpdateWithoutProspectingBroadcastsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -2644,8 +2514,6 @@ export type UserUncheckedUpdateWithoutProspectingBroadcastsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -2679,8 +2547,6 @@ export type UserCreateWithoutSerpSearchLogsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -2714,8 +2580,6 @@ export type UserUncheckedCreateWithoutSerpSearchLogsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -2765,8 +2629,6 @@ export type UserUpdateWithoutSerpSearchLogsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -2800,8 +2662,6 @@ export type UserUncheckedUpdateWithoutSerpSearchLogsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -2835,8 +2695,6 @@ export type UserCreateWithoutSerpSearchOffsetsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -2870,8 +2728,6 @@ export type UserUncheckedCreateWithoutSerpSearchOffsetsInput = {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  msgVar1?: string | null
-  msgVar2?: string | null
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -2921,8 +2777,6 @@ export type UserUpdateWithoutSerpSearchOffsetsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -2956,8 +2810,6 @@ export type UserUncheckedUpdateWithoutSerpSearchOffsetsInput = {
   wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  msgVar2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -3130,8 +2982,6 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   wapiToken?: boolean
   prospectingInstanceId?: boolean
   prospectingToken?: boolean
-  msgVar1?: boolean
-  msgVar2?: boolean
   createdAt?: boolean
   Products?: boolean | Prisma.User$ProductsArgs<ExtArgs>
   ProductCategories?: boolean | Prisma.User$ProductCategoriesArgs<ExtArgs>
@@ -3167,8 +3017,6 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   wapiToken?: boolean
   prospectingInstanceId?: boolean
   prospectingToken?: boolean
-  msgVar1?: boolean
-  msgVar2?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -3190,8 +3038,6 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   wapiToken?: boolean
   prospectingInstanceId?: boolean
   prospectingToken?: boolean
-  msgVar1?: boolean
-  msgVar2?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -3213,12 +3059,10 @@ export type UserSelectScalar = {
   wapiToken?: boolean
   prospectingInstanceId?: boolean
   prospectingToken?: boolean
-  msgVar1?: boolean
-  msgVar2?: boolean
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "phoneNumber" | "address" | "isActive" | "emailVerified" | "Role" | "CustomerType" | "Plan" | "trialExpiresAt" | "onboardingMessageSentAt" | "wapiInstanceId" | "wapiToken" | "prospectingInstanceId" | "prospectingToken" | "msgVar1" | "msgVar2" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "phoneNumber" | "address" | "isActive" | "emailVerified" | "Role" | "CustomerType" | "Plan" | "trialExpiresAt" | "onboardingMessageSentAt" | "wapiInstanceId" | "wapiToken" | "prospectingInstanceId" | "prospectingToken" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Products?: boolean | Prisma.User$ProductsArgs<ExtArgs>
   ProductCategories?: boolean | Prisma.User$ProductCategoriesArgs<ExtArgs>
@@ -3273,8 +3117,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     wapiToken: string | null
     prospectingInstanceId: string | null
     prospectingToken: string | null
-    msgVar1: string | null
-    msgVar2: string | null
     createdAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -3729,8 +3571,6 @@ export interface UserFieldRefs {
   readonly wapiToken: Prisma.FieldRef<"User", 'String'>
   readonly prospectingInstanceId: Prisma.FieldRef<"User", 'String'>
   readonly prospectingToken: Prisma.FieldRef<"User", 'String'>
-  readonly msgVar1: Prisma.FieldRef<"User", 'String'>
-  readonly msgVar2: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     

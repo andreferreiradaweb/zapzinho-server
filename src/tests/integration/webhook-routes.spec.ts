@@ -88,46 +88,15 @@ describe('POST /webhook/whatsapp', () => {
   beforeAll(async () => {
     await app.ready()
 
-    // User WITHOUT variables configured
     await userRepo.create({
-      id: 'user-no-vars',
-      email: 'novars@test.com',
+      id: 'user-test',
+      email: 'test@test.com',
       passwordHash: await hash('Test123', 6),
       Role: 'CLIENT',
       CustomerType: 'B2C',
       isActive: true,
       emailVerified: true,
-      wapiInstanceId: 'instance-no-vars',
-      msgVar1: null,
-      msgVar2: null,
-    })
-
-    // User WITH both variables configured
-    await userRepo.create({
-      id: 'user-with-vars',
-      email: 'withvars@test.com',
-      passwordHash: await hash('Test123', 6),
-      Role: 'CLIENT',
-      CustomerType: 'B2C',
-      isActive: true,
-      emailVerified: true,
-      wapiInstanceId: 'instance-with-vars',
-      msgVar1: 'RXJS4598',
-      msgVar2: 'RXJS4599',
-    })
-
-    // User with only variable 1 configured
-    await userRepo.create({
-      id: 'user-one-var',
-      email: 'onevar@test.com',
-      passwordHash: await hash('Test123', 6),
-      Role: 'CLIENT',
-      CustomerType: 'B2C',
-      isActive: true,
-      emailVerified: true,
-      wapiInstanceId: 'instance-one-var',
-      msgVar1: 'PHONE_CODE',
-      msgVar2: null,
+      wapiInstanceId: 'instance-test',
     })
   })
 
@@ -144,7 +113,7 @@ describe('POST /webhook/whatsapp', () => {
       const res = await app.inject({
         method: 'POST',
         url: '/webhook/whatsapp',
-        payload: makePayload({ instanceId: 'instance-no-vars', isGroup: true }),
+        payload: makePayload({ instanceId: 'instance-test', isGroup: true }),
       })
 
       expect(res.statusCode).toBe(200)
@@ -153,13 +122,13 @@ describe('POST /webhook/whatsapp', () => {
     })
   })
 
-  describe('fromMe = false (mensagem de cliente)', () => {
-    it('cria lead com o telefone do remetente quando não há variáveis configuradas', async () => {
+  describe('mensagem de cliente (fromMe = false)', () => {
+    it('cria lead com o telefone do remetente', async () => {
       const res = await app.inject({
         method: 'POST',
         url: '/webhook/whatsapp',
         payload: makePayload({
-          instanceId: 'instance-no-vars',
+          instanceId: 'instance-test',
           fromMe: false,
           chatId: '5585988880001@c.us',
           pushName: 'Cliente Normal',
@@ -172,127 +141,26 @@ describe('POST /webhook/whatsapp', () => {
       expect(leadRepo.items).toHaveLength(1)
       expect(leadRepo.items[0].nome).toBe('Cliente Normal')
     })
-
-    it('cria lead com o telefone do remetente mesmo quando variáveis estão configuradas (ignorando vars)', async () => {
-      const res = await app.inject({
-        method: 'POST',
-        url: '/webhook/whatsapp',
-        payload: makePayload({
-          instanceId: 'instance-with-vars',
-          fromMe: false,
-          chatId: '5585988880002@c.us',
-          pushName: 'Cliente Qualquer',
-          conversation: 'mensagem sem os códigos',
-        }),
-      })
-
-      expect(res.statusCode).toBe(200)
-      expect(res.json().ok).toBe(true)
-      expect(leadRepo.items).toHaveLength(1)
-      expect(leadRepo.items[0].nome).toBe('Cliente Qualquer')
-    })
   })
 
-  describe('fromMe = true (mensagem própria) com variáveis configuradas', () => {
-    it('cria lead com dados extraídos das variáveis no formato CODE=VALUE', async () => {
+  describe('mensagem própria (fromMe = true)', () => {
+    it('cria lead com o telefone do chat (mesmo comportamento que fromMe=false)', async () => {
       const res = await app.inject({
         method: 'POST',
         url: '/webhook/whatsapp',
         payload: makePayload({
-          instanceId: 'instance-with-vars',
+          instanceId: 'instance-test',
           fromMe: true,
-          conversation: 'Personalização escolhida: https://lp.com/?name=Teste&RXJS4598=85997139967&RXJS4599=André+Ferreira',
+          chatId: '5585977770001@c.us',
+          pushName: 'Contato',
+          conversation: 'mensagem enviada pelo próprio usuário',
         }),
       })
 
       expect(res.statusCode).toBe(200)
       expect(res.json().ok).toBe(true)
       expect(leadRepo.items).toHaveLength(1)
-      expect(leadRepo.items[0].telefone).toBe('85997139967')
-      expect(leadRepo.items[0].nome).toBe('André Ferreira')
-    })
-
-    it('ignora mensagem no formato CODE: VALUE (não suportado)', async () => {
-      const res = await app.inject({
-        method: 'POST',
-        url: '/webhook/whatsapp',
-        payload: makePayload({
-          instanceId: 'instance-with-vars',
-          fromMe: true,
-          conversation: 'Personalização escolhida: https://lp.com/?name=Teste\nRXJS4598: 85991112222\nRXJS4599: Maria Silva',
-        }),
-      })
-
-      expect(res.statusCode).toBe(200)
-      expect(res.json().reason).toBe('vars_not_found_in_message')
-      expect(leadRepo.items).toHaveLength(0)
-    })
-
-    it('ignora mensagem quando apenas uma das duas variáveis configuradas está presente', async () => {
-      const res = await app.inject({
-        method: 'POST',
-        url: '/webhook/whatsapp',
-        payload: makePayload({
-          instanceId: 'instance-with-vars',
-          fromMe: true,
-          conversation: 'RXJS4598=85997139967',
-        }),
-      })
-
-      expect(res.statusCode).toBe(200)
-      expect(res.json().reason).toBe('vars_not_found_in_message')
-      expect(leadRepo.items).toHaveLength(0)
-    })
-
-    it('ignora mensagem sem nenhuma variável quando ambas estão configuradas', async () => {
-      const res = await app.inject({
-        method: 'POST',
-        url: '/webhook/whatsapp',
-        payload: makePayload({
-          instanceId: 'instance-with-vars',
-          fromMe: true,
-          conversation: 'mensagem normal sem códigos',
-        }),
-      })
-
-      expect(res.statusCode).toBe(200)
-      expect(res.json().reason).toBe('vars_not_found_in_message')
-      expect(leadRepo.items).toHaveLength(0)
-    })
-  })
-
-  describe('fromMe = true com apenas uma variável configurada', () => {
-    it('cria lead quando a única variável configurada está presente', async () => {
-      const res = await app.inject({
-        method: 'POST',
-        url: '/webhook/whatsapp',
-        payload: makePayload({
-          instanceId: 'instance-one-var',
-          fromMe: true,
-          conversation: 'PHONE_CODE=85933334444',
-        }),
-      })
-
-      expect(res.statusCode).toBe(200)
-      expect(res.json().ok).toBe(true)
-      expect(leadRepo.items).toHaveLength(1)
-      expect(leadRepo.items[0].telefone).toBe('85933334444')
-    })
-
-    it('ignora mensagem quando a única variável configurada não está presente', async () => {
-      const res = await app.inject({
-        method: 'POST',
-        url: '/webhook/whatsapp',
-        payload: makePayload({
-          instanceId: 'instance-one-var',
-          fromMe: true,
-          conversation: 'mensagem sem o código',
-        }),
-      })
-
-      expect(res.statusCode).toBe(200)
-      expect(res.json().reason).toBe('vars_not_found_in_message')
-      expect(leadRepo.items).toHaveLength(0)
+      expect(leadRepo.items[0].telefone).toBe('5585977770001')
     })
   })
 

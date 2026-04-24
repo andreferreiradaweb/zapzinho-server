@@ -66,7 +66,7 @@ export async function whatsappWebhookController(
     return reply.status(200).send({ ok: false, reason: 'invalid_payload' })
   }
 
-  const { instanceId, fromMe, isGroup, chat, sender, msgContent } = parsed.data
+  const { instanceId, isGroup, chat, sender, msgContent } = parsed.data
 
   // Skip group messages
   if (isGroup === true) {
@@ -78,19 +78,12 @@ export async function whatsappWebhookController(
   const message = msgContent?.conversation ?? ''
 
   try {
-    const result = await makeHandleIncomingMessage().execute({
+    const { lead, created } = await makeHandleIncomingMessage().execute({
       instanceId,
       phone,
       name,
       message,
-      fromMe: fromMe === true,
     })
-
-    if ('skipped' in result) {
-      return reply.status(200).send({ ok: true, reason: 'vars_not_found_in_message' })
-    }
-
-    const { lead, created } = result
 
     if (message) {
       addClassificationMessage(lead.id, lead.userId, message, created)

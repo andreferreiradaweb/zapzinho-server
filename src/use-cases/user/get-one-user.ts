@@ -35,8 +35,6 @@ export class GetOneUserUseCase {
       wapiToken: findedUser.wapiToken,
       prospectingInstanceId: findedUser.prospectingInstanceId,
       prospectingToken: findedUser.prospectingToken,
-      msgVar1: findedUser.msgVar1,
-      msgVar2: findedUser.msgVar2,
       emailVerified: findedUser.emailVerified,
     }
 
