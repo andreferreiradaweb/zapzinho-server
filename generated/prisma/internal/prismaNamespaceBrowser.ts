@@ -110,6 +110,8 @@ export const UserScalarFieldEnum = {
   wapiToken: 'wapiToken',
   prospectingInstanceId: 'prospectingInstanceId',
   prospectingToken: 'prospectingToken',
+  msgVar1: 'msgVar1',
+  msgVar2: 'msgVar2',
   createdAt: 'createdAt'
 } as const
 

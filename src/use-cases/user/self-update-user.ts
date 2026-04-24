@@ -12,8 +12,8 @@ interface SelfUpdateUserUseCaseRequest {
   name?: string
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
-  lpPhoneParam?: string | null
-  lpNameParam?: string | null
+  msgVar1?: string | null
+  msgVar2?: string | null
 }
 
 interface SelfUpdateUserUseCaseResponse {
@@ -31,8 +31,8 @@ export class SelfUpdateUserUseCase {
     name,
     prospectingInstanceId,
     prospectingToken,
-    lpPhoneParam,
-    lpNameParam,
+    msgVar1,
+    msgVar2,
   }: SelfUpdateUserUseCaseRequest): Promise<SelfUpdateUserUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(id)
 
@@ -62,7 +62,7 @@ export class SelfUpdateUserUseCase {
       hashedPassword = findedUser.passwordHash
     }
 
-    const { Role, createdAt, email, isActive, CustomerType, trialExpiresAt, onboardingMessageSentAt, wapiInstanceId, prospectingInstanceId: updatedProspectingInstanceId, prospectingToken: updatedProspectingToken, name: updatedName, Plan, address, emailVerified, wapiToken, lpPhoneParam: updatedLpPhoneParam, lpNameParam: updatedLpNameParam } =
+    const { Role, createdAt, email, isActive, CustomerType, trialExpiresAt, onboardingMessageSentAt, wapiInstanceId, prospectingInstanceId: updatedProspectingInstanceId, prospectingToken: updatedProspectingToken, name: updatedName, Plan, address, emailVerified, wapiToken, msgVar1: updatedLpPhoneParam, msgVar2: updatedLpNameParam } =
       await this.userRepository.update({
         id,
         phoneNumber: phoneNumber || findedUser.phoneNumber,
@@ -81,10 +81,10 @@ export class SelfUpdateUserUseCase {
           prospectingToken !== undefined
             ? prospectingToken
             : findedUser.prospectingToken,
-        lpPhoneParam:
-          lpPhoneParam !== undefined ? lpPhoneParam : findedUser.lpPhoneParam,
-        lpNameParam:
-          lpNameParam !== undefined ? lpNameParam : findedUser.lpNameParam,
+        msgVar1:
+          msgVar1 !== undefined ? msgVar1 : findedUser.msgVar1,
+        msgVar2:
+          msgVar2 !== undefined ? msgVar2 : findedUser.msgVar2,
       })
 
     const newUser = {
@@ -101,8 +101,8 @@ export class SelfUpdateUserUseCase {
       wapiToken,
       prospectingInstanceId: updatedProspectingInstanceId,
       prospectingToken: updatedProspectingToken,
-      lpPhoneParam: updatedLpPhoneParam,
-      lpNameParam: updatedLpNameParam,
+      msgVar1: updatedLpPhoneParam,
+      msgVar2: updatedLpNameParam,
       name: updatedName,
       address,
       emailVerified,

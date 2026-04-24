@@ -98,8 +98,8 @@ describe('POST /webhook/whatsapp', () => {
       isActive: true,
       emailVerified: true,
       wapiInstanceId: 'instance-no-vars',
-      lpPhoneParam: null,
-      lpNameParam: null,
+      msgVar1: null,
+      msgVar2: null,
     })
 
     // User WITH both variables configured
@@ -112,8 +112,8 @@ describe('POST /webhook/whatsapp', () => {
       isActive: true,
       emailVerified: true,
       wapiInstanceId: 'instance-with-vars',
-      lpPhoneParam: 'RXJS4598',
-      lpNameParam: 'RXJS4599',
+      msgVar1: 'RXJS4598',
+      msgVar2: 'RXJS4599',
     })
 
     // User with only variable 1 configured
@@ -126,8 +126,8 @@ describe('POST /webhook/whatsapp', () => {
       isActive: true,
       emailVerified: true,
       wapiInstanceId: 'instance-one-var',
-      lpPhoneParam: 'PHONE_CODE',
-      lpNameParam: null,
+      msgVar1: 'PHONE_CODE',
+      msgVar2: null,
     })
   })
 

@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "User" RENAME COLUMN "lpPhoneParam" TO "msgVar1";
+ALTER TABLE "User" RENAME COLUMN "lpNameParam" TO "msgVar2";
+ALTER TABLE "User" ALTER COLUMN "msgVar1" DROP DEFAULT;
+ALTER TABLE "User" ALTER COLUMN "msgVar2" DROP DEFAULT;

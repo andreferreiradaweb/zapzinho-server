@@ -65,11 +65,11 @@ export class HandleIncomingMessageUseCase {
 
     // Variable detection only applies to self-sent messages (fromMe)
     if (fromMe) {
-      const hasVar1 = !!user.lpPhoneParam
-      const hasVar2 = !!user.lpNameParam
+      const hasVar1 = !!user.msgVar1
+      const hasVar2 = !!user.msgVar2
 
-      const extractedPhone = hasVar1 ? extractMsgVar(message, user.lpPhoneParam!) : null
-      const extractedName = hasVar2 ? extractMsgVar(message, user.lpNameParam!) : null
+      const extractedPhone = hasVar1 ? extractMsgVar(message, user.msgVar1!) : null
+      const extractedName = hasVar2 ? extractMsgVar(message, user.msgVar2!) : null
 
       if (hasVar1 && hasVar2 && (!extractedPhone || !extractedName)) return { skipped: true }
       if (hasVar1 && !hasVar2 && !extractedPhone) return { skipped: true }

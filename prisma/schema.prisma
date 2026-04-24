@@ -25,8 +25,8 @@ model User {
   wapiToken                    String?
   prospectingInstanceId        String?
   prospectingToken             String?
-  lpPhoneParam                 String?   @default("whatsappnumber")
-  lpNameParam                  String?   @default("customername")
+  msgVar1                      String?
+  msgVar2                      String?
   createdAt                    DateTime  @default(now())
   Products                     Product[]
   ProductCategories            ProductCategory[]

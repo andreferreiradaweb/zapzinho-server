@@ -6,8 +6,8 @@ interface GetLpConfigRequest {
 }
 
 interface GetLpConfigResponse {
-  lpPhoneParam: string
-  lpNameParam: string
+  msgVar1: string | null
+  msgVar2: string | null
 }
 
 export class GetLpConfigUseCase {
@@ -19,8 +19,8 @@ export class GetLpConfigUseCase {
     if (!user) throw new ResourceNotFound()
 
     return {
-      lpPhoneParam: user.lpPhoneParam ?? 'whatsappnumber',
-      lpNameParam: user.lpNameParam ?? 'customername',
+      msgVar1: user.msgVar1 ?? null,
+      msgVar2: user.msgVar2 ?? null,
     }
   }
 }
