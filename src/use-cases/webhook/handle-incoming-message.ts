@@ -32,9 +32,6 @@ export function extractMsgVar(message: string, code: string): string | null {
   if (!code || !message) return null
   const escaped = code.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-  const colonMatch = message.match(new RegExp(`(?:^|\\n)${escaped}:\\s*(.+)`, 'i'))
-  if (colonMatch) return colonMatch[1].trim()
-
   const equalsMatch = message.match(new RegExp(`(?:^|[?&\\s])${escaped}=([^&\\s]+)`, 'im'))
   if (equalsMatch) return decodeURIComponent(equalsMatch[1].replace(/\+/g, ' '))
 

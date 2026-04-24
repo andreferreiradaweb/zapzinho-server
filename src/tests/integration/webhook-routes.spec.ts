@@ -212,7 +212,7 @@ describe('POST /webhook/whatsapp', () => {
       expect(leadRepo.items[0].nome).toBe('André Ferreira')
     })
 
-    it('cria lead com dados extraídos das variáveis no formato CODE: VALUE', async () => {
+    it('ignora mensagem no formato CODE: VALUE (não suportado)', async () => {
       const res = await app.inject({
         method: 'POST',
         url: '/webhook/whatsapp',
@@ -224,10 +224,8 @@ describe('POST /webhook/whatsapp', () => {
       })
 
       expect(res.statusCode).toBe(200)
-      expect(res.json().ok).toBe(true)
-      expect(leadRepo.items).toHaveLength(1)
-      expect(leadRepo.items[0].telefone).toBe('85991112222')
-      expect(leadRepo.items[0].nome).toBe('Maria Silva')
+      expect(res.json().reason).toBe('vars_not_found_in_message')
+      expect(leadRepo.items).toHaveLength(0)
     })
 
     it('ignora mensagem quando apenas uma das duas variáveis configuradas está presente', async () => {

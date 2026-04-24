@@ -3,55 +3,6 @@ import { extractMsgVar } from '@/use-cases/webhook/handle-incoming-message'
 
 const CODE = 'whatsappnumber'
 
-describe('extractMsgVar — formato CODE: VALUE', () => {
-  it('extrai valor quando código está na primeira linha', () => {
-    expect(extractMsgVar(`${CODE}: 85997139967`, CODE)).toBe('85997139967')
-  })
-
-  it('extrai valor quando código está em linha do meio', () => {
-    const msg = `Olá, segue meu pedido:\n${CODE}: 85997139967\nObrigado`
-    expect(extractMsgVar(msg, CODE)).toBe('85997139967')
-  })
-
-  it('extrai valor após URL com dois pontos', () => {
-    const msg = `Minha escolha: https://lp.com/?name=Maria\n${CODE}: 85997139967`
-    expect(extractMsgVar(msg, CODE)).toBe('85997139967')
-  })
-
-  it('ignora código no meio de uma linha (não no início)', () => {
-    const msg = `texto ${CODE}: 85997139967`
-    expect(extractMsgVar(msg, CODE)).toBeNull()
-  })
-
-  it('ignora dois-pontos de URL na mesma linha que o código', () => {
-    // garrafa: https:// não deve dar match para código "garrafa"
-    expect(extractMsgVar('garrafa: https://site.com', 'garrafa')).toBe('https://site.com')
-    // mas "whatsappnumber" não está em "garrafa: ..."
-    expect(extractMsgVar('garrafa: https://site.com', CODE)).toBeNull()
-  })
-
-  it('é case-insensitive', () => {
-    expect(extractMsgVar(`WHATSAPPNUMBER: 85997139967`, CODE)).toBe('85997139967')
-    expect(extractMsgVar(`WhatsAppNumber: 85997139967`, CODE)).toBe('85997139967')
-  })
-
-  it('remove espaços extras ao redor do valor (trim)', () => {
-    expect(extractMsgVar(`${CODE}:   85997139967  `, CODE)).toBe('85997139967')
-  })
-
-  it('retorna null quando mensagem está vazia', () => {
-    expect(extractMsgVar('', CODE)).toBeNull()
-  })
-
-  it('retorna null quando código está vazio', () => {
-    expect(extractMsgVar(`${CODE}: 85997139967`, '')).toBeNull()
-  })
-
-  it('retorna null quando código não está na mensagem', () => {
-    expect(extractMsgVar('customername: Maria', CODE)).toBeNull()
-  })
-})
-
 describe('extractMsgVar — formato CODE=VALUE', () => {
   it('extrai valor quando código é único na mensagem', () => {
     expect(extractMsgVar(`${CODE}=85997139967`, CODE)).toBe('85997139967')
@@ -67,9 +18,13 @@ describe('extractMsgVar — formato CODE=VALUE', () => {
     expect(extractMsgVar(msg, CODE)).toBe('85997139967')
   })
 
-  it('extrai valor quando está separado por & sem URL', () => {
+  it('extrai valor quando está separado por &', () => {
     const msg = `customername=André&${CODE}=85997139967`
     expect(extractMsgVar(msg, CODE)).toBe('85997139967')
+  })
+
+  it('extrai valor quando está no início da mensagem', () => {
+    expect(extractMsgVar(`${CODE}=85997139967 customername=André`, CODE)).toBe('85997139967')
   })
 
   it('decodifica %2B como +', () => {
@@ -77,34 +32,48 @@ describe('extractMsgVar — formato CODE=VALUE', () => {
   })
 
   it('decodifica + como espaço', () => {
-    expect(extractMsgVar(`customername=André+Ferreira`, 'customername')).toBe('André Ferreira')
+    expect(extractMsgVar('customername=André+Ferreira', 'customername')).toBe('André Ferreira')
   })
 
   it('não captura código que é sufixo de outro código', () => {
-    // "mynumber=123" não deve dar match para código "number"
     expect(extractMsgVar('mynumber=123', 'number')).toBeNull()
   })
 
   it('retorna null quando código não está na mensagem', () => {
     expect(extractMsgVar('customername=Maria', CODE)).toBeNull()
   })
+
+  it('retorna null quando mensagem está vazia', () => {
+    expect(extractMsgVar('', CODE)).toBeNull()
+  })
+
+  it('retorna null quando código está vazio', () => {
+    expect(extractMsgVar(`${CODE}=85997139967`, '')).toBeNull()
+  })
+
+  it('é case-insensitive', () => {
+    expect(extractMsgVar(`WHATSAPPNUMBER=85997139967`, CODE)).toBe('85997139967')
+  })
+})
+
+describe('extractMsgVar — formato CODE: VALUE não é mais suportado', () => {
+  it('não captura formato colon', () => {
+    expect(extractMsgVar(`${CODE}: 85997139967`, CODE)).toBeNull()
+    expect(extractMsgVar(`customername: jose`, 'customername')).toBeNull()
+  })
 })
 
 describe('extractMsgVar — mensagem real do ShareButton', () => {
-  it('extrai ambas as variáveis de uma mensagem completa', () => {
-    const msg = [
-      'Já escolhi a personalização da minha garrafa: https://gravacao-lazer-terzon.vercel.app/?font=Stephenson+Brandon&iconsize=40&namesize=20&name=Maria&icon=9',
-      'customername: Mariá da dores',
-      'whatsappnumber: 85999000099',
-    ].join('\n')
+  it('extrai ambas as variáveis da mensagem gerada pelo ShareButton', () => {
+    const msg = 'Já escolhi a personalização da minha garrafa: https://gravacao-lazer-terzon.vercel.app/?font=Stephenson+Brandon&iconsize=40&namesize=20&name=Maria&icon=9 customername=Mari%C3%A1+da+dores whatsappnumber=85999000099'
 
     expect(extractMsgVar(msg, 'customername')).toBe('Mariá da dores')
     expect(extractMsgVar(msg, 'whatsappnumber')).toBe('85999000099')
   })
 
-  it('extrai de mensagem manual com =', () => {
-    const msg = 'customername=André Ferreira whatsappnumber=85997139967'
-    expect(extractMsgVar(msg, 'customername')).toBe('André')
+  it('extrai de mensagem manual simples', () => {
+    const msg = 'customername=André+Ferreira whatsappnumber=85997139967'
+    expect(extractMsgVar(msg, 'customername')).toBe('André Ferreira')
     expect(extractMsgVar(msg, 'whatsappnumber')).toBe('85997139967')
   })
 })
