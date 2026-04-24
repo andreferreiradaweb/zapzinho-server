@@ -1,0 +1,64 @@
+# ============================================================
+# CI Pipeline — Zapzinho Server (Backend)
+# ============================================================
+# DESATIVADO — só roda manualmente (workflow_dispatch)
+# Para ativar automático no push, substitua o trigger por:
+#
+#   on:
+#     push:
+#       branches: [main, master]
+#     pull_request:
+#       branches: [main, master]
+#
+# Secrets necessários (Settings → Secrets and variables → Actions):
+#   JWT_SECRET         (mesmo valor do .env de produção)
+#   RENDER_DEPLOY_HOOK (Render → Service → Settings → Deploy Hooks)
+# ============================================================
+
+name: CI — Backend
+
+on:
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: Unit + Integration Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        env:
+          NODE_ENV: test
+          JWT_SECRET: ${{ secrets.JWT_SECRET || 'ci-test-secret-key' }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL || 'postgresql://test:test@localhost:5432/test' }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY || 're_test_ci' }}
+          PASSWORD_ADMIN: CIAdmin123!
+          ADMIN_EMAIL: admin@ci.com
+        run: npm test
+
+  deploy:
+    name: Deploy → Render
+    needs: tests
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Trigger Render deploy
+        run: |
+          if [ -n "${{ secrets.RENDER_DEPLOY_HOOK }}" ]; then
+            curl -s -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+            echo "Deploy triggered."
+          else
+            echo "RENDER_DEPLOY_HOOK not configured. Skipping."
+          fi
