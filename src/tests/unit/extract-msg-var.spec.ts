@@ -65,7 +65,7 @@ describe('extractMsgVar — formato CODE: VALUE não é mais suportado', () => {
 
 describe('extractMsgVar — mensagem real do ShareButton', () => {
   it('extrai ambas as variáveis da mensagem gerada pelo ShareButton', () => {
-    const msg = 'Já escolhi a personalização da minha garrafa: https://gravacao-lazer-terzon.vercel.app/?font=Stephenson+Brandon&iconsize=40&namesize=20&name=Maria&icon=9 customername=Mari%C3%A1+da+dores whatsappnumber=85999000099'
+    const msg = 'Já escolhi a personalização da minha garrafa: https://gravacao-lazer-terzon.vercel.app/?font=Stephenson+Brandon&iconsize=40&namesize=20&name=Maria&icon=9 customername=Mariá+da+dores whatsappnumber=85999000099'
 
     expect(extractMsgVar(msg, 'customername')).toBe('Mariá da dores')
     expect(extractMsgVar(msg, 'whatsappnumber')).toBe('85999000099')
