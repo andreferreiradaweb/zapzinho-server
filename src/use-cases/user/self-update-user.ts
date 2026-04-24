@@ -62,7 +62,7 @@ export class SelfUpdateUserUseCase {
       hashedPassword = findedUser.passwordHash
     }
 
-    const { Role, createdAt, email, isActive, CustomerType, trialExpiresAt, onboardingMessageSentAt, wapiInstanceId, prospectingInstanceId: updatedProspectingInstanceId, prospectingToken: updatedProspectingToken, name: updatedName, Plan, address, emailVerified, wapiToken } =
+    const { Role, createdAt, email, isActive, CustomerType, trialExpiresAt, onboardingMessageSentAt, wapiInstanceId, prospectingInstanceId: updatedProspectingInstanceId, prospectingToken: updatedProspectingToken, name: updatedName, Plan, address, emailVerified, wapiToken, lpPhoneParam: updatedLpPhoneParam, lpNameParam: updatedLpNameParam } =
       await this.userRepository.update({
         id,
         phoneNumber: phoneNumber || findedUser.phoneNumber,
@@ -101,6 +101,8 @@ export class SelfUpdateUserUseCase {
       wapiToken,
       prospectingInstanceId: updatedProspectingInstanceId,
       prospectingToken: updatedProspectingToken,
+      lpPhoneParam: updatedLpPhoneParam,
+      lpNameParam: updatedLpNameParam,
       name: updatedName,
       address,
       emailVerified,
