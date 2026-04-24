@@ -68,11 +68,6 @@ export async function whatsappWebhookController(
 
   const { instanceId, fromMe, isGroup, chat, sender, msgContent } = parsed.data
 
-  // Skip messages sent by the bot itself
-  if (fromMe === true) {
-    return reply.status(200).send({ ok: true, reason: 'outgoing_message_ignored' })
-  }
-
   // Skip group messages
   if (isGroup === true) {
     return reply.status(200).send({ ok: true, reason: 'group_message_ignored' })
