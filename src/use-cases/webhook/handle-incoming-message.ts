@@ -28,7 +28,7 @@ interface HandleIncomingMessageSkipped {
  *   - "CODE: VALUE"  (line-separated, added by ShareButton)
  *   - "CODE=VALUE"   (URL query-param style, e.g. when customer pastes the URL directly)
  */
-function extractMsgVar(message: string, code: string): string | null {
+export function extractMsgVar(message: string, code: string): string | null {
   if (!code || !message) return null
   const escaped = code.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
