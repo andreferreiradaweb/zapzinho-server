@@ -91,6 +91,14 @@ export class PrismaUserRepository implements UserRepository {
     return user || null
   }
 
+  async findUserByPhone(phone: string) {
+    const digits = phone.replace(/\D/g, '').slice(-11)
+    const user = await prisma.user.findFirst({
+      where: { phoneNumber: { contains: digits } },
+    })
+    return user || null
+  }
+
   async findAdminUser() {
     const user = await prisma.user.findFirst({
       where: { Role: 'ADMIN' },

@@ -40,6 +40,11 @@ export class InMemoryUserRepository implements UserRepository {
     return this.items.find((u) => u.wapiInstanceId === instanceId) ?? null
   }
 
+  async findUserByPhone(phone: string): Promise<any> {
+    const digits = phone.replace(/\D/g, '').slice(-11)
+    return this.items.find((u) => u.phoneNumber?.replace(/\D/g, '').includes(digits)) ?? null
+  }
+
   async findAdminUser(): Promise<any> {
     return this.items.find((u) => u.Role === 'ADMIN') ?? null
   }

@@ -17,6 +17,7 @@ export interface UserRepository {
   findUserById(id: string): Promise<UserWithLeadsAndProducts | null>
   findUserByEmail(email: string): Promise<User | null>
   findUserByInstanceId(instanceId: string): Promise<User | null>
+  findUserByPhone(phone: string): Promise<User | null>
   findAdminUser(): Promise<User | null>
   countUsers(search: string): Promise<number>
   filterUsers(

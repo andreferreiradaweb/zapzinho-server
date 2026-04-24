@@ -4,7 +4,7 @@ import { handleSpecificError } from '@/helpers/handleSpecificError'
 import { CreateLeadFromWhatsappFactory } from '@/factory/lead/create-lead-from-whatsapp'
 
 const bodySchema = z.object({
-  userId: z.string().uuid(),
+  storePhone: z.string().min(8),
   whatsappnumber: z.string().min(8),
   customername: z.string().min(1),
 })
@@ -14,13 +14,13 @@ export async function CreateLeadFromWhatsappController(
   reply: FastifyReply,
 ) {
   try {
-    const { userId, whatsappnumber, customername } = bodySchema.parse(
+    const { storePhone, whatsappnumber, customername } = bodySchema.parse(
       request.body,
     )
 
     const useCase = CreateLeadFromWhatsappFactory()
     const { lead, created } = await useCase.execute({
-      userId,
+      storePhone,
       telefone: whatsappnumber,
       nome: customername,
     })
