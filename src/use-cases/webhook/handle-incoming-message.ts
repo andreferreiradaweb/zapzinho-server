@@ -9,6 +9,7 @@ interface HandleIncomingMessageRequest {
   phone: string        // digits only, e.g. 5511999999999
   name: string
   message: string
+  fromMe: boolean
 }
 
 interface HandleIncomingMessageResponse {
@@ -52,6 +53,7 @@ export class HandleIncomingMessageUseCase {
     phone,
     name,
     message,
+    fromMe,
   }: HandleIncomingMessageRequest): Promise<HandleIncomingMessageResponse | HandleIncomingMessageSkipped> {
     let user = await this.userRepository.findUserByInstanceId(instanceId)
 
@@ -61,40 +63,46 @@ export class HandleIncomingMessageUseCase {
 
     if (!user) throw new ResourceNotFound()
 
-    const hasVar1 = !!user.lpPhoneParam
-    const hasVar2 = !!user.lpNameParam
+    // Variable detection only applies to self-sent messages (fromMe)
+    if (fromMe) {
+      const hasVar1 = !!user.lpPhoneParam
+      const hasVar2 = !!user.lpNameParam
 
-    const extractedPhone = hasVar1 ? extractMsgVar(message, user.lpPhoneParam!) : null
-    const extractedName = hasVar2 ? extractMsgVar(message, user.lpNameParam!) : null
+      const extractedPhone = hasVar1 ? extractMsgVar(message, user.lpPhoneParam!) : null
+      const extractedName = hasVar2 ? extractMsgVar(message, user.lpNameParam!) : null
 
-    // When variables are configured, all configured ones must appear in the same message
-    if (hasVar1 && hasVar2 && (!extractedPhone || !extractedName)) {
-      return { skipped: true }
-    }
-    if (hasVar1 && !hasVar2 && !extractedPhone) {
-      return { skipped: true }
-    }
-    if (!hasVar1 && hasVar2 && !extractedName) {
-      return { skipped: true }
+      if (hasVar1 && hasVar2 && (!extractedPhone || !extractedName)) return { skipped: true }
+      if (hasVar1 && !hasVar2 && !extractedPhone) return { skipped: true }
+      if (!hasVar1 && hasVar2 && !extractedName) return { skipped: true }
+
+      const resolvedPhone = extractedPhone ? extractedPhone.replace(/\D/g, '') : phone
+      const resolvedName = extractedName || name || phone
+
+      return this.upsert(user.id, resolvedPhone, resolvedName, message)
     }
 
-    const resolvedPhone = extractedPhone
-      ? extractedPhone.replace(/\D/g, '')
-      : phone
-    const resolvedName = extractedName || name || phone
+    // Regular incoming message — upsert lead by sender's phone (original behaviour)
+    return this.upsert(user.id, phone, name, message)
+  }
+
+  private async upsert(
+    userId: string,
+    phone: string,
+    name: string,
+    message: string,
+  ): Promise<HandleIncomingMessageResponse> {
 
     try {
       const { lead, created } = await this.leadRepository.upsertByPhone({
-        userId: user.id,
-        phone: resolvedPhone,
-        name: resolvedName,
+        userId,
+        phone,
+        name,
         message,
       })
       return { lead, created }
     } catch (err) {
-      // Fallback for unique constraint race: find the already-created lead
-      if (err instanceof Prisma.PrismaClientKnownRequestError && (err as Prisma.PrismaClientKnownRequestError).code === 'P2002') {
-        const existing = await this.leadRepository.findLeadWhereUserByNumber(user.id, resolvedPhone)
+      if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
+        const existing = await this.leadRepository.findLeadWhereUserByNumber(userId, phone)
         if (existing) {
           const updated = await this.leadRepository.update({
             id: existing.id,

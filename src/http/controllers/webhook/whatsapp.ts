@@ -68,11 +68,6 @@ export async function whatsappWebhookController(
 
   const { instanceId, fromMe, isGroup, chat, sender, msgContent } = parsed.data
 
-  // Variable-based lead capture only works for self-sent messages (fromMe)
-  if (!fromMe) {
-    return reply.status(200).send({ ok: true, reason: 'incoming_message_ignored' })
-  }
-
   // Skip group messages
   if (isGroup === true) {
     return reply.status(200).send({ ok: true, reason: 'group_message_ignored' })
@@ -88,6 +83,7 @@ export async function whatsappWebhookController(
       phone,
       name,
       message,
+      fromMe: fromMe === true,
     })
 
     if ('skipped' in result) {
