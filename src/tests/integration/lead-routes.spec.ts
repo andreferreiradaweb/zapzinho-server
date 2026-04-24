@@ -296,6 +296,75 @@ describe('Rotas de lead (HTTP)', () => {
     })
   })
 
+  describe('POST /lead/whatsapp', () => {
+    beforeAll(async () => {
+      await userRepo.create({
+        id: 'store-owner',
+        email: 'loja@test.com',
+        passwordHash: await hash('Test123', 6),
+        Role: 'CLIENT',
+        CustomerType: 'B2C',
+        isActive: true,
+        emailVerified: true,
+        phoneNumber: '5585986385878',
+      })
+    })
+
+    it('cria lead (201) com storePhone, customername e whatsappnumber', async () => {
+      const res = await app.inject({
+        method: 'POST',
+        url: '/lead/whatsapp',
+        payload: {
+          storePhone: '5585986385878',
+          customername: 'Maria Silva',
+          whatsappnumber: '85999000091',
+        },
+      })
+
+      expect(res.statusCode).toBe(201)
+      expect(res.json().lead.nome).toBe('Maria Silva')
+      expect(res.json().lead.telefone).toBe('85999000091')
+      expect(res.json().created).toBe(true)
+    })
+
+    it('retorna 200 e created=false ao cadastrar mesmo telefone novamente', async () => {
+      await app.inject({
+        method: 'POST',
+        url: '/lead/whatsapp',
+        payload: { storePhone: '5585986385878', customername: 'João', whatsappnumber: '85988880001' },
+      })
+
+      const res = await app.inject({
+        method: 'POST',
+        url: '/lead/whatsapp',
+        payload: { storePhone: '5585986385878', customername: 'João Repetido', whatsappnumber: '85988880001' },
+      })
+
+      expect(res.statusCode).toBe(200)
+      expect(res.json().created).toBe(false)
+    })
+
+    it('retorna 404 quando storePhone não corresponde a nenhum usuário', async () => {
+      const res = await app.inject({
+        method: 'POST',
+        url: '/lead/whatsapp',
+        payload: { storePhone: '11000000000', customername: 'X', whatsappnumber: '85900000001' },
+      })
+
+      expect(res.statusCode).toBe(404)
+    })
+
+    it('retorna 400 para payload inválido', async () => {
+      const res = await app.inject({
+        method: 'POST',
+        url: '/lead/whatsapp',
+        payload: { customername: 'Sem telefone da loja' },
+      })
+
+      expect(res.statusCode).toBe(400)
+    })
+  })
+
   describe('DELETE /lead/:id', () => {
     it('retorna 404 ao deletar lead inexistente', async () => {
       const response = await app.inject({
