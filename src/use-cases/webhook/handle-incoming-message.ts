@@ -65,15 +65,32 @@ export class HandleIncomingMessageUseCase {
       const hasVar1 = !!user.msgVar1
       const hasVar2 = !!user.msgVar2
 
-      const extractedPhone = hasVar1 ? extractMsgVar(message, user.msgVar1!) : null
-      const extractedName = hasVar2 ? extractMsgVar(message, user.msgVar2!) : null
+      const val1 = hasVar1 ? extractMsgVar(message, user.msgVar1!) : null
+      const val2 = hasVar2 ? extractMsgVar(message, user.msgVar2!) : null
 
-      if (hasVar1 && hasVar2 && (!extractedPhone || !extractedName)) return { skipped: true }
-      if (hasVar1 && !hasVar2 && !extractedPhone) return { skipped: true }
-      if (!hasVar1 && hasVar2 && !extractedName) return { skipped: true }
+      if (hasVar1 && hasVar2 && (!val1 || !val2)) return { skipped: true }
+      if (hasVar1 && !hasVar2 && !val1) return { skipped: true }
+      if (!hasVar1 && hasVar2 && !val2) return { skipped: true }
 
-      const resolvedPhone = extractedPhone ? extractedPhone.replace(/\D/g, '') : phone
-      const resolvedName = extractedName || name || phone
+      const looksLikePhone = (v: string) => /^\d{7,}$/.test(v.replace(/\D/g, ''))
+
+      let resolvedPhone: string
+      let resolvedName: string
+
+      if (val1 && val2) {
+        // Auto-detect which value is the phone regardless of variable order
+        if (!looksLikePhone(val1) && looksLikePhone(val2)) {
+          resolvedPhone = val2.replace(/\D/g, '')
+          resolvedName = val1
+        } else {
+          resolvedPhone = val1.replace(/\D/g, '')
+          resolvedName = val2
+        }
+      } else {
+        const single = (val1 || val2)!
+        resolvedPhone = single.replace(/\D/g, '') || phone
+        resolvedName = name || phone
+      }
 
       if (!resolvedPhone) return { skipped: true }
 
