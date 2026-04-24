@@ -18,6 +18,8 @@ type UserRecord = {
   wapiToken: string | null
   prospectingInstanceId: string | null
   prospectingToken: string | null
+  lpPhoneParam: string | null
+  lpNameParam: string | null
   createdAt: Date
 }
 
@@ -68,10 +70,12 @@ export class InMemoryUserRepository implements UserRepository {
       Plan: 'PADRAO',
       trialExpiresAt: null,
       onboardingMessageSentAt: null,
-      wapiInstanceId: null,
-      wapiToken: null,
-      prospectingInstanceId: null,
-      prospectingToken: null,
+      wapiInstanceId: data.wapiInstanceId ?? null,
+      wapiToken: data.wapiToken ?? null,
+      prospectingInstanceId: data.prospectingInstanceId ?? null,
+      prospectingToken: data.prospectingToken ?? null,
+      lpPhoneParam: data.lpPhoneParam ?? null,
+      lpNameParam: data.lpNameParam ?? null,
       createdAt: new Date(),
     }
     this.items.push(user)
