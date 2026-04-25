@@ -156,7 +156,7 @@ export async function GetDashboardStatsController(
     }, 0)
   }, 0)
 
-  const totalProfit = totalCost > 0 ? totalRevenue - totalCost : 0
+  const totalProfit = totalRevenue - totalCost
 
   return reply.status(200).send({
     totalLeads,
