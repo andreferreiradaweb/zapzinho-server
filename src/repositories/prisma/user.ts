@@ -4,6 +4,16 @@ import { prisma } from '@/lib/prisma'
 
 export class PrismaUserRepository implements UserRepository {
   async countUsers(search: string) {
+    const isDigitsOnly = search && /^\d+$/.test(search)
+
+    if (isDigitsOnly) {
+      const result = await prisma.$queryRaw<{ count: bigint }[]>`
+        SELECT COUNT(*) as count FROM "User"
+        WHERE REGEXP_REPLACE(COALESCE("phoneNumber", ''), '[^0-9]', '', 'g') LIKE ${`%${search}%`}
+      `
+      return Number(result[0]?.count ?? 0)
+    }
+
     const count = await prisma.user.count({
       where: search
         ? {
@@ -23,6 +33,30 @@ export class PrismaUserRepository implements UserRepository {
     search: string,
     role?: Role,
   ) {
+    const isDigitsOnly = search && /^\d+$/.test(search)
+
+    if (isDigitsOnly) {
+      const matched = await prisma.$queryRaw<{ id: string }[]>`
+        SELECT id FROM "User"
+        WHERE REGEXP_REPLACE(COALESCE("phoneNumber", ''), '[^0-9]', '', 'g') LIKE ${`%${search}%`}
+        ${role ? Prisma.sql`AND "Role" = ${role}::"Role"` : Prisma.empty}
+      `
+      const ids = matched.map((r) => r.id)
+      if (ids.length === 0) return []
+
+      const users = await prisma.user.findMany({
+        where: { id: { in: ids } },
+        orderBy: { createdAt: 'desc' },
+        skip: Number(offset),
+        take: Number(limit),
+        include: {
+          Leads: { select: { id: true } },
+          Products: { select: { id: true } },
+        },
+      })
+      return users || []
+    }
+
     const users = await prisma.user.findMany({
       where: {
         ...(search
