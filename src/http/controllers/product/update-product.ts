@@ -12,8 +12,18 @@ export async function UpdateProductController(
     title: z.string(),
     description: z.string().nullish(),
     code: z.string().nullish(),
-    price: z.string().nullish(),
-    costPrice: z.string().nullish(),
+    price: z
+      .string()
+      .nullish()
+      .refine((v) => !v || parseFloat(v.replace(',', '.')) >= 0, {
+        message: 'price must be non-negative',
+      }),
+    costPrice: z
+      .string()
+      .nullish()
+      .refine((v) => !v || parseFloat(v.replace(',', '.')) >= 0, {
+        message: 'costPrice must be non-negative',
+      }),
     condition: z.string().nullish(),
     photos: z.array(z.string()),
     categoryId: z.string().uuid().nullish(),
