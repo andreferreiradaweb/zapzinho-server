@@ -11,6 +11,7 @@ export class PrismaProductRepository implements ProductRepository {
         title: true,
         description: true,
         price: true,
+        costPrice: true,
         condition: true,
         photos: true,
         categoryId: true,

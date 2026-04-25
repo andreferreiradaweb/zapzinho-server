@@ -11,6 +11,7 @@ interface ProductForOptions {
   title: string
   description: string | null
   price: string | null
+  costPrice: string | null
   condition: string | null
   photos: string[]
   categoryId: string | null
