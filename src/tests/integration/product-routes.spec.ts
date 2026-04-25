@@ -126,6 +126,39 @@ describe('Rotas de produto (HTTP)', () => {
 
       expect(response.statusCode).toBe(400)
     })
+
+    it('retorna 400 para price negativo', async () => {
+      const response = await app.inject({
+        method: 'POST',
+        url: '/products',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { title: 'Produto', photos: [], price: '-100,00' },
+      })
+
+      expect(response.statusCode).toBe(400)
+    })
+
+    it('retorna 400 para costPrice negativo', async () => {
+      const response = await app.inject({
+        method: 'POST',
+        url: '/products',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { title: 'Produto', photos: [], costPrice: '-50,00' },
+      })
+
+      expect(response.statusCode).toBe(400)
+    })
+
+    it('aceita price e costPrice zero', async () => {
+      const response = await app.inject({
+        method: 'POST',
+        url: '/products',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { title: 'Produto', photos: [], price: '0', costPrice: '0' },
+      })
+
+      expect(response.statusCode).toBe(201)
+    })
   })
 
   describe('GET /products', () => {
@@ -238,6 +271,26 @@ describe('Rotas de produto (HTTP)', () => {
         payload: { id: 'id-que-nao-existe', title: 'X', photos: [] },
       })
       expect(response.statusCode).toBe(404)
+    })
+
+    it('retorna 400 ao atualizar com price negativo', async () => {
+      const response = await app.inject({
+        method: 'PUT',
+        url: '/products',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { id: productId, title: 'X', photos: [], price: '-1,00' },
+      })
+      expect(response.statusCode).toBe(400)
+    })
+
+    it('retorna 400 ao atualizar com costPrice negativo', async () => {
+      const response = await app.inject({
+        method: 'PUT',
+        url: '/products',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { id: productId, title: 'X', photos: [], costPrice: '-1,00' },
+      })
+      expect(response.statusCode).toBe(400)
     })
   })
 
