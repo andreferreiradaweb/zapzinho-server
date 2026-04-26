@@ -21,6 +21,7 @@ export class InMemoryLeadSaleRepository implements LeadSaleRepository {
         productId: item.productId,
         quantity: item.quantity,
         price: item.price,
+        costPrice: item.costPrice ?? null,
         Product: {
           title: `Produto ${item.productId}`,
           price: String(item.price),
@@ -56,6 +57,7 @@ export class InMemoryLeadSaleRepository implements LeadSaleRepository {
         productId: item.productId,
         quantity: item.quantity,
         price: item.price,
+        costPrice: item.costPrice ?? null,
         Product: {
           title: `Produto ${item.productId}`,
           price: String(item.price),

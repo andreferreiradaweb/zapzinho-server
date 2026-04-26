@@ -177,6 +177,40 @@ describe('Rotas de lead-sale (HTTP)', () => {
       })
       expect(response.statusCode).toBe(404)
     })
+
+    it('grava costPrice por item quando enviado no payload', async () => {
+      const response = await app.inject({
+        method: 'POST',
+        url: '/lead-sale',
+        headers: { authorization: `Bearer ${token}` },
+        payload: {
+          leadId,
+          discount: 0,
+          items: [{ productId: PROD_1, quantity: 1, costPrice: 60 }],
+        },
+      })
+
+      expect(response.statusCode).toBe(201)
+      const sale = saleRepo.items.find((s) => s.id === response.json().id)
+      expect(sale?.Items[0].costPrice).toBe(60)
+    })
+
+    it('grava costPrice null quando não enviado no payload', async () => {
+      const response = await app.inject({
+        method: 'POST',
+        url: '/lead-sale',
+        headers: { authorization: `Bearer ${token}` },
+        payload: {
+          leadId,
+          discount: 0,
+          items: [{ productId: PROD_1, quantity: 1 }],
+        },
+      })
+
+      expect(response.statusCode).toBe(201)
+      const sale = saleRepo.items.find((s) => s.id === response.json().id)
+      expect(sale?.Items[0].costPrice).toBeNull()
+    })
   })
 
   describe('PUT /lead-sale/:saleId', () => {
@@ -218,6 +252,22 @@ describe('Rotas de lead-sale (HTTP)', () => {
         payload: { discount: 0, items: [{ productId: PROD_1, quantity: 1 }] },
       })
       expect(response.statusCode).toBe(401)
+    })
+
+    it('atualiza costPrice por item quando enviado no payload', async () => {
+      const response = await app.inject({
+        method: 'PUT',
+        url: `/lead-sale/${saleId}`,
+        headers: { authorization: `Bearer ${token}` },
+        payload: {
+          discount: 0,
+          items: [{ productId: PROD_2, quantity: 1, costPrice: 35 }],
+        },
+      })
+
+      expect(response.statusCode).toBe(200)
+      const sale = saleRepo.items.find((s) => s.id === saleId)
+      expect(sale?.Items[0].costPrice).toBe(35)
     })
 
     it('retorna 404 para venda inexistente', async () => {
