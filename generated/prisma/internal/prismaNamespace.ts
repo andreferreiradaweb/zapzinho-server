@@ -397,6 +397,11 @@ export const ModelName = {
   Automation: 'Automation',
   BroadcastBlock: 'BroadcastBlock',
   MessageLog: 'MessageLog',
+  Flow: 'Flow',
+  FlowStep: 'FlowStep',
+  FlowOption: 'FlowOption',
+  FlowAction: 'FlowAction',
+  FlowSession: 'FlowSession',
   ContactList: 'ContactList',
   ImportedContact: 'ImportedContact',
   ProspectingBroadcast: 'ProspectingBroadcast',
@@ -422,7 +427,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "productCategory" | "product" | "lead" | "leadSale" | "leadSaleItem" | "leadItem" | "messageTemplate" | "broadcast" | "broadcastLead" | "automation" | "broadcastBlock" | "messageLog" | "contactList" | "importedContact" | "prospectingBroadcast" | "customer" | "address" | "order" | "orderItem" | "payment" | "serpSearchLog" | "serpSearchOffset"
+    modelProps: "user" | "productCategory" | "product" | "lead" | "leadSale" | "leadSaleItem" | "leadItem" | "messageTemplate" | "broadcast" | "broadcastLead" | "automation" | "broadcastBlock" | "messageLog" | "flow" | "flowStep" | "flowOption" | "flowAction" | "flowSession" | "contactList" | "importedContact" | "prospectingBroadcast" | "customer" | "address" | "order" | "orderItem" | "payment" | "serpSearchLog" | "serpSearchOffset"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1385,6 +1390,376 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.MessageLogCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.MessageLogCountAggregateOutputType> | number
+        }
+      }
+    }
+    Flow: {
+      payload: Prisma.$FlowPayload<ExtArgs>
+      fields: Prisma.FlowFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FlowFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FlowFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowPayload>
+        }
+        findFirst: {
+          args: Prisma.FlowFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FlowFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowPayload>
+        }
+        findMany: {
+          args: Prisma.FlowFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowPayload>[]
+        }
+        create: {
+          args: Prisma.FlowCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowPayload>
+        }
+        createMany: {
+          args: Prisma.FlowCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FlowCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowPayload>[]
+        }
+        delete: {
+          args: Prisma.FlowDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowPayload>
+        }
+        update: {
+          args: Prisma.FlowUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowPayload>
+        }
+        deleteMany: {
+          args: Prisma.FlowDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FlowUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FlowUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowPayload>[]
+        }
+        upsert: {
+          args: Prisma.FlowUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowPayload>
+        }
+        aggregate: {
+          args: Prisma.FlowAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFlow>
+        }
+        groupBy: {
+          args: Prisma.FlowGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FlowGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FlowCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FlowCountAggregateOutputType> | number
+        }
+      }
+    }
+    FlowStep: {
+      payload: Prisma.$FlowStepPayload<ExtArgs>
+      fields: Prisma.FlowStepFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FlowStepFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowStepPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FlowStepFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowStepPayload>
+        }
+        findFirst: {
+          args: Prisma.FlowStepFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowStepPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FlowStepFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowStepPayload>
+        }
+        findMany: {
+          args: Prisma.FlowStepFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowStepPayload>[]
+        }
+        create: {
+          args: Prisma.FlowStepCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowStepPayload>
+        }
+        createMany: {
+          args: Prisma.FlowStepCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FlowStepCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowStepPayload>[]
+        }
+        delete: {
+          args: Prisma.FlowStepDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowStepPayload>
+        }
+        update: {
+          args: Prisma.FlowStepUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowStepPayload>
+        }
+        deleteMany: {
+          args: Prisma.FlowStepDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FlowStepUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FlowStepUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowStepPayload>[]
+        }
+        upsert: {
+          args: Prisma.FlowStepUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowStepPayload>
+        }
+        aggregate: {
+          args: Prisma.FlowStepAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFlowStep>
+        }
+        groupBy: {
+          args: Prisma.FlowStepGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FlowStepGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FlowStepCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FlowStepCountAggregateOutputType> | number
+        }
+      }
+    }
+    FlowOption: {
+      payload: Prisma.$FlowOptionPayload<ExtArgs>
+      fields: Prisma.FlowOptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FlowOptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowOptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FlowOptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowOptionPayload>
+        }
+        findFirst: {
+          args: Prisma.FlowOptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowOptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FlowOptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowOptionPayload>
+        }
+        findMany: {
+          args: Prisma.FlowOptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowOptionPayload>[]
+        }
+        create: {
+          args: Prisma.FlowOptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowOptionPayload>
+        }
+        createMany: {
+          args: Prisma.FlowOptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FlowOptionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowOptionPayload>[]
+        }
+        delete: {
+          args: Prisma.FlowOptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowOptionPayload>
+        }
+        update: {
+          args: Prisma.FlowOptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowOptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.FlowOptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FlowOptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FlowOptionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowOptionPayload>[]
+        }
+        upsert: {
+          args: Prisma.FlowOptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowOptionPayload>
+        }
+        aggregate: {
+          args: Prisma.FlowOptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFlowOption>
+        }
+        groupBy: {
+          args: Prisma.FlowOptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FlowOptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FlowOptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FlowOptionCountAggregateOutputType> | number
+        }
+      }
+    }
+    FlowAction: {
+      payload: Prisma.$FlowActionPayload<ExtArgs>
+      fields: Prisma.FlowActionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FlowActionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowActionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FlowActionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowActionPayload>
+        }
+        findFirst: {
+          args: Prisma.FlowActionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowActionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FlowActionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowActionPayload>
+        }
+        findMany: {
+          args: Prisma.FlowActionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowActionPayload>[]
+        }
+        create: {
+          args: Prisma.FlowActionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowActionPayload>
+        }
+        createMany: {
+          args: Prisma.FlowActionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FlowActionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowActionPayload>[]
+        }
+        delete: {
+          args: Prisma.FlowActionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowActionPayload>
+        }
+        update: {
+          args: Prisma.FlowActionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowActionPayload>
+        }
+        deleteMany: {
+          args: Prisma.FlowActionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FlowActionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FlowActionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowActionPayload>[]
+        }
+        upsert: {
+          args: Prisma.FlowActionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowActionPayload>
+        }
+        aggregate: {
+          args: Prisma.FlowActionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFlowAction>
+        }
+        groupBy: {
+          args: Prisma.FlowActionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FlowActionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FlowActionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FlowActionCountAggregateOutputType> | number
+        }
+      }
+    }
+    FlowSession: {
+      payload: Prisma.$FlowSessionPayload<ExtArgs>
+      fields: Prisma.FlowSessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FlowSessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowSessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FlowSessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowSessionPayload>
+        }
+        findFirst: {
+          args: Prisma.FlowSessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowSessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FlowSessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowSessionPayload>
+        }
+        findMany: {
+          args: Prisma.FlowSessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowSessionPayload>[]
+        }
+        create: {
+          args: Prisma.FlowSessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowSessionPayload>
+        }
+        createMany: {
+          args: Prisma.FlowSessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FlowSessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowSessionPayload>[]
+        }
+        delete: {
+          args: Prisma.FlowSessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowSessionPayload>
+        }
+        update: {
+          args: Prisma.FlowSessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowSessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.FlowSessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FlowSessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FlowSessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowSessionPayload>[]
+        }
+        upsert: {
+          args: Prisma.FlowSessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlowSessionPayload>
+        }
+        aggregate: {
+          args: Prisma.FlowSessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFlowSession>
+        }
+        groupBy: {
+          args: Prisma.FlowSessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FlowSessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FlowSessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FlowSessionCountAggregateOutputType> | number
         }
       }
     }
@@ -2366,6 +2741,61 @@ export const MessageLogScalarFieldEnum = {
 export type MessageLogScalarFieldEnum = (typeof MessageLogScalarFieldEnum)[keyof typeof MessageLogScalarFieldEnum]
 
 
+export const FlowScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+} as const
+
+export type FlowScalarFieldEnum = (typeof FlowScalarFieldEnum)[keyof typeof FlowScalarFieldEnum]
+
+
+export const FlowStepScalarFieldEnum = {
+  id: 'id',
+  flowId: 'flowId',
+  message: 'message'
+} as const
+
+export type FlowStepScalarFieldEnum = (typeof FlowStepScalarFieldEnum)[keyof typeof FlowStepScalarFieldEnum]
+
+
+export const FlowOptionScalarFieldEnum = {
+  id: 'id',
+  stepId: 'stepId',
+  label: 'label',
+  trigger: 'trigger'
+} as const
+
+export type FlowOptionScalarFieldEnum = (typeof FlowOptionScalarFieldEnum)[keyof typeof FlowOptionScalarFieldEnum]
+
+
+export const FlowActionScalarFieldEnum = {
+  id: 'id',
+  optionId: 'optionId',
+  type: 'type',
+  payload: 'payload',
+  order: 'order'
+} as const
+
+export type FlowActionScalarFieldEnum = (typeof FlowActionScalarFieldEnum)[keyof typeof FlowActionScalarFieldEnum]
+
+
+export const FlowSessionScalarFieldEnum = {
+  id: 'id',
+  flowId: 'flowId',
+  stepId: 'stepId',
+  userId: 'userId',
+  phone: 'phone',
+  status: 'status',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
+} as const
+
+export type FlowSessionScalarFieldEnum = (typeof FlowSessionScalarFieldEnum)[keyof typeof FlowSessionScalarFieldEnum]
+
+
 export const ContactListScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -2507,6 +2937,13 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -2521,6 +2958,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -2691,6 +3137,48 @@ export type ListEnumMessageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
+ * Reference to a field of type 'FlowActionType'
+ */
+export type EnumFlowActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlowActionType'>
+    
+
+
+/**
+ * Reference to a field of type 'FlowActionType[]'
+ */
+export type ListEnumFlowActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlowActionType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'FlowSessionStatus'
+ */
+export type EnumFlowSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlowSessionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'FlowSessionStatus[]'
+ */
+export type ListEnumFlowSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlowSessionStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'ImportedContactStatus'
  */
 export type EnumImportedContactStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ImportedContactStatus'>
@@ -2853,6 +3341,11 @@ export type GlobalOmitConfig = {
   automation?: Prisma.AutomationOmit
   broadcastBlock?: Prisma.BroadcastBlockOmit
   messageLog?: Prisma.MessageLogOmit
+  flow?: Prisma.FlowOmit
+  flowStep?: Prisma.FlowStepOmit
+  flowOption?: Prisma.FlowOptionOmit
+  flowAction?: Prisma.FlowActionOmit
+  flowSession?: Prisma.FlowSessionOmit
   contactList?: Prisma.ContactListOmit
   importedContact?: Prisma.ImportedContactOmit
   prospectingBroadcast?: Prisma.ProspectingBroadcastOmit

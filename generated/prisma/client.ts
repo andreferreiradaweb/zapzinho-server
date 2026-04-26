@@ -105,6 +105,31 @@ export type BroadcastBlock = Prisma.BroadcastBlockModel
  */
 export type MessageLog = Prisma.MessageLogModel
 /**
+ * Model Flow
+ * 
+ */
+export type Flow = Prisma.FlowModel
+/**
+ * Model FlowStep
+ * 
+ */
+export type FlowStep = Prisma.FlowStepModel
+/**
+ * Model FlowOption
+ * 
+ */
+export type FlowOption = Prisma.FlowOptionModel
+/**
+ * Model FlowAction
+ * 
+ */
+export type FlowAction = Prisma.FlowActionModel
+/**
+ * Model FlowSession
+ * 
+ */
+export type FlowSession = Prisma.FlowSessionModel
+/**
  * Model ContactList
  * 
  */

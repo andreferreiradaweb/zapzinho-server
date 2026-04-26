@@ -64,6 +64,11 @@ export const ModelName = {
   Automation: 'Automation',
   BroadcastBlock: 'BroadcastBlock',
   MessageLog: 'MessageLog',
+  Flow: 'Flow',
+  FlowStep: 'FlowStep',
+  FlowOption: 'FlowOption',
+  FlowAction: 'FlowAction',
+  FlowSession: 'FlowSession',
   ContactList: 'ContactList',
   ImportedContact: 'ImportedContact',
   ProspectingBroadcast: 'ProspectingBroadcast',
@@ -291,6 +296,61 @@ export const MessageLogScalarFieldEnum = {
 export type MessageLogScalarFieldEnum = (typeof MessageLogScalarFieldEnum)[keyof typeof MessageLogScalarFieldEnum]
 
 
+export const FlowScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+} as const
+
+export type FlowScalarFieldEnum = (typeof FlowScalarFieldEnum)[keyof typeof FlowScalarFieldEnum]
+
+
+export const FlowStepScalarFieldEnum = {
+  id: 'id',
+  flowId: 'flowId',
+  message: 'message'
+} as const
+
+export type FlowStepScalarFieldEnum = (typeof FlowStepScalarFieldEnum)[keyof typeof FlowStepScalarFieldEnum]
+
+
+export const FlowOptionScalarFieldEnum = {
+  id: 'id',
+  stepId: 'stepId',
+  label: 'label',
+  trigger: 'trigger'
+} as const
+
+export type FlowOptionScalarFieldEnum = (typeof FlowOptionScalarFieldEnum)[keyof typeof FlowOptionScalarFieldEnum]
+
+
+export const FlowActionScalarFieldEnum = {
+  id: 'id',
+  optionId: 'optionId',
+  type: 'type',
+  payload: 'payload',
+  order: 'order'
+} as const
+
+export type FlowActionScalarFieldEnum = (typeof FlowActionScalarFieldEnum)[keyof typeof FlowActionScalarFieldEnum]
+
+
+export const FlowSessionScalarFieldEnum = {
+  id: 'id',
+  flowId: 'flowId',
+  stepId: 'stepId',
+  userId: 'userId',
+  phone: 'phone',
+  status: 'status',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
+} as const
+
+export type FlowSessionScalarFieldEnum = (typeof FlowSessionScalarFieldEnum)[keyof typeof FlowSessionScalarFieldEnum]
+
+
 export const ContactListScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -432,6 +492,13 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const JsonNullValueInput = {
+  JsonNull: 'JsonNull'
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -446,4 +513,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: 'DbNull',
+  JsonNull: 'JsonNull',
+  AnyNull: 'AnyNull'
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

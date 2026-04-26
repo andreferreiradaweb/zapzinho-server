@@ -8,6 +8,7 @@ import { PrismaContactListRepository } from '@/repositories/prisma/prospecting'
 import { PrismaMessageLogRepository } from '@/repositories/prisma/message-log'
 import { PrismaUserRepository } from '@/repositories/prisma/user'
 import { sendWhatsAppMessageWithCredentials } from '@/services/wapi'
+import { ProcessFlowReplyFactory } from '@/factory/flow/process-flow-reply'
 import { prisma } from '@/lib/prisma'
 import { v4 as uuid } from 'uuid'
 
@@ -86,6 +87,18 @@ export async function whatsappWebhookController(
     })
 
     if (message) {
+      // If the lead has an active flow session, process the reply and skip other automations
+      const flowHandled = await ProcessFlowReplyFactory()
+        .execute({ userId: lead.userId, phone, message })
+        .catch((err) => {
+          console.error('[Webhook] Flow reply error:', err)
+          return false
+        })
+
+      if (flowHandled) {
+        return reply.status(200).send({ ok: true, created, leadId: lead.id, flow: true })
+      }
+
       addClassificationMessage(lead.id, lead.userId, message, created)
     }
 

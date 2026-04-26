@@ -35,6 +35,8 @@ model User {
   MessageLogs                  MessageLog[]
   BroadcastBlocks              BroadcastBlock[]
   LeadSales                    LeadSale[]
+  Flows                        Flow[]
+  FlowSessions                 FlowSession[]
   ContactLists                 ContactList[]
   ProspectingBroadcasts        ProspectingBroadcast[]
   SerpSearchLogs               SerpSearchLog[]
@@ -274,6 +276,73 @@ enum MessageType {
   BROADCAST
   AUTOMATION
   MANUAL
+  FLOW
+}
+
+// --- Flows (interactive WhatsApp menus) ---
+
+model Flow {
+  id        String        @id @default(uuid())
+  userId    String
+  name      String
+  isActive  Boolean       @default(true)
+  createdAt DateTime      @default(now())
+  User      User          @relation(fields: [userId], references: [id])
+  Steps     FlowStep[]
+  Sessions  FlowSession[]
+}
+
+model FlowStep {
+  id      String       @id @default(uuid())
+  flowId  String
+  message String
+  Flow    Flow         @relation(fields: [flowId], references: [id], onDelete: Cascade)
+  Options FlowOption[]
+}
+
+model FlowOption {
+  id      String       @id @default(uuid())
+  stepId  String
+  label   String
+  trigger String
+  Step    FlowStep     @relation(fields: [stepId], references: [id], onDelete: Cascade)
+  Actions FlowAction[]
+}
+
+model FlowAction {
+  id       String         @id @default(uuid())
+  optionId String
+  type     FlowActionType
+  payload  Json
+  order    Int            @default(0)
+  Option   FlowOption     @relation(fields: [optionId], references: [id], onDelete: Cascade)
+}
+
+model FlowSession {
+  id            String            @id @default(uuid())
+  flowId        String
+  stepId        String
+  userId        String
+  phone         String
+  status        FlowSessionStatus @default(ACTIVE)
+  createdAt     DateTime          @default(now())
+  expiresAt     DateTime
+  Flow          Flow              @relation(fields: [flowId], references: [id])
+  User          User              @relation(fields: [userId], references: [id])
+
+  @@index([userId, phone, status])
+}
+
+enum FlowActionType {
+  SEND_MESSAGE
+  UPDATE_LEAD_STATUS
+  ASSIGN_CATEGORY
+}
+
+enum FlowSessionStatus {
+  ACTIVE
+  COMPLETED
+  EXPIRED
 }
 
 // --- Prospecting (mass import + two-step messaging) ---

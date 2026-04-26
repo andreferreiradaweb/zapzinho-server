@@ -72,10 +72,29 @@ export const MessageType = {
   NPS: 'NPS',
   BROADCAST: 'BROADCAST',
   AUTOMATION: 'AUTOMATION',
-  MANUAL: 'MANUAL'
+  MANUAL: 'MANUAL',
+  FLOW: 'FLOW'
 } as const
 
 export type MessageType = (typeof MessageType)[keyof typeof MessageType]
+
+
+export const FlowActionType = {
+  SEND_MESSAGE: 'SEND_MESSAGE',
+  UPDATE_LEAD_STATUS: 'UPDATE_LEAD_STATUS',
+  ASSIGN_CATEGORY: 'ASSIGN_CATEGORY'
+} as const
+
+export type FlowActionType = (typeof FlowActionType)[keyof typeof FlowActionType]
+
+
+export const FlowSessionStatus = {
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type FlowSessionStatus = (typeof FlowSessionStatus)[keyof typeof FlowSessionStatus]
 
 
 export const ImportedContactStatus = {
