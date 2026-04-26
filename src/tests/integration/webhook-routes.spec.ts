@@ -5,6 +5,7 @@ vi.mock('@/lib/prisma', () => ({
   prisma: {
     user: { findUnique: vi.fn() },
     prospectingBroadcast: { findFirst: vi.fn().mockResolvedValue(null) },
+    flowSession: { findFirst: vi.fn().mockResolvedValue(null) },
     messageLog: { create: vi.fn().mockResolvedValue({}) },
   },
   CustomerType: { B2C: 'B2C', B2B: 'B2B' },
