@@ -10,6 +10,8 @@ vi.mock('@/lib/prisma', () => ({
     },
     messageLog: { create: vi.fn().mockResolvedValue({}) },
     broadcast: { findUnique: vi.fn() },
+    messageTemplate: { findUnique: vi.fn().mockResolvedValue(null) },
+    product: { findUnique: vi.fn().mockResolvedValue(null) },
   },
   CustomerType: { B2C: 'B2C', B2B: 'B2B' },
   Role: { ADMIN: 'ADMIN', CLIENT: 'CLIENT' },
@@ -24,12 +26,16 @@ vi.mock('@/lib/prisma', () => ({
     SEND_MESSAGE: 'SEND_MESSAGE',
     UPDATE_LEAD_STATUS: 'UPDATE_LEAD_STATUS',
     ASSIGN_CATEGORY: 'ASSIGN_CATEGORY',
+    SEND_IMAGE: 'SEND_IMAGE',
+    SEND_TEMPLATE: 'SEND_TEMPLATE',
+    SEND_PRODUCT: 'SEND_PRODUCT',
   },
   FlowSessionStatus: {
     ACTIVE: 'ACTIVE',
     COMPLETED: 'COMPLETED',
     EXPIRED: 'EXPIRED',
   },
+  Prisma: { InputJsonValue: {} },
 }))
 
 vi.mock('@/lib/resend', () => ({
@@ -85,6 +91,53 @@ const STEP_PAYLOAD = {
         { type: 'SEND_MESSAGE', payload: { message: 'Setor de suporte.' }, order: 0 },
         { type: 'UPDATE_LEAD_STATUS', payload: { status: 'NEGOCIACAO' }, order: 1 },
       ],
+    },
+  ],
+}
+
+const NESTED_STEP_PAYLOAD = {
+  message: 'Olá! Escolha o setor:\n1. Financeiro\n2. Suporte',
+  options: [
+    {
+      label: '1. Financeiro',
+      trigger: '1',
+      actions: [],
+      nextStep: {
+        message: 'Financeiro:\n1. Boleto\n2. Pix',
+        options: [
+          {
+            label: '1. Boleto',
+            trigger: '1',
+            actions: [{ type: 'SEND_MESSAGE', payload: { message: 'Seu boleto...' }, order: 0 }],
+          },
+          {
+            label: '2. Pix',
+            trigger: '2',
+            actions: [{ type: 'SEND_IMAGE', payload: { imageUrl: 'https://img.com/pix.png', caption: 'QR Pix' }, order: 0 }],
+          },
+        ],
+      },
+    },
+    {
+      label: '2. Suporte',
+      trigger: '2',
+      actions: [{ type: 'SEND_MESSAGE', payload: { message: 'Suporte ativo.' }, order: 0 }],
+    },
+  ],
+}
+
+const RICH_STEP_PAYLOAD = {
+  message: 'Escolha:\n1. Ver produto\n2. Ver template',
+  options: [
+    {
+      label: '1. Produto',
+      trigger: '1',
+      actions: [{ type: 'SEND_PRODUCT', payload: { productId: 'prod-123' }, order: 0 }],
+    },
+    {
+      label: '2. Template',
+      trigger: '2',
+      actions: [{ type: 'SEND_TEMPLATE', payload: { templateId: 'tpl-123' }, order: 0 }],
     },
   ],
 }
@@ -170,6 +223,35 @@ describe('Rotas de flows (HTTP)', () => {
       expect(opts[1].Actions[1].type).toBe('UPDATE_LEAD_STATUS')
     })
 
+    it('cria flow com submenu aninhado (nextStep)', async () => {
+      const res = await app.inject({
+        method: 'POST',
+        url: '/flows',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { name: 'Flow aninhado', step: NESTED_STEP_PAYLOAD },
+      })
+
+      expect(res.statusCode).toBe(201)
+      const body = res.json()
+      expect(body.Steps[0].Options[0].NextStep).toBeDefined()
+      expect(body.Steps[0].Options[0].NextStep.message).toBe('Financeiro:\n1. Boleto\n2. Pix')
+      expect(body.Steps[0].Options[0].NextStep.Options).toHaveLength(2)
+    })
+
+    it('persiste ações ricas (SEND_IMAGE, SEND_TEMPLATE, SEND_PRODUCT)', async () => {
+      const res = await app.inject({
+        method: 'POST',
+        url: '/flows',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { name: 'Ações ricas', step: RICH_STEP_PAYLOAD },
+      })
+
+      expect(res.statusCode).toBe(201)
+      const body = res.json()
+      expect(body.Steps[0].Options[0].Actions[0].type).toBe('SEND_PRODUCT')
+      expect(body.Steps[0].Options[1].Actions[0].type).toBe('SEND_TEMPLATE')
+    })
+
     it('retorna 400 para step sem opções', async () => {
       const res = await app.inject({
         method: 'POST',
@@ -239,11 +321,7 @@ describe('Rotas de flows (HTTP)', () => {
         method: 'PUT',
         url: `/flows/${flowId}`,
         headers: { authorization: `Bearer ${token}` },
-        payload: {
-          name: 'Atualizado',
-          isActive: false,
-          step: STEP_PAYLOAD,
-        },
+        payload: { name: 'Atualizado', isActive: false, step: STEP_PAYLOAD },
       })
 
       expect(res.statusCode).toBe(200)
@@ -251,29 +329,18 @@ describe('Rotas de flows (HTTP)', () => {
       expect(res.json().isActive).toBe(false)
     })
 
-    it('atualiza opções e ações do step', async () => {
-      const newStep = {
-        message: 'Nova mensagem',
-        options: [
-          {
-            label: '1. Novo',
-            trigger: '1',
-            actions: [{ type: 'SEND_MESSAGE', payload: { message: 'Ok' }, order: 0 }],
-          },
-        ],
-      }
-
+    it('atualiza step para estrutura aninhada', async () => {
       const res = await app.inject({
         method: 'PUT',
         url: `/flows/${flowId}`,
         headers: { authorization: `Bearer ${token}` },
-        payload: { name: 'Atualizado', isActive: true, step: newStep },
+        payload: { name: 'Com submenu', isActive: true, step: NESTED_STEP_PAYLOAD },
       })
 
       expect(res.statusCode).toBe(200)
       const flow = flowRepo.items.find((f) => f.id === flowId)
-      expect(flow!.Steps[0].message).toBe('Nova mensagem')
-      expect(flow!.Steps[0].Options).toHaveLength(1)
+      expect(flow!.Steps[0].Options[0].NextStep).not.toBeNull()
+      expect(flow!.Steps[0].Options[0].NextStep!.Options).toHaveLength(2)
     })
 
     it('retorna 404 para flow inexistente', async () => {
@@ -340,6 +407,7 @@ describe('Rotas de flows (HTTP)', () => {
 
   describe('POST /flows/:flowId/trigger/:leadId', () => {
     let flowId: string
+    let nestedFlowId: string
     let leadId: string
 
     beforeEach(async () => {
@@ -350,6 +418,14 @@ describe('Rotas de flows (HTTP)', () => {
         payload: { name: 'Trigger test', step: STEP_PAYLOAD },
       })
       flowId = res.json().id
+
+      const nestedRes = await app.inject({
+        method: 'POST',
+        url: '/flows',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { name: 'Nested trigger test', step: NESTED_STEP_PAYLOAD },
+      })
+      nestedFlowId = nestedRes.json().id
 
       const lead = await leadRepo.create({
         nome: 'Lead Teste',
@@ -382,6 +458,18 @@ describe('Rotas de flows (HTTP)', () => {
       expect(flowRepo.sessions).toHaveLength(1)
       expect(flowRepo.sessions[0].status).toBe('ACTIVE')
       expect(flowRepo.sessions[0].phone).toBe('5511999990001')
+    })
+
+    it('sessão aponta para o step raiz do flow aninhado', async () => {
+      await app.inject({
+        method: 'POST',
+        url: `/flows/${nestedFlowId}/trigger/${leadId}`,
+        headers: { authorization: `Bearer ${token}` },
+      })
+
+      const session = flowRepo.sessions[0]
+      const nestedFlow = flowRepo.items.find((f) => f.id === nestedFlowId)!
+      expect(session.stepId).toBe(nestedFlow.Steps[0].id)
     })
 
     it('retorna 404 para flow inexistente', async () => {

@@ -1,10 +1,100 @@
 import { prisma } from '@/lib/prisma'
+import { Prisma } from '@/lib/prisma'
 import {
   FlowRepository,
   FlowWithSteps,
   FlowSession,
   FlowStepData,
+  FlowOptionData,
 } from '@/repositories/flow'
+
+// Fixed-depth nested include — supports up to 5 levels of sub-menus
+const optionInclude = {
+  Actions: { orderBy: { order: 'asc' as const } },
+  NextStep: {
+    include: {
+      Options: {
+        include: {
+          Actions: { orderBy: { order: 'asc' as const } },
+          NextStep: {
+            include: {
+              Options: {
+                include: {
+                  Actions: { orderBy: { order: 'asc' as const } },
+                  NextStep: {
+                    include: {
+                      Options: {
+                        include: {
+                          Actions: { orderBy: { order: 'asc' as const } },
+                          NextStep: {
+                            include: {
+                              Options: {
+                                include: {
+                                  Actions: { orderBy: { order: 'asc' as const } },
+                                  NextStep: null,
+                                },
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
+
+const flowInclude = {
+  Steps: { include: { Options: { include: optionInclude } } },
+}
+
+type PrismaTx = Omit<typeof prisma, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'>
+
+async function createStepTree(
+  tx: PrismaTx,
+  flowId: string,
+  stepData: FlowStepData,
+): Promise<string> {
+  const step = await tx.flowStep.create({
+    data: {
+      flowId,
+      message: stepData.message,
+      Options: {
+        create: stepData.options.map((opt) => ({
+          label: opt.label,
+          trigger: opt.trigger,
+          Actions: {
+            create: opt.actions.map((act) => ({
+              type: act.type,
+              payload: act.payload as Prisma.InputJsonValue,
+              order: act.order,
+            })),
+          },
+        })),
+      },
+    },
+    include: { Options: { select: { id: true } } },
+  })
+
+  for (let i = 0; i < stepData.options.length; i++) {
+    const optData: FlowOptionData = stepData.options[i]
+    if (optData.nextStep) {
+      const nextStepId = await createStepTree(tx, flowId, optData.nextStep)
+      await tx.flowOption.update({
+        where: { id: step.Options[i].id },
+        data: { nextStepId },
+      })
+    }
+  }
+
+  return step.id
+}
 
 export class PrismaFlowRepository implements FlowRepository {
   async create(data: {
@@ -12,42 +102,21 @@ export class PrismaFlowRepository implements FlowRepository {
     name: string
     step: FlowStepData
   }): Promise<FlowWithSteps> {
-    const flow = await prisma.flow.create({
-      data: {
-        userId: data.userId,
-        name: data.name,
-        Steps: {
-          create: {
-            message: data.step.message,
-            Options: {
-              create: data.step.options.map((opt) => ({
-                label: opt.label,
-                trigger: opt.trigger,
-                Actions: {
-                  create: opt.actions.map((act) => ({
-                    type: act.type,
-                    payload: act.payload,
-                    order: act.order,
-                  })),
-                },
-              })),
-            },
-          },
-        },
-      },
-      include: {
-        Steps: { include: { Options: { include: { Actions: true } } } },
-      },
+    const flow = await prisma.$transaction(async (tx) => {
+      const created = await tx.flow.create({
+        data: { userId: data.userId, name: data.name },
+      })
+      await createStepTree(tx as unknown as PrismaTx, created.id, data.step)
+      return created.id
     })
-    return flow as FlowWithSteps
+
+    return this.findById(flow) as Promise<FlowWithSteps>
   }
 
   async findById(id: string): Promise<FlowWithSteps | null> {
     const flow = await prisma.flow.findUnique({
       where: { id },
-      include: {
-        Steps: { include: { Options: { include: { Actions: { orderBy: { order: 'asc' } } } } } },
-      },
+      include: flowInclude,
     })
     return flow as FlowWithSteps | null
   }
@@ -55,9 +124,7 @@ export class PrismaFlowRepository implements FlowRepository {
   async findByUserId(userId: string): Promise<FlowWithSteps[]> {
     const flows = await prisma.flow.findMany({
       where: { userId },
-      include: {
-        Steps: { include: { Options: { include: { Actions: { orderBy: { order: 'asc' } } } } } },
-      },
+      include: flowInclude,
       orderBy: { createdAt: 'desc' },
     })
     return flows as FlowWithSteps[]
@@ -69,47 +136,55 @@ export class PrismaFlowRepository implements FlowRepository {
     isActive: boolean
     step: FlowStepData
   }): Promise<FlowWithSteps> {
-    const existing = await prisma.flow.findUnique({
-      where: { id: data.id },
-      include: { Steps: true },
-    })
-
     await prisma.$transaction(async (tx) => {
-      if (existing?.Steps[0]) {
-        await tx.flowStep.delete({ where: { id: existing.Steps[0].id } })
+      // Null out all nextStepIds first to avoid FK constraint issues when deleting steps
+      const existing = await tx.flow.findUnique({
+        where: { id: data.id },
+        include: { Steps: { include: { Options: { select: { id: true, nextStepId: true } } } } },
+      })
+      const optionIds = existing?.Steps.flatMap((s) =>
+        s.Options.filter((o) => o.nextStepId !== null).map((o) => o.id),
+      ) ?? []
+      if (optionIds.length > 0) {
+        await tx.flowOption.updateMany({
+          where: { id: { in: optionIds } },
+          data: { nextStepId: null },
+        })
       }
+
+      // Delete all existing steps (cascades to options and actions)
+      await tx.flowStep.deleteMany({ where: { flowId: data.id } })
+
+      // Update flow metadata
       await tx.flow.update({
         where: { id: data.id },
-        data: {
-          name: data.name,
-          isActive: data.isActive,
-          Steps: {
-            create: {
-              message: data.step.message,
-              Options: {
-                create: data.step.options.map((opt) => ({
-                  label: opt.label,
-                  trigger: opt.trigger,
-                  Actions: {
-                    create: opt.actions.map((act) => ({
-                      type: act.type,
-                      payload: act.payload,
-                      order: act.order,
-                    })),
-                  },
-                })),
-              },
-            },
-          },
-        },
+        data: { name: data.name, isActive: data.isActive },
       })
+
+      // Recreate step tree
+      await createStepTree(tx as unknown as PrismaTx, data.id, data.step)
     })
 
     return this.findById(data.id) as Promise<FlowWithSteps>
   }
 
   async delete(id: string): Promise<void> {
-    await prisma.flow.delete({ where: { id } })
+    await prisma.$transaction(async (tx) => {
+      const existing = await tx.flow.findUnique({
+        where: { id },
+        include: { Steps: { include: { Options: { select: { id: true, nextStepId: true } } } } },
+      })
+      const optionIds = existing?.Steps.flatMap((s) =>
+        s.Options.filter((o) => o.nextStepId !== null).map((o) => o.id),
+      ) ?? []
+      if (optionIds.length > 0) {
+        await tx.flowOption.updateMany({
+          where: { id: { in: optionIds } },
+          data: { nextStepId: null },
+        })
+      }
+      await tx.flow.delete({ where: { id } })
+    })
   }
 
   async createSession(data: {
@@ -138,6 +213,13 @@ export class PrismaFlowRepository implements FlowRepository {
     await prisma.flowSession.update({
       where: { id },
       data: { status: 'COMPLETED' },
+    })
+  }
+
+  async advanceSession(id: string, nextStepId: string): Promise<void> {
+    await prisma.flowSession.update({
+      where: { id },
+      data: { stepId: nextStepId },
     })
   }
 

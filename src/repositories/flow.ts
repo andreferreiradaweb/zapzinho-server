@@ -12,11 +12,34 @@ export interface FlowOptionData {
   label: string
   trigger: string
   actions: FlowActionData[]
+  nextStep?: FlowStepData | null
 }
 
 export interface FlowStepData {
   message: string
   options: FlowOptionData[]
+}
+
+// Recursive types for persisted flow with full nesting
+export interface FlowActionItem {
+  id: string
+  type: FlowActionType
+  payload: Record<string, unknown>
+  order: number
+}
+
+export interface FlowOptionItem {
+  id: string
+  label: string
+  trigger: string
+  Actions: FlowActionItem[]
+  NextStep: FlowStepItem | null
+}
+
+export interface FlowStepItem {
+  id: string
+  message: string
+  Options: FlowOptionItem[]
 }
 
 export interface FlowWithSteps {
@@ -25,21 +48,7 @@ export interface FlowWithSteps {
   name: string
   isActive: boolean
   createdAt: Date
-  Steps: Array<{
-    id: string
-    message: string
-    Options: Array<{
-      id: string
-      label: string
-      trigger: string
-      Actions: Array<{
-        id: string
-        type: FlowActionType
-        payload: Record<string, unknown>
-        order: number
-      }>
-    }>
-  }>
+  Steps: FlowStepItem[]
 }
 
 export interface FlowSession {
@@ -83,6 +92,8 @@ export interface FlowRepository {
   findActiveSession(userId: string, phone: string): Promise<FlowSession | null>
 
   completeSession(id: string): Promise<void>
+
+  advanceSession(id: string, nextStepId: string): Promise<void>
 
   expireOldSessions(): Promise<void>
 }

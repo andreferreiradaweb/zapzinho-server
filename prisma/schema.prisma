@@ -293,20 +293,23 @@ model Flow {
 }
 
 model FlowStep {
-  id      String       @id @default(uuid())
-  flowId  String
-  message String
-  Flow    Flow         @relation(fields: [flowId], references: [id], onDelete: Cascade)
-  Options FlowOption[]
+  id         String       @id @default(uuid())
+  flowId     String
+  message    String
+  Flow       Flow         @relation(fields: [flowId], references: [id], onDelete: Cascade)
+  Options    FlowOption[]
+  FromOption FlowOption?  @relation("OptionToNextStep")
 }
 
 model FlowOption {
-  id      String       @id @default(uuid())
-  stepId  String
-  label   String
-  trigger String
-  Step    FlowStep     @relation(fields: [stepId], references: [id], onDelete: Cascade)
-  Actions FlowAction[]
+  id         String       @id @default(uuid())
+  stepId     String
+  label      String
+  trigger    String
+  nextStepId String?      @unique
+  Step       FlowStep     @relation(fields: [stepId], references: [id], onDelete: Cascade)
+  NextStep   FlowStep?    @relation("OptionToNextStep", fields: [nextStepId], references: [id], onDelete: SetNull)
+  Actions    FlowAction[]
 }
 
 model FlowAction {
@@ -337,6 +340,9 @@ enum FlowActionType {
   SEND_MESSAGE
   UPDATE_LEAD_STATUS
   ASSIGN_CATEGORY
+  SEND_IMAGE
+  SEND_TEMPLATE
+  SEND_PRODUCT
 }
 
 enum FlowSessionStatus {

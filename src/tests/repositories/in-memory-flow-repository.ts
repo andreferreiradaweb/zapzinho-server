@@ -4,7 +4,41 @@ import {
   FlowWithSteps,
   FlowSession,
   FlowStepData,
+  FlowStepItem,
+  FlowOptionItem,
 } from '@/repositories/flow'
+
+function buildStepItem(stepData: FlowStepData): FlowStepItem {
+  return {
+    id: uuid(),
+    message: stepData.message,
+    Options: stepData.options.map((opt): FlowOptionItem => ({
+      id: uuid(),
+      label: opt.label,
+      trigger: opt.trigger,
+      Actions: opt.actions.map((act) => ({
+        id: uuid(),
+        type: act.type,
+        payload: act.payload,
+        order: act.order,
+      })),
+      NextStep: opt.nextStep ? buildStepItem(opt.nextStep) : null,
+    })),
+  }
+}
+
+function findStepById(steps: FlowStepItem[], id: string): FlowStepItem | null {
+  for (const step of steps) {
+    if (step.id === id) return step
+    for (const opt of step.Options) {
+      if (opt.NextStep) {
+        const found = findStepById([opt.NextStep], id)
+        if (found) return found
+      }
+    }
+  }
+  return null
+}
 
 export class InMemoryFlowRepository implements FlowRepository {
   public items: FlowWithSteps[] = []
@@ -15,30 +49,14 @@ export class InMemoryFlowRepository implements FlowRepository {
     name: string
     step: FlowStepData
   }): Promise<FlowWithSteps> {
-    const stepId = uuid()
+    const rootStep = buildStepItem(data.step)
     const flow: FlowWithSteps = {
       id: uuid(),
       userId: data.userId,
       name: data.name,
       isActive: true,
       createdAt: new Date(),
-      Steps: [
-        {
-          id: stepId,
-          message: data.step.message,
-          Options: data.step.options.map((opt) => ({
-            id: uuid(),
-            label: opt.label,
-            trigger: opt.trigger,
-            Actions: opt.actions.map((act) => ({
-              id: uuid(),
-              type: act.type,
-              payload: act.payload,
-              order: act.order,
-            })),
-          })),
-        },
-      ],
+      Steps: [rootStep],
     }
     this.items.push(flow)
     return flow
@@ -60,28 +78,12 @@ export class InMemoryFlowRepository implements FlowRepository {
   }): Promise<FlowWithSteps> {
     const idx = this.items.findIndex((f) => f.id === data.id)
     if (idx === -1) throw new Error('Flow not found')
-    const stepId = uuid()
+    const rootStep = buildStepItem(data.step)
     this.items[idx] = {
       ...this.items[idx],
       name: data.name,
       isActive: data.isActive,
-      Steps: [
-        {
-          id: stepId,
-          message: data.step.message,
-          Options: data.step.options.map((opt) => ({
-            id: uuid(),
-            label: opt.label,
-            trigger: opt.trigger,
-            Actions: opt.actions.map((act) => ({
-              id: uuid(),
-              type: act.type,
-              payload: act.payload,
-              order: act.order,
-            })),
-          })),
-        },
-      ],
+      Steps: [rootStep],
     }
     return this.items[idx]
   }
@@ -128,9 +130,23 @@ export class InMemoryFlowRepository implements FlowRepository {
     if (s) s.status = 'COMPLETED'
   }
 
+  async advanceSession(id: string, nextStepId: string): Promise<void> {
+    const s = this.sessions.find((s) => s.id === id)
+    if (s) s.stepId = nextStepId
+  }
+
   async expireOldSessions(): Promise<void> {
     this.sessions.forEach((s) => {
       if (s.status === 'ACTIVE' && s.expiresAt < new Date()) s.status = 'EXPIRED'
     })
+  }
+
+  // Helper for tests: find any step by id in all flows
+  findStepInFlows(stepId: string): FlowStepItem | null {
+    for (const flow of this.items) {
+      const found = findStepById(flow.Steps, stepId)
+      if (found) return found
+    }
+    return null
   }
 }
