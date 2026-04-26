@@ -140,20 +140,25 @@ export async function GetDashboardStatsController(
   const sales = saleItems
 
   const totalGrossRevenue = sales.reduce(
-    (acc, sale) => acc + sale.Items.reduce((s, item) => s + item.price * item.quantity, 0),
+    (acc, sale) =>
+      acc + sale.Items.reduce((s, item) => s + (item.price || 0) * item.quantity, 0),
     0,
   )
 
-  const totalDiscount = sales.reduce((acc, sale) => acc + sale.discount, 0)
+  const totalDiscount = sales.reduce((acc, sale) => acc + (sale.discount || 0), 0)
 
   const totalRevenue = totalGrossRevenue - totalDiscount
 
   const totalCost = sales.reduce((acc, sale) => {
-    return acc + sale.Items.reduce((s, item) => {
-      const cost = item.Product?.costPrice ? parseFloat(item.Product.costPrice) : null
-      if (cost === null || isNaN(cost)) return s
-      return s + cost * item.quantity
-    }, 0)
+    return (
+      acc +
+      sale.Items.reduce((s, item) => {
+        if (!item.Product?.costPrice) return s
+        const cost = parseFloat(item.Product.costPrice.replace(',', '.'))
+        if (!Number.isFinite(cost) || cost <= 0) return s
+        return s + cost * item.quantity
+      }, 0)
+    )
   }, 0)
 
   const totalProfit = totalRevenue - totalCost
@@ -168,6 +173,7 @@ export async function GetDashboardStatsController(
     totalCost,
     totalDiscount,
     totalProfit,
+    totalSalesCount: sales.length,
     recentLeads,
     leadsByStatus: leadsByStatus.map((s) => ({
       status: s.Status,

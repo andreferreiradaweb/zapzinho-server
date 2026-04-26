@@ -109,6 +109,7 @@ describe('GET /dashboard/stats', () => {
       totalCost: 0,
       totalDiscount: 0,
       totalProfit: 0,
+      totalSalesCount: 0,
       recentLeads: [],
       leadsByStatus: [],
       topCategories: [],
@@ -148,6 +149,24 @@ describe('GET /dashboard/stats', () => {
     expect(body.totalRevenue).toBe(150)  // 200 - 50
     expect(body.totalCost).toBe(80)
     expect(body.totalProfit).toBe(70)    // 150 - 80
+    expect(body.totalSalesCount).toBe(1)
+  })
+
+  it('parseia costPrice com vírgula como separador decimal (ex: "80,50")', async () => {
+    vi.mocked(prisma.leadSale.findMany).mockResolvedValue([
+      { discount: 0, Items: [{ price: 100, quantity: 1, Product: { costPrice: '80,50' } }] },
+    ] as any)
+
+    const res = await app.inject({
+      method: 'GET',
+      url: '/dashboard/stats',
+      headers: { authorization: `Bearer ${token}` },
+    })
+
+    const body = res.json()
+    expect(body.totalRevenue).toBe(100)
+    expect(body.totalCost).toBe(80.5)
+    expect(body.totalProfit).toBeCloseTo(19.5)
   })
 
   it('soma múltiplas vendas no período', async () => {
