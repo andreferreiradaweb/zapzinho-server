@@ -320,7 +320,8 @@ export const FlowOptionScalarFieldEnum = {
   id: 'id',
   stepId: 'stepId',
   label: 'label',
-  trigger: 'trigger'
+  trigger: 'trigger',
+  nextStepId: 'nextStepId'
 } as const
 
 export type FlowOptionScalarFieldEnum = (typeof FlowOptionScalarFieldEnum)[keyof typeof FlowOptionScalarFieldEnum]

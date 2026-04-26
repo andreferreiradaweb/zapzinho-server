@@ -82,7 +82,10 @@ export type MessageType = (typeof MessageType)[keyof typeof MessageType]
 export const FlowActionType = {
   SEND_MESSAGE: 'SEND_MESSAGE',
   UPDATE_LEAD_STATUS: 'UPDATE_LEAD_STATUS',
-  ASSIGN_CATEGORY: 'ASSIGN_CATEGORY'
+  ASSIGN_CATEGORY: 'ASSIGN_CATEGORY',
+  SEND_IMAGE: 'SEND_IMAGE',
+  SEND_TEMPLATE: 'SEND_TEMPLATE',
+  SEND_PRODUCT: 'SEND_PRODUCT'
 } as const
 
 export type FlowActionType = (typeof FlowActionType)[keyof typeof FlowActionType]

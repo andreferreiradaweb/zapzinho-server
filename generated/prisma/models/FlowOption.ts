@@ -29,6 +29,7 @@ export type FlowOptionMinAggregateOutputType = {
   stepId: string | null
   label: string | null
   trigger: string | null
+  nextStepId: string | null
 }
 
 export type FlowOptionMaxAggregateOutputType = {
@@ -36,6 +37,7 @@ export type FlowOptionMaxAggregateOutputType = {
   stepId: string | null
   label: string | null
   trigger: string | null
+  nextStepId: string | null
 }
 
 export type FlowOptionCountAggregateOutputType = {
@@ -43,6 +45,7 @@ export type FlowOptionCountAggregateOutputType = {
   stepId: number
   label: number
   trigger: number
+  nextStepId: number
   _all: number
 }
 
@@ -52,6 +55,7 @@ export type FlowOptionMinAggregateInputType = {
   stepId?: true
   label?: true
   trigger?: true
+  nextStepId?: true
 }
 
 export type FlowOptionMaxAggregateInputType = {
@@ -59,6 +63,7 @@ export type FlowOptionMaxAggregateInputType = {
   stepId?: true
   label?: true
   trigger?: true
+  nextStepId?: true
 }
 
 export type FlowOptionCountAggregateInputType = {
@@ -66,6 +71,7 @@ export type FlowOptionCountAggregateInputType = {
   stepId?: true
   label?: true
   trigger?: true
+  nextStepId?: true
   _all?: true
 }
 
@@ -146,6 +152,7 @@ export type FlowOptionGroupByOutputType = {
   stepId: string
   label: string
   trigger: string
+  nextStepId: string | null
   _count: FlowOptionCountAggregateOutputType | null
   _min: FlowOptionMinAggregateOutputType | null
   _max: FlowOptionMaxAggregateOutputType | null
@@ -174,7 +181,9 @@ export type FlowOptionWhereInput = {
   stepId?: Prisma.StringFilter<"FlowOption"> | string
   label?: Prisma.StringFilter<"FlowOption"> | string
   trigger?: Prisma.StringFilter<"FlowOption"> | string
+  nextStepId?: Prisma.StringNullableFilter<"FlowOption"> | string | null
   Step?: Prisma.XOR<Prisma.FlowStepScalarRelationFilter, Prisma.FlowStepWhereInput>
+  NextStep?: Prisma.XOR<Prisma.FlowStepNullableScalarRelationFilter, Prisma.FlowStepWhereInput> | null
   Actions?: Prisma.FlowActionListRelationFilter
 }
 
@@ -183,12 +192,15 @@ export type FlowOptionOrderByWithRelationInput = {
   stepId?: Prisma.SortOrder
   label?: Prisma.SortOrder
   trigger?: Prisma.SortOrder
+  nextStepId?: Prisma.SortOrderInput | Prisma.SortOrder
   Step?: Prisma.FlowStepOrderByWithRelationInput
+  NextStep?: Prisma.FlowStepOrderByWithRelationInput
   Actions?: Prisma.FlowActionOrderByRelationAggregateInput
 }
 
 export type FlowOptionWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  nextStepId?: string
   AND?: Prisma.FlowOptionWhereInput | Prisma.FlowOptionWhereInput[]
   OR?: Prisma.FlowOptionWhereInput[]
   NOT?: Prisma.FlowOptionWhereInput | Prisma.FlowOptionWhereInput[]
@@ -196,14 +208,16 @@ export type FlowOptionWhereUniqueInput = Prisma.AtLeast<{
   label?: Prisma.StringFilter<"FlowOption"> | string
   trigger?: Prisma.StringFilter<"FlowOption"> | string
   Step?: Prisma.XOR<Prisma.FlowStepScalarRelationFilter, Prisma.FlowStepWhereInput>
+  NextStep?: Prisma.XOR<Prisma.FlowStepNullableScalarRelationFilter, Prisma.FlowStepWhereInput> | null
   Actions?: Prisma.FlowActionListRelationFilter
-}, "id">
+}, "id" | "nextStepId">
 
 export type FlowOptionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   stepId?: Prisma.SortOrder
   label?: Prisma.SortOrder
   trigger?: Prisma.SortOrder
+  nextStepId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FlowOptionCountOrderByAggregateInput
   _max?: Prisma.FlowOptionMaxOrderByAggregateInput
   _min?: Prisma.FlowOptionMinOrderByAggregateInput
@@ -217,6 +231,7 @@ export type FlowOptionScalarWhereWithAggregatesInput = {
   stepId?: Prisma.StringWithAggregatesFilter<"FlowOption"> | string
   label?: Prisma.StringWithAggregatesFilter<"FlowOption"> | string
   trigger?: Prisma.StringWithAggregatesFilter<"FlowOption"> | string
+  nextStepId?: Prisma.StringNullableWithAggregatesFilter<"FlowOption"> | string | null
 }
 
 export type FlowOptionCreateInput = {
@@ -224,6 +239,7 @@ export type FlowOptionCreateInput = {
   label: string
   trigger: string
   Step: Prisma.FlowStepCreateNestedOneWithoutOptionsInput
+  NextStep?: Prisma.FlowStepCreateNestedOneWithoutFromOptionInput
   Actions?: Prisma.FlowActionCreateNestedManyWithoutOptionInput
 }
 
@@ -232,6 +248,7 @@ export type FlowOptionUncheckedCreateInput = {
   stepId: string
   label: string
   trigger: string
+  nextStepId?: string | null
   Actions?: Prisma.FlowActionUncheckedCreateNestedManyWithoutOptionInput
 }
 
@@ -240,6 +257,7 @@ export type FlowOptionUpdateInput = {
   label?: Prisma.StringFieldUpdateOperationsInput | string
   trigger?: Prisma.StringFieldUpdateOperationsInput | string
   Step?: Prisma.FlowStepUpdateOneRequiredWithoutOptionsNestedInput
+  NextStep?: Prisma.FlowStepUpdateOneWithoutFromOptionNestedInput
   Actions?: Prisma.FlowActionUpdateManyWithoutOptionNestedInput
 }
 
@@ -248,6 +266,7 @@ export type FlowOptionUncheckedUpdateInput = {
   stepId?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   trigger?: Prisma.StringFieldUpdateOperationsInput | string
+  nextStepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Actions?: Prisma.FlowActionUncheckedUpdateManyWithoutOptionNestedInput
 }
 
@@ -256,6 +275,7 @@ export type FlowOptionCreateManyInput = {
   stepId: string
   label: string
   trigger: string
+  nextStepId?: string | null
 }
 
 export type FlowOptionUpdateManyMutationInput = {
@@ -269,12 +289,18 @@ export type FlowOptionUncheckedUpdateManyInput = {
   stepId?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   trigger?: Prisma.StringFieldUpdateOperationsInput | string
+  nextStepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FlowOptionListRelationFilter = {
   every?: Prisma.FlowOptionWhereInput
   some?: Prisma.FlowOptionWhereInput
   none?: Prisma.FlowOptionWhereInput
+}
+
+export type FlowOptionNullableScalarRelationFilter = {
+  is?: Prisma.FlowOptionWhereInput | null
+  isNot?: Prisma.FlowOptionWhereInput | null
 }
 
 export type FlowOptionOrderByRelationAggregateInput = {
@@ -286,6 +312,7 @@ export type FlowOptionCountOrderByAggregateInput = {
   stepId?: Prisma.SortOrder
   label?: Prisma.SortOrder
   trigger?: Prisma.SortOrder
+  nextStepId?: Prisma.SortOrder
 }
 
 export type FlowOptionMaxOrderByAggregateInput = {
@@ -293,6 +320,7 @@ export type FlowOptionMaxOrderByAggregateInput = {
   stepId?: Prisma.SortOrder
   label?: Prisma.SortOrder
   trigger?: Prisma.SortOrder
+  nextStepId?: Prisma.SortOrder
 }
 
 export type FlowOptionMinOrderByAggregateInput = {
@@ -300,6 +328,7 @@ export type FlowOptionMinOrderByAggregateInput = {
   stepId?: Prisma.SortOrder
   label?: Prisma.SortOrder
   trigger?: Prisma.SortOrder
+  nextStepId?: Prisma.SortOrder
 }
 
 export type FlowOptionScalarRelationFilter = {
@@ -314,11 +343,23 @@ export type FlowOptionCreateNestedManyWithoutStepInput = {
   connect?: Prisma.FlowOptionWhereUniqueInput | Prisma.FlowOptionWhereUniqueInput[]
 }
 
+export type FlowOptionCreateNestedOneWithoutNextStepInput = {
+  create?: Prisma.XOR<Prisma.FlowOptionCreateWithoutNextStepInput, Prisma.FlowOptionUncheckedCreateWithoutNextStepInput>
+  connectOrCreate?: Prisma.FlowOptionCreateOrConnectWithoutNextStepInput
+  connect?: Prisma.FlowOptionWhereUniqueInput
+}
+
 export type FlowOptionUncheckedCreateNestedManyWithoutStepInput = {
   create?: Prisma.XOR<Prisma.FlowOptionCreateWithoutStepInput, Prisma.FlowOptionUncheckedCreateWithoutStepInput> | Prisma.FlowOptionCreateWithoutStepInput[] | Prisma.FlowOptionUncheckedCreateWithoutStepInput[]
   connectOrCreate?: Prisma.FlowOptionCreateOrConnectWithoutStepInput | Prisma.FlowOptionCreateOrConnectWithoutStepInput[]
   createMany?: Prisma.FlowOptionCreateManyStepInputEnvelope
   connect?: Prisma.FlowOptionWhereUniqueInput | Prisma.FlowOptionWhereUniqueInput[]
+}
+
+export type FlowOptionUncheckedCreateNestedOneWithoutNextStepInput = {
+  create?: Prisma.XOR<Prisma.FlowOptionCreateWithoutNextStepInput, Prisma.FlowOptionUncheckedCreateWithoutNextStepInput>
+  connectOrCreate?: Prisma.FlowOptionCreateOrConnectWithoutNextStepInput
+  connect?: Prisma.FlowOptionWhereUniqueInput
 }
 
 export type FlowOptionUpdateManyWithoutStepNestedInput = {
@@ -335,6 +376,16 @@ export type FlowOptionUpdateManyWithoutStepNestedInput = {
   deleteMany?: Prisma.FlowOptionScalarWhereInput | Prisma.FlowOptionScalarWhereInput[]
 }
 
+export type FlowOptionUpdateOneWithoutNextStepNestedInput = {
+  create?: Prisma.XOR<Prisma.FlowOptionCreateWithoutNextStepInput, Prisma.FlowOptionUncheckedCreateWithoutNextStepInput>
+  connectOrCreate?: Prisma.FlowOptionCreateOrConnectWithoutNextStepInput
+  upsert?: Prisma.FlowOptionUpsertWithoutNextStepInput
+  disconnect?: Prisma.FlowOptionWhereInput | boolean
+  delete?: Prisma.FlowOptionWhereInput | boolean
+  connect?: Prisma.FlowOptionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FlowOptionUpdateToOneWithWhereWithoutNextStepInput, Prisma.FlowOptionUpdateWithoutNextStepInput>, Prisma.FlowOptionUncheckedUpdateWithoutNextStepInput>
+}
+
 export type FlowOptionUncheckedUpdateManyWithoutStepNestedInput = {
   create?: Prisma.XOR<Prisma.FlowOptionCreateWithoutStepInput, Prisma.FlowOptionUncheckedCreateWithoutStepInput> | Prisma.FlowOptionCreateWithoutStepInput[] | Prisma.FlowOptionUncheckedCreateWithoutStepInput[]
   connectOrCreate?: Prisma.FlowOptionCreateOrConnectWithoutStepInput | Prisma.FlowOptionCreateOrConnectWithoutStepInput[]
@@ -347,6 +398,16 @@ export type FlowOptionUncheckedUpdateManyWithoutStepNestedInput = {
   update?: Prisma.FlowOptionUpdateWithWhereUniqueWithoutStepInput | Prisma.FlowOptionUpdateWithWhereUniqueWithoutStepInput[]
   updateMany?: Prisma.FlowOptionUpdateManyWithWhereWithoutStepInput | Prisma.FlowOptionUpdateManyWithWhereWithoutStepInput[]
   deleteMany?: Prisma.FlowOptionScalarWhereInput | Prisma.FlowOptionScalarWhereInput[]
+}
+
+export type FlowOptionUncheckedUpdateOneWithoutNextStepNestedInput = {
+  create?: Prisma.XOR<Prisma.FlowOptionCreateWithoutNextStepInput, Prisma.FlowOptionUncheckedCreateWithoutNextStepInput>
+  connectOrCreate?: Prisma.FlowOptionCreateOrConnectWithoutNextStepInput
+  upsert?: Prisma.FlowOptionUpsertWithoutNextStepInput
+  disconnect?: Prisma.FlowOptionWhereInput | boolean
+  delete?: Prisma.FlowOptionWhereInput | boolean
+  connect?: Prisma.FlowOptionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FlowOptionUpdateToOneWithWhereWithoutNextStepInput, Prisma.FlowOptionUpdateWithoutNextStepInput>, Prisma.FlowOptionUncheckedUpdateWithoutNextStepInput>
 }
 
 export type FlowOptionCreateNestedOneWithoutActionsInput = {
@@ -367,6 +428,7 @@ export type FlowOptionCreateWithoutStepInput = {
   id?: string
   label: string
   trigger: string
+  NextStep?: Prisma.FlowStepCreateNestedOneWithoutFromOptionInput
   Actions?: Prisma.FlowActionCreateNestedManyWithoutOptionInput
 }
 
@@ -374,6 +436,7 @@ export type FlowOptionUncheckedCreateWithoutStepInput = {
   id?: string
   label: string
   trigger: string
+  nextStepId?: string | null
   Actions?: Prisma.FlowActionUncheckedCreateNestedManyWithoutOptionInput
 }
 
@@ -385,6 +448,27 @@ export type FlowOptionCreateOrConnectWithoutStepInput = {
 export type FlowOptionCreateManyStepInputEnvelope = {
   data: Prisma.FlowOptionCreateManyStepInput | Prisma.FlowOptionCreateManyStepInput[]
   skipDuplicates?: boolean
+}
+
+export type FlowOptionCreateWithoutNextStepInput = {
+  id?: string
+  label: string
+  trigger: string
+  Step: Prisma.FlowStepCreateNestedOneWithoutOptionsInput
+  Actions?: Prisma.FlowActionCreateNestedManyWithoutOptionInput
+}
+
+export type FlowOptionUncheckedCreateWithoutNextStepInput = {
+  id?: string
+  stepId: string
+  label: string
+  trigger: string
+  Actions?: Prisma.FlowActionUncheckedCreateNestedManyWithoutOptionInput
+}
+
+export type FlowOptionCreateOrConnectWithoutNextStepInput = {
+  where: Prisma.FlowOptionWhereUniqueInput
+  create: Prisma.XOR<Prisma.FlowOptionCreateWithoutNextStepInput, Prisma.FlowOptionUncheckedCreateWithoutNextStepInput>
 }
 
 export type FlowOptionUpsertWithWhereUniqueWithoutStepInput = {
@@ -411,6 +495,34 @@ export type FlowOptionScalarWhereInput = {
   stepId?: Prisma.StringFilter<"FlowOption"> | string
   label?: Prisma.StringFilter<"FlowOption"> | string
   trigger?: Prisma.StringFilter<"FlowOption"> | string
+  nextStepId?: Prisma.StringNullableFilter<"FlowOption"> | string | null
+}
+
+export type FlowOptionUpsertWithoutNextStepInput = {
+  update: Prisma.XOR<Prisma.FlowOptionUpdateWithoutNextStepInput, Prisma.FlowOptionUncheckedUpdateWithoutNextStepInput>
+  create: Prisma.XOR<Prisma.FlowOptionCreateWithoutNextStepInput, Prisma.FlowOptionUncheckedCreateWithoutNextStepInput>
+  where?: Prisma.FlowOptionWhereInput
+}
+
+export type FlowOptionUpdateToOneWithWhereWithoutNextStepInput = {
+  where?: Prisma.FlowOptionWhereInput
+  data: Prisma.XOR<Prisma.FlowOptionUpdateWithoutNextStepInput, Prisma.FlowOptionUncheckedUpdateWithoutNextStepInput>
+}
+
+export type FlowOptionUpdateWithoutNextStepInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  trigger?: Prisma.StringFieldUpdateOperationsInput | string
+  Step?: Prisma.FlowStepUpdateOneRequiredWithoutOptionsNestedInput
+  Actions?: Prisma.FlowActionUpdateManyWithoutOptionNestedInput
+}
+
+export type FlowOptionUncheckedUpdateWithoutNextStepInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  stepId?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  trigger?: Prisma.StringFieldUpdateOperationsInput | string
+  Actions?: Prisma.FlowActionUncheckedUpdateManyWithoutOptionNestedInput
 }
 
 export type FlowOptionCreateWithoutActionsInput = {
@@ -418,6 +530,7 @@ export type FlowOptionCreateWithoutActionsInput = {
   label: string
   trigger: string
   Step: Prisma.FlowStepCreateNestedOneWithoutOptionsInput
+  NextStep?: Prisma.FlowStepCreateNestedOneWithoutFromOptionInput
 }
 
 export type FlowOptionUncheckedCreateWithoutActionsInput = {
@@ -425,6 +538,7 @@ export type FlowOptionUncheckedCreateWithoutActionsInput = {
   stepId: string
   label: string
   trigger: string
+  nextStepId?: string | null
 }
 
 export type FlowOptionCreateOrConnectWithoutActionsInput = {
@@ -448,6 +562,7 @@ export type FlowOptionUpdateWithoutActionsInput = {
   label?: Prisma.StringFieldUpdateOperationsInput | string
   trigger?: Prisma.StringFieldUpdateOperationsInput | string
   Step?: Prisma.FlowStepUpdateOneRequiredWithoutOptionsNestedInput
+  NextStep?: Prisma.FlowStepUpdateOneWithoutFromOptionNestedInput
 }
 
 export type FlowOptionUncheckedUpdateWithoutActionsInput = {
@@ -455,18 +570,21 @@ export type FlowOptionUncheckedUpdateWithoutActionsInput = {
   stepId?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   trigger?: Prisma.StringFieldUpdateOperationsInput | string
+  nextStepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FlowOptionCreateManyStepInput = {
   id?: string
   label: string
   trigger: string
+  nextStepId?: string | null
 }
 
 export type FlowOptionUpdateWithoutStepInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   trigger?: Prisma.StringFieldUpdateOperationsInput | string
+  NextStep?: Prisma.FlowStepUpdateOneWithoutFromOptionNestedInput
   Actions?: Prisma.FlowActionUpdateManyWithoutOptionNestedInput
 }
 
@@ -474,6 +592,7 @@ export type FlowOptionUncheckedUpdateWithoutStepInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   trigger?: Prisma.StringFieldUpdateOperationsInput | string
+  nextStepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Actions?: Prisma.FlowActionUncheckedUpdateManyWithoutOptionNestedInput
 }
 
@@ -481,6 +600,7 @@ export type FlowOptionUncheckedUpdateManyWithoutStepInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   trigger?: Prisma.StringFieldUpdateOperationsInput | string
+  nextStepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -519,7 +639,9 @@ export type FlowOptionSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   stepId?: boolean
   label?: boolean
   trigger?: boolean
+  nextStepId?: boolean
   Step?: boolean | Prisma.FlowStepDefaultArgs<ExtArgs>
+  NextStep?: boolean | Prisma.FlowOption$NextStepArgs<ExtArgs>
   Actions?: boolean | Prisma.FlowOption$ActionsArgs<ExtArgs>
   _count?: boolean | Prisma.FlowOptionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["flowOption"]>
@@ -529,7 +651,9 @@ export type FlowOptionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   stepId?: boolean
   label?: boolean
   trigger?: boolean
+  nextStepId?: boolean
   Step?: boolean | Prisma.FlowStepDefaultArgs<ExtArgs>
+  NextStep?: boolean | Prisma.FlowOption$NextStepArgs<ExtArgs>
 }, ExtArgs["result"]["flowOption"]>
 
 export type FlowOptionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -537,7 +661,9 @@ export type FlowOptionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   stepId?: boolean
   label?: boolean
   trigger?: boolean
+  nextStepId?: boolean
   Step?: boolean | Prisma.FlowStepDefaultArgs<ExtArgs>
+  NextStep?: boolean | Prisma.FlowOption$NextStepArgs<ExtArgs>
 }, ExtArgs["result"]["flowOption"]>
 
 export type FlowOptionSelectScalar = {
@@ -545,25 +671,30 @@ export type FlowOptionSelectScalar = {
   stepId?: boolean
   label?: boolean
   trigger?: boolean
+  nextStepId?: boolean
 }
 
-export type FlowOptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "stepId" | "label" | "trigger", ExtArgs["result"]["flowOption"]>
+export type FlowOptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "stepId" | "label" | "trigger" | "nextStepId", ExtArgs["result"]["flowOption"]>
 export type FlowOptionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Step?: boolean | Prisma.FlowStepDefaultArgs<ExtArgs>
+  NextStep?: boolean | Prisma.FlowOption$NextStepArgs<ExtArgs>
   Actions?: boolean | Prisma.FlowOption$ActionsArgs<ExtArgs>
   _count?: boolean | Prisma.FlowOptionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FlowOptionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Step?: boolean | Prisma.FlowStepDefaultArgs<ExtArgs>
+  NextStep?: boolean | Prisma.FlowOption$NextStepArgs<ExtArgs>
 }
 export type FlowOptionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Step?: boolean | Prisma.FlowStepDefaultArgs<ExtArgs>
+  NextStep?: boolean | Prisma.FlowOption$NextStepArgs<ExtArgs>
 }
 
 export type $FlowOptionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FlowOption"
   objects: {
     Step: Prisma.$FlowStepPayload<ExtArgs>
+    NextStep: Prisma.$FlowStepPayload<ExtArgs> | null
     Actions: Prisma.$FlowActionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -571,6 +702,7 @@ export type $FlowOptionPayload<ExtArgs extends runtime.Types.Extensions.Internal
     stepId: string
     label: string
     trigger: string
+    nextStepId: string | null
   }, ExtArgs["result"]["flowOption"]>
   composites: {}
 }
@@ -966,6 +1098,7 @@ readonly fields: FlowOptionFieldRefs;
 export interface Prisma__FlowOptionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   Step<T extends Prisma.FlowStepDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FlowStepDefaultArgs<ExtArgs>>): Prisma.Prisma__FlowStepClient<runtime.Types.Result.GetResult<Prisma.$FlowStepPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  NextStep<T extends Prisma.FlowOption$NextStepArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FlowOption$NextStepArgs<ExtArgs>>): Prisma.Prisma__FlowStepClient<runtime.Types.Result.GetResult<Prisma.$FlowStepPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   Actions<T extends Prisma.FlowOption$ActionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FlowOption$ActionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FlowActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1000,6 +1133,7 @@ export interface FlowOptionFieldRefs {
   readonly stepId: Prisma.FieldRef<"FlowOption", 'String'>
   readonly label: Prisma.FieldRef<"FlowOption", 'String'>
   readonly trigger: Prisma.FieldRef<"FlowOption", 'String'>
+  readonly nextStepId: Prisma.FieldRef<"FlowOption", 'String'>
 }
     
 
@@ -1393,6 +1527,25 @@ export type FlowOptionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many FlowOptions to delete.
    */
   limit?: number
+}
+
+/**
+ * FlowOption.NextStep
+ */
+export type FlowOption$NextStepArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FlowStep
+   */
+  select?: Prisma.FlowStepSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FlowStep
+   */
+  omit?: Prisma.FlowStepOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FlowStepInclude<ExtArgs> | null
+  where?: Prisma.FlowStepWhereInput
 }
 
 /**
