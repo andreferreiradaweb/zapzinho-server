@@ -7,7 +7,7 @@ interface UpdateLeadSaleRequest {
   saleId: string
   userId: string
   discount: number
-  items: { productId: string; quantity: number }[]
+  items: { productId: string; quantity: number; costPrice?: number | null }[]
 }
 
 export class UpdateLeadSaleUseCase {
@@ -35,6 +35,7 @@ export class UpdateLeadSaleUseCase {
       productId: item.productId,
       quantity: item.quantity,
       price: priceMap.get(item.productId) ?? 0,
+      costPrice: item.costPrice ?? null,
     }))
 
     return this.leadSaleRepository.update({ id: saleId, userId, discount, items: saleItems })

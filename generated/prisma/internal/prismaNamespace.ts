@@ -2256,7 +2256,8 @@ export const LeadSaleItemScalarFieldEnum = {
   saleId: 'saleId',
   productId: 'productId',
   quantity: 'quantity',
-  price: 'price'
+  price: 'price',
+  costPrice: 'costPrice'
 } as const
 
 export type LeadSaleItemScalarFieldEnum = (typeof LeadSaleItemScalarFieldEnum)[keyof typeof LeadSaleItemScalarFieldEnum]

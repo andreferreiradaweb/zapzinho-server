@@ -29,11 +29,13 @@ export type AggregateLeadSaleItem = {
 export type LeadSaleItemAvgAggregateOutputType = {
   quantity: number | null
   price: number | null
+  costPrice: number | null
 }
 
 export type LeadSaleItemSumAggregateOutputType = {
   quantity: number | null
   price: number | null
+  costPrice: number | null
 }
 
 export type LeadSaleItemMinAggregateOutputType = {
@@ -42,6 +44,7 @@ export type LeadSaleItemMinAggregateOutputType = {
   productId: string | null
   quantity: number | null
   price: number | null
+  costPrice: number | null
 }
 
 export type LeadSaleItemMaxAggregateOutputType = {
@@ -50,6 +53,7 @@ export type LeadSaleItemMaxAggregateOutputType = {
   productId: string | null
   quantity: number | null
   price: number | null
+  costPrice: number | null
 }
 
 export type LeadSaleItemCountAggregateOutputType = {
@@ -58,6 +62,7 @@ export type LeadSaleItemCountAggregateOutputType = {
   productId: number
   quantity: number
   price: number
+  costPrice: number
   _all: number
 }
 
@@ -65,11 +70,13 @@ export type LeadSaleItemCountAggregateOutputType = {
 export type LeadSaleItemAvgAggregateInputType = {
   quantity?: true
   price?: true
+  costPrice?: true
 }
 
 export type LeadSaleItemSumAggregateInputType = {
   quantity?: true
   price?: true
+  costPrice?: true
 }
 
 export type LeadSaleItemMinAggregateInputType = {
@@ -78,6 +85,7 @@ export type LeadSaleItemMinAggregateInputType = {
   productId?: true
   quantity?: true
   price?: true
+  costPrice?: true
 }
 
 export type LeadSaleItemMaxAggregateInputType = {
@@ -86,6 +94,7 @@ export type LeadSaleItemMaxAggregateInputType = {
   productId?: true
   quantity?: true
   price?: true
+  costPrice?: true
 }
 
 export type LeadSaleItemCountAggregateInputType = {
@@ -94,6 +103,7 @@ export type LeadSaleItemCountAggregateInputType = {
   productId?: true
   quantity?: true
   price?: true
+  costPrice?: true
   _all?: true
 }
 
@@ -189,6 +199,7 @@ export type LeadSaleItemGroupByOutputType = {
   productId: string
   quantity: number
   price: number
+  costPrice: number | null
   _count: LeadSaleItemCountAggregateOutputType | null
   _avg: LeadSaleItemAvgAggregateOutputType | null
   _sum: LeadSaleItemSumAggregateOutputType | null
@@ -220,6 +231,7 @@ export type LeadSaleItemWhereInput = {
   productId?: Prisma.StringFilter<"LeadSaleItem"> | string
   quantity?: Prisma.IntFilter<"LeadSaleItem"> | number
   price?: Prisma.FloatFilter<"LeadSaleItem"> | number
+  costPrice?: Prisma.FloatNullableFilter<"LeadSaleItem"> | number | null
   Sale?: Prisma.XOR<Prisma.LeadSaleScalarRelationFilter, Prisma.LeadSaleWhereInput>
   Product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
 }
@@ -230,6 +242,7 @@ export type LeadSaleItemOrderByWithRelationInput = {
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   Sale?: Prisma.LeadSaleOrderByWithRelationInput
   Product?: Prisma.ProductOrderByWithRelationInput
 }
@@ -243,6 +256,7 @@ export type LeadSaleItemWhereUniqueInput = Prisma.AtLeast<{
   productId?: Prisma.StringFilter<"LeadSaleItem"> | string
   quantity?: Prisma.IntFilter<"LeadSaleItem"> | number
   price?: Prisma.FloatFilter<"LeadSaleItem"> | number
+  costPrice?: Prisma.FloatNullableFilter<"LeadSaleItem"> | number | null
   Sale?: Prisma.XOR<Prisma.LeadSaleScalarRelationFilter, Prisma.LeadSaleWhereInput>
   Product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
 }, "id">
@@ -253,6 +267,7 @@ export type LeadSaleItemOrderByWithAggregationInput = {
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeadSaleItemCountOrderByAggregateInput
   _avg?: Prisma.LeadSaleItemAvgOrderByAggregateInput
   _max?: Prisma.LeadSaleItemMaxOrderByAggregateInput
@@ -269,12 +284,14 @@ export type LeadSaleItemScalarWhereWithAggregatesInput = {
   productId?: Prisma.StringWithAggregatesFilter<"LeadSaleItem"> | string
   quantity?: Prisma.IntWithAggregatesFilter<"LeadSaleItem"> | number
   price?: Prisma.FloatWithAggregatesFilter<"LeadSaleItem"> | number
+  costPrice?: Prisma.FloatNullableWithAggregatesFilter<"LeadSaleItem"> | number | null
 }
 
 export type LeadSaleItemCreateInput = {
   id?: string
   quantity?: number
   price?: number
+  costPrice?: number | null
   Sale: Prisma.LeadSaleCreateNestedOneWithoutItemsInput
   Product: Prisma.ProductCreateNestedOneWithoutLeadSaleItemsInput
 }
@@ -285,12 +302,14 @@ export type LeadSaleItemUncheckedCreateInput = {
   productId: string
   quantity?: number
   price?: number
+  costPrice?: number | null
 }
 
 export type LeadSaleItemUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   Sale?: Prisma.LeadSaleUpdateOneRequiredWithoutItemsNestedInput
   Product?: Prisma.ProductUpdateOneRequiredWithoutLeadSaleItemsNestedInput
 }
@@ -301,6 +320,7 @@ export type LeadSaleItemUncheckedUpdateInput = {
   productId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type LeadSaleItemCreateManyInput = {
@@ -309,12 +329,14 @@ export type LeadSaleItemCreateManyInput = {
   productId: string
   quantity?: number
   price?: number
+  costPrice?: number | null
 }
 
 export type LeadSaleItemUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type LeadSaleItemUncheckedUpdateManyInput = {
@@ -323,6 +345,7 @@ export type LeadSaleItemUncheckedUpdateManyInput = {
   productId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type LeadSaleItemListRelationFilter = {
@@ -341,11 +364,13 @@ export type LeadSaleItemCountOrderByAggregateInput = {
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
 }
 
 export type LeadSaleItemAvgOrderByAggregateInput = {
   quantity?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
 }
 
 export type LeadSaleItemMaxOrderByAggregateInput = {
@@ -354,6 +379,7 @@ export type LeadSaleItemMaxOrderByAggregateInput = {
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
 }
 
 export type LeadSaleItemMinOrderByAggregateInput = {
@@ -362,11 +388,13 @@ export type LeadSaleItemMinOrderByAggregateInput = {
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
 }
 
 export type LeadSaleItemSumOrderByAggregateInput = {
   quantity?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
 }
 
 export type LeadSaleItemCreateNestedManyWithoutProductInput = {
@@ -461,10 +489,19 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type LeadSaleItemCreateWithoutProductInput = {
   id?: string
   quantity?: number
   price?: number
+  costPrice?: number | null
   Sale: Prisma.LeadSaleCreateNestedOneWithoutItemsInput
 }
 
@@ -473,6 +510,7 @@ export type LeadSaleItemUncheckedCreateWithoutProductInput = {
   saleId: string
   quantity?: number
   price?: number
+  costPrice?: number | null
 }
 
 export type LeadSaleItemCreateOrConnectWithoutProductInput = {
@@ -510,12 +548,14 @@ export type LeadSaleItemScalarWhereInput = {
   productId?: Prisma.StringFilter<"LeadSaleItem"> | string
   quantity?: Prisma.IntFilter<"LeadSaleItem"> | number
   price?: Prisma.FloatFilter<"LeadSaleItem"> | number
+  costPrice?: Prisma.FloatNullableFilter<"LeadSaleItem"> | number | null
 }
 
 export type LeadSaleItemCreateWithoutSaleInput = {
   id?: string
   quantity?: number
   price?: number
+  costPrice?: number | null
   Product: Prisma.ProductCreateNestedOneWithoutLeadSaleItemsInput
 }
 
@@ -524,6 +564,7 @@ export type LeadSaleItemUncheckedCreateWithoutSaleInput = {
   productId: string
   quantity?: number
   price?: number
+  costPrice?: number | null
 }
 
 export type LeadSaleItemCreateOrConnectWithoutSaleInput = {
@@ -557,12 +598,14 @@ export type LeadSaleItemCreateManyProductInput = {
   saleId: string
   quantity?: number
   price?: number
+  costPrice?: number | null
 }
 
 export type LeadSaleItemUpdateWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   Sale?: Prisma.LeadSaleUpdateOneRequiredWithoutItemsNestedInput
 }
 
@@ -571,6 +614,7 @@ export type LeadSaleItemUncheckedUpdateWithoutProductInput = {
   saleId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type LeadSaleItemUncheckedUpdateManyWithoutProductInput = {
@@ -578,6 +622,7 @@ export type LeadSaleItemUncheckedUpdateManyWithoutProductInput = {
   saleId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type LeadSaleItemCreateManySaleInput = {
@@ -585,12 +630,14 @@ export type LeadSaleItemCreateManySaleInput = {
   productId: string
   quantity?: number
   price?: number
+  costPrice?: number | null
 }
 
 export type LeadSaleItemUpdateWithoutSaleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   Product?: Prisma.ProductUpdateOneRequiredWithoutLeadSaleItemsNestedInput
 }
 
@@ -599,6 +646,7 @@ export type LeadSaleItemUncheckedUpdateWithoutSaleInput = {
   productId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type LeadSaleItemUncheckedUpdateManyWithoutSaleInput = {
@@ -606,6 +654,7 @@ export type LeadSaleItemUncheckedUpdateManyWithoutSaleInput = {
   productId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  costPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 
@@ -616,6 +665,7 @@ export type LeadSaleItemSelect<ExtArgs extends runtime.Types.Extensions.Internal
   productId?: boolean
   quantity?: boolean
   price?: boolean
+  costPrice?: boolean
   Sale?: boolean | Prisma.LeadSaleDefaultArgs<ExtArgs>
   Product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadSaleItem"]>
@@ -626,6 +676,7 @@ export type LeadSaleItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   productId?: boolean
   quantity?: boolean
   price?: boolean
+  costPrice?: boolean
   Sale?: boolean | Prisma.LeadSaleDefaultArgs<ExtArgs>
   Product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadSaleItem"]>
@@ -636,6 +687,7 @@ export type LeadSaleItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   productId?: boolean
   quantity?: boolean
   price?: boolean
+  costPrice?: boolean
   Sale?: boolean | Prisma.LeadSaleDefaultArgs<ExtArgs>
   Product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadSaleItem"]>
@@ -646,9 +698,10 @@ export type LeadSaleItemSelectScalar = {
   productId?: boolean
   quantity?: boolean
   price?: boolean
+  costPrice?: boolean
 }
 
-export type LeadSaleItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "saleId" | "productId" | "quantity" | "price", ExtArgs["result"]["leadSaleItem"]>
+export type LeadSaleItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "saleId" | "productId" | "quantity" | "price" | "costPrice", ExtArgs["result"]["leadSaleItem"]>
 export type LeadSaleItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Sale?: boolean | Prisma.LeadSaleDefaultArgs<ExtArgs>
   Product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
@@ -674,6 +727,7 @@ export type $LeadSaleItemPayload<ExtArgs extends runtime.Types.Extensions.Intern
     productId: string
     quantity: number
     price: number
+    costPrice: number | null
   }, ExtArgs["result"]["leadSaleItem"]>
   composites: {}
 }
@@ -1104,6 +1158,7 @@ export interface LeadSaleItemFieldRefs {
   readonly productId: Prisma.FieldRef<"LeadSaleItem", 'String'>
   readonly quantity: Prisma.FieldRef<"LeadSaleItem", 'Int'>
   readonly price: Prisma.FieldRef<"LeadSaleItem", 'Float'>
+  readonly costPrice: Prisma.FieldRef<"LeadSaleItem", 'Float'>
 }
     
 

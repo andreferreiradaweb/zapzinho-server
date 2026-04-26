@@ -10,7 +10,7 @@ interface CreateLeadSaleRequest {
   leadId: string
   userId: string
   discount: number
-  items: { productId: string; quantity: number }[]
+  items: { productId: string; quantity: number; costPrice?: number | null }[]
 }
 
 export class CreateLeadSaleUseCase {
@@ -41,6 +41,7 @@ export class CreateLeadSaleUseCase {
       productId: item.productId,
       quantity: item.quantity,
       price: priceMap.get(item.productId) ?? 0,
+      costPrice: item.costPrice ?? null,
     }))
 
     const sale = await this.leadSaleRepository.create({

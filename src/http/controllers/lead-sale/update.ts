@@ -10,6 +10,7 @@ const bodySchema = z.object({
   items: z.array(z.object({
     productId: z.string().uuid(),
     quantity: z.number().int().min(1).default(1),
+    costPrice: z.number().min(0).nullable().optional(),
   })).min(1),
 })
 

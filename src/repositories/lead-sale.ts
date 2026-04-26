@@ -2,6 +2,7 @@ export type LeadSaleItemInput = {
   productId: string
   quantity: number
   price: number
+  costPrice?: number | null
 }
 
 export interface LeadSaleRepository {
@@ -34,6 +35,7 @@ export type LeadSaleWithItems = {
     productId: string
     quantity: number
     price: number
+    costPrice: number | null
     Product: { title: string; price: string | null; costPrice: string | null }
   }[]
 }

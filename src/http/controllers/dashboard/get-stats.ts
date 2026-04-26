@@ -84,7 +84,14 @@ export async function GetDashboardStatsController(
       },
       select: {
         discount: true,
-        Items: { select: { price: true, quantity: true, Product: { select: { costPrice: true } } } },
+        Items: {
+          select: {
+            price: true,
+            quantity: true,
+            costPrice: true,
+            Product: { select: { costPrice: true } },
+          },
+        },
       },
     }),
     prisma.lead.findMany({
@@ -153,9 +160,13 @@ export async function GetDashboardStatsController(
     return (
       acc +
       sale.Items.reduce((s, item) => {
-        if (!item.Product?.costPrice) return s
-        const cost = parseFloat(item.Product.costPrice.replace(',', '.'))
-        if (!Number.isFinite(cost) || cost <= 0) return s
+        let cost: number | null = null
+        if (item.costPrice != null && Number.isFinite(item.costPrice)) {
+          cost = item.costPrice
+        } else if (item.Product?.costPrice) {
+          cost = parseFloat(item.Product.costPrice.replace(',', '.'))
+        }
+        if (cost == null || !Number.isFinite(cost)) return s
         return s + cost * item.quantity
       }, 0)
     )
