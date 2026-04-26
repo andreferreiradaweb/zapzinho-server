@@ -31,7 +31,6 @@ const optionInclude = {
                               Options: {
                                 include: {
                                   Actions: { orderBy: { order: 'asc' as const } },
-                                  NextStep: null,
                                 },
                               },
                             },
