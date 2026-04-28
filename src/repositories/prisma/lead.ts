@@ -166,7 +166,7 @@ export class PrismaLeadRepository implements LeadRepository {
     return prisma.lead.delete({ where: { id } })
   }
 
-  async upsertByPhone({ userId, phone, name, message }: { userId: string; phone: string; name: string; message: string }): Promise<{ lead: Lead; created: boolean }> {
+  async upsertByPhone({ userId, phone, name, message, origin }: { userId: string; phone: string; name: string; message: string; origin?: string }): Promise<{ lead: Lead; created: boolean }> {
     const existing = await prisma.lead.findFirst({
       where: { userId, telefone: phone },
     })
@@ -188,6 +188,7 @@ export class PrismaLeadRepository implements LeadRepository {
         Status: 'NOVO_INTERESSE',
         productId: null,
         lastClientMessageAt: new Date(),
+        ...(origin ? { origin } : {}),
       },
     })
     return { lead, created: true }

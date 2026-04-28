@@ -7,6 +7,7 @@ const bodySchema = z.object({
   storePhone: z.string().min(8),
   whatsappnumber: z.string().min(8),
   customername: z.string().min(1),
+  origin: z.string().optional(),
 })
 
 export async function CreateLeadFromWhatsappController(
@@ -14,7 +15,7 @@ export async function CreateLeadFromWhatsappController(
   reply: FastifyReply,
 ) {
   try {
-    const { storePhone, whatsappnumber, customername } = bodySchema.parse(
+    const { storePhone, whatsappnumber, customername, origin } = bodySchema.parse(
       request.body,
     )
 
@@ -23,6 +24,7 @@ export async function CreateLeadFromWhatsappController(
       storePhone,
       telefone: whatsappnumber,
       nome: customername,
+      origin,
     })
 
     return reply.status(created ? 201 : 200).send({ lead, created })

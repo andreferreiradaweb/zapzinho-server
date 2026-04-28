@@ -27,7 +27,7 @@ export interface LeadRepository {
     productId?: string,
     categoryId?: string,
   ): Promise<Lead[]>
-  upsertByPhone(params: { userId: string; phone: string; name: string; message: string }): Promise<{ lead: Lead; created: boolean }>
+  upsertByPhone(params: { userId: string; phone: string; name: string; message: string; origin?: string }): Promise<{ lead: Lead; created: boolean }>
   delete(id: string): Promise<Lead>
   create(data: Prisma.LeadUncheckedCreateInput): Promise<Lead>
   update(data: Prisma.LeadUncheckedUpdateInput): Promise<Lead>

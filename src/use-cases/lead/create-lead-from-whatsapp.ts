@@ -7,6 +7,7 @@ interface Request {
   storePhone: string
   telefone: string
   nome: string
+  origin?: string
 }
 
 interface Response {
@@ -20,7 +21,7 @@ export class CreateLeadFromWhatsappUseCase {
     private userRepository: UserRepository,
   ) {}
 
-  async execute({ storePhone, telefone, nome }: Request): Promise<Response> {
+  async execute({ storePhone, telefone, nome, origin }: Request): Promise<Response> {
     const user = await this.userRepository.findUserByPhone(storePhone)
     if (!user) throw new ResourceNotFound()
 
@@ -31,6 +32,7 @@ export class CreateLeadFromWhatsappUseCase {
       phone,
       name: nome,
       message: 'Lead capturado via landing page',
+      origin,
     })
 
     return { lead, created }

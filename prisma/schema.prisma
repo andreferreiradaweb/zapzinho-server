@@ -111,6 +111,7 @@ model Lead {
   lastClientMessageAt DateTime?
   deliveryDate        DateTime?
   delivered           Boolean         @default(false)
+  origin              String?
   BroadcastLeads  BroadcastLead[]
   MessageLogs     MessageLog[]
   LeadItems       LeadItem[]
