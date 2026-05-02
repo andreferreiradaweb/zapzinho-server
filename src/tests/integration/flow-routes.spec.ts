@@ -46,6 +46,9 @@ vi.mock('@/services/wapi', () => ({
   sendWhatsAppMessage: vi.fn().mockResolvedValue({ success: true }),
   sendWhatsAppImage: vi.fn().mockResolvedValue({ success: true }),
   sendWhatsAppVideo: vi.fn().mockResolvedValue({ success: true }),
+  sendWhatsAppMessageWithCredentials: vi.fn().mockResolvedValue({ success: true }),
+  sendWhatsAppImageWithCredentials: vi.fn().mockResolvedValue({ success: true }),
+  sendWhatsAppVideoWithCredentials: vi.fn().mockResolvedValue({ success: true }),
   wapiDelay: vi.fn().mockResolvedValue(undefined),
 }))
 
@@ -164,6 +167,8 @@ describe('Rotas de flows (HTTP)', () => {
       CustomerType: 'B2C',
       isActive: true,
       emailVerified: true,
+      wapiInstanceId: 'test-instance',
+      wapiToken: 'test-token',
     })
     token = await getAuthToken('flows@empresa.com', 'Senha123')
   })

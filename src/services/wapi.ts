@@ -142,6 +142,74 @@ export async function sendWhatsAppVideo({
 }
 
 /**
+ * Sends a WhatsApp image using custom instance credentials.
+ */
+export async function sendWhatsAppImageWithCredentials(
+  instanceId: string,
+  token: string,
+  phone: string,
+  imageUrl: string,
+  caption?: string,
+): Promise<SendMessageResult> {
+  const normalizedPhone = phone.replace(/\D/g, '')
+  try {
+    const url = `${env.WAPI_BASE_URL}/message/send-image?instanceId=${instanceId}`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({
+        phone: normalizedPhone,
+        image: imageUrl,
+        ...(caption ? { caption } : {}),
+        delayMessage: 0,
+      }),
+    })
+    if (!response.ok) {
+      const body = await response.text()
+      return { success: false, error: `HTTP ${response.status}: ${body}` }
+    }
+    return { success: true }
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error)
+    return { success: false, error: msg }
+  }
+}
+
+/**
+ * Sends a WhatsApp video using custom instance credentials.
+ */
+export async function sendWhatsAppVideoWithCredentials(
+  instanceId: string,
+  token: string,
+  phone: string,
+  videoUrl: string,
+  caption?: string,
+): Promise<SendMessageResult> {
+  const normalizedPhone = phone.replace(/\D/g, '')
+  try {
+    const url = `${env.WAPI_BASE_URL}/message/send-video?instanceId=${instanceId}`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({
+        phone: normalizedPhone,
+        video: videoUrl,
+        ...(caption ? { caption } : {}),
+        delayMessage: 0,
+      }),
+    })
+    if (!response.ok) {
+      const body = await response.text()
+      return { success: false, error: `HTTP ${response.status}: ${body}` }
+    }
+    return { success: true }
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error)
+    return { success: false, error: msg }
+  }
+}
+
+/**
  * Sends a WhatsApp text message using custom instance credentials (for prospecting).
  */
 export async function sendWhatsAppMessageWithCredentials(

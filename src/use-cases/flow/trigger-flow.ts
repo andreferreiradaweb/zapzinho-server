@@ -1,8 +1,9 @@
 import { FlowRepository, FlowWithSteps } from '@/repositories/flow'
 import { LeadRepository } from '@/repositories/lead'
 import { MessageLogRepository } from '@/repositories/message-log'
+import { UserRepository } from '@/repositories/user'
 import { ResourceNotFound } from '@/error/resource-not-found'
-import { sendWhatsAppMessage } from '@/services/wapi'
+import { sendWhatsAppMessageWithCredentials } from '@/services/wapi'
 
 const SESSION_TTL_MINUTES = 30
 
@@ -22,6 +23,7 @@ export class TriggerFlowUseCase {
     private flowRepository: FlowRepository,
     private leadRepository: LeadRepository,
     private messageLogRepository: MessageLogRepository,
+    private userRepository: UserRepository,
   ) {}
 
   async execute(req: Request): Promise<Response> {
@@ -34,7 +36,10 @@ export class TriggerFlowUseCase {
     const step = flow.Steps[0]
     if (!step) throw new ResourceNotFound()
 
-    await sendWhatsAppMessage({ phone: lead.telefone, message: step.message })
+    const user = await this.userRepository.findUserById(req.userId)
+    if (!user?.wapiInstanceId || !user?.wapiToken) throw new ResourceNotFound()
+
+    await sendWhatsAppMessageWithCredentials(user.wapiInstanceId, user.wapiToken, lead.telefone, step.message)
 
     await this.messageLogRepository.create({
       userId: req.userId,

@@ -1,9 +1,15 @@
 import { BroadcastRepository, BroadcastWithLeads } from '@/repositories/broadcast'
 import { BroadcastBlockRepository } from '@/repositories/broadcast-block'
 import { MessageLogRepository } from '@/repositories/message-log'
+import { UserRepository } from '@/repositories/user'
 import { ResourceNotFound } from '@/error/resource-not-found'
 import { InvalidCredentialsError } from '@/error/invalid-credentials-error'
-import { sendWhatsAppMessage, sendWhatsAppImage, sendWhatsAppVideo, wapiDelay } from '@/services/wapi'
+import {
+  sendWhatsAppMessageWithCredentials,
+  sendWhatsAppImageWithCredentials,
+  sendWhatsAppVideoWithCredentials,
+  wapiDelay,
+} from '@/services/wapi'
 import { prisma } from '@/lib/prisma'
 import { v4 as uuid } from 'uuid'
 
@@ -12,6 +18,7 @@ export class SendBroadcastUseCase {
     private broadcastRepository: BroadcastRepository,
     private messageLogRepository: MessageLogRepository,
     private blockRepository: BroadcastBlockRepository,
+    private userRepository: UserRepository,
   ) {}
 
   async execute(id: string, userId: string): Promise<void> {
@@ -32,6 +39,15 @@ export class SendBroadcastUseCase {
   }
 
   private async runSend(broadcast: BroadcastWithLeads, userId: string) {
+    const user = await this.userRepository.findUserById(userId)
+    if (!user?.wapiInstanceId || !user?.wapiToken) {
+      console.error(`[Broadcast] Instância WhatsApp não configurada para userId=${userId}`)
+      await this.broadcastRepository.updateStatus(broadcast.id, 'FAILED').catch(() => null)
+      return
+    }
+    const instanceId = user.wapiInstanceId
+    const token = user.wapiToken
+
     const full = await prisma.broadcast.findUnique({
       where: { id: broadcast.id },
       include: { BroadcastLeads: { include: { Lead: true } } },
@@ -67,31 +83,17 @@ export class SendBroadcastUseCase {
       let result
 
       if (hasVideo) {
-        result = await sendWhatsAppVideo({
-          phone: bl.Lead.telefone,
-          videoUrl: full.videoUrl!,
-          caption: full.message,
-        })
+        result = await sendWhatsAppVideoWithCredentials(instanceId, token, bl.Lead.telefone, full.videoUrl!, full.message)
         await wapiDelay()
       } else if (hasImages) {
-        // Send first image with message as caption
-        result = await sendWhatsAppImage({
-          phone: bl.Lead.telefone,
-          imageUrl: full.imageUrls[0],
-          caption: full.message,
-        })
+        result = await sendWhatsAppImageWithCredentials(instanceId, token, bl.Lead.telefone, full.imageUrls[0], full.message)
         await wapiDelay()
-
-        // Send remaining images without caption
         for (let i = 1; i < full.imageUrls.length; i++) {
-          await sendWhatsAppImage({ phone: bl.Lead.telefone, imageUrl: full.imageUrls[i] })
+          await sendWhatsAppImageWithCredentials(instanceId, token, bl.Lead.telefone, full.imageUrls[i])
           await wapiDelay()
         }
       } else {
-        result = await sendWhatsAppMessage({
-          phone: bl.Lead.telefone,
-          message: full.message,
-        })
+        result = await sendWhatsAppMessageWithCredentials(instanceId, token, bl.Lead.telefone, full.message)
         await wapiDelay()
       }
 

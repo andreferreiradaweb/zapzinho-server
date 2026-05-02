@@ -1,7 +1,8 @@
 import { FlowRepository, FlowStepItem } from '@/repositories/flow'
 import { LeadRepository } from '@/repositories/lead'
 import { MessageLogRepository } from '@/repositories/message-log'
-import { sendWhatsAppMessage, sendWhatsAppImage } from '@/services/wapi'
+import { UserRepository } from '@/repositories/user'
+import { sendWhatsAppMessageWithCredentials, sendWhatsAppImageWithCredentials } from '@/services/wapi'
 import { FlowActionType } from '@/repositories/flow'
 import { prisma } from '@/lib/prisma'
 
@@ -29,6 +30,7 @@ export class ProcessFlowReplyUseCase {
     private flowRepository: FlowRepository,
     private leadRepository: LeadRepository,
     private messageLogRepository: MessageLogRepository,
+    private userRepository: UserRepository,
   ) {}
 
   async execute(req: Request): Promise<boolean> {
@@ -47,6 +49,11 @@ export class ProcessFlowReplyUseCase {
     )
     if (!matchedOption) return false
 
+    const user = await this.userRepository.findUserById(req.userId)
+    if (!user?.wapiInstanceId || !user?.wapiToken) return false
+    const instanceId = user.wapiInstanceId
+    const token = user.wapiToken
+
     const lead = await this.leadRepository.findLeadWhereUserByNumber(req.userId, req.phone)
 
     const sortedActions = [...matchedOption.Actions].sort((a, b) => a.order - b.order)
@@ -55,7 +62,7 @@ export class ProcessFlowReplyUseCase {
       if (action.type === FlowActionType.SEND_MESSAGE) {
         const msg = (action.payload as { message: string }).message
         if (msg) {
-          await sendWhatsAppMessage({ phone: req.phone, message: msg })
+          await sendWhatsAppMessageWithCredentials(instanceId, token, req.phone, msg)
           await this.messageLogRepository.create({
             userId: req.userId,
             leadId: lead?.id ?? null,
@@ -67,7 +74,7 @@ export class ProcessFlowReplyUseCase {
       } else if (action.type === FlowActionType.SEND_IMAGE) {
         const { imageUrl, caption } = action.payload as { imageUrl: string; caption?: string }
         if (imageUrl) {
-          await sendWhatsAppImage({ phone: req.phone, imageUrl, caption })
+          await sendWhatsAppImageWithCredentials(instanceId, token, req.phone, imageUrl, caption)
           await this.messageLogRepository.create({
             userId: req.userId,
             leadId: lead?.id ?? null,
@@ -82,13 +89,9 @@ export class ProcessFlowReplyUseCase {
           const template = await prisma.messageTemplate.findUnique({ where: { id: templateId } })
           if (template) {
             if (template.imageUrl) {
-              await sendWhatsAppImage({
-                phone: req.phone,
-                imageUrl: template.imageUrl,
-                caption: template.content,
-              })
+              await sendWhatsAppImageWithCredentials(instanceId, token, req.phone, template.imageUrl, template.content)
             } else {
-              await sendWhatsAppMessage({ phone: req.phone, message: template.content })
+              await sendWhatsAppMessageWithCredentials(instanceId, token, req.phone, template.content)
             }
             await this.messageLogRepository.create({
               userId: req.userId,
@@ -110,9 +113,9 @@ export class ProcessFlowReplyUseCase {
             if (product.code) lines.push(`Código: ${product.code}`)
             const msg = lines.join('\n')
             if (product.photos?.[0]) {
-              await sendWhatsAppImage({ phone: req.phone, imageUrl: product.photos[0], caption: msg })
+              await sendWhatsAppImageWithCredentials(instanceId, token, req.phone, product.photos[0], msg)
             } else {
-              await sendWhatsAppMessage({ phone: req.phone, message: msg })
+              await sendWhatsAppMessageWithCredentials(instanceId, token, req.phone, msg)
             }
             await this.messageLogRepository.create({
               userId: req.userId,
@@ -139,7 +142,7 @@ export class ProcessFlowReplyUseCase {
     // Advance session to next step, or complete it
     if (matchedOption.NextStep) {
       await this.flowRepository.advanceSession(session.id, matchedOption.NextStep.id)
-      await sendWhatsAppMessage({ phone: req.phone, message: matchedOption.NextStep.message })
+      await sendWhatsAppMessageWithCredentials(instanceId, token, req.phone, matchedOption.NextStep.message)
       await this.messageLogRepository.create({
         userId: req.userId,
         leadId: lead?.id ?? null,

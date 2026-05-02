@@ -2,7 +2,13 @@ import { prisma } from '@/lib/prisma'
 import { PrismaAutomationRepository } from '@/repositories/prisma/automation'
 import { PrismaLeadRepository } from '@/repositories/prisma/lead'
 import { PrismaBroadcastBlockRepository } from '@/repositories/prisma/broadcast-block'
-import { sendWhatsAppMessage, sendWhatsAppImage, sendWhatsAppVideo, wapiDelay } from '@/services/wapi'
+import { PrismaUserRepository } from '@/repositories/prisma/user'
+import {
+  sendWhatsAppMessageWithCredentials,
+  sendWhatsAppImageWithCredentials,
+  sendWhatsAppVideoWithCredentials,
+  wapiDelay,
+} from '@/services/wapi'
 import { v4 as uuid } from 'uuid'
 
 export async function runAutomationJob() {
@@ -11,12 +17,21 @@ export async function runAutomationJob() {
   const automationRepo = new PrismaAutomationRepository()
   const leadRepo = new PrismaLeadRepository()
   const blockRepo = new PrismaBroadcastBlockRepository()
+  const userRepo = new PrismaUserRepository()
 
   const automations = await automationRepo.findAllActive()
   console.log(`[Cron] Automations: ${automations.length} active`)
 
   for (const automation of automations) {
     console.log(`[Cron] Processing automation "${automation.name}" (${automation.id})`)
+
+    const user = await userRepo.findUserById(automation.userId)
+    if (!user?.wapiInstanceId || !user?.wapiToken) {
+      console.warn(`[Cron] Instância WhatsApp não configurada para userId=${automation.userId}, pulando automação`)
+      continue
+    }
+    const instanceId = user.wapiInstanceId
+    const token = user.wapiToken
 
     const leads = await leadRepo.findAllForBroadcast(
       automation.userId,
@@ -51,25 +66,17 @@ export async function runAutomationJob() {
       let result
 
       if (hasVideo) {
-        result = await sendWhatsAppVideo({
-          phone: lead.telefone,
-          videoUrl: automation.videoUrl!,
-          caption: automation.message,
-        })
+        result = await sendWhatsAppVideoWithCredentials(instanceId, token, lead.telefone, automation.videoUrl!, automation.message)
         await wapiDelay()
       } else if (hasImages) {
-        result = await sendWhatsAppImage({
-          phone: lead.telefone,
-          imageUrl: automation.imageUrls[0],
-          caption: automation.message,
-        })
+        result = await sendWhatsAppImageWithCredentials(instanceId, token, lead.telefone, automation.imageUrls[0], automation.message)
         await wapiDelay()
         for (let i = 1; i < automation.imageUrls.length; i++) {
-          await sendWhatsAppImage({ phone: lead.telefone, imageUrl: automation.imageUrls[i] })
+          await sendWhatsAppImageWithCredentials(instanceId, token, lead.telefone, automation.imageUrls[i])
           await wapiDelay()
         }
       } else {
-        result = await sendWhatsAppMessage({ phone: lead.telefone, message: automation.message })
+        result = await sendWhatsAppMessageWithCredentials(instanceId, token, lead.telefone, automation.message)
         await wapiDelay()
       }
 
