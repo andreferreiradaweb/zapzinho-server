@@ -5,9 +5,10 @@ import { CreateLeadFromWhatsappFactory } from '@/factory/lead/create-lead-from-w
 
 const bodySchema = z.object({
   storePhone: z.string().min(8),
-  whatsappnumber: z.string().min(8),
-  customername: z.string().min(1),
+  whatsappnumber: z.string().min(8).optional(),
+  customername: z.string().min(1).optional(),
   origin: z.string().optional(),
+  message: z.string().optional(),
 })
 
 export async function CreateLeadFromWhatsappController(
@@ -15,19 +16,21 @@ export async function CreateLeadFromWhatsappController(
   reply: FastifyReply,
 ) {
   try {
-    const { storePhone, whatsappnumber, customername, origin } = bodySchema.parse(
-      request.body,
-    )
+    const { storePhone, whatsappnumber, customername, origin, message } =
+      bodySchema.parse(request.body)
 
     const useCase = CreateLeadFromWhatsappFactory()
-    const { lead, created } = await useCase.execute({
+    const result = await useCase.execute({
       storePhone,
       telefone: whatsappnumber,
       nome: customername,
       origin,
+      message,
     })
 
-    return reply.status(created ? 201 : 200).send({ lead, created })
+    return reply
+      .status(result.created ? 201 : 200)
+      .send(result)
   } catch (error) {
     handleSpecificError(error, reply)
   }

@@ -27,6 +27,9 @@ vi.mock('@/services/wapi', () => ({
   sendWhatsAppMessage: vi.fn().mockResolvedValue({ success: false }),
   sendWhatsAppImage: vi.fn().mockResolvedValue({ success: false }),
   sendWhatsAppVideo: vi.fn().mockResolvedValue({ success: false }),
+  sendWhatsAppMessageWithCredentials: vi.fn().mockResolvedValue({ success: true }),
+  sendWhatsAppImageWithCredentials: vi.fn().mockResolvedValue({ success: true }),
+  sendWhatsAppVideoWithCredentials: vi.fn().mockResolvedValue({ success: true }),
   wapiDelay: vi.fn().mockResolvedValue(undefined),
 }))
 
