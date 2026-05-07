@@ -22,6 +22,10 @@ export async function leadRoutes(app: FastifyInstance) {
   app.put('/lead', { onRequest: [verifyJwt] }, UpdateLeadController)
   app.delete('/lead/:id', { onRequest: [verifyJwt] }, DeleteLeadController)
   app.post('/lp/lead', CreateLeadForLpController)
-  app.post('/lead/whatsapp', CreateLeadFromWhatsappController)
+  app.post(
+    '/lead/whatsapp',
+    { config: { rateLimit: { max: 20, timeWindow: '1 minute' } } },
+    CreateLeadFromWhatsappController,
+  )
   app.post('/automation/lead', CreateLeadForAutomationController)
 }
