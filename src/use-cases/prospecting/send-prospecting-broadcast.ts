@@ -55,6 +55,18 @@ export class SendProspectingBroadcastUseCase {
       (c) => !allowedCategories || (c.category !== null && allowedCategories.includes(c.category)),
     )
 
+    const excludedByCategory = allowedCategories
+      ? broadcast.ContactList.Contacts.filter(
+          (c) => !allEligible.includes(c),
+        )
+      : []
+
+    if (excludedByCategory.length > 0) {
+      console.log(
+        `[ProspectingBroadcast] ${excludedByCategory.length} contatos ignorados por filtro de categoria (${allowedCategories?.join(', ')}): ${excludedByCategory.map((c) => c.phone).join(', ')}`,
+      )
+    }
+
     const contacts = allEligible.filter(
       (c) => c.status === 'PENDING' || c.status === 'FAILED',
     )
@@ -87,38 +99,47 @@ export class SendProspectingBroadcastUseCase {
 
     for (const contact of contacts) {
       const logId = uuid()
-      await this.messageLogRepository.create({
-        id: logId,
-        userId,
-        leadId: null,
-        phone: contact.phone,
-        message: broadcast.warmupMessage,
-        type: 'BROADCAST',
-        status: 'PENDING',
-      })
-
-      const result = await sendWhatsAppMessageWithCredentials(
-        instanceId,
-        token,
-        contact.phone,
-        broadcast.warmupMessage,
-      )
-      await wapiProspectingDelay()
-
-      if (result.success) {
-        await this.contactListRepository.updateContactStatus(contact.id, 'WARMUP_SENT', {
-          warmupSentAt: new Date(),
+      try {
+        await this.messageLogRepository.create({
+          id: logId,
+          userId,
+          leadId: null,
+          phone: contact.phone,
+          message: broadcast.warmupMessage,
+          type: 'BROADCAST',
+          status: 'PENDING',
         })
-        await this.prospectingBroadcastRepository.incrementCount(broadcast.id, 'totalSent')
-        await this.messageLogRepository.markSent(logId)
-        console.log(`[ProspectingBroadcast] ✓ Warmup enviado para ${contact.phone}`)
-      } else {
+
+        const result = await sendWhatsAppMessageWithCredentials(
+          instanceId,
+          token,
+          contact.phone,
+          broadcast.warmupMessage,
+        )
+        await wapiProspectingDelay()
+
+        if (result.success) {
+          await this.contactListRepository.updateContactStatus(contact.id, 'WARMUP_SENT', {
+            warmupSentAt: new Date(),
+          })
+          await this.prospectingBroadcastRepository.incrementCount(broadcast.id, 'totalSent')
+          await this.messageLogRepository.markSent(logId)
+          console.log(`[ProspectingBroadcast] ✓ Warmup enviado para ${contact.phone}`)
+        } else {
+          await this.contactListRepository.updateContactStatus(contact.id, 'FAILED', {
+            errorMsg: result.error,
+          })
+          await this.prospectingBroadcastRepository.incrementCount(broadcast.id, 'totalFailed')
+          await this.messageLogRepository.markFailed(logId, result.error ?? 'unknown error')
+          console.error(`[ProspectingBroadcast] ✗ Falha para ${contact.phone}: ${result.error}`)
+        }
+      } catch (err) {
+        console.error(`[ProspectingBroadcast] ✗ Exceção para ${contact.phone}:`, err)
         await this.contactListRepository.updateContactStatus(contact.id, 'FAILED', {
-          errorMsg: result.error,
-        })
-        await this.prospectingBroadcastRepository.incrementCount(broadcast.id, 'totalFailed')
-        await this.messageLogRepository.markFailed(logId, result.error ?? 'unknown error')
-        console.error(`[ProspectingBroadcast] ✗ Falha para ${contact.phone}: ${result.error}`)
+          errorMsg: String(err),
+        }).catch(() => null)
+        await this.prospectingBroadcastRepository.incrementCount(broadcast.id, 'totalFailed').catch(() => null)
+        await this.messageLogRepository.markFailed(logId, String(err)).catch(() => null)
       }
     }
 
