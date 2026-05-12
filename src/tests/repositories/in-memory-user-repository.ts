@@ -35,7 +35,11 @@ export class InMemoryUserRepository implements UserRepository {
   }
 
   async findUserByInstanceId(instanceId: string): Promise<any> {
-    return this.items.find((u) => u.wapiInstanceId === instanceId) ?? null
+    return (
+      this.items.find(
+        (u) => u.wapiInstanceId === instanceId || u.prospectingInstanceId === instanceId,
+      ) ?? null
+    )
   }
 
   async findUserByPhone(phone: string): Promise<any> {

@@ -67,7 +67,7 @@ export async function whatsappWebhookController(
     return reply.status(200).send({ ok: false, reason: 'invalid_payload' })
   }
 
-  const { instanceId, isGroup, chat, sender, msgContent } = parsed.data
+  const { instanceId, isGroup, fromMe, chat, sender, msgContent } = parsed.data
 
   // Skip group messages
   if (isGroup === true) {
@@ -77,6 +77,14 @@ export async function whatsappWebhookController(
   const phone = normalizePhone(chat.id)
   const name = sender?.pushName ?? phone
   const message = msgContent?.conversation ?? ''
+
+  // Process prospecting reply independently — runs even if the main lead lookup fails,
+  // and only for customer-sent messages (fromMe !== true).
+  if (fromMe !== true) {
+    handleProspectingReply(instanceId, phone).catch((err) =>
+      console.error('[Webhook] Prospecting reply error:', err),
+    )
+  }
 
   try {
     const { lead, created } = await makeHandleIncomingMessage().execute({
@@ -102,12 +110,6 @@ export async function whatsappWebhookController(
       addClassificationMessage(lead.id, lead.userId, message, created)
     }
 
-    // Check if this phone belongs to a prospecting contact waiting for a reply
-    console.log(`[Webhook] Verificando prospecção: instanceId=${instanceId} phone=${phone} userId=${lead.userId}`)
-    handleProspectingReply(instanceId, phone, lead.userId).catch((err) =>
-      console.error('[Webhook] Prospecting reply error:', err),
-    )
-
     return reply.status(200).send({ ok: true, created, leadId: lead.id })
   } catch (err) {
     console.error('[Webhook] Error:', err)
@@ -115,11 +117,19 @@ export async function whatsappWebhookController(
   }
 }
 
-async function handleProspectingReply(_instanceId: string, phone: string, userId: string) {
+async function handleProspectingReply(instanceId: string, phone: string) {
+  // Look up the user by either the CRM or prospecting instance ID
+  const userRepo = new PrismaUserRepository()
+  const user = await userRepo.findUserByInstanceId(instanceId)
+  if (!user) {
+    console.log(`[Prospecting] Nenhum usuário encontrado para instanceId=${instanceId}`)
+    return
+  }
+
   const contactListRepo = new PrismaContactListRepository()
-  const contact = await contactListRepo.findContactByPhone(userId, phone)
+  const contact = await contactListRepo.findContactByPhone(user.id, phone)
   if (!contact) {
-    console.log(`[Prospecting] Nenhum contato WARMUP_SENT encontrado para phone=${phone} userId=${userId}`)
+    console.log(`[Prospecting] Nenhum contato WARMUP_SENT encontrado para phone=${phone} userId=${user.id}`)
     return
   }
 
@@ -134,11 +144,8 @@ async function handleProspectingReply(_instanceId: string, phone: string, userId
     return
   }
 
-  // Use the user's prospecting credentials
-  const userRepo = new PrismaUserRepository()
-  const user = await userRepo.findUserById(userId)
-  if (!user?.prospectingInstanceId || !user?.prospectingToken) {
-    console.log(`[Prospecting] Credenciais de prospecção não configuradas para userId=${userId}`)
+  if (!user.prospectingInstanceId || !user.prospectingToken) {
+    console.log(`[Prospecting] Credenciais de prospecção não configuradas para userId=${user.id}`)
     return
   }
 
@@ -147,7 +154,7 @@ async function handleProspectingReply(_instanceId: string, phone: string, userId
 
   await logRepo.create({
     id: logId,
-    userId,
+    userId: user.id,
     leadId: null,
     phone,
     message: broadcast.templateMessage,

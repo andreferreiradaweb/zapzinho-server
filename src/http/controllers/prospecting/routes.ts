@@ -12,6 +12,7 @@ import { sendProspectingBroadcastController } from './send-prospecting-broadcast
 import { listProspectingBroadcastsController } from './list-prospecting-broadcasts'
 import { searchContactsController } from './search-contacts'
 import { getSearchCreditsController } from './get-search-credits'
+import { generateTemplateMessageController } from './generate-template-message'
 
 export async function prospectingRoutes(app: FastifyInstance) {
   // Contact lists
@@ -25,6 +26,7 @@ export async function prospectingRoutes(app: FastifyInstance) {
   app.post('/contact-list/contact/:contactId/move-to-lead', { onRequest: [verifyJwt] }, moveToLeadController)
 
   // Prospecting broadcasts
+  app.post('/prospecting-broadcast/generate-template', { onRequest: [verifyJwt] }, generateTemplateMessageController)
   app.post('/prospecting-broadcast', { onRequest: [verifyJwt] }, createProspectingBroadcastController)
   app.get('/prospecting-broadcast', { onRequest: [verifyJwt] }, listProspectingBroadcastsController)
   app.post('/prospecting-broadcast/:id/send', { onRequest: [verifyJwt, verifyIsActive] }, sendProspectingBroadcastController)
