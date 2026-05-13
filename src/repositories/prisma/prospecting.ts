@@ -97,6 +97,17 @@ export class PrismaContactListRepository implements ContactListRepository {
     return prisma.importedContact.count({ where: { contactListId, category } })
   }
 
+  async countWarmupSentToday(userId: string) {
+    const startOfDay = new Date()
+    startOfDay.setHours(0, 0, 0, 0)
+    return prisma.importedContact.count({
+      where: {
+        ContactList: { userId },
+        warmupSentAt: { gte: startOfDay },
+      },
+    })
+  }
+
   async getDistinctCategories(contactListId: string) {
     const rows = await prisma.importedContact.findMany({
       where: { contactListId, category: { not: null } },

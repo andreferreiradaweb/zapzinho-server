@@ -7,6 +7,7 @@ import { UserRepository } from '@/repositories/user'
 import { ResourceNotFound } from '@/error/resource-not-found'
 import { InvalidCredentialsError } from '@/error/invalid-credentials-error'
 import { sendWhatsAppMessageWithCredentials, wapiProspectingDelay } from '@/services/wapi'
+import { env } from '@/config/validatedEnv'
 import { v4 as uuid } from 'uuid'
 
 export class SendProspectingBroadcastUseCase {
@@ -29,11 +30,21 @@ export class SendProspectingBroadcastUseCase {
       throw new Error('Credenciais de prospecção não configuradas para este usuário')
     }
 
+    const dailyLimit = env.PROSPECTING_DAILY_LIMIT
+    const todaySent = await this.contactListRepository.countWarmupSentToday(userId)
+    const remainingToday = Math.max(0, dailyLimit - todaySent)
+
+    if (remainingToday === 0) {
+      throw new Error(
+        `Limite diário de ${dailyLimit} mensagens de prospecção atingido. Tente novamente amanhã.`,
+      )
+    }
+
     await this.prospectingBroadcastRepository.updateStatus(broadcastId, 'SENDING', {
       startedAt: new Date(),
     })
 
-    this.runSend(broadcast, userId, user.prospectingInstanceId, user.prospectingToken).catch((err) => {
+    this.runSend(broadcast, userId, user.prospectingInstanceId, user.prospectingToken, remainingToday).catch((err) => {
       console.error('[ProspectingBroadcast] Fatal error:', err)
       this.prospectingBroadcastRepository.updateStatus(broadcastId, 'FAILED').catch(() => null)
     })
@@ -44,6 +55,7 @@ export class SendProspectingBroadcastUseCase {
     userId: string,
     instanceId: string,
     token: string,
+    remainingToday: number,
   ) {
     if (!broadcast) return
 
@@ -94,11 +106,18 @@ export class SendProspectingBroadcastUseCase {
       console.log(`[ProspectingBroadcast] ${alreadyReceived.length} contatos bloqueados (já receberam)`)
     }
 
+    const canSend = Math.min(contacts.length, remainingToday)
+    const skippedByLimit = contacts.length - canSend
+
     console.log(
-      `[ProspectingBroadcast] Iniciando id=${broadcast.id} | contatos=${contacts.length} | bloqueados=${alreadyReceived.length}`,
+      `[ProspectingBroadcast] Iniciando id=${broadcast.id} | contatos=${contacts.length} | bloqueados=${alreadyReceived.length} | limite_dia=${remainingToday} | enviando=${canSend}`,
     )
 
-    for (const contact of contacts) {
+    if (skippedByLimit > 0) {
+      console.log(`[ProspectingBroadcast] ${skippedByLimit} contatos adiados para amanhã (limite diário)`)
+    }
+
+    for (const contact of contacts.slice(0, canSend)) {
       const logId = uuid()
       try {
         await this.messageLogRepository.create({

@@ -16,6 +16,7 @@ export interface ContactListRepository {
   findAllByUserId(userId: string, offset: number, limit: number): Promise<ContactList[]>
   countByUserId(userId: string): Promise<number>
   findById(id: string): Promise<(ContactList & { Contacts: ImportedContact[] }) | null>
+  countWarmupSentToday(userId: string): Promise<number>
   addContacts(
     contactListId: string,
     contacts: Array<{ name: string; phone: string; email?: string; website?: string; address?: string; category?: string }>,
