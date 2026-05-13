@@ -65,6 +65,7 @@ export class SendProspectingBroadcastUseCase {
       console.log(
         `[ProspectingBroadcast] ${excludedByCategory.length} contatos ignorados por filtro de categoria (${allowedCategories?.join(', ')}): ${excludedByCategory.map((c) => c.phone).join(', ')}`,
       )
+      await this.prospectingBroadcastRepository.incrementFailedCount(broadcast.id, excludedByCategory.length)
     }
 
     const contacts = allEligible.filter(
