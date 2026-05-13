@@ -23,7 +23,7 @@ export class SendProspectingBroadcastUseCase {
     if (!broadcast) throw new ResourceNotFound()
     if (broadcast.userId !== userId) throw new InvalidCredentialsError()
 
-    if (broadcast.status === 'SENDING' || broadcast.status === 'SENT') return
+    if (broadcast.status === 'SENDING') return
 
     const user = await this.userRepository.findUserById(userId)
     if (!user || !user.prospectingInstanceId || !user.prospectingToken) {
