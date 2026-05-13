@@ -1,24 +1,25 @@
-import { ProspectingBroadcast } from '@/lib/prisma'
+import { ProspectingBroadcast } from "@/lib/prisma";
 import {
   ContactListRepository,
   ProspectingBroadcastRepository,
-} from '@/repositories/prospecting'
-import { ResourceNotFound } from '@/error/resource-not-found'
-import { InvalidCredentialsError } from '@/error/invalid-credentials-error'
-import { v4 as uuid } from 'uuid'
+} from "@/repositories/prospecting";
+import { ResourceNotFound } from "@/error/resource-not-found";
+import { InvalidCredentialsError } from "@/error/invalid-credentials-error";
+import { v4 as uuid } from "uuid";
 
 interface CreateProspectingBroadcastRequest {
-  userId: string
-  contactListId: string
-  name: string
-  warmupMessage: string
-  templateMessage: string
-  categoryFilter?: string
+  userId: string;
+  contactListId: string;
+  name: string;
+  warmupMessage: string;
+  warmupVariations?: string[];
+  templateMessage: string;
+  categoryFilter?: string;
 }
 
 interface CreateProspectingBroadcastResponse {
-  broadcast: ProspectingBroadcast
-  recipientCount: number
+  broadcast: ProspectingBroadcast;
+  recipientCount: number;
 }
 
 export class CreateProspectingBroadcastUseCase {
@@ -30,13 +31,18 @@ export class CreateProspectingBroadcastUseCase {
   async execute(
     data: CreateProspectingBroadcastRequest,
   ): Promise<CreateProspectingBroadcastResponse> {
-    const list = await this.contactListRepository.findById(data.contactListId)
-    if (!list) throw new ResourceNotFound()
-    if (list.userId !== data.userId) throw new InvalidCredentialsError()
+    const list = await this.contactListRepository.findById(data.contactListId);
+    if (!list) throw new ResourceNotFound();
+    if (list.userId !== data.userId) throw new InvalidCredentialsError();
 
-    const existing = await this.prospectingBroadcastRepository.findSentByContactListId(data.contactListId)
+    const existing =
+      await this.prospectingBroadcastRepository.findSentByContactListId(
+        data.contactListId,
+      );
     if (existing) {
-      throw new Error('Esta lista já possui um disparo enviado. Crie uma nova lista para disparar novamente.')
+      throw new Error(
+        "Esta lista já possui um disparo enviado. Crie uma nova lista para disparar novamente.",
+      );
     }
 
     const broadcast = await this.prospectingBroadcastRepository.create({
@@ -45,22 +51,30 @@ export class CreateProspectingBroadcastUseCase {
       contactListId: data.contactListId,
       name: data.name,
       warmupMessage: data.warmupMessage,
+      warmupVariations: data.warmupVariations ?? [],
       templateMessage: data.templateMessage,
       categoryFilter: data.categoryFilter ?? null,
-      status: 'DRAFT',
-    })
+      status: "DRAFT",
+    });
 
-    let recipientCount: number
+    let recipientCount: number;
     if (data.categoryFilter) {
-      const cats = data.categoryFilter.split(',').map((s) => s.trim())
+      const cats = data.categoryFilter.split(",").map((s) => s.trim());
       const counts = await Promise.all(
-        cats.map((cat) => this.contactListRepository.countContactsByCategory(data.contactListId, cat)),
-      )
-      recipientCount = counts.reduce((a, b) => a + b, 0)
+        cats.map((cat) =>
+          this.contactListRepository.countContactsByCategory(
+            data.contactListId,
+            cat,
+          ),
+        ),
+      );
+      recipientCount = counts.reduce((a, b) => a + b, 0);
     } else {
-      recipientCount = await this.contactListRepository.countContacts(data.contactListId)
+      recipientCount = await this.contactListRepository.countContacts(
+        data.contactListId,
+      );
     }
 
-    return { broadcast, recipientCount }
+    return { broadcast, recipientCount };
   }
 }
