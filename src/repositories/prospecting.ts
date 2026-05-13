@@ -17,6 +17,7 @@ export interface ContactListRepository {
   countByUserId(userId: string): Promise<number>
   findById(id: string): Promise<(ContactList & { Contacts: ImportedContact[] }) | null>
   countWarmupSentToday(userId: string): Promise<number>
+  resetContactsByListId(contactListId: string): Promise<void>
   addContacts(
     contactListId: string,
     contacts: Array<{ name: string; phone: string; email?: string; website?: string; address?: string; category?: string }>,
@@ -47,6 +48,7 @@ export interface ProspectingBroadcastStatus {
   finishedAt: Date | null
   userId: string
   totalContacts: number
+  contactListId: string
 }
 
 export interface ProspectingBroadcastRepository {
@@ -67,4 +69,5 @@ export interface ProspectingBroadcastRepository {
   incrementCount(id: string, field: 'totalSent' | 'totalFailed'): Promise<void>
   findSentByContactListId(contactListId: string): Promise<ProspectingBroadcast | null>
   incrementFailedCount(id: string, amount: number): Promise<void>
+  reset(id: string): Promise<void>
 }

@@ -108,6 +108,19 @@ export class PrismaContactListRepository implements ContactListRepository {
     })
   }
 
+  async resetContactsByListId(contactListId: string) {
+    await prisma.importedContact.updateMany({
+      where: { contactListId },
+      data: {
+        status: 'PENDING',
+        warmupSentAt: null,
+        repliedAt: null,
+        templateSentAt: null,
+        errorMsg: null,
+      },
+    })
+  }
+
   async getDistinctCategories(contactListId: string) {
     const rows = await prisma.importedContact.findMany({
       where: { contactListId, category: { not: null } },
@@ -144,6 +157,7 @@ export class PrismaProspectingBroadcastRepository
         startedAt: true,
         finishedAt: true,
         userId: true,
+        contactListId: true,
         ContactList: { select: { _count: { select: { Contacts: true } } } },
       },
     })
@@ -156,6 +170,7 @@ export class PrismaProspectingBroadcastRepository
       startedAt: row.startedAt,
       finishedAt: row.finishedAt,
       userId: row.userId,
+      contactListId: row.contactListId,
       totalContacts: row.ContactList._count.Contacts,
     }
   }
@@ -202,6 +217,19 @@ export class PrismaProspectingBroadcastRepository
     await prisma.prospectingBroadcast.update({
       where: { id },
       data: { totalFailed: { increment: amount } },
+    })
+  }
+
+  async reset(id: string) {
+    await prisma.prospectingBroadcast.update({
+      where: { id },
+      data: {
+        status: 'DRAFT',
+        totalSent: 0,
+        totalFailed: 0,
+        startedAt: null,
+        finishedAt: null,
+      },
     })
   }
 }
