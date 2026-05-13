@@ -13,6 +13,7 @@ import { listProspectingBroadcastsController } from './list-prospecting-broadcas
 import { searchContactsController } from './search-contacts'
 import { getSearchCreditsController } from './get-search-credits'
 import { generateTemplateMessageController } from './generate-template-message'
+import { getProspectingBroadcastController } from './get-prospecting-broadcast'
 
 export async function prospectingRoutes(app: FastifyInstance) {
   // Contact lists
@@ -29,5 +30,6 @@ export async function prospectingRoutes(app: FastifyInstance) {
   app.post('/prospecting-broadcast/generate-template', { onRequest: [verifyJwt] }, generateTemplateMessageController)
   app.post('/prospecting-broadcast', { onRequest: [verifyJwt] }, createProspectingBroadcastController)
   app.get('/prospecting-broadcast', { onRequest: [verifyJwt] }, listProspectingBroadcastsController)
+  app.get('/prospecting-broadcast/:id', { onRequest: [verifyJwt] }, getProspectingBroadcastController)
   app.post('/prospecting-broadcast/:id/send', { onRequest: [verifyJwt, verifyIsActive] }, sendProspectingBroadcastController)
 }

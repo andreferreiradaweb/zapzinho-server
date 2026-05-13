@@ -122,6 +122,33 @@ export class PrismaProspectingBroadcastRepository
     })
   }
 
+  async getStatusById(id: string) {
+    const row = await prisma.prospectingBroadcast.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        status: true,
+        totalSent: true,
+        totalFailed: true,
+        startedAt: true,
+        finishedAt: true,
+        userId: true,
+        ContactList: { select: { _count: { select: { Contacts: true } } } },
+      },
+    })
+    if (!row) return null
+    return {
+      id: row.id,
+      status: row.status,
+      totalSent: row.totalSent,
+      totalFailed: row.totalFailed,
+      startedAt: row.startedAt,
+      finishedAt: row.finishedAt,
+      userId: row.userId,
+      totalContacts: row.ContactList._count.Contacts,
+    }
+  }
+
   async findAllByUserId(userId: string, offset: number, limit: number) {
     return prisma.prospectingBroadcast.findMany({
       where: { userId },

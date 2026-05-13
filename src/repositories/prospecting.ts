@@ -37,9 +37,21 @@ export interface ContactListRepository {
   getDistinctCategories(contactListId: string): Promise<string[]>
 }
 
+export interface ProspectingBroadcastStatus {
+  id: string
+  status: BroadcastStatus
+  totalSent: number
+  totalFailed: number
+  startedAt: Date | null
+  finishedAt: Date | null
+  userId: string
+  totalContacts: number
+}
+
 export interface ProspectingBroadcastRepository {
   create(data: Prisma.ProspectingBroadcastUncheckedCreateInput): Promise<ProspectingBroadcast>
   findById(id: string): Promise<ProspectingBroadcastWithList | null>
+  getStatusById(id: string): Promise<ProspectingBroadcastStatus | null>
   findAllByUserId(
     userId: string,
     offset: number,
