@@ -73,11 +73,7 @@ app.setErrorHandler((error, _, reply) => {
       .send({ message: 'Validation error', issues: error.format() })
   }
 
-  if (env.NODE_ENV !== 'production') {
-    console.error(error)
-  } else {
-    // Here we should log to Datadog/NewRelic/Sentry
-  }
+  console.error('[500]', error)
 
   return reply.status(500).send({ message: 'Internal server error' })
 })
