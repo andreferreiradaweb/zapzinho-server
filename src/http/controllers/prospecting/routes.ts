@@ -16,6 +16,7 @@ import { generateTemplateMessageController } from "./generate-template-message";
 import { generateWarmupVariationsController } from "./generate-warmup-variations";
 import { getProspectingBroadcastController } from "./get-prospecting-broadcast";
 import { resetProspectingBroadcastController } from "./reset-prospecting-broadcast";
+import { cancelProspectingBroadcastController } from "./cancel-prospecting-broadcast";
 import { markContactStatusController } from "./mark-contact-status";
 
 export async function prospectingRoutes(app: FastifyInstance) {
@@ -96,6 +97,11 @@ export async function prospectingRoutes(app: FastifyInstance) {
     "/prospecting-broadcast/:id/reset",
     { onRequest: [verifyJwt] },
     resetProspectingBroadcastController,
+  );
+  app.post(
+    "/prospecting-broadcast/:id/cancel",
+    { onRequest: [verifyJwt] },
+    cancelProspectingBroadcastController,
   );
   app.post(
     "/contact-list/contact/:contactId/:action",

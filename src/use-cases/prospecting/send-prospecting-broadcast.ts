@@ -156,6 +156,11 @@ export class SendProspectingBroadcastUseCase {
 
     const sendList = contacts.slice(0, canSend);
     for (let i = 0; i < sendList.length; i++) {
+      const current = await this.prospectingBroadcastRepository.getStatusById(broadcast.id);
+      if (!current || current.status !== 'SENDING') {
+        console.log(`[ProspectingBroadcast] Interrompido id=${broadcast.id}`);
+        return;
+      }
       if (i > 0) await wapiProspectingDelay();
       const contact = sendList[i];
       const logId = uuid();
