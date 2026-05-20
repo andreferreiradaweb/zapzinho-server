@@ -12,6 +12,7 @@ interface SelfUpdateUserUseCaseRequest {
   name?: string
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
+  prospectingDailyLimit?: number | null
 }
 
 interface SelfUpdateUserUseCaseResponse {
@@ -29,6 +30,7 @@ export class SelfUpdateUserUseCase {
     name,
     prospectingInstanceId,
     prospectingToken,
+    prospectingDailyLimit,
   }: SelfUpdateUserUseCaseRequest): Promise<SelfUpdateUserUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(id)
 
@@ -92,6 +94,10 @@ export class SelfUpdateUserUseCase {
         prospectingToken !== undefined
           ? prospectingToken
           : findedUser.prospectingToken,
+      prospectingDailyLimit:
+        prospectingDailyLimit !== undefined
+          ? prospectingDailyLimit
+          : findedUser.prospectingDailyLimit,
     })
 
     const newUser = {

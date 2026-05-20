@@ -36,7 +36,7 @@ export class SendProspectingBroadcastUseCase {
       );
     }
 
-    const dailyLimit = env.PROSPECTING_DAILY_LIMIT;
+    const dailyLimit = user.prospectingDailyLimit ?? env.PROSPECTING_DAILY_LIMIT;
     const todaySent =
       await this.contactListRepository.countWarmupSentToday(userId);
     const remainingToday = Math.max(0, dailyLimit - todaySent);

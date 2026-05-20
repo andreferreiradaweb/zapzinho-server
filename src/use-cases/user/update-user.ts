@@ -19,6 +19,7 @@ interface UpdateUserUseCaseRequest {
   wapiToken?: string | null
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
+  prospectingDailyLimit?: number | null
 }
 
 interface UpdateUserUseCaseResponse {
@@ -43,6 +44,7 @@ export class UpdateUserUseCase {
     wapiToken,
     prospectingInstanceId,
     prospectingToken,
+    prospectingDailyLimit,
   }: UpdateUserUseCaseRequest): Promise<UpdateUserUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(id)
 
@@ -80,6 +82,7 @@ export class UpdateUserUseCase {
       wapiToken: wapiToken !== undefined ? wapiToken : findedUser.wapiToken,
       prospectingInstanceId: prospectingInstanceId !== undefined ? prospectingInstanceId : findedUser.prospectingInstanceId,
       prospectingToken: prospectingToken !== undefined ? prospectingToken : findedUser.prospectingToken,
+      prospectingDailyLimit: prospectingDailyLimit !== undefined ? prospectingDailyLimit : findedUser.prospectingDailyLimit,
     })
 
     return { user }

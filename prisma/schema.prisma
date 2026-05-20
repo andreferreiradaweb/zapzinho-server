@@ -25,6 +25,7 @@ model User {
   wapiToken                    String?
   prospectingInstanceId        String?
   prospectingToken             String?
+  prospectingDailyLimit        Int?
   createdAt                    DateTime  @default(now())
   Products                     Product[]
   ProductCategories            ProductCategory[]
