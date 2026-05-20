@@ -154,7 +154,10 @@ export class SendProspectingBroadcastUseCase {
       ...(broadcast.warmupVariations as string[]),
     ];
 
-    for (const contact of contacts.slice(0, canSend)) {
+    const sendList = contacts.slice(0, canSend);
+    for (let i = 0; i < sendList.length; i++) {
+      if (i > 0) await wapiProspectingDelay();
+      const contact = sendList[i];
       const logId = uuid();
       const message =
         messagePool[Math.floor(Math.random() * messagePool.length)];
@@ -175,7 +178,6 @@ export class SendProspectingBroadcastUseCase {
           contact.phone,
           message,
         );
-        await wapiProspectingDelay();
 
         if (result.success) {
           await this.contactListRepository.updateContactStatus(
