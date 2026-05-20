@@ -229,10 +229,11 @@ export async function sendWhatsAppMessageWithCredentials(
       },
       body: JSON.stringify({ phone: normalizedPhone, message, delayMessage: 0 }),
     })
+    const body = await response.text()
     if (!response.ok) {
-      const body = await response.text()
       return { success: false, error: `HTTP ${response.status}: ${body}` }
     }
+    console.log(`[WAPI] send-text instanceId=${instanceId} phone=${normalizedPhone} status=${response.status} body=${body}`)
     return { success: true }
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error)
