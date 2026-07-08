@@ -42,7 +42,10 @@ model User {
   ProspectingBroadcasts        ProspectingBroadcast[]
   SerpSearchLogs               SerpSearchLog[]
   SerpSearchOffsets            SerpSearchOffset[]
+  EmailLists                   EmailList[]
+  EmailCampaigns               EmailCampaign[]
 }
+
 
 enum UserPlan {
   PADRAO
@@ -508,4 +511,45 @@ model SerpSearchOffset {
   User      User     @relation(fields: [userId], references: [id])
 
   @@unique([userId, queryKey])
+}
+
+model EmailList {
+  id          String            @id @default(uuid())
+  userId      String
+  name        String
+  publicToken String            @unique @default(uuid())
+  createdAt   DateTime          @default(now())
+  User        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Subscribers EmailSubscriber[]
+  Campaigns   EmailCampaign[]
+}
+
+model EmailSubscriber {
+  id          String    @id @default(uuid())
+  emailListId String
+  email       String
+  name        String?
+  status      String    @default("SUBSCRIBED")
+  source      String    @default("manual")
+  createdAt   DateTime  @default(now())
+  EmailList   EmailList @relation(fields: [emailListId], references: [id], onDelete: Cascade)
+
+  @@unique([emailListId, email])
+}
+
+model EmailCampaign {
+  id          String    @id @default(uuid())
+  userId      String
+  emailListId String
+  name        String
+  subject     String
+  body        String    @db.Text
+  status      String    @default("DRAFT")
+  totalSent   Int       @default(0)
+  totalFailed Int       @default(0)
+  startedAt   DateTime?
+  finishedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  User        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  EmailList   EmailList @relation(fields: [emailListId], references: [id], onDelete: Cascade)
 }
