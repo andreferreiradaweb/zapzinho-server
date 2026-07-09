@@ -5,13 +5,13 @@ import { v4 as uuid } from 'uuid'
 
 async function seed() {
   const adminHash = await bcrypt.hash(env.PASSWORD_ADMIN, 6)
-  const clientHash = await bcrypt.hash('312978', 6)
+  const clientHash = await bcrypt.hash('kb312978', 6)
 
   const admin = await prisma.user.upsert({
-    where: { email: 'admin@zapzinho.com' },
+    where: { email: 'andreferreiradaweb@gmail.com' },
     update: {},
     create: {
-      email: 'admin@zapzinho.com',
+      email: 'andreferreiradaweb@gmail.com',
       Role: Role.ADMIN,
       CustomerType: CustomerType.B2C,
       passwordHash: adminHash,
@@ -20,10 +20,10 @@ async function seed() {
   })
 
   const client = await prisma.user.upsert({
-    where: { email: 'cliente@zapzinho.com' },
+    where: { email: 'andrebmx789@gmail.com' },
     update: {},
     create: {
-      email: 'cliente@zapzinho.com',
+      email: 'andrebmx789@gmail.com',
       Role: Role.CLIENT,
       CustomerType: CustomerType.B2C,
       passwordHash: clientHash,
