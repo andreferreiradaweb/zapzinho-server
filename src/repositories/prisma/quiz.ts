@@ -9,21 +9,6 @@ import {
   QuizSettings,
 } from '@/repositories/quiz'
 
-function slugify(name: string): string {
-  return (
-    name
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[̀-ͯ]/g, '')
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '') || 'quiz'
-  )
-}
-
-function randomCode(length: number): string {
-  return Math.random().toString(36).slice(2, 2 + length)
-}
-
 export class PrismaQuizRepository implements QuizRepository {
   async create(data: { userId: string; name: string; description?: string; slug: string }) {
     const quiz = await prisma.quiz.create({
