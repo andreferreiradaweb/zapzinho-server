@@ -41,6 +41,10 @@ export interface QuizData {
   capturePhoneText: string
   captureEmail: boolean
   captureEmailText: string
+  resultQualifiedTitle: string
+  resultQualifiedMsg: string
+  resultNotQualTitle: string
+  resultNotQualMsg: string
   createdAt: Date
   Questions: QuizQuestionData[]
   _count?: { Leads: number }
@@ -78,6 +82,10 @@ export interface QuizSettings {
   capturePhoneText?: string
   captureEmail?: boolean
   captureEmailText?: string
+  resultQualifiedTitle?: string
+  resultQualifiedMsg?: string
+  resultNotQualTitle?: string
+  resultNotQualMsg?: string
 }
 
 export interface QuizRepository {

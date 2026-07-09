@@ -37,6 +37,10 @@ export type QuizMinAggregateOutputType = {
   capturePhoneText: string | null
   captureEmail: boolean | null
   captureEmailText: string | null
+  resultQualifiedTitle: string | null
+  resultQualifiedMsg: string | null
+  resultNotQualTitle: string | null
+  resultNotQualMsg: string | null
   createdAt: Date | null
 }
 
@@ -53,6 +57,10 @@ export type QuizMaxAggregateOutputType = {
   capturePhoneText: string | null
   captureEmail: boolean | null
   captureEmailText: string | null
+  resultQualifiedTitle: string | null
+  resultQualifiedMsg: string | null
+  resultNotQualTitle: string | null
+  resultNotQualMsg: string | null
   createdAt: Date | null
 }
 
@@ -69,6 +77,10 @@ export type QuizCountAggregateOutputType = {
   capturePhoneText: number
   captureEmail: number
   captureEmailText: number
+  resultQualifiedTitle: number
+  resultQualifiedMsg: number
+  resultNotQualTitle: number
+  resultNotQualMsg: number
   createdAt: number
   _all: number
 }
@@ -87,6 +99,10 @@ export type QuizMinAggregateInputType = {
   capturePhoneText?: true
   captureEmail?: true
   captureEmailText?: true
+  resultQualifiedTitle?: true
+  resultQualifiedMsg?: true
+  resultNotQualTitle?: true
+  resultNotQualMsg?: true
   createdAt?: true
 }
 
@@ -103,6 +119,10 @@ export type QuizMaxAggregateInputType = {
   capturePhoneText?: true
   captureEmail?: true
   captureEmailText?: true
+  resultQualifiedTitle?: true
+  resultQualifiedMsg?: true
+  resultNotQualTitle?: true
+  resultNotQualMsg?: true
   createdAt?: true
 }
 
@@ -119,6 +139,10 @@ export type QuizCountAggregateInputType = {
   capturePhoneText?: true
   captureEmail?: true
   captureEmailText?: true
+  resultQualifiedTitle?: true
+  resultQualifiedMsg?: true
+  resultNotQualTitle?: true
+  resultNotQualMsg?: true
   createdAt?: true
   _all?: true
 }
@@ -208,6 +232,10 @@ export type QuizGroupByOutputType = {
   capturePhoneText: string
   captureEmail: boolean
   captureEmailText: string
+  resultQualifiedTitle: string
+  resultQualifiedMsg: string
+  resultNotQualTitle: string
+  resultNotQualMsg: string
   createdAt: Date
   _count: QuizCountAggregateOutputType | null
   _min: QuizMinAggregateOutputType | null
@@ -245,6 +273,10 @@ export type QuizWhereInput = {
   capturePhoneText?: Prisma.StringFilter<"Quiz"> | string
   captureEmail?: Prisma.BoolFilter<"Quiz"> | boolean
   captureEmailText?: Prisma.StringFilter<"Quiz"> | string
+  resultQualifiedTitle?: Prisma.StringFilter<"Quiz"> | string
+  resultQualifiedMsg?: Prisma.StringFilter<"Quiz"> | string
+  resultNotQualTitle?: Prisma.StringFilter<"Quiz"> | string
+  resultNotQualMsg?: Prisma.StringFilter<"Quiz"> | string
   createdAt?: Prisma.DateTimeFilter<"Quiz"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Questions?: Prisma.QuizQuestionListRelationFilter
@@ -264,6 +296,10 @@ export type QuizOrderByWithRelationInput = {
   capturePhoneText?: Prisma.SortOrder
   captureEmail?: Prisma.SortOrder
   captureEmailText?: Prisma.SortOrder
+  resultQualifiedTitle?: Prisma.SortOrder
+  resultQualifiedMsg?: Prisma.SortOrder
+  resultNotQualTitle?: Prisma.SortOrder
+  resultNotQualMsg?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   User?: Prisma.UserOrderByWithRelationInput
   Questions?: Prisma.QuizQuestionOrderByRelationAggregateInput
@@ -286,6 +322,10 @@ export type QuizWhereUniqueInput = Prisma.AtLeast<{
   capturePhoneText?: Prisma.StringFilter<"Quiz"> | string
   captureEmail?: Prisma.BoolFilter<"Quiz"> | boolean
   captureEmailText?: Prisma.StringFilter<"Quiz"> | string
+  resultQualifiedTitle?: Prisma.StringFilter<"Quiz"> | string
+  resultQualifiedMsg?: Prisma.StringFilter<"Quiz"> | string
+  resultNotQualTitle?: Prisma.StringFilter<"Quiz"> | string
+  resultNotQualMsg?: Prisma.StringFilter<"Quiz"> | string
   createdAt?: Prisma.DateTimeFilter<"Quiz"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Questions?: Prisma.QuizQuestionListRelationFilter
@@ -305,6 +345,10 @@ export type QuizOrderByWithAggregationInput = {
   capturePhoneText?: Prisma.SortOrder
   captureEmail?: Prisma.SortOrder
   captureEmailText?: Prisma.SortOrder
+  resultQualifiedTitle?: Prisma.SortOrder
+  resultQualifiedMsg?: Prisma.SortOrder
+  resultNotQualTitle?: Prisma.SortOrder
+  resultNotQualMsg?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.QuizCountOrderByAggregateInput
   _max?: Prisma.QuizMaxOrderByAggregateInput
@@ -327,6 +371,10 @@ export type QuizScalarWhereWithAggregatesInput = {
   capturePhoneText?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
   captureEmail?: Prisma.BoolWithAggregatesFilter<"Quiz"> | boolean
   captureEmailText?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
+  resultQualifiedTitle?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
+  resultQualifiedMsg?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
+  resultNotQualTitle?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
+  resultNotQualMsg?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Quiz"> | Date | string
 }
 
@@ -342,6 +390,10 @@ export type QuizCreateInput = {
   capturePhoneText?: string
   captureEmail?: boolean
   captureEmailText?: string
+  resultQualifiedTitle?: string
+  resultQualifiedMsg?: string
+  resultNotQualTitle?: string
+  resultNotQualMsg?: string
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutQuizzesInput
   Questions?: Prisma.QuizQuestionCreateNestedManyWithoutQuizInput
@@ -361,6 +413,10 @@ export type QuizUncheckedCreateInput = {
   capturePhoneText?: string
   captureEmail?: boolean
   captureEmailText?: string
+  resultQualifiedTitle?: string
+  resultQualifiedMsg?: string
+  resultNotQualTitle?: string
+  resultNotQualMsg?: string
   createdAt?: Date | string
   Questions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutQuizInput
   Leads?: Prisma.QuizLeadUncheckedCreateNestedManyWithoutQuizInput
@@ -378,6 +434,10 @@ export type QuizUpdateInput = {
   capturePhoneText?: Prisma.StringFieldUpdateOperationsInput | string
   captureEmail?: Prisma.BoolFieldUpdateOperationsInput | boolean
   captureEmailText?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutQuizzesNestedInput
   Questions?: Prisma.QuizQuestionUpdateManyWithoutQuizNestedInput
@@ -397,6 +457,10 @@ export type QuizUncheckedUpdateInput = {
   capturePhoneText?: Prisma.StringFieldUpdateOperationsInput | string
   captureEmail?: Prisma.BoolFieldUpdateOperationsInput | boolean
   captureEmailText?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Questions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutQuizNestedInput
   Leads?: Prisma.QuizLeadUncheckedUpdateManyWithoutQuizNestedInput
@@ -415,6 +479,10 @@ export type QuizCreateManyInput = {
   capturePhoneText?: string
   captureEmail?: boolean
   captureEmailText?: string
+  resultQualifiedTitle?: string
+  resultQualifiedMsg?: string
+  resultNotQualTitle?: string
+  resultNotQualMsg?: string
   createdAt?: Date | string
 }
 
@@ -430,6 +498,10 @@ export type QuizUpdateManyMutationInput = {
   capturePhoneText?: Prisma.StringFieldUpdateOperationsInput | string
   captureEmail?: Prisma.BoolFieldUpdateOperationsInput | boolean
   captureEmailText?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -446,6 +518,10 @@ export type QuizUncheckedUpdateManyInput = {
   capturePhoneText?: Prisma.StringFieldUpdateOperationsInput | string
   captureEmail?: Prisma.BoolFieldUpdateOperationsInput | boolean
   captureEmailText?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -472,6 +548,10 @@ export type QuizCountOrderByAggregateInput = {
   capturePhoneText?: Prisma.SortOrder
   captureEmail?: Prisma.SortOrder
   captureEmailText?: Prisma.SortOrder
+  resultQualifiedTitle?: Prisma.SortOrder
+  resultQualifiedMsg?: Prisma.SortOrder
+  resultNotQualTitle?: Prisma.SortOrder
+  resultNotQualMsg?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -488,6 +568,10 @@ export type QuizMaxOrderByAggregateInput = {
   capturePhoneText?: Prisma.SortOrder
   captureEmail?: Prisma.SortOrder
   captureEmailText?: Prisma.SortOrder
+  resultQualifiedTitle?: Prisma.SortOrder
+  resultQualifiedMsg?: Prisma.SortOrder
+  resultNotQualTitle?: Prisma.SortOrder
+  resultNotQualMsg?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -504,6 +588,10 @@ export type QuizMinOrderByAggregateInput = {
   capturePhoneText?: Prisma.SortOrder
   captureEmail?: Prisma.SortOrder
   captureEmailText?: Prisma.SortOrder
+  resultQualifiedTitle?: Prisma.SortOrder
+  resultQualifiedMsg?: Prisma.SortOrder
+  resultNotQualTitle?: Prisma.SortOrder
+  resultNotQualMsg?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -594,6 +682,10 @@ export type QuizCreateWithoutUserInput = {
   capturePhoneText?: string
   captureEmail?: boolean
   captureEmailText?: string
+  resultQualifiedTitle?: string
+  resultQualifiedMsg?: string
+  resultNotQualTitle?: string
+  resultNotQualMsg?: string
   createdAt?: Date | string
   Questions?: Prisma.QuizQuestionCreateNestedManyWithoutQuizInput
   Leads?: Prisma.QuizLeadCreateNestedManyWithoutQuizInput
@@ -611,6 +703,10 @@ export type QuizUncheckedCreateWithoutUserInput = {
   capturePhoneText?: string
   captureEmail?: boolean
   captureEmailText?: string
+  resultQualifiedTitle?: string
+  resultQualifiedMsg?: string
+  resultNotQualTitle?: string
+  resultNotQualMsg?: string
   createdAt?: Date | string
   Questions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutQuizInput
   Leads?: Prisma.QuizLeadUncheckedCreateNestedManyWithoutQuizInput
@@ -658,6 +754,10 @@ export type QuizScalarWhereInput = {
   capturePhoneText?: Prisma.StringFilter<"Quiz"> | string
   captureEmail?: Prisma.BoolFilter<"Quiz"> | boolean
   captureEmailText?: Prisma.StringFilter<"Quiz"> | string
+  resultQualifiedTitle?: Prisma.StringFilter<"Quiz"> | string
+  resultQualifiedMsg?: Prisma.StringFilter<"Quiz"> | string
+  resultNotQualTitle?: Prisma.StringFilter<"Quiz"> | string
+  resultNotQualMsg?: Prisma.StringFilter<"Quiz"> | string
   createdAt?: Prisma.DateTimeFilter<"Quiz"> | Date | string
 }
 
@@ -673,6 +773,10 @@ export type QuizCreateWithoutQuestionsInput = {
   capturePhoneText?: string
   captureEmail?: boolean
   captureEmailText?: string
+  resultQualifiedTitle?: string
+  resultQualifiedMsg?: string
+  resultNotQualTitle?: string
+  resultNotQualMsg?: string
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutQuizzesInput
   Leads?: Prisma.QuizLeadCreateNestedManyWithoutQuizInput
@@ -691,6 +795,10 @@ export type QuizUncheckedCreateWithoutQuestionsInput = {
   capturePhoneText?: string
   captureEmail?: boolean
   captureEmailText?: string
+  resultQualifiedTitle?: string
+  resultQualifiedMsg?: string
+  resultNotQualTitle?: string
+  resultNotQualMsg?: string
   createdAt?: Date | string
   Leads?: Prisma.QuizLeadUncheckedCreateNestedManyWithoutQuizInput
 }
@@ -723,6 +831,10 @@ export type QuizUpdateWithoutQuestionsInput = {
   capturePhoneText?: Prisma.StringFieldUpdateOperationsInput | string
   captureEmail?: Prisma.BoolFieldUpdateOperationsInput | boolean
   captureEmailText?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutQuizzesNestedInput
   Leads?: Prisma.QuizLeadUpdateManyWithoutQuizNestedInput
@@ -741,6 +853,10 @@ export type QuizUncheckedUpdateWithoutQuestionsInput = {
   capturePhoneText?: Prisma.StringFieldUpdateOperationsInput | string
   captureEmail?: Prisma.BoolFieldUpdateOperationsInput | boolean
   captureEmailText?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Leads?: Prisma.QuizLeadUncheckedUpdateManyWithoutQuizNestedInput
 }
@@ -757,6 +873,10 @@ export type QuizCreateWithoutLeadsInput = {
   capturePhoneText?: string
   captureEmail?: boolean
   captureEmailText?: string
+  resultQualifiedTitle?: string
+  resultQualifiedMsg?: string
+  resultNotQualTitle?: string
+  resultNotQualMsg?: string
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutQuizzesInput
   Questions?: Prisma.QuizQuestionCreateNestedManyWithoutQuizInput
@@ -775,6 +895,10 @@ export type QuizUncheckedCreateWithoutLeadsInput = {
   capturePhoneText?: string
   captureEmail?: boolean
   captureEmailText?: string
+  resultQualifiedTitle?: string
+  resultQualifiedMsg?: string
+  resultNotQualTitle?: string
+  resultNotQualMsg?: string
   createdAt?: Date | string
   Questions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutQuizInput
 }
@@ -807,6 +931,10 @@ export type QuizUpdateWithoutLeadsInput = {
   capturePhoneText?: Prisma.StringFieldUpdateOperationsInput | string
   captureEmail?: Prisma.BoolFieldUpdateOperationsInput | boolean
   captureEmailText?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutQuizzesNestedInput
   Questions?: Prisma.QuizQuestionUpdateManyWithoutQuizNestedInput
@@ -825,6 +953,10 @@ export type QuizUncheckedUpdateWithoutLeadsInput = {
   capturePhoneText?: Prisma.StringFieldUpdateOperationsInput | string
   captureEmail?: Prisma.BoolFieldUpdateOperationsInput | boolean
   captureEmailText?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Questions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutQuizNestedInput
 }
@@ -841,6 +973,10 @@ export type QuizCreateManyUserInput = {
   capturePhoneText?: string
   captureEmail?: boolean
   captureEmailText?: string
+  resultQualifiedTitle?: string
+  resultQualifiedMsg?: string
+  resultNotQualTitle?: string
+  resultNotQualMsg?: string
   createdAt?: Date | string
 }
 
@@ -856,6 +992,10 @@ export type QuizUpdateWithoutUserInput = {
   capturePhoneText?: Prisma.StringFieldUpdateOperationsInput | string
   captureEmail?: Prisma.BoolFieldUpdateOperationsInput | boolean
   captureEmailText?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Questions?: Prisma.QuizQuestionUpdateManyWithoutQuizNestedInput
   Leads?: Prisma.QuizLeadUpdateManyWithoutQuizNestedInput
@@ -873,6 +1013,10 @@ export type QuizUncheckedUpdateWithoutUserInput = {
   capturePhoneText?: Prisma.StringFieldUpdateOperationsInput | string
   captureEmail?: Prisma.BoolFieldUpdateOperationsInput | boolean
   captureEmailText?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Questions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutQuizNestedInput
   Leads?: Prisma.QuizLeadUncheckedUpdateManyWithoutQuizNestedInput
@@ -890,6 +1034,10 @@ export type QuizUncheckedUpdateManyWithoutUserInput = {
   capturePhoneText?: Prisma.StringFieldUpdateOperationsInput | string
   captureEmail?: Prisma.BoolFieldUpdateOperationsInput | boolean
   captureEmailText?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -946,6 +1094,10 @@ export type QuizSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   capturePhoneText?: boolean
   captureEmail?: boolean
   captureEmailText?: boolean
+  resultQualifiedTitle?: boolean
+  resultQualifiedMsg?: boolean
+  resultNotQualTitle?: boolean
+  resultNotQualMsg?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Questions?: boolean | Prisma.Quiz$QuestionsArgs<ExtArgs>
@@ -966,6 +1118,10 @@ export type QuizSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   capturePhoneText?: boolean
   captureEmail?: boolean
   captureEmailText?: boolean
+  resultQualifiedTitle?: boolean
+  resultQualifiedMsg?: boolean
+  resultNotQualTitle?: boolean
+  resultNotQualMsg?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["quiz"]>
@@ -983,6 +1139,10 @@ export type QuizSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   capturePhoneText?: boolean
   captureEmail?: boolean
   captureEmailText?: boolean
+  resultQualifiedTitle?: boolean
+  resultQualifiedMsg?: boolean
+  resultNotQualTitle?: boolean
+  resultNotQualMsg?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["quiz"]>
@@ -1000,10 +1160,14 @@ export type QuizSelectScalar = {
   capturePhoneText?: boolean
   captureEmail?: boolean
   captureEmailText?: boolean
+  resultQualifiedTitle?: boolean
+  resultQualifiedMsg?: boolean
+  resultNotQualTitle?: boolean
+  resultNotQualMsg?: boolean
   createdAt?: boolean
 }
 
-export type QuizOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "description" | "publicToken" | "active" | "welcomeMessage" | "captureNameText" | "capturePhone" | "capturePhoneText" | "captureEmail" | "captureEmailText" | "createdAt", ExtArgs["result"]["quiz"]>
+export type QuizOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "description" | "publicToken" | "active" | "welcomeMessage" | "captureNameText" | "capturePhone" | "capturePhoneText" | "captureEmail" | "captureEmailText" | "resultQualifiedTitle" | "resultQualifiedMsg" | "resultNotQualTitle" | "resultNotQualMsg" | "createdAt", ExtArgs["result"]["quiz"]>
 export type QuizInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Questions?: boolean | Prisma.Quiz$QuestionsArgs<ExtArgs>
@@ -1037,6 +1201,10 @@ export type $QuizPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     capturePhoneText: string
     captureEmail: boolean
     captureEmailText: string
+    resultQualifiedTitle: string
+    resultQualifiedMsg: string
+    resultNotQualTitle: string
+    resultNotQualMsg: string
     createdAt: Date
   }, ExtArgs["result"]["quiz"]>
   composites: {}
@@ -1476,6 +1644,10 @@ export interface QuizFieldRefs {
   readonly capturePhoneText: Prisma.FieldRef<"Quiz", 'String'>
   readonly captureEmail: Prisma.FieldRef<"Quiz", 'Boolean'>
   readonly captureEmailText: Prisma.FieldRef<"Quiz", 'String'>
+  readonly resultQualifiedTitle: Prisma.FieldRef<"Quiz", 'String'>
+  readonly resultQualifiedMsg: Prisma.FieldRef<"Quiz", 'String'>
+  readonly resultNotQualTitle: Prisma.FieldRef<"Quiz", 'String'>
+  readonly resultNotQualMsg: Prisma.FieldRef<"Quiz", 'String'>
   readonly createdAt: Prisma.FieldRef<"Quiz", 'DateTime'>
 }
     

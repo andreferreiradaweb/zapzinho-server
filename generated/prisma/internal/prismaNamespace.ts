@@ -3588,6 +3588,10 @@ export const QuizScalarFieldEnum = {
   capturePhoneText: 'capturePhoneText',
   captureEmail: 'captureEmail',
   captureEmailText: 'captureEmailText',
+  resultQualifiedTitle: 'resultQualifiedTitle',
+  resultQualifiedMsg: 'resultQualifiedMsg',
+  resultNotQualTitle: 'resultNotQualTitle',
+  resultNotQualMsg: 'resultNotQualMsg',
   createdAt: 'createdAt'
 } as const
 
