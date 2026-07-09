@@ -157,3 +157,43 @@ export type SerpSearchLog = Prisma.SerpSearchLogModel
  * 
  */
 export type SerpSearchOffset = Prisma.SerpSearchOffsetModel
+/**
+ * Model EmailList
+ * 
+ */
+export type EmailList = Prisma.EmailListModel
+/**
+ * Model EmailSubscriber
+ * 
+ */
+export type EmailSubscriber = Prisma.EmailSubscriberModel
+/**
+ * Model EmailCampaign
+ * 
+ */
+export type EmailCampaign = Prisma.EmailCampaignModel
+/**
+ * Model Quiz
+ * 
+ */
+export type Quiz = Prisma.QuizModel
+/**
+ * Model QuizQuestion
+ * 
+ */
+export type QuizQuestion = Prisma.QuizQuestionModel
+/**
+ * Model QuizOption
+ * 
+ */
+export type QuizOption = Prisma.QuizOptionModel
+/**
+ * Model QuizLead
+ * 
+ */
+export type QuizLead = Prisma.QuizLeadModel
+/**
+ * Model QuizAnswer
+ * 
+ */
+export type QuizAnswer = Prisma.QuizAnswerModel

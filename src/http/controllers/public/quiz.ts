@@ -8,8 +8,8 @@ const tokenParams = z.object({ token: z.string() })
 
 const submitBody = z.object({
   name: z.string().min(1),
-  email: z.string().email(),
-  phone: z.string().min(1),
+  email: z.string().default(''),
+  phone: z.string().default(''),
   answers: z
     .array(
       z.object({

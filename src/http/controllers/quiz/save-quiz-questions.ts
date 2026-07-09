@@ -6,6 +6,12 @@ import { ResourceNotFound } from '@/error/resource-not-found'
 const paramsSchema = z.object({ id: z.string().uuid() })
 
 const bodySchema = z.object({
+  welcomeMessage: z.string().default(''),
+  captureNameText: z.string().default('Qual é o seu nome?'),
+  capturePhone: z.boolean().default(false),
+  capturePhoneText: z.string().default('Qual é o seu WhatsApp?'),
+  captureEmail: z.boolean().default(false),
+  captureEmailText: z.string().default('Qual é o seu e-mail?'),
   questions: z.array(
     z.object({
       text: z.string().min(1),
@@ -26,10 +32,10 @@ const bodySchema = z.object({
 
 export async function saveQuizQuestionsController(req: FastifyRequest, reply: FastifyReply) {
   const { id } = paramsSchema.parse(req.params)
-  const { questions } = bodySchema.parse(req.body)
+  const { questions, ...settings } = bodySchema.parse(req.body)
   const userId = req.user.sub
   try {
-    const result = await makeSaveQuizQuestions().execute(id, userId, questions)
+    const result = await makeSaveQuizQuestions().execute(id, userId, questions, settings)
     return reply.send(result)
   } catch (err) {
     if (err instanceof ResourceNotFound) return reply.status(404).send({ message: 'Quiz não encontrado' })

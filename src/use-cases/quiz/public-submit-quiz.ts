@@ -43,11 +43,21 @@ export class PublicSubmitQuizUseCase {
 
     const { status, score } = calculateQualification(quiz.Questions, params.answers)
 
+    // Extract email/phone from typed questions if not provided in body
+    const emailAnswer = params.answers.find((a) => {
+      const q = quiz.Questions.find((q) => q.id === a.questionId)
+      return q?.type === 'EMAIL'
+    })
+    const phoneAnswer = params.answers.find((a) => {
+      const q = quiz.Questions.find((q) => q.id === a.questionId)
+      return q?.type === 'WHATSAPP'
+    })
+
     const lead = await this.leadRepo.create({
       quizId: quiz.id,
       name: params.name,
-      email: params.email,
-      phone: params.phone,
+      email: params.email || emailAnswer?.textValue || '',
+      phone: params.phone || phoneAnswer?.textValue || '',
       status,
       score,
     })

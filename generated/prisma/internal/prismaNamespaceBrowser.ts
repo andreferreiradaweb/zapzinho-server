@@ -78,7 +78,15 @@ export const ModelName = {
   OrderItem: 'OrderItem',
   Payment: 'Payment',
   SerpSearchLog: 'SerpSearchLog',
-  SerpSearchOffset: 'SerpSearchOffset'
+  SerpSearchOffset: 'SerpSearchOffset',
+  EmailList: 'EmailList',
+  EmailSubscriber: 'EmailSubscriber',
+  EmailCampaign: 'EmailCampaign',
+  Quiz: 'Quiz',
+  QuizQuestion: 'QuizQuestion',
+  QuizOption: 'QuizOption',
+  QuizLead: 'QuizLead',
+  QuizAnswer: 'QuizAnswer'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -115,6 +123,7 @@ export const UserScalarFieldEnum = {
   wapiToken: 'wapiToken',
   prospectingInstanceId: 'prospectingInstanceId',
   prospectingToken: 'prospectingToken',
+  prospectingDailyLimit: 'prospectingDailyLimit',
   createdAt: 'createdAt'
 } as const
 
@@ -392,6 +401,7 @@ export const ProspectingBroadcastScalarFieldEnum = {
   contactListId: 'contactListId',
   name: 'name',
   warmupMessage: 'warmupMessage',
+  warmupVariations: 'warmupVariations',
   templateMessage: 'templateMessage',
   categoryFilter: 'categoryFilter',
   status: 'status',
@@ -484,6 +494,114 @@ export const SerpSearchOffsetScalarFieldEnum = {
 } as const
 
 export type SerpSearchOffsetScalarFieldEnum = (typeof SerpSearchOffsetScalarFieldEnum)[keyof typeof SerpSearchOffsetScalarFieldEnum]
+
+
+export const EmailListScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  publicToken: 'publicToken',
+  createdAt: 'createdAt'
+} as const
+
+export type EmailListScalarFieldEnum = (typeof EmailListScalarFieldEnum)[keyof typeof EmailListScalarFieldEnum]
+
+
+export const EmailSubscriberScalarFieldEnum = {
+  id: 'id',
+  emailListId: 'emailListId',
+  email: 'email',
+  name: 'name',
+  status: 'status',
+  source: 'source',
+  createdAt: 'createdAt'
+} as const
+
+export type EmailSubscriberScalarFieldEnum = (typeof EmailSubscriberScalarFieldEnum)[keyof typeof EmailSubscriberScalarFieldEnum]
+
+
+export const EmailCampaignScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  emailListId: 'emailListId',
+  name: 'name',
+  subject: 'subject',
+  body: 'body',
+  status: 'status',
+  totalSent: 'totalSent',
+  totalFailed: 'totalFailed',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type EmailCampaignScalarFieldEnum = (typeof EmailCampaignScalarFieldEnum)[keyof typeof EmailCampaignScalarFieldEnum]
+
+
+export const QuizScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  publicToken: 'publicToken',
+  active: 'active',
+  welcomeMessage: 'welcomeMessage',
+  captureNameText: 'captureNameText',
+  capturePhone: 'capturePhone',
+  capturePhoneText: 'capturePhoneText',
+  captureEmail: 'captureEmail',
+  captureEmailText: 'captureEmailText',
+  createdAt: 'createdAt'
+} as const
+
+export type QuizScalarFieldEnum = (typeof QuizScalarFieldEnum)[keyof typeof QuizScalarFieldEnum]
+
+
+export const QuizQuestionScalarFieldEnum = {
+  id: 'id',
+  quizId: 'quizId',
+  text: 'text',
+  type: 'type',
+  order: 'order'
+} as const
+
+export type QuizQuestionScalarFieldEnum = (typeof QuizQuestionScalarFieldEnum)[keyof typeof QuizQuestionScalarFieldEnum]
+
+
+export const QuizOptionScalarFieldEnum = {
+  id: 'id',
+  questionId: 'questionId',
+  text: 'text',
+  order: 'order',
+  isQualifying: 'isQualifying'
+} as const
+
+export type QuizOptionScalarFieldEnum = (typeof QuizOptionScalarFieldEnum)[keyof typeof QuizOptionScalarFieldEnum]
+
+
+export const QuizLeadScalarFieldEnum = {
+  id: 'id',
+  quizId: 'quizId',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  status: 'status',
+  score: 'score',
+  createdAt: 'createdAt'
+} as const
+
+export type QuizLeadScalarFieldEnum = (typeof QuizLeadScalarFieldEnum)[keyof typeof QuizLeadScalarFieldEnum]
+
+
+export const QuizAnswerScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  questionId: 'questionId',
+  optionId: 'optionId',
+  textValue: 'textValue'
+} as const
+
+export type QuizAnswerScalarFieldEnum = (typeof QuizAnswerScalarFieldEnum)[keyof typeof QuizAnswerScalarFieldEnum]
 
 
 export const SortOrder = {

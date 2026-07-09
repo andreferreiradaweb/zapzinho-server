@@ -73,7 +73,8 @@ export const MessageType = {
   BROADCAST: 'BROADCAST',
   AUTOMATION: 'AUTOMATION',
   MANUAL: 'MANUAL',
-  FLOW: 'FLOW'
+  FLOW: 'FLOW',
+  LEAD_NOTIFICATION: 'LEAD_NOTIFICATION'
 } as const
 
 export type MessageType = (typeof MessageType)[keyof typeof MessageType]

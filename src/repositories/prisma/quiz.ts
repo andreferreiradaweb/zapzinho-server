@@ -6,6 +6,7 @@ import {
   QuizLeadData,
   QuizQuestionInput,
   QuizAnswerInput,
+  QuizSettings,
 } from '@/repositories/quiz'
 
 export class PrismaQuizRepository implements QuizRepository {
@@ -61,6 +62,10 @@ export class PrismaQuizRepository implements QuizRepository {
 
   async delete(id: string): Promise<void> {
     await prisma.quiz.delete({ where: { id } })
+  }
+
+  async update(id: string, data: QuizSettings): Promise<void> {
+    await prisma.quiz.update({ where: { id }, data })
   }
 
   async saveQuestions(quizId: string, questions: QuizQuestionInput[]): Promise<void> {

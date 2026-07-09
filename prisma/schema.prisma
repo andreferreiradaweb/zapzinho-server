@@ -558,16 +558,22 @@ model EmailCampaign {
 // --- Quiz de Qualificação ---
 
 model Quiz {
-  id          String         @id @default(uuid())
-  userId      String
-  name        String
-  description String?
-  publicToken String         @unique @default(uuid())
-  active      Boolean        @default(true)
-  createdAt   DateTime       @default(now())
-  User        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Questions   QuizQuestion[]
-  Leads       QuizLead[]
+  id               String         @id @default(uuid())
+  userId           String
+  name             String
+  description      String?
+  publicToken      String         @unique @default(uuid())
+  active           Boolean        @default(true)
+  welcomeMessage   String         @default("")
+  captureNameText  String         @default("Qual é o seu nome?")
+  capturePhone     Boolean        @default(false)
+  capturePhoneText String         @default("Qual é o seu WhatsApp?")
+  captureEmail     Boolean        @default(false)
+  captureEmailText String         @default("Qual é o seu e-mail?")
+  createdAt        DateTime       @default(now())
+  User             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Questions        QuizQuestion[]
+  Leads            QuizLead[]
 }
 
 model QuizQuestion {

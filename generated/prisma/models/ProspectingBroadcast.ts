@@ -74,6 +74,7 @@ export type ProspectingBroadcastCountAggregateOutputType = {
   contactListId: number
   name: number
   warmupMessage: number
+  warmupVariations: number
   templateMessage: number
   categoryFilter: number
   status: number
@@ -134,6 +135,7 @@ export type ProspectingBroadcastCountAggregateInputType = {
   contactListId?: true
   name?: true
   warmupMessage?: true
+  warmupVariations?: true
   templateMessage?: true
   categoryFilter?: true
   status?: true
@@ -237,6 +239,7 @@ export type ProspectingBroadcastGroupByOutputType = {
   contactListId: string
   name: string
   warmupMessage: string
+  warmupVariations: string[]
   templateMessage: string
   categoryFilter: string | null
   status: $Enums.BroadcastStatus
@@ -276,6 +279,7 @@ export type ProspectingBroadcastWhereInput = {
   contactListId?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   name?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   warmupMessage?: Prisma.StringFilter<"ProspectingBroadcast"> | string
+  warmupVariations?: Prisma.StringNullableListFilter<"ProspectingBroadcast">
   templateMessage?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   categoryFilter?: Prisma.StringNullableFilter<"ProspectingBroadcast"> | string | null
   status?: Prisma.EnumBroadcastStatusFilter<"ProspectingBroadcast"> | $Enums.BroadcastStatus
@@ -294,6 +298,7 @@ export type ProspectingBroadcastOrderByWithRelationInput = {
   contactListId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   warmupMessage?: Prisma.SortOrder
+  warmupVariations?: Prisma.SortOrder
   templateMessage?: Prisma.SortOrder
   categoryFilter?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -315,6 +320,7 @@ export type ProspectingBroadcastWhereUniqueInput = Prisma.AtLeast<{
   contactListId?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   name?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   warmupMessage?: Prisma.StringFilter<"ProspectingBroadcast"> | string
+  warmupVariations?: Prisma.StringNullableListFilter<"ProspectingBroadcast">
   templateMessage?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   categoryFilter?: Prisma.StringNullableFilter<"ProspectingBroadcast"> | string | null
   status?: Prisma.EnumBroadcastStatusFilter<"ProspectingBroadcast"> | $Enums.BroadcastStatus
@@ -333,6 +339,7 @@ export type ProspectingBroadcastOrderByWithAggregationInput = {
   contactListId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   warmupMessage?: Prisma.SortOrder
+  warmupVariations?: Prisma.SortOrder
   templateMessage?: Prisma.SortOrder
   categoryFilter?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -357,6 +364,7 @@ export type ProspectingBroadcastScalarWhereWithAggregatesInput = {
   contactListId?: Prisma.StringWithAggregatesFilter<"ProspectingBroadcast"> | string
   name?: Prisma.StringWithAggregatesFilter<"ProspectingBroadcast"> | string
   warmupMessage?: Prisma.StringWithAggregatesFilter<"ProspectingBroadcast"> | string
+  warmupVariations?: Prisma.StringNullableListFilter<"ProspectingBroadcast">
   templateMessage?: Prisma.StringWithAggregatesFilter<"ProspectingBroadcast"> | string
   categoryFilter?: Prisma.StringNullableWithAggregatesFilter<"ProspectingBroadcast"> | string | null
   status?: Prisma.EnumBroadcastStatusWithAggregatesFilter<"ProspectingBroadcast"> | $Enums.BroadcastStatus
@@ -371,6 +379,7 @@ export type ProspectingBroadcastCreateInput = {
   id?: string
   name: string
   warmupMessage: string
+  warmupVariations?: Prisma.ProspectingBroadcastCreatewarmupVariationsInput | string[]
   templateMessage: string
   categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
@@ -389,6 +398,7 @@ export type ProspectingBroadcastUncheckedCreateInput = {
   contactListId: string
   name: string
   warmupMessage: string
+  warmupVariations?: Prisma.ProspectingBroadcastCreatewarmupVariationsInput | string[]
   templateMessage: string
   categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
@@ -403,6 +413,7 @@ export type ProspectingBroadcastUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  warmupVariations?: Prisma.ProspectingBroadcastUpdatewarmupVariationsInput | string[]
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
   categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
@@ -421,6 +432,7 @@ export type ProspectingBroadcastUncheckedUpdateInput = {
   contactListId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  warmupVariations?: Prisma.ProspectingBroadcastUpdatewarmupVariationsInput | string[]
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
   categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
@@ -437,6 +449,7 @@ export type ProspectingBroadcastCreateManyInput = {
   contactListId: string
   name: string
   warmupMessage: string
+  warmupVariations?: Prisma.ProspectingBroadcastCreatewarmupVariationsInput | string[]
   templateMessage: string
   categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
@@ -451,6 +464,7 @@ export type ProspectingBroadcastUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  warmupVariations?: Prisma.ProspectingBroadcastUpdatewarmupVariationsInput | string[]
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
   categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
@@ -467,6 +481,7 @@ export type ProspectingBroadcastUncheckedUpdateManyInput = {
   contactListId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  warmupVariations?: Prisma.ProspectingBroadcastUpdatewarmupVariationsInput | string[]
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
   categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
@@ -493,6 +508,7 @@ export type ProspectingBroadcastCountOrderByAggregateInput = {
   contactListId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   warmupMessage?: Prisma.SortOrder
+  warmupVariations?: Prisma.SortOrder
   templateMessage?: Prisma.SortOrder
   categoryFilter?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -629,10 +645,20 @@ export type ProspectingBroadcastUncheckedUpdateManyWithoutContactListNestedInput
   deleteMany?: Prisma.ProspectingBroadcastScalarWhereInput | Prisma.ProspectingBroadcastScalarWhereInput[]
 }
 
+export type ProspectingBroadcastCreatewarmupVariationsInput = {
+  set: string[]
+}
+
+export type ProspectingBroadcastUpdatewarmupVariationsInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
 export type ProspectingBroadcastCreateWithoutUserInput = {
   id?: string
   name: string
   warmupMessage: string
+  warmupVariations?: Prisma.ProspectingBroadcastCreatewarmupVariationsInput | string[]
   templateMessage: string
   categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
@@ -649,6 +675,7 @@ export type ProspectingBroadcastUncheckedCreateWithoutUserInput = {
   contactListId: string
   name: string
   warmupMessage: string
+  warmupVariations?: Prisma.ProspectingBroadcastCreatewarmupVariationsInput | string[]
   templateMessage: string
   categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
@@ -694,6 +721,7 @@ export type ProspectingBroadcastScalarWhereInput = {
   contactListId?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   name?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   warmupMessage?: Prisma.StringFilter<"ProspectingBroadcast"> | string
+  warmupVariations?: Prisma.StringNullableListFilter<"ProspectingBroadcast">
   templateMessage?: Prisma.StringFilter<"ProspectingBroadcast"> | string
   categoryFilter?: Prisma.StringNullableFilter<"ProspectingBroadcast"> | string | null
   status?: Prisma.EnumBroadcastStatusFilter<"ProspectingBroadcast"> | $Enums.BroadcastStatus
@@ -708,6 +736,7 @@ export type ProspectingBroadcastCreateWithoutContactListInput = {
   id?: string
   name: string
   warmupMessage: string
+  warmupVariations?: Prisma.ProspectingBroadcastCreatewarmupVariationsInput | string[]
   templateMessage: string
   categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
@@ -724,6 +753,7 @@ export type ProspectingBroadcastUncheckedCreateWithoutContactListInput = {
   userId: string
   name: string
   warmupMessage: string
+  warmupVariations?: Prisma.ProspectingBroadcastCreatewarmupVariationsInput | string[]
   templateMessage: string
   categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
@@ -765,6 +795,7 @@ export type ProspectingBroadcastCreateManyUserInput = {
   contactListId: string
   name: string
   warmupMessage: string
+  warmupVariations?: Prisma.ProspectingBroadcastCreatewarmupVariationsInput | string[]
   templateMessage: string
   categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
@@ -779,6 +810,7 @@ export type ProspectingBroadcastUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  warmupVariations?: Prisma.ProspectingBroadcastUpdatewarmupVariationsInput | string[]
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
   categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
@@ -795,6 +827,7 @@ export type ProspectingBroadcastUncheckedUpdateWithoutUserInput = {
   contactListId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  warmupVariations?: Prisma.ProspectingBroadcastUpdatewarmupVariationsInput | string[]
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
   categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
@@ -810,6 +843,7 @@ export type ProspectingBroadcastUncheckedUpdateManyWithoutUserInput = {
   contactListId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  warmupVariations?: Prisma.ProspectingBroadcastUpdatewarmupVariationsInput | string[]
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
   categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
@@ -825,6 +859,7 @@ export type ProspectingBroadcastCreateManyContactListInput = {
   userId: string
   name: string
   warmupMessage: string
+  warmupVariations?: Prisma.ProspectingBroadcastCreatewarmupVariationsInput | string[]
   templateMessage: string
   categoryFilter?: string | null
   status?: $Enums.BroadcastStatus
@@ -839,6 +874,7 @@ export type ProspectingBroadcastUpdateWithoutContactListInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  warmupVariations?: Prisma.ProspectingBroadcastUpdatewarmupVariationsInput | string[]
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
   categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
@@ -855,6 +891,7 @@ export type ProspectingBroadcastUncheckedUpdateWithoutContactListInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  warmupVariations?: Prisma.ProspectingBroadcastUpdatewarmupVariationsInput | string[]
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
   categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
@@ -870,6 +907,7 @@ export type ProspectingBroadcastUncheckedUpdateManyWithoutContactListInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   warmupMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  warmupVariations?: Prisma.ProspectingBroadcastUpdatewarmupVariationsInput | string[]
   templateMessage?: Prisma.StringFieldUpdateOperationsInput | string
   categoryFilter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
@@ -888,6 +926,7 @@ export type ProspectingBroadcastSelect<ExtArgs extends runtime.Types.Extensions.
   contactListId?: boolean
   name?: boolean
   warmupMessage?: boolean
+  warmupVariations?: boolean
   templateMessage?: boolean
   categoryFilter?: boolean
   status?: boolean
@@ -906,6 +945,7 @@ export type ProspectingBroadcastSelectCreateManyAndReturn<ExtArgs extends runtim
   contactListId?: boolean
   name?: boolean
   warmupMessage?: boolean
+  warmupVariations?: boolean
   templateMessage?: boolean
   categoryFilter?: boolean
   status?: boolean
@@ -924,6 +964,7 @@ export type ProspectingBroadcastSelectUpdateManyAndReturn<ExtArgs extends runtim
   contactListId?: boolean
   name?: boolean
   warmupMessage?: boolean
+  warmupVariations?: boolean
   templateMessage?: boolean
   categoryFilter?: boolean
   status?: boolean
@@ -942,6 +983,7 @@ export type ProspectingBroadcastSelectScalar = {
   contactListId?: boolean
   name?: boolean
   warmupMessage?: boolean
+  warmupVariations?: boolean
   templateMessage?: boolean
   categoryFilter?: boolean
   status?: boolean
@@ -952,7 +994,7 @@ export type ProspectingBroadcastSelectScalar = {
   createdAt?: boolean
 }
 
-export type ProspectingBroadcastOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "contactListId" | "name" | "warmupMessage" | "templateMessage" | "categoryFilter" | "status" | "startedAt" | "finishedAt" | "totalSent" | "totalFailed" | "createdAt", ExtArgs["result"]["prospectingBroadcast"]>
+export type ProspectingBroadcastOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "contactListId" | "name" | "warmupMessage" | "warmupVariations" | "templateMessage" | "categoryFilter" | "status" | "startedAt" | "finishedAt" | "totalSent" | "totalFailed" | "createdAt", ExtArgs["result"]["prospectingBroadcast"]>
 export type ProspectingBroadcastInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   ContactList?: boolean | Prisma.ContactListDefaultArgs<ExtArgs>
@@ -978,6 +1020,7 @@ export type $ProspectingBroadcastPayload<ExtArgs extends runtime.Types.Extension
     contactListId: string
     name: string
     warmupMessage: string
+    warmupVariations: string[]
     templateMessage: string
     categoryFilter: string | null
     status: $Enums.BroadcastStatus
@@ -1416,6 +1459,7 @@ export interface ProspectingBroadcastFieldRefs {
   readonly contactListId: Prisma.FieldRef<"ProspectingBroadcast", 'String'>
   readonly name: Prisma.FieldRef<"ProspectingBroadcast", 'String'>
   readonly warmupMessage: Prisma.FieldRef<"ProspectingBroadcast", 'String'>
+  readonly warmupVariations: Prisma.FieldRef<"ProspectingBroadcast", 'String[]'>
   readonly templateMessage: Prisma.FieldRef<"ProspectingBroadcast", 'String'>
   readonly categoryFilter: Prisma.FieldRef<"ProspectingBroadcast", 'String'>
   readonly status: Prisma.FieldRef<"ProspectingBroadcast", 'BroadcastStatus'>

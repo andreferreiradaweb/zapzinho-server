@@ -35,6 +35,12 @@ export interface QuizData {
   description: string | null
   publicToken: string
   active: boolean
+  welcomeMessage: string
+  captureNameText: string
+  capturePhone: boolean
+  capturePhoneText: string
+  captureEmail: boolean
+  captureEmailText: string
   createdAt: Date
   Questions: QuizQuestionData[]
   _count?: { Leads: number }
@@ -65,6 +71,15 @@ export interface QuizLeadData {
   }[]
 }
 
+export interface QuizSettings {
+  welcomeMessage?: string
+  captureNameText?: string
+  capturePhone?: boolean
+  capturePhoneText?: string
+  captureEmail?: boolean
+  captureEmailText?: string
+}
+
 export interface QuizRepository {
   create(data: {
     userId: string
@@ -76,6 +91,7 @@ export interface QuizRepository {
   findByToken(token: string): Promise<QuizData | null>
   delete(id: string): Promise<void>
   saveQuestions(quizId: string, questions: QuizQuestionInput[]): Promise<void>
+  update(id: string, data: QuizSettings): Promise<void>
 }
 
 export interface QuizLeadRepository {
