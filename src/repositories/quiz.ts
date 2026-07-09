@@ -34,6 +34,7 @@ export interface QuizData {
   name: string
   description: string | null
   publicToken: string
+  slug: string
   active: boolean
   welcomeMessage: string
   captureNameText: string
@@ -97,11 +98,12 @@ export interface QuizRepository {
     userId: string
     name: string
     description?: string
-  }): Promise<{ id: string; publicToken: string }>
+    slug: string
+  }): Promise<{ id: string; publicToken: string; slug: string }>
   findAllByUserId(userId: string, offset: number, limit: number): Promise<QuizData[]>
   countByUserId(userId: string): Promise<number>
   findById(id: string): Promise<QuizData | null>
-  findByToken(token: string): Promise<QuizData | null>
+  findBySlug(slug: string): Promise<QuizData | null>
   delete(id: string): Promise<void>
   saveQuestions(quizId: string, questions: QuizQuestionInput[]): Promise<void>
   update(id: string, data: QuizSettings): Promise<void>

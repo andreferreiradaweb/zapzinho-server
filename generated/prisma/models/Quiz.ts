@@ -30,6 +30,7 @@ export type QuizMinAggregateOutputType = {
   name: string | null
   description: string | null
   publicToken: string | null
+  slug: string | null
   active: boolean | null
   welcomeMessage: string | null
   captureNameText: string | null
@@ -52,6 +53,7 @@ export type QuizMaxAggregateOutputType = {
   name: string | null
   description: string | null
   publicToken: string | null
+  slug: string | null
   active: boolean | null
   welcomeMessage: string | null
   captureNameText: string | null
@@ -74,6 +76,7 @@ export type QuizCountAggregateOutputType = {
   name: number
   description: number
   publicToken: number
+  slug: number
   active: number
   welcomeMessage: number
   captureNameText: number
@@ -98,6 +101,7 @@ export type QuizMinAggregateInputType = {
   name?: true
   description?: true
   publicToken?: true
+  slug?: true
   active?: true
   welcomeMessage?: true
   captureNameText?: true
@@ -120,6 +124,7 @@ export type QuizMaxAggregateInputType = {
   name?: true
   description?: true
   publicToken?: true
+  slug?: true
   active?: true
   welcomeMessage?: true
   captureNameText?: true
@@ -142,6 +147,7 @@ export type QuizCountAggregateInputType = {
   name?: true
   description?: true
   publicToken?: true
+  slug?: true
   active?: true
   welcomeMessage?: true
   captureNameText?: true
@@ -237,6 +243,7 @@ export type QuizGroupByOutputType = {
   name: string
   description: string | null
   publicToken: string
+  slug: string
   active: boolean
   welcomeMessage: string
   captureNameText: string
@@ -280,6 +287,7 @@ export type QuizWhereInput = {
   name?: Prisma.StringFilter<"Quiz"> | string
   description?: Prisma.StringNullableFilter<"Quiz"> | string | null
   publicToken?: Prisma.StringFilter<"Quiz"> | string
+  slug?: Prisma.StringFilter<"Quiz"> | string
   active?: Prisma.BoolFilter<"Quiz"> | boolean
   welcomeMessage?: Prisma.StringFilter<"Quiz"> | string
   captureNameText?: Prisma.StringFilter<"Quiz"> | string
@@ -305,6 +313,7 @@ export type QuizOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   publicToken?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   active?: Prisma.SortOrder
   welcomeMessage?: Prisma.SortOrder
   captureNameText?: Prisma.SortOrder
@@ -327,6 +336,7 @@ export type QuizOrderByWithRelationInput = {
 export type QuizWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   publicToken?: string
+  slug?: string
   AND?: Prisma.QuizWhereInput | Prisma.QuizWhereInput[]
   OR?: Prisma.QuizWhereInput[]
   NOT?: Prisma.QuizWhereInput | Prisma.QuizWhereInput[]
@@ -350,7 +360,7 @@ export type QuizWhereUniqueInput = Prisma.AtLeast<{
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Questions?: Prisma.QuizQuestionListRelationFilter
   Leads?: Prisma.QuizLeadListRelationFilter
-}, "id" | "publicToken">
+}, "id" | "publicToken" | "slug">
 
 export type QuizOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -358,6 +368,7 @@ export type QuizOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   publicToken?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   active?: Prisma.SortOrder
   welcomeMessage?: Prisma.SortOrder
   captureNameText?: Prisma.SortOrder
@@ -386,6 +397,7 @@ export type QuizScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Quiz"> | string | null
   publicToken?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
+  slug?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
   active?: Prisma.BoolWithAggregatesFilter<"Quiz"> | boolean
   welcomeMessage?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
   captureNameText?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
@@ -407,6 +419,7 @@ export type QuizCreateInput = {
   name: string
   description?: string | null
   publicToken?: string
+  slug: string
   active?: boolean
   welcomeMessage?: string
   captureNameText?: string
@@ -432,6 +445,7 @@ export type QuizUncheckedCreateInput = {
   name: string
   description?: string | null
   publicToken?: string
+  slug: string
   active?: boolean
   welcomeMessage?: string
   captureNameText?: string
@@ -455,6 +469,7 @@ export type QuizUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicToken?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   welcomeMessage?: Prisma.StringFieldUpdateOperationsInput | string
   captureNameText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -480,6 +495,7 @@ export type QuizUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicToken?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   welcomeMessage?: Prisma.StringFieldUpdateOperationsInput | string
   captureNameText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -504,6 +520,7 @@ export type QuizCreateManyInput = {
   name: string
   description?: string | null
   publicToken?: string
+  slug: string
   active?: boolean
   welcomeMessage?: string
   captureNameText?: string
@@ -525,6 +542,7 @@ export type QuizUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicToken?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   welcomeMessage?: Prisma.StringFieldUpdateOperationsInput | string
   captureNameText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -547,6 +565,7 @@ export type QuizUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicToken?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   welcomeMessage?: Prisma.StringFieldUpdateOperationsInput | string
   captureNameText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -579,6 +598,7 @@ export type QuizCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   publicToken?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   active?: Prisma.SortOrder
   welcomeMessage?: Prisma.SortOrder
   captureNameText?: Prisma.SortOrder
@@ -601,6 +621,7 @@ export type QuizMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   publicToken?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   active?: Prisma.SortOrder
   welcomeMessage?: Prisma.SortOrder
   captureNameText?: Prisma.SortOrder
@@ -623,6 +644,7 @@ export type QuizMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   publicToken?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   active?: Prisma.SortOrder
   welcomeMessage?: Prisma.SortOrder
   captureNameText?: Prisma.SortOrder
@@ -719,6 +741,7 @@ export type QuizCreateWithoutUserInput = {
   name: string
   description?: string | null
   publicToken?: string
+  slug: string
   active?: boolean
   welcomeMessage?: string
   captureNameText?: string
@@ -742,6 +765,7 @@ export type QuizUncheckedCreateWithoutUserInput = {
   name: string
   description?: string | null
   publicToken?: string
+  slug: string
   active?: boolean
   welcomeMessage?: string
   captureNameText?: string
@@ -795,6 +819,7 @@ export type QuizScalarWhereInput = {
   name?: Prisma.StringFilter<"Quiz"> | string
   description?: Prisma.StringNullableFilter<"Quiz"> | string | null
   publicToken?: Prisma.StringFilter<"Quiz"> | string
+  slug?: Prisma.StringFilter<"Quiz"> | string
   active?: Prisma.BoolFilter<"Quiz"> | boolean
   welcomeMessage?: Prisma.StringFilter<"Quiz"> | string
   captureNameText?: Prisma.StringFilter<"Quiz"> | string
@@ -816,6 +841,7 @@ export type QuizCreateWithoutQuestionsInput = {
   name: string
   description?: string | null
   publicToken?: string
+  slug: string
   active?: boolean
   welcomeMessage?: string
   captureNameText?: string
@@ -840,6 +866,7 @@ export type QuizUncheckedCreateWithoutQuestionsInput = {
   name: string
   description?: string | null
   publicToken?: string
+  slug: string
   active?: boolean
   welcomeMessage?: string
   captureNameText?: string
@@ -878,6 +905,7 @@ export type QuizUpdateWithoutQuestionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicToken?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   welcomeMessage?: Prisma.StringFieldUpdateOperationsInput | string
   captureNameText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -902,6 +930,7 @@ export type QuizUncheckedUpdateWithoutQuestionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicToken?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   welcomeMessage?: Prisma.StringFieldUpdateOperationsInput | string
   captureNameText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -924,6 +953,7 @@ export type QuizCreateWithoutLeadsInput = {
   name: string
   description?: string | null
   publicToken?: string
+  slug: string
   active?: boolean
   welcomeMessage?: string
   captureNameText?: string
@@ -948,6 +978,7 @@ export type QuizUncheckedCreateWithoutLeadsInput = {
   name: string
   description?: string | null
   publicToken?: string
+  slug: string
   active?: boolean
   welcomeMessage?: string
   captureNameText?: string
@@ -986,6 +1017,7 @@ export type QuizUpdateWithoutLeadsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicToken?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   welcomeMessage?: Prisma.StringFieldUpdateOperationsInput | string
   captureNameText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1010,6 +1042,7 @@ export type QuizUncheckedUpdateWithoutLeadsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicToken?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   welcomeMessage?: Prisma.StringFieldUpdateOperationsInput | string
   captureNameText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1032,6 +1065,7 @@ export type QuizCreateManyUserInput = {
   name: string
   description?: string | null
   publicToken?: string
+  slug: string
   active?: boolean
   welcomeMessage?: string
   captureNameText?: string
@@ -1053,6 +1087,7 @@ export type QuizUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicToken?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   welcomeMessage?: Prisma.StringFieldUpdateOperationsInput | string
   captureNameText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1076,6 +1111,7 @@ export type QuizUncheckedUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicToken?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   welcomeMessage?: Prisma.StringFieldUpdateOperationsInput | string
   captureNameText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1099,6 +1135,7 @@ export type QuizUncheckedUpdateManyWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicToken?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   welcomeMessage?: Prisma.StringFieldUpdateOperationsInput | string
   captureNameText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1161,6 +1198,7 @@ export type QuizSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   name?: boolean
   description?: boolean
   publicToken?: boolean
+  slug?: boolean
   active?: boolean
   welcomeMessage?: boolean
   captureNameText?: boolean
@@ -1187,6 +1225,7 @@ export type QuizSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   description?: boolean
   publicToken?: boolean
+  slug?: boolean
   active?: boolean
   welcomeMessage?: boolean
   captureNameText?: boolean
@@ -1210,6 +1249,7 @@ export type QuizSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   description?: boolean
   publicToken?: boolean
+  slug?: boolean
   active?: boolean
   welcomeMessage?: boolean
   captureNameText?: boolean
@@ -1233,6 +1273,7 @@ export type QuizSelectScalar = {
   name?: boolean
   description?: boolean
   publicToken?: boolean
+  slug?: boolean
   active?: boolean
   welcomeMessage?: boolean
   captureNameText?: boolean
@@ -1249,7 +1290,7 @@ export type QuizSelectScalar = {
   createdAt?: boolean
 }
 
-export type QuizOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "description" | "publicToken" | "active" | "welcomeMessage" | "captureNameText" | "capturePhone" | "capturePhoneText" | "captureEmail" | "captureEmailText" | "resultQualifiedTitle" | "resultQualifiedMsg" | "resultNotQualTitle" | "resultNotQualMsg" | "bgColor" | "primaryColor" | "createdAt", ExtArgs["result"]["quiz"]>
+export type QuizOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "description" | "publicToken" | "slug" | "active" | "welcomeMessage" | "captureNameText" | "capturePhone" | "capturePhoneText" | "captureEmail" | "captureEmailText" | "resultQualifiedTitle" | "resultQualifiedMsg" | "resultNotQualTitle" | "resultNotQualMsg" | "bgColor" | "primaryColor" | "createdAt", ExtArgs["result"]["quiz"]>
 export type QuizInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Questions?: boolean | Prisma.Quiz$QuestionsArgs<ExtArgs>
@@ -1276,6 +1317,7 @@ export type $QuizPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     name: string
     description: string | null
     publicToken: string
+    slug: string
     active: boolean
     welcomeMessage: string
     captureNameText: string
@@ -1721,6 +1763,7 @@ export interface QuizFieldRefs {
   readonly name: Prisma.FieldRef<"Quiz", 'String'>
   readonly description: Prisma.FieldRef<"Quiz", 'String'>
   readonly publicToken: Prisma.FieldRef<"Quiz", 'String'>
+  readonly slug: Prisma.FieldRef<"Quiz", 'String'>
   readonly active: Prisma.FieldRef<"Quiz", 'Boolean'>
   readonly welcomeMessage: Prisma.FieldRef<"Quiz", 'String'>
   readonly captureNameText: Prisma.FieldRef<"Quiz", 'String'>

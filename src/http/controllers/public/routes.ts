@@ -23,7 +23,7 @@ export async function publicRoutes(app: FastifyInstance) {
     return reply.status(200).send()
   })
 
-  app.options('/public/quiz/:token', async (_req, reply) => {
+  app.options('/public/quiz/:slug', async (_req, reply) => {
     reply.header('Access-Control-Allow-Origin', corsHeaders.origin)
     reply.header('Access-Control-Allow-Methods', corsHeaders.methods)
     reply.header('Access-Control-Allow-Headers', corsHeaders.headers)
@@ -31,6 +31,6 @@ export async function publicRoutes(app: FastifyInstance) {
   })
 
   app.post('/public/subscribe', publicSubscribeController)
-  app.get('/public/quiz/:token', publicGetQuizController)
-  app.post('/public/quiz/:token/submit', publicSubmitQuizController)
+  app.get('/public/quiz/:slug', publicGetQuizController)
+  app.post('/public/quiz/:slug/submit', publicSubmitQuizController)
 }

@@ -9,11 +9,31 @@ import {
   QuizSettings,
 } from '@/repositories/quiz'
 
+function slugify(name: string): string {
+  return (
+    name
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'quiz'
+  )
+}
+
+function randomCode(length: number): string {
+  return Math.random().toString(36).slice(2, 2 + length)
+}
+
 export class PrismaQuizRepository implements QuizRepository {
-  async create(data: { userId: string; name: string; description?: string }) {
+  async create(data: { userId: string; name: string; description?: string; slug: string }) {
     const quiz = await prisma.quiz.create({
-      data: { userId: data.userId, name: data.name, description: data.description },
-      select: { id: true, publicToken: true },
+      data: {
+        userId: data.userId,
+        name: data.name,
+        description: data.description,
+        slug: data.slug,
+      },
+      select: { id: true, publicToken: true, slug: true },
     })
     return quiz
   }
@@ -53,9 +73,9 @@ export class PrismaQuizRepository implements QuizRepository {
     return quiz as unknown as QuizData | null
   }
 
-  async findByToken(token: string): Promise<QuizData | null> {
+  async findBySlug(slug: string): Promise<QuizData | null> {
     const quiz = await prisma.quiz.findUnique({
-      where: { publicToken: token, active: true },
+      where: { slug, active: true },
       include: {
         Questions: {
           orderBy: { order: 'asc' },

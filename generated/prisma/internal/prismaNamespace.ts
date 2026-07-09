@@ -3581,6 +3581,7 @@ export const QuizScalarFieldEnum = {
   name: 'name',
   description: 'description',
   publicToken: 'publicToken',
+  slug: 'slug',
   active: 'active',
   welcomeMessage: 'welcomeMessage',
   captureNameText: 'captureNameText',

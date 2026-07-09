@@ -4,7 +4,7 @@ import { makePublicGetQuiz } from '@/factory/quiz/make-public-get-quiz'
 import { makePublicSubmitQuiz } from '@/factory/quiz/make-public-submit-quiz'
 import { ResourceNotFound } from '@/error/resource-not-found'
 
-const tokenParams = z.object({ token: z.string() })
+const slugParams = z.object({ slug: z.string() })
 
 const submitBody = z.object({
   name: z.string().min(1),
@@ -22,9 +22,9 @@ const submitBody = z.object({
 })
 
 export async function publicGetQuizController(req: FastifyRequest, reply: FastifyReply) {
-  const { token } = tokenParams.parse(req.params)
+  const { slug } = slugParams.parse(req.params)
   try {
-    const result = await makePublicGetQuiz().execute(token)
+    const result = await makePublicGetQuiz().execute(slug)
     return reply.send(result)
   } catch (err) {
     if (err instanceof ResourceNotFound) return reply.status(404).send({ message: 'Quiz não encontrado' })
@@ -33,10 +33,10 @@ export async function publicGetQuizController(req: FastifyRequest, reply: Fastif
 }
 
 export async function publicSubmitQuizController(req: FastifyRequest, reply: FastifyReply) {
-  const { token } = tokenParams.parse(req.params)
+  const { slug } = slugParams.parse(req.params)
   const body = submitBody.parse(req.body)
   try {
-    const result = await makePublicSubmitQuiz().execute({ token, ...body })
+    const result = await makePublicSubmitQuiz().execute({ slug, ...body })
     return reply.send(result)
   } catch (err) {
     if (err instanceof ResourceNotFound) return reply.status(404).send({ message: 'Quiz não encontrado' })

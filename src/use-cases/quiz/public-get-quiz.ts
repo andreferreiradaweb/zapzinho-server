@@ -4,8 +4,8 @@ import { ResourceNotFound } from '@/error/resource-not-found'
 export class PublicGetQuizUseCase {
   constructor(private quizRepo: QuizRepository) {}
 
-  async execute(token: string) {
-    const quiz = await this.quizRepo.findByToken(token)
+  async execute(slug: string) {
+    const quiz = await this.quizRepo.findBySlug(slug)
     if (!quiz) throw new ResourceNotFound()
     // Strip isQualifying so the public API doesn't leak qualification logic
     const safe = {

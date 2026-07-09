@@ -563,6 +563,7 @@ model Quiz {
   name             String
   description      String?
   publicToken      String         @unique @default(uuid())
+  slug             String         @unique
   active           Boolean        @default(true)
   welcomeMessage        String         @default("")
   captureNameText       String         @default("Qual é o seu nome?")

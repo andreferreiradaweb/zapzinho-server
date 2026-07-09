@@ -2,7 +2,7 @@ import { QuizRepository, QuizLeadRepository, QuizAnswerInput } from '@/repositor
 import { ResourceNotFound } from '@/error/resource-not-found'
 
 interface SubmitParams {
-  token: string
+  slug: string
   name: string
   email: string
   phone: string
@@ -38,7 +38,7 @@ export class PublicSubmitQuizUseCase {
   ) {}
 
   async execute(params: SubmitParams) {
-    const quiz = await this.quizRepo.findByToken(params.token)
+    const quiz = await this.quizRepo.findBySlug(params.slug)
     if (!quiz) throw new ResourceNotFound()
 
     const { status, score } = calculateQualification(quiz.Questions, params.answers)
