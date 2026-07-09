@@ -94,7 +94,8 @@ export interface QuizRepository {
     name: string
     description?: string
   }): Promise<{ id: string; publicToken: string }>
-  findAllByUserId(userId: string): Promise<QuizData[]>
+  findAllByUserId(userId: string, offset: number, limit: number): Promise<QuizData[]>
+  countByUserId(userId: string): Promise<number>
   findById(id: string): Promise<QuizData | null>
   findByToken(token: string): Promise<QuizData | null>
   delete(id: string): Promise<void>

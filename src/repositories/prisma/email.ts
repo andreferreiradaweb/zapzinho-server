@@ -14,12 +14,18 @@ export class PrismaEmailListRepository implements EmailListRepository {
     })
   }
 
-  async findAllByUserId(userId: string) {
+  async findAllByUserId(userId: string, offset: number, limit: number) {
     return prisma.emailList.findMany({
       where: { userId },
       orderBy: { createdAt: 'desc' },
+      skip: offset,
+      take: limit,
       include: { _count: { select: { Subscribers: true } } },
     })
+  }
+
+  async countByUserId(userId: string): Promise<number> {
+    return prisma.emailList.count({ where: { userId } })
   }
 
   async findById(id: string) {

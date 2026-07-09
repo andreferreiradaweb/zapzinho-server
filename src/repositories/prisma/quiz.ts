@@ -18,10 +18,12 @@ export class PrismaQuizRepository implements QuizRepository {
     return quiz
   }
 
-  async findAllByUserId(userId: string): Promise<QuizData[]> {
+  async findAllByUserId(userId: string, offset: number, limit: number): Promise<QuizData[]> {
     const quizzes = await prisma.quiz.findMany({
       where: { userId },
       orderBy: { createdAt: 'desc' },
+      skip: offset,
+      take: limit,
       include: {
         Questions: {
           orderBy: { order: 'asc' },
@@ -31,6 +33,10 @@ export class PrismaQuizRepository implements QuizRepository {
       },
     })
     return quizzes as unknown as QuizData[]
+  }
+
+  async countByUserId(userId: string): Promise<number> {
+    return prisma.quiz.count({ where: { userId } })
   }
 
   async findById(id: string): Promise<QuizData | null> {

@@ -34,7 +34,8 @@ export interface EmailCampaignData {
 
 export interface EmailListRepository {
   create(data: { userId: string; name: string }): Promise<EmailListData>
-  findAllByUserId(userId: string): Promise<EmailListData[]>
+  findAllByUserId(userId: string, offset: number, limit: number): Promise<EmailListData[]>
+  countByUserId(userId: string): Promise<number>
   findById(id: string): Promise<EmailListData | null>
   findByPublicToken(token: string): Promise<EmailListData | null>
   delete(id: string): Promise<void>
