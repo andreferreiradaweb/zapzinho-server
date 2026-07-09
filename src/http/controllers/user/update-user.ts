@@ -24,13 +24,14 @@ export async function updateUserController(
     prospectingInstanceId: z.string().optional().nullable(),
     prospectingToken: z.string().optional().nullable(),
     prospectingDailyLimit: z.number().int().positive().optional().nullable(),
+    modules: z.array(z.string()).optional(),
   })
 
   try {
     const {
       email, password, isActive, role, plan, customerType, phoneNumber, id,
       name, address, wapiInstanceId, wapiToken, prospectingInstanceId, prospectingToken,
-      prospectingDailyLimit,
+      prospectingDailyLimit, modules,
     } = updateBodySchema.parse(request.body)
 
     const updateUseCase = MakeUpdateUseCase()
@@ -41,7 +42,7 @@ export async function updateUserController(
       name: name ?? undefined,
       address: address ?? undefined,
       wapiInstanceId, wapiToken, prospectingInstanceId, prospectingToken,
-      prospectingDailyLimit,
+      prospectingDailyLimit, modules,
     })
     return reply.status(201).send(user)
   } catch (error) {

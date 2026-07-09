@@ -19,9 +19,10 @@ export async function registerUserController(
     role: z.nativeEnum(Role),
     name: z.string().optional(),
     address: z.string().optional(),
+    modules: z.array(z.string()).default([]),
   })
 
-  const { email, password, isActive, role, phoneNumber, name, address } =
+  const { email, password, isActive, role, phoneNumber, name, address, modules } =
     registerBodySchema.parse(request.body)
 
   try {
@@ -34,6 +35,7 @@ export async function registerUserController(
       phoneNumber,
       name,
       address,
+      modules,
     })
     return reply.status(201).send()
   } catch (error) {

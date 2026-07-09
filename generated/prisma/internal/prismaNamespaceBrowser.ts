@@ -124,6 +124,7 @@ export const UserScalarFieldEnum = {
   prospectingInstanceId: 'prospectingInstanceId',
   prospectingToken: 'prospectingToken',
   prospectingDailyLimit: 'prospectingDailyLimit',
+  modules: 'modules',
   createdAt: 'createdAt'
 } as const
 

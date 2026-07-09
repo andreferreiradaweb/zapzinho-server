@@ -97,6 +97,7 @@ export type UserCountAggregateOutputType = {
   prospectingInstanceId: number
   prospectingToken: number
   prospectingDailyLimit: number
+  modules: number
   createdAt: number
   _all: number
 }
@@ -173,6 +174,7 @@ export type UserCountAggregateInputType = {
   prospectingInstanceId?: true
   prospectingToken?: true
   prospectingDailyLimit?: true
+  modules?: true
   createdAt?: true
   _all?: true
 }
@@ -282,6 +284,7 @@ export type UserGroupByOutputType = {
   prospectingInstanceId: string | null
   prospectingToken: string | null
   prospectingDailyLimit: number | null
+  modules: string[]
   createdAt: Date
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
@@ -327,6 +330,7 @@ export type UserWhereInput = {
   prospectingInstanceId?: Prisma.StringNullableFilter<"User"> | string | null
   prospectingToken?: Prisma.StringNullableFilter<"User"> | string | null
   prospectingDailyLimit?: Prisma.IntNullableFilter<"User"> | number | null
+  modules?: Prisma.StringNullableListFilter<"User">
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   Products?: Prisma.ProductListRelationFilter
   ProductCategories?: Prisma.ProductCategoryListRelationFilter
@@ -367,6 +371,7 @@ export type UserOrderByWithRelationInput = {
   prospectingInstanceId?: Prisma.SortOrderInput | Prisma.SortOrder
   prospectingToken?: Prisma.SortOrderInput | Prisma.SortOrder
   prospectingDailyLimit?: Prisma.SortOrderInput | Prisma.SortOrder
+  modules?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   Products?: Prisma.ProductOrderByRelationAggregateInput
   ProductCategories?: Prisma.ProductCategoryOrderByRelationAggregateInput
@@ -410,6 +415,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   prospectingInstanceId?: Prisma.StringNullableFilter<"User"> | string | null
   prospectingToken?: Prisma.StringNullableFilter<"User"> | string | null
   prospectingDailyLimit?: Prisma.IntNullableFilter<"User"> | number | null
+  modules?: Prisma.StringNullableListFilter<"User">
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   Products?: Prisma.ProductListRelationFilter
   ProductCategories?: Prisma.ProductCategoryListRelationFilter
@@ -450,6 +456,7 @@ export type UserOrderByWithAggregationInput = {
   prospectingInstanceId?: Prisma.SortOrderInput | Prisma.SortOrder
   prospectingToken?: Prisma.SortOrderInput | Prisma.SortOrder
   prospectingDailyLimit?: Prisma.SortOrderInput | Prisma.SortOrder
+  modules?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
@@ -480,6 +487,7 @@ export type UserScalarWhereWithAggregatesInput = {
   prospectingInstanceId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   prospectingToken?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   prospectingDailyLimit?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
+  modules?: Prisma.StringNullableListFilter<"User">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
@@ -502,6 +510,7 @@ export type UserCreateInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -542,6 +551,7 @@ export type UserUncheckedCreateInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -582,6 +592,7 @@ export type UserUpdateInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -622,6 +633,7 @@ export type UserUncheckedUpdateInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -662,6 +674,7 @@ export type UserCreateManyInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
 }
 
@@ -684,6 +697,7 @@ export type UserUpdateManyMutationInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -706,7 +720,16 @@ export type UserUncheckedUpdateManyInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -728,6 +751,7 @@ export type UserCountOrderByAggregateInput = {
   prospectingInstanceId?: Prisma.SortOrder
   prospectingToken?: Prisma.SortOrder
   prospectingDailyLimit?: Prisma.SortOrder
+  modules?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -788,6 +812,10 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserCreatemodulesInput = {
+  set: string[]
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -822,6 +850,11 @@ export type NullableIntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type UserUpdatemodulesInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -1099,6 +1132,7 @@ export type UserCreateWithoutProductCategoriesInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -1138,6 +1172,7 @@ export type UserUncheckedCreateWithoutProductCategoriesInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -1193,6 +1228,7 @@ export type UserUpdateWithoutProductCategoriesInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -1232,6 +1268,7 @@ export type UserUncheckedUpdateWithoutProductCategoriesInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -1271,6 +1308,7 @@ export type UserCreateWithoutProductsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -1310,6 +1348,7 @@ export type UserUncheckedCreateWithoutProductsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -1365,6 +1404,7 @@ export type UserUpdateWithoutProductsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -1404,6 +1444,7 @@ export type UserUncheckedUpdateWithoutProductsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -1443,6 +1484,7 @@ export type UserCreateWithoutLeadsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -1482,6 +1524,7 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -1537,6 +1580,7 @@ export type UserUpdateWithoutLeadsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -1576,6 +1620,7 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -1615,6 +1660,7 @@ export type UserCreateWithoutLeadSalesInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -1654,6 +1700,7 @@ export type UserUncheckedCreateWithoutLeadSalesInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -1709,6 +1756,7 @@ export type UserUpdateWithoutLeadSalesInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -1748,6 +1796,7 @@ export type UserUncheckedUpdateWithoutLeadSalesInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -1787,6 +1836,7 @@ export type UserCreateWithoutMessageTemplatesInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -1826,6 +1876,7 @@ export type UserUncheckedCreateWithoutMessageTemplatesInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -1881,6 +1932,7 @@ export type UserUpdateWithoutMessageTemplatesInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -1920,6 +1972,7 @@ export type UserUncheckedUpdateWithoutMessageTemplatesInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -1959,6 +2012,7 @@ export type UserCreateWithoutBroadcastsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -1998,6 +2052,7 @@ export type UserUncheckedCreateWithoutBroadcastsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -2053,6 +2108,7 @@ export type UserUpdateWithoutBroadcastsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -2092,6 +2148,7 @@ export type UserUncheckedUpdateWithoutBroadcastsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -2131,6 +2188,7 @@ export type UserCreateWithoutAutomationsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -2170,6 +2228,7 @@ export type UserUncheckedCreateWithoutAutomationsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -2225,6 +2284,7 @@ export type UserUpdateWithoutAutomationsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -2264,6 +2324,7 @@ export type UserUncheckedUpdateWithoutAutomationsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -2303,6 +2364,7 @@ export type UserCreateWithoutBroadcastBlocksInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -2342,6 +2404,7 @@ export type UserUncheckedCreateWithoutBroadcastBlocksInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -2397,6 +2460,7 @@ export type UserUpdateWithoutBroadcastBlocksInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -2436,6 +2500,7 @@ export type UserUncheckedUpdateWithoutBroadcastBlocksInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -2475,6 +2540,7 @@ export type UserCreateWithoutMessageLogsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -2514,6 +2580,7 @@ export type UserUncheckedCreateWithoutMessageLogsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -2569,6 +2636,7 @@ export type UserUpdateWithoutMessageLogsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -2608,6 +2676,7 @@ export type UserUncheckedUpdateWithoutMessageLogsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -2647,6 +2716,7 @@ export type UserCreateWithoutFlowsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -2686,6 +2756,7 @@ export type UserUncheckedCreateWithoutFlowsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -2741,6 +2812,7 @@ export type UserUpdateWithoutFlowsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -2780,6 +2852,7 @@ export type UserUncheckedUpdateWithoutFlowsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -2819,6 +2892,7 @@ export type UserCreateWithoutFlowSessionsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -2858,6 +2932,7 @@ export type UserUncheckedCreateWithoutFlowSessionsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -2913,6 +2988,7 @@ export type UserUpdateWithoutFlowSessionsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -2952,6 +3028,7 @@ export type UserUncheckedUpdateWithoutFlowSessionsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -2991,6 +3068,7 @@ export type UserCreateWithoutContactListsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -3030,6 +3108,7 @@ export type UserUncheckedCreateWithoutContactListsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -3085,6 +3164,7 @@ export type UserUpdateWithoutContactListsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -3124,6 +3204,7 @@ export type UserUncheckedUpdateWithoutContactListsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -3163,6 +3244,7 @@ export type UserCreateWithoutProspectingBroadcastsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -3202,6 +3284,7 @@ export type UserUncheckedCreateWithoutProspectingBroadcastsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -3257,6 +3340,7 @@ export type UserUpdateWithoutProspectingBroadcastsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -3296,6 +3380,7 @@ export type UserUncheckedUpdateWithoutProspectingBroadcastsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -3335,6 +3420,7 @@ export type UserCreateWithoutSerpSearchLogsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -3374,6 +3460,7 @@ export type UserUncheckedCreateWithoutSerpSearchLogsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -3429,6 +3516,7 @@ export type UserUpdateWithoutSerpSearchLogsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -3468,6 +3556,7 @@ export type UserUncheckedUpdateWithoutSerpSearchLogsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -3507,6 +3596,7 @@ export type UserCreateWithoutSerpSearchOffsetsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -3546,6 +3636,7 @@ export type UserUncheckedCreateWithoutSerpSearchOffsetsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -3601,6 +3692,7 @@ export type UserUpdateWithoutSerpSearchOffsetsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -3640,6 +3732,7 @@ export type UserUncheckedUpdateWithoutSerpSearchOffsetsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -3679,6 +3772,7 @@ export type UserCreateWithoutEmailListsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -3718,6 +3812,7 @@ export type UserUncheckedCreateWithoutEmailListsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -3773,6 +3868,7 @@ export type UserUpdateWithoutEmailListsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -3812,6 +3908,7 @@ export type UserUncheckedUpdateWithoutEmailListsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -3851,6 +3948,7 @@ export type UserCreateWithoutEmailCampaignsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -3890,6 +3988,7 @@ export type UserUncheckedCreateWithoutEmailCampaignsInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -3945,6 +4044,7 @@ export type UserUpdateWithoutEmailCampaignsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -3984,6 +4084,7 @@ export type UserUncheckedUpdateWithoutEmailCampaignsInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -4023,6 +4124,7 @@ export type UserCreateWithoutQuizzesInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
@@ -4062,6 +4164,7 @@ export type UserUncheckedCreateWithoutQuizzesInput = {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -4117,6 +4220,7 @@ export type UserUpdateWithoutQuizzesInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
@@ -4156,6 +4260,7 @@ export type UserUncheckedUpdateWithoutQuizzesInput = {
   prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -4379,6 +4484,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   prospectingInstanceId?: boolean
   prospectingToken?: boolean
   prospectingDailyLimit?: boolean
+  modules?: boolean
   createdAt?: boolean
   Products?: boolean | Prisma.User$ProductsArgs<ExtArgs>
   ProductCategories?: boolean | Prisma.User$ProductCategoriesArgs<ExtArgs>
@@ -4420,6 +4526,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   prospectingInstanceId?: boolean
   prospectingToken?: boolean
   prospectingDailyLimit?: boolean
+  modules?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -4442,6 +4549,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   prospectingInstanceId?: boolean
   prospectingToken?: boolean
   prospectingDailyLimit?: boolean
+  modules?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -4464,10 +4572,11 @@ export type UserSelectScalar = {
   prospectingInstanceId?: boolean
   prospectingToken?: boolean
   prospectingDailyLimit?: boolean
+  modules?: boolean
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "phoneNumber" | "address" | "isActive" | "emailVerified" | "Role" | "CustomerType" | "Plan" | "trialExpiresAt" | "onboardingMessageSentAt" | "wapiInstanceId" | "wapiToken" | "prospectingInstanceId" | "prospectingToken" | "prospectingDailyLimit" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "phoneNumber" | "address" | "isActive" | "emailVerified" | "Role" | "CustomerType" | "Plan" | "trialExpiresAt" | "onboardingMessageSentAt" | "wapiInstanceId" | "wapiToken" | "prospectingInstanceId" | "prospectingToken" | "prospectingDailyLimit" | "modules" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Products?: boolean | Prisma.User$ProductsArgs<ExtArgs>
   ProductCategories?: boolean | Prisma.User$ProductCategoriesArgs<ExtArgs>
@@ -4533,6 +4642,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     prospectingInstanceId: string | null
     prospectingToken: string | null
     prospectingDailyLimit: number | null
+    modules: string[]
     createdAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -4993,6 +5103,7 @@ export interface UserFieldRefs {
   readonly prospectingInstanceId: Prisma.FieldRef<"User", 'String'>
   readonly prospectingToken: Prisma.FieldRef<"User", 'String'>
   readonly prospectingDailyLimit: Prisma.FieldRef<"User", 'Int'>
+  readonly modules: Prisma.FieldRef<"User", 'String[]'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     

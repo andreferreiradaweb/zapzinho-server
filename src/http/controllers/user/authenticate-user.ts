@@ -18,7 +18,7 @@ export async function AuthenticateController(
     const authenticateUseCase = MakeAuthenticateUseCase()
     const { user } = await authenticateUseCase.execute({ email, password })
     const token = await reply.jwtSign(
-      { userRole: user.Role, userPlan: user.Plan, userName: user.name ?? '' },
+      { userRole: user.Role, userPlan: user.Plan, userName: user.name ?? '', modules: user.modules ?? [] },
       { sign: { sub: user.id } },
     )
     return reply.status(200).send({ token })

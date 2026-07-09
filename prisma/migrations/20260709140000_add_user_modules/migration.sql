@@ -1,0 +1,1 @@
+ALTER TABLE "User" ADD COLUMN "modules" TEXT[] NOT NULL DEFAULT '{}';
