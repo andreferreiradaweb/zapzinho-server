@@ -21,6 +21,7 @@ import { prospectingRoutes } from './http/controllers/prospecting/routes'
 import { flowRoutes } from './http/controllers/flow/routes'
 import { aiRoutes } from './http/controllers/ai/routes'
 import { emailRoutes } from './http/controllers/email/routes'
+import { quizRoutes } from './http/controllers/quiz/routes'
 import { publicRoutes } from './http/controllers/public/routes'
 
 export const app = fastify()
@@ -68,6 +69,7 @@ app.register(prospectingRoutes)
 app.register(flowRoutes)
 app.register(aiRoutes)
 app.register(emailRoutes)
+app.register(quizRoutes)
 app.register(publicRoutes)
 
 app.setErrorHandler((error, _, reply) => {

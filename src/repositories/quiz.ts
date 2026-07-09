@@ -1,0 +1,93 @@
+export interface QuizOptionInput {
+  text: string
+  order: number
+  isQualifying: boolean
+}
+
+export interface QuizQuestionInput {
+  text: string
+  type: string
+  order: number
+  options: QuizOptionInput[]
+}
+
+export interface QuizOptionData {
+  id: string
+  questionId: string
+  text: string
+  order: number
+  isQualifying: boolean
+}
+
+export interface QuizQuestionData {
+  id: string
+  quizId: string
+  text: string
+  type: string
+  order: number
+  Options: QuizOptionData[]
+}
+
+export interface QuizData {
+  id: string
+  userId: string
+  name: string
+  description: string | null
+  publicToken: string
+  active: boolean
+  createdAt: Date
+  Questions: QuizQuestionData[]
+  _count?: { Leads: number }
+}
+
+export interface QuizAnswerInput {
+  questionId: string
+  optionId?: string
+  textValue?: string
+}
+
+export interface QuizLeadData {
+  id: string
+  quizId: string
+  name: string | null
+  email: string | null
+  phone: string | null
+  status: string
+  score: number
+  createdAt: Date
+  Answers: {
+    id: string
+    questionId: string
+    optionId: string | null
+    textValue: string | null
+    Question: { text: string; type: string }
+    Option: { text: string; isQualifying: boolean } | null
+  }[]
+}
+
+export interface QuizRepository {
+  create(data: {
+    userId: string
+    name: string
+    description?: string
+  }): Promise<{ id: string; publicToken: string }>
+  findAllByUserId(userId: string): Promise<QuizData[]>
+  findById(id: string): Promise<QuizData | null>
+  findByToken(token: string): Promise<QuizData | null>
+  delete(id: string): Promise<void>
+  saveQuestions(quizId: string, questions: QuizQuestionInput[]): Promise<void>
+}
+
+export interface QuizLeadRepository {
+  create(data: {
+    quizId: string
+    name?: string
+    email?: string
+    phone?: string
+    status: string
+    score: number
+  }): Promise<{ id: string }>
+  createAnswers(leadId: string, answers: QuizAnswerInput[]): Promise<void>
+  findAllByQuizId(quizId: string, status?: string): Promise<QuizLeadData[]>
+  delete(id: string): Promise<void>
+}

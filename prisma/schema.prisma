@@ -44,6 +44,7 @@ model User {
   SerpSearchOffsets            SerpSearchOffset[]
   EmailLists                   EmailList[]
   EmailCampaigns               EmailCampaign[]
+  Quizzes                      Quiz[]
 }
 
 
@@ -552,4 +553,68 @@ model EmailCampaign {
   createdAt   DateTime  @default(now())
   User        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   EmailList   EmailList @relation(fields: [emailListId], references: [id], onDelete: Cascade)
+}
+
+// --- Quiz de Qualificação ---
+
+model Quiz {
+  id          String         @id @default(uuid())
+  userId      String
+  name        String
+  description String?
+  publicToken String         @unique @default(uuid())
+  active      Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  User        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Questions   QuizQuestion[]
+  Leads       QuizLead[]
+}
+
+model QuizQuestion {
+  id      String       @id @default(uuid())
+  quizId  String
+  text    String
+  type    String
+  order   Int
+  Quiz    Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  Options QuizOption[]
+  Answers QuizAnswer[]
+}
+
+model QuizOption {
+  id           String       @id @default(uuid())
+  questionId   String
+  text         String
+  order        Int
+  isQualifying Boolean      @default(false)
+  Question     QuizQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  Answers      QuizAnswer[]
+}
+
+model QuizLead {
+  id        String       @id @default(uuid())
+  quizId    String
+  name      String?
+  email     String?
+  phone     String?
+  status    String       @default("NOT_QUALIFIED")
+  score     Int          @default(0)
+  createdAt DateTime     @default(now())
+  Quiz      Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  Answers   QuizAnswer[]
+
+  @@index([quizId])
+}
+
+model QuizAnswer {
+  id         String        @id @default(uuid())
+  leadId     String
+  questionId String
+  optionId   String?
+  textValue  String?
+  Lead       QuizLead      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  Question   QuizQuestion  @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  Option     QuizOption?   @relation(fields: [optionId], references: [id])
+
+  @@index([leadId])
 }
