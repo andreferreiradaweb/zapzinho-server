@@ -2,14 +2,22 @@ import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 import { makePublicGetQuiz } from '@/factory/quiz/make-public-get-quiz'
 import { makePublicSubmitQuiz } from '@/factory/quiz/make-public-submit-quiz'
+import { makePartialSaveQuiz } from '@/factory/quiz/make-partial-save-quiz'
 import { ResourceNotFound } from '@/error/resource-not-found'
 
 const slugParams = z.object({ slug: z.string() })
+
+const partialBody = z.object({
+  name: z.string().min(1),
+  phone: z.string().default(''),
+  email: z.string().default(''),
+})
 
 const submitBody = z.object({
   name: z.string().min(1),
   email: z.string().default(''),
   phone: z.string().default(''),
+  leadId: z.string().uuid().optional(),
   answers: z
     .array(
       z.object({
@@ -26,6 +34,18 @@ export async function publicGetQuizController(req: FastifyRequest, reply: Fastif
   try {
     const result = await makePublicGetQuiz().execute(slug)
     return reply.send(result)
+  } catch (err) {
+    if (err instanceof ResourceNotFound) return reply.status(404).send({ message: 'Quiz não encontrado' })
+    throw err
+  }
+}
+
+export async function publicPartialSaveQuizController(req: FastifyRequest, reply: FastifyReply) {
+  const { slug } = slugParams.parse(req.params)
+  const body = partialBody.parse(req.body)
+  try {
+    const result = await makePartialSaveQuiz().execute({ slug, ...body })
+    return reply.status(201).send(result)
   } catch (err) {
     if (err instanceof ResourceNotFound) return reply.status(404).send({ message: 'Quiz não encontrado' })
     throw err

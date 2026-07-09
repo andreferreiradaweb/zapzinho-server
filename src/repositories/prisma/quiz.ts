@@ -119,6 +119,13 @@ export class PrismaQuizLeadRepository implements QuizLeadRepository {
     return lead
   }
 
+  async updateLead(
+    id: string,
+    data: { status: string; score: number; name?: string; email?: string; phone?: string },
+  ): Promise<void> {
+    await prisma.quizLead.update({ where: { id }, data })
+  }
+
   async createAnswers(leadId: string, answers: QuizAnswerInput[]): Promise<void> {
     await prisma.quizAnswer.createMany({
       data: answers.map((a) => ({

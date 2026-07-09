@@ -118,6 +118,7 @@ export interface QuizLeadRepository {
     status: string
     score: number
   }): Promise<{ id: string }>
+  updateLead(id: string, data: { status: string; score: number; name?: string; email?: string; phone?: string }): Promise<void>
   createAnswers(leadId: string, answers: QuizAnswerInput[]): Promise<void>
   findAllByQuizId(quizId: string, status?: string): Promise<QuizLeadData[]>
   delete(id: string): Promise<void>

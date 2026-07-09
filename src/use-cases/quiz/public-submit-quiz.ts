@@ -7,6 +7,7 @@ interface SubmitParams {
   email: string
   phone: string
   answers: QuizAnswerInput[]
+  leadId?: string
 }
 
 function calculateQualification(
@@ -53,19 +54,35 @@ export class PublicSubmitQuizUseCase {
       return q?.type === 'WHATSAPP'
     })
 
-    const lead = await this.leadRepo.create({
-      quizId: quiz.id,
-      name: params.name,
-      email: params.email || emailAnswer?.textValue || '',
-      phone: params.phone || phoneAnswer?.textValue || '',
-      status,
-      score,
-    })
+    const resolvedEmail = params.email || emailAnswer?.textValue || ''
+    const resolvedPhone = params.phone || phoneAnswer?.textValue || ''
 
-    if (params.answers.length > 0) {
-      await this.leadRepo.createAnswers(lead.id, params.answers)
+    let leadId: string
+    if (params.leadId) {
+      await this.leadRepo.updateLead(params.leadId, {
+        status,
+        score,
+        name: params.name,
+        email: resolvedEmail,
+        phone: resolvedPhone,
+      })
+      leadId = params.leadId
+    } else {
+      const lead = await this.leadRepo.create({
+        quizId: quiz.id,
+        name: params.name,
+        email: resolvedEmail,
+        phone: resolvedPhone,
+        status,
+        score,
+      })
+      leadId = lead.id
     }
 
-    return { status, score, leadId: lead.id }
+    if (params.answers.length > 0) {
+      await this.leadRepo.createAnswers(leadId, params.answers)
+    }
+
+    return { status, score, leadId }
   }
 }
