@@ -5,6 +5,8 @@ import { ResourceNotFound } from '@/error/resource-not-found'
 
 const paramsSchema = z.object({ id: z.string().uuid() })
 
+const HEX_COLOR = /^#[0-9a-fA-F]{6}$/
+
 const bodySchema = z.object({
   welcomeMessage: z.string().default(''),
   captureNameText: z.string().default('Qual é o seu nome?'),
@@ -12,6 +14,12 @@ const bodySchema = z.object({
   capturePhoneText: z.string().default('Qual é o seu WhatsApp?'),
   captureEmail: z.boolean().default(false),
   captureEmailText: z.string().default('Qual é o seu e-mail?'),
+  resultQualifiedTitle: z.string().default('Parabéns!'),
+  resultQualifiedMsg: z.string().default('Você foi qualificado! Nossa equipe entrará em contato em breve.'),
+  resultNotQualTitle: z.string().default('Obrigado!'),
+  resultNotQualMsg: z.string().default('Agradecemos sua participação. Fique de olho em nossas novidades.'),
+  bgColor: z.string().regex(HEX_COLOR).default('#0d1b2e'),
+  primaryColor: z.string().regex(HEX_COLOR).default('#00c853'),
   questions: z.array(
     z.object({
       text: z.string().min(1),

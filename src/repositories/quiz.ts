@@ -45,6 +45,8 @@ export interface QuizData {
   resultQualifiedMsg: string
   resultNotQualTitle: string
   resultNotQualMsg: string
+  bgColor: string
+  primaryColor: string
   createdAt: Date
   Questions: QuizQuestionData[]
   _count?: { Leads: number }
@@ -86,6 +88,8 @@ export interface QuizSettings {
   resultQualifiedMsg?: string
   resultNotQualTitle?: string
   resultNotQualMsg?: string
+  bgColor?: string
+  primaryColor?: string
 }
 
 export interface QuizRepository {

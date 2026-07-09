@@ -574,6 +574,8 @@ model Quiz {
   resultQualifiedMsg    String         @default("Você foi qualificado! Nossa equipe entrará em contato em breve.")
   resultNotQualTitle    String         @default("Obrigado!")
   resultNotQualMsg      String         @default("Agradecemos sua participação. Fique de olho em nossas novidades.")
+  bgColor               String         @default("#0d1b2e")
+  primaryColor          String         @default("#00c853")
   createdAt             DateTime       @default(now())
   User             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   Questions        QuizQuestion[]

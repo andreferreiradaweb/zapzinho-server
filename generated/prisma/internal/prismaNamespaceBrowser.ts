@@ -555,6 +555,8 @@ export const QuizScalarFieldEnum = {
   resultQualifiedMsg: 'resultQualifiedMsg',
   resultNotQualTitle: 'resultNotQualTitle',
   resultNotQualMsg: 'resultNotQualMsg',
+  bgColor: 'bgColor',
+  primaryColor: 'primaryColor',
   createdAt: 'createdAt'
 } as const
 

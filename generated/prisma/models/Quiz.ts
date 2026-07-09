@@ -41,6 +41,8 @@ export type QuizMinAggregateOutputType = {
   resultQualifiedMsg: string | null
   resultNotQualTitle: string | null
   resultNotQualMsg: string | null
+  bgColor: string | null
+  primaryColor: string | null
   createdAt: Date | null
 }
 
@@ -61,6 +63,8 @@ export type QuizMaxAggregateOutputType = {
   resultQualifiedMsg: string | null
   resultNotQualTitle: string | null
   resultNotQualMsg: string | null
+  bgColor: string | null
+  primaryColor: string | null
   createdAt: Date | null
 }
 
@@ -81,6 +85,8 @@ export type QuizCountAggregateOutputType = {
   resultQualifiedMsg: number
   resultNotQualTitle: number
   resultNotQualMsg: number
+  bgColor: number
+  primaryColor: number
   createdAt: number
   _all: number
 }
@@ -103,6 +109,8 @@ export type QuizMinAggregateInputType = {
   resultQualifiedMsg?: true
   resultNotQualTitle?: true
   resultNotQualMsg?: true
+  bgColor?: true
+  primaryColor?: true
   createdAt?: true
 }
 
@@ -123,6 +131,8 @@ export type QuizMaxAggregateInputType = {
   resultQualifiedMsg?: true
   resultNotQualTitle?: true
   resultNotQualMsg?: true
+  bgColor?: true
+  primaryColor?: true
   createdAt?: true
 }
 
@@ -143,6 +153,8 @@ export type QuizCountAggregateInputType = {
   resultQualifiedMsg?: true
   resultNotQualTitle?: true
   resultNotQualMsg?: true
+  bgColor?: true
+  primaryColor?: true
   createdAt?: true
   _all?: true
 }
@@ -236,6 +248,8 @@ export type QuizGroupByOutputType = {
   resultQualifiedMsg: string
   resultNotQualTitle: string
   resultNotQualMsg: string
+  bgColor: string
+  primaryColor: string
   createdAt: Date
   _count: QuizCountAggregateOutputType | null
   _min: QuizMinAggregateOutputType | null
@@ -277,6 +291,8 @@ export type QuizWhereInput = {
   resultQualifiedMsg?: Prisma.StringFilter<"Quiz"> | string
   resultNotQualTitle?: Prisma.StringFilter<"Quiz"> | string
   resultNotQualMsg?: Prisma.StringFilter<"Quiz"> | string
+  bgColor?: Prisma.StringFilter<"Quiz"> | string
+  primaryColor?: Prisma.StringFilter<"Quiz"> | string
   createdAt?: Prisma.DateTimeFilter<"Quiz"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Questions?: Prisma.QuizQuestionListRelationFilter
@@ -300,6 +316,8 @@ export type QuizOrderByWithRelationInput = {
   resultQualifiedMsg?: Prisma.SortOrder
   resultNotQualTitle?: Prisma.SortOrder
   resultNotQualMsg?: Prisma.SortOrder
+  bgColor?: Prisma.SortOrder
+  primaryColor?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   User?: Prisma.UserOrderByWithRelationInput
   Questions?: Prisma.QuizQuestionOrderByRelationAggregateInput
@@ -326,6 +344,8 @@ export type QuizWhereUniqueInput = Prisma.AtLeast<{
   resultQualifiedMsg?: Prisma.StringFilter<"Quiz"> | string
   resultNotQualTitle?: Prisma.StringFilter<"Quiz"> | string
   resultNotQualMsg?: Prisma.StringFilter<"Quiz"> | string
+  bgColor?: Prisma.StringFilter<"Quiz"> | string
+  primaryColor?: Prisma.StringFilter<"Quiz"> | string
   createdAt?: Prisma.DateTimeFilter<"Quiz"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Questions?: Prisma.QuizQuestionListRelationFilter
@@ -349,6 +369,8 @@ export type QuizOrderByWithAggregationInput = {
   resultQualifiedMsg?: Prisma.SortOrder
   resultNotQualTitle?: Prisma.SortOrder
   resultNotQualMsg?: Prisma.SortOrder
+  bgColor?: Prisma.SortOrder
+  primaryColor?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.QuizCountOrderByAggregateInput
   _max?: Prisma.QuizMaxOrderByAggregateInput
@@ -375,6 +397,8 @@ export type QuizScalarWhereWithAggregatesInput = {
   resultQualifiedMsg?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
   resultNotQualTitle?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
   resultNotQualMsg?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
+  bgColor?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
+  primaryColor?: Prisma.StringWithAggregatesFilter<"Quiz"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Quiz"> | Date | string
 }
 
@@ -394,6 +418,8 @@ export type QuizCreateInput = {
   resultQualifiedMsg?: string
   resultNotQualTitle?: string
   resultNotQualMsg?: string
+  bgColor?: string
+  primaryColor?: string
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutQuizzesInput
   Questions?: Prisma.QuizQuestionCreateNestedManyWithoutQuizInput
@@ -417,6 +443,8 @@ export type QuizUncheckedCreateInput = {
   resultQualifiedMsg?: string
   resultNotQualTitle?: string
   resultNotQualMsg?: string
+  bgColor?: string
+  primaryColor?: string
   createdAt?: Date | string
   Questions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutQuizInput
   Leads?: Prisma.QuizLeadUncheckedCreateNestedManyWithoutQuizInput
@@ -438,6 +466,8 @@ export type QuizUpdateInput = {
   resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  bgColor?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutQuizzesNestedInput
   Questions?: Prisma.QuizQuestionUpdateManyWithoutQuizNestedInput
@@ -461,6 +491,8 @@ export type QuizUncheckedUpdateInput = {
   resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  bgColor?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Questions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutQuizNestedInput
   Leads?: Prisma.QuizLeadUncheckedUpdateManyWithoutQuizNestedInput
@@ -483,6 +515,8 @@ export type QuizCreateManyInput = {
   resultQualifiedMsg?: string
   resultNotQualTitle?: string
   resultNotQualMsg?: string
+  bgColor?: string
+  primaryColor?: string
   createdAt?: Date | string
 }
 
@@ -502,6 +536,8 @@ export type QuizUpdateManyMutationInput = {
   resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  bgColor?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -522,6 +558,8 @@ export type QuizUncheckedUpdateManyInput = {
   resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  bgColor?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -552,6 +590,8 @@ export type QuizCountOrderByAggregateInput = {
   resultQualifiedMsg?: Prisma.SortOrder
   resultNotQualTitle?: Prisma.SortOrder
   resultNotQualMsg?: Prisma.SortOrder
+  bgColor?: Prisma.SortOrder
+  primaryColor?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -572,6 +612,8 @@ export type QuizMaxOrderByAggregateInput = {
   resultQualifiedMsg?: Prisma.SortOrder
   resultNotQualTitle?: Prisma.SortOrder
   resultNotQualMsg?: Prisma.SortOrder
+  bgColor?: Prisma.SortOrder
+  primaryColor?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -592,6 +634,8 @@ export type QuizMinOrderByAggregateInput = {
   resultQualifiedMsg?: Prisma.SortOrder
   resultNotQualTitle?: Prisma.SortOrder
   resultNotQualMsg?: Prisma.SortOrder
+  bgColor?: Prisma.SortOrder
+  primaryColor?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -686,6 +730,8 @@ export type QuizCreateWithoutUserInput = {
   resultQualifiedMsg?: string
   resultNotQualTitle?: string
   resultNotQualMsg?: string
+  bgColor?: string
+  primaryColor?: string
   createdAt?: Date | string
   Questions?: Prisma.QuizQuestionCreateNestedManyWithoutQuizInput
   Leads?: Prisma.QuizLeadCreateNestedManyWithoutQuizInput
@@ -707,6 +753,8 @@ export type QuizUncheckedCreateWithoutUserInput = {
   resultQualifiedMsg?: string
   resultNotQualTitle?: string
   resultNotQualMsg?: string
+  bgColor?: string
+  primaryColor?: string
   createdAt?: Date | string
   Questions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutQuizInput
   Leads?: Prisma.QuizLeadUncheckedCreateNestedManyWithoutQuizInput
@@ -758,6 +806,8 @@ export type QuizScalarWhereInput = {
   resultQualifiedMsg?: Prisma.StringFilter<"Quiz"> | string
   resultNotQualTitle?: Prisma.StringFilter<"Quiz"> | string
   resultNotQualMsg?: Prisma.StringFilter<"Quiz"> | string
+  bgColor?: Prisma.StringFilter<"Quiz"> | string
+  primaryColor?: Prisma.StringFilter<"Quiz"> | string
   createdAt?: Prisma.DateTimeFilter<"Quiz"> | Date | string
 }
 
@@ -777,6 +827,8 @@ export type QuizCreateWithoutQuestionsInput = {
   resultQualifiedMsg?: string
   resultNotQualTitle?: string
   resultNotQualMsg?: string
+  bgColor?: string
+  primaryColor?: string
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutQuizzesInput
   Leads?: Prisma.QuizLeadCreateNestedManyWithoutQuizInput
@@ -799,6 +851,8 @@ export type QuizUncheckedCreateWithoutQuestionsInput = {
   resultQualifiedMsg?: string
   resultNotQualTitle?: string
   resultNotQualMsg?: string
+  bgColor?: string
+  primaryColor?: string
   createdAt?: Date | string
   Leads?: Prisma.QuizLeadUncheckedCreateNestedManyWithoutQuizInput
 }
@@ -835,6 +889,8 @@ export type QuizUpdateWithoutQuestionsInput = {
   resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  bgColor?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutQuizzesNestedInput
   Leads?: Prisma.QuizLeadUpdateManyWithoutQuizNestedInput
@@ -857,6 +913,8 @@ export type QuizUncheckedUpdateWithoutQuestionsInput = {
   resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  bgColor?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Leads?: Prisma.QuizLeadUncheckedUpdateManyWithoutQuizNestedInput
 }
@@ -877,6 +935,8 @@ export type QuizCreateWithoutLeadsInput = {
   resultQualifiedMsg?: string
   resultNotQualTitle?: string
   resultNotQualMsg?: string
+  bgColor?: string
+  primaryColor?: string
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutQuizzesInput
   Questions?: Prisma.QuizQuestionCreateNestedManyWithoutQuizInput
@@ -899,6 +959,8 @@ export type QuizUncheckedCreateWithoutLeadsInput = {
   resultQualifiedMsg?: string
   resultNotQualTitle?: string
   resultNotQualMsg?: string
+  bgColor?: string
+  primaryColor?: string
   createdAt?: Date | string
   Questions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutQuizInput
 }
@@ -935,6 +997,8 @@ export type QuizUpdateWithoutLeadsInput = {
   resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  bgColor?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutQuizzesNestedInput
   Questions?: Prisma.QuizQuestionUpdateManyWithoutQuizNestedInput
@@ -957,6 +1021,8 @@ export type QuizUncheckedUpdateWithoutLeadsInput = {
   resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  bgColor?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Questions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutQuizNestedInput
 }
@@ -977,6 +1043,8 @@ export type QuizCreateManyUserInput = {
   resultQualifiedMsg?: string
   resultNotQualTitle?: string
   resultNotQualMsg?: string
+  bgColor?: string
+  primaryColor?: string
   createdAt?: Date | string
 }
 
@@ -996,6 +1064,8 @@ export type QuizUpdateWithoutUserInput = {
   resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  bgColor?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Questions?: Prisma.QuizQuestionUpdateManyWithoutQuizNestedInput
   Leads?: Prisma.QuizLeadUpdateManyWithoutQuizNestedInput
@@ -1017,6 +1087,8 @@ export type QuizUncheckedUpdateWithoutUserInput = {
   resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  bgColor?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Questions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutQuizNestedInput
   Leads?: Prisma.QuizLeadUncheckedUpdateManyWithoutQuizNestedInput
@@ -1038,6 +1110,8 @@ export type QuizUncheckedUpdateManyWithoutUserInput = {
   resultQualifiedMsg?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualTitle?: Prisma.StringFieldUpdateOperationsInput | string
   resultNotQualMsg?: Prisma.StringFieldUpdateOperationsInput | string
+  bgColor?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1098,6 +1172,8 @@ export type QuizSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   resultQualifiedMsg?: boolean
   resultNotQualTitle?: boolean
   resultNotQualMsg?: boolean
+  bgColor?: boolean
+  primaryColor?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Questions?: boolean | Prisma.Quiz$QuestionsArgs<ExtArgs>
@@ -1122,6 +1198,8 @@ export type QuizSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   resultQualifiedMsg?: boolean
   resultNotQualTitle?: boolean
   resultNotQualMsg?: boolean
+  bgColor?: boolean
+  primaryColor?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["quiz"]>
@@ -1143,6 +1221,8 @@ export type QuizSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   resultQualifiedMsg?: boolean
   resultNotQualTitle?: boolean
   resultNotQualMsg?: boolean
+  bgColor?: boolean
+  primaryColor?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["quiz"]>
@@ -1164,10 +1244,12 @@ export type QuizSelectScalar = {
   resultQualifiedMsg?: boolean
   resultNotQualTitle?: boolean
   resultNotQualMsg?: boolean
+  bgColor?: boolean
+  primaryColor?: boolean
   createdAt?: boolean
 }
 
-export type QuizOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "description" | "publicToken" | "active" | "welcomeMessage" | "captureNameText" | "capturePhone" | "capturePhoneText" | "captureEmail" | "captureEmailText" | "resultQualifiedTitle" | "resultQualifiedMsg" | "resultNotQualTitle" | "resultNotQualMsg" | "createdAt", ExtArgs["result"]["quiz"]>
+export type QuizOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "description" | "publicToken" | "active" | "welcomeMessage" | "captureNameText" | "capturePhone" | "capturePhoneText" | "captureEmail" | "captureEmailText" | "resultQualifiedTitle" | "resultQualifiedMsg" | "resultNotQualTitle" | "resultNotQualMsg" | "bgColor" | "primaryColor" | "createdAt", ExtArgs["result"]["quiz"]>
 export type QuizInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Questions?: boolean | Prisma.Quiz$QuestionsArgs<ExtArgs>
@@ -1205,6 +1287,8 @@ export type $QuizPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     resultQualifiedMsg: string
     resultNotQualTitle: string
     resultNotQualMsg: string
+    bgColor: string
+    primaryColor: string
     createdAt: Date
   }, ExtArgs["result"]["quiz"]>
   composites: {}
@@ -1648,6 +1732,8 @@ export interface QuizFieldRefs {
   readonly resultQualifiedMsg: Prisma.FieldRef<"Quiz", 'String'>
   readonly resultNotQualTitle: Prisma.FieldRef<"Quiz", 'String'>
   readonly resultNotQualMsg: Prisma.FieldRef<"Quiz", 'String'>
+  readonly bgColor: Prisma.FieldRef<"Quiz", 'String'>
+  readonly primaryColor: Prisma.FieldRef<"Quiz", 'String'>
   readonly createdAt: Prisma.FieldRef<"Quiz", 'DateTime'>
 }
     
