@@ -74,7 +74,11 @@ export async function whatsappWebhookController(
     return reply.status(200).send({ ok: true, reason: 'group_message_ignored' })
   }
 
-  const phone = normalizePhone(chat.id)
+  // W-API now sends chat.id in @lid format for some accounts. When that happens,
+  // the real phone number is in sender.id instead.
+  const rawPhone =
+    chat.id.includes('@lid') && sender?.id ? sender.id : chat.id
+  const phone = normalizePhone(rawPhone)
   const name = sender?.pushName ?? phone
   const message = msgContent?.conversation ?? ''
 
