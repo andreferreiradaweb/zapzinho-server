@@ -29,6 +29,14 @@ const bodySchema = z.discriminatedUnion('type', [
     listName: z.string(),
     categories: z.array(z.string()).optional(),
   }),
+  z.object({
+    type: z.literal('quiz-builder'),
+    quizName: z.string(),
+    businessDescription: z.string(),
+    capturePhone: z.boolean().default(false),
+    captureEmail: z.boolean().default(false),
+    questionCount: z.number().int().min(2).max(8).default(4),
+  }),
 ])
 
 function buildPrompt(body: z.infer<typeof bodySchema>): string {
@@ -113,6 +121,49 @@ A mensagem deve:
 - Pode incluir um emoji leve
 
 Responda APENAS com o texto da mensagem, sem aspas, sem explicações.`
+    }
+
+    case 'quiz-builder': {
+      const captureLines = ['- Nome (obrigatório)']
+      if (body.capturePhone) captureLines.push('- Telefone/WhatsApp')
+      if (body.captureEmail) captureLines.push('- E-mail')
+
+      const phoneField = body.capturePhone
+        ? `\n  "capturePhoneText": "Qual é o seu WhatsApp?",`
+        : ''
+      const emailField = body.captureEmail
+        ? `\n  "captureEmailText": "Qual é o seu e-mail?",`
+        : ''
+
+      return `Você é um especialista em marketing de qualificação de leads no Brasil.
+
+Gere um quiz de qualificação completo com base nas informações abaixo:
+- Nome do quiz: ${body.quizName}
+- Descrição do negócio/produto: ${body.businessDescription}
+
+O quiz deve capturar os seguintes dados do visitante:
+${captureLines.join('\n')}
+
+O quiz deve ter exatamente ${body.questionCount} perguntas de múltipla escolha (type RADIO) que ajudem a qualificar o lead. Cada pergunta deve ter de 2 a 4 opções. Marque isQualifying: true nas opções que indicam que o lead é qualificado para o negócio.
+
+Responda APENAS com um JSON válido neste formato exato, sem markdown, sem backticks, sem nenhum texto adicional:
+{
+  "welcomeMessage": "mensagem de boas-vindas amigável e contextualizada",
+  "captureNameText": "pergunta para capturar o nome",${phoneField}${emailField}
+  "questions": [
+    {
+      "text": "texto da pergunta",
+      "options": [
+        { "text": "opção qualificada", "isQualifying": true },
+        { "text": "opção não qualificada", "isQualifying": false }
+      ]
+    }
+  ],
+  "resultQualifiedTitle": "título da tela de qualificado",
+  "resultQualifiedMsg": "mensagem para lead qualificado — próximos passos",
+  "resultNotQualTitle": "título da tela de não qualificado",
+  "resultNotQualMsg": "mensagem gentil para lead não qualificado"
+}`
     }
   }
 }

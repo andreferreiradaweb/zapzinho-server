@@ -8,6 +8,7 @@ const paramsSchema = z.object({ id: z.string().uuid() })
 const HEX_COLOR = /^#[0-9a-fA-F]{6}$/
 
 const bodySchema = z.object({
+  name: z.string().min(1).optional(),
   welcomeMessage: z.string().default(''),
   captureNameText: z.string().default('Qual é o seu nome?'),
   capturePhone: z.boolean().default(false),

@@ -79,6 +79,7 @@ export interface QuizLeadData {
 }
 
 export interface QuizSettings {
+  name?: string
   welcomeMessage?: string
   captureNameText?: string
   capturePhone?: boolean
