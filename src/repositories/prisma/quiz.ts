@@ -76,7 +76,24 @@ export class PrismaQuizRepository implements QuizRepository {
   }
 
   async update(id: string, data: QuizSettings): Promise<void> {
-    await prisma.quiz.update({ where: { id }, data })
+    await prisma.quiz.update({
+      where: { id },
+      data: {
+        ...(data.name !== undefined && { name: data.name }),
+        ...(data.welcomeMessage !== undefined && { welcomeMessage: data.welcomeMessage }),
+        ...(data.captureNameText !== undefined && { captureNameText: data.captureNameText }),
+        ...(data.capturePhone !== undefined && { capturePhone: data.capturePhone }),
+        ...(data.capturePhoneText !== undefined && { capturePhoneText: data.capturePhoneText }),
+        ...(data.captureEmail !== undefined && { captureEmail: data.captureEmail }),
+        ...(data.captureEmailText !== undefined && { captureEmailText: data.captureEmailText }),
+        ...(data.resultQualifiedTitle !== undefined && { resultQualifiedTitle: data.resultQualifiedTitle }),
+        ...(data.resultQualifiedMsg !== undefined && { resultQualifiedMsg: data.resultQualifiedMsg }),
+        ...(data.resultNotQualTitle !== undefined && { resultNotQualTitle: data.resultNotQualTitle }),
+        ...(data.resultNotQualMsg !== undefined && { resultNotQualMsg: data.resultNotQualMsg }),
+        ...(data.bgColor !== undefined && { bgColor: data.bgColor }),
+        ...(data.primaryColor !== undefined && { primaryColor: data.primaryColor }),
+      },
+    })
   }
 
   async saveQuestions(quizId: string, questions: QuizQuestionInput[]): Promise<void> {
