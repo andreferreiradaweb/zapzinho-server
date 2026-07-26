@@ -13,6 +13,7 @@ interface ListLeadsRequestQuery {
   phone?: string
   productId?: string
   categoryId?: string
+  origin?: string
 }
 
 export async function ListLeadsController(
@@ -22,7 +23,7 @@ export async function ListLeadsController(
   reply: FastifyReply,
 ) {
   const { sub } = request.user
-  const { page, limit, search, status, startDate, endDate, phone, productId, categoryId } = request.query
+  const { page, limit, search, status, startDate, endDate, phone, productId, categoryId, origin } = request.query
   try {
     const listLeadsUseCase = ListLeadsFactory()
     const leads = await listLeadsUseCase.execute({
@@ -36,6 +37,7 @@ export async function ListLeadsController(
       phone,
       productId,
       categoryId,
+      origin,
     })
 
     return reply.status(200).send(leads)

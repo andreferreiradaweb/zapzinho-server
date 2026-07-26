@@ -14,6 +14,7 @@ interface ListLeadsUseCaseRequest {
   phone?: string
   productId?: string
   categoryId?: string
+  origin?: string
 }
 
 interface ListLeadsUseCaseResponse {
@@ -40,6 +41,7 @@ export class ListLeadsUseCase {
     phone,
     productId,
     categoryId,
+    origin,
   }: ListLeadsUseCaseRequest): Promise<ListLeadsUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(userId)
 
@@ -56,6 +58,7 @@ export class ListLeadsUseCase {
       phone,
       productId,
       categoryId,
+      origin,
     )
 
     const offset = (page - 1) * limit
@@ -71,6 +74,7 @@ export class ListLeadsUseCase {
       phone,
       productId,
       categoryId,
+      origin,
     )
 
     return {

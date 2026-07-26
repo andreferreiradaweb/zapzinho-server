@@ -85,6 +85,7 @@ export class PrismaLeadRepository implements LeadRepository {
     phone?: string,
     productId?: string,
     categoryId?: string,
+    origin?: string,
   ) {
     const where: Prisma.LeadWhereInput = { userId }
 
@@ -102,6 +103,7 @@ export class PrismaLeadRepository implements LeadRepository {
       { Product: { categoryId } },
     ]})
     if (phone) where.telefone = { contains: phone.replace(/\D/g, '') }
+    if (origin) where.origin = { contains: origin, mode: 'insensitive' }
     if (startDate && endDate) {
       where.createdAt = { gte: new Date(startDate), lte: new Date(endDate) }
     }
@@ -136,6 +138,7 @@ export class PrismaLeadRepository implements LeadRepository {
     phone?: string,
     productId?: string,
     categoryId?: string,
+    origin?: string,
   ) {
     const where: Prisma.LeadWhereInput = { userId }
     const andConditions: Prisma.LeadWhereInput[] = []
@@ -152,6 +155,7 @@ export class PrismaLeadRepository implements LeadRepository {
       { Product: { categoryId } },
     ]})
     if (phone) where.telefone = { contains: phone.replace(/\D/g, '') }
+    if (origin) where.origin = { contains: origin, mode: 'insensitive' }
     if (startDate && endDate) {
       where.createdAt = { gte: new Date(startDate), lte: new Date(endDate) }
     }

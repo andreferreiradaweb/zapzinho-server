@@ -17,6 +17,7 @@ type LeadRecord = {
   deliveryDate: Date | null
   delivered: boolean
   createdAt: Date
+  origin: string | null
 }
 
 export class InMemoryLeadRepository implements LeadRepository {
@@ -33,17 +34,47 @@ export class InMemoryLeadRepository implements LeadRepository {
     )
   }
 
-  async countByUserId(userId: string, search: string): Promise<number> {
-    return this.items.filter((l) => l.userId === userId && l.nome.includes(search)).length
+  async countByUserId(
+    userId: string,
+    search: string,
+    _status?: string,
+    _startDate?: string,
+    _endDate?: string,
+    _phone?: string,
+    _productId?: string,
+    _categoryId?: string,
+    origin?: string,
+  ): Promise<number> {
+    return this.items.filter((l) =>
+      l.userId === userId &&
+      l.nome.includes(search) &&
+      (!origin || (l.origin ?? '').toLowerCase().includes(origin.toLowerCase())),
+    ).length
   }
 
-  async filterManyByUserId(userId: string, offset: number, limit: number, search: string): Promise<any[]> {
+  async filterManyByUserId(
+    userId: string,
+    offset: number,
+    limit: number,
+    search: string,
+    _status?: string,
+    _startDate?: string,
+    _endDate?: string,
+    _phone?: string,
+    _productId?: string,
+    _categoryId?: string,
+    origin?: string,
+  ): Promise<any[]> {
     return this.items
-      .filter((l) => l.userId === userId && l.nome.includes(search))
+      .filter((l) =>
+        l.userId === userId &&
+        l.nome.includes(search) &&
+        (!origin || (l.origin ?? '').toLowerCase().includes(origin.toLowerCase())),
+      )
       .slice(offset, offset + limit)
   }
 
-  async upsertByPhone(params: { userId: string; phone: string; name: string; message: string }): Promise<any> {
+  async upsertByPhone(params: { userId: string; phone: string; name: string; message: string; origin?: string }): Promise<any> {
     const existing = this.items.find((l) => l.userId === params.userId && l.telefone === params.phone)
     if (existing) {
       existing.message = params.message
@@ -55,6 +86,7 @@ export class InMemoryLeadRepository implements LeadRepository {
       nome: params.name,
       message: params.message,
       Status: 'NOVO_INTERESSE',
+      origin: params.origin,
     })
     return { lead, created: true }
   }
@@ -83,6 +115,7 @@ export class InMemoryLeadRepository implements LeadRepository {
       deliveryDate: null,
       delivered: false,
       createdAt: data.createdAt ?? new Date(),
+      origin: data.origin ?? null,
     }
     this.items.push(lead)
     return lead

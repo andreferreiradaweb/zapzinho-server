@@ -157,6 +157,42 @@ describe('Rotas de lead (HTTP)', () => {
       const response = await app.inject({ method: 'GET', url: '/lead' })
       expect(response.statusCode).toBe(401)
     })
+
+    it('filtra por origem (origin)', async () => {
+      await userRepo.create({
+        id: 'origin-filter-owner',
+        email: 'origemfiltro@empresa.com',
+        passwordHash: await hash('Empresa123', 6),
+        Role: 'CLIENT',
+        CustomerType: 'B2C',
+        isActive: true,
+        emailVerified: true,
+        phoneNumber: '5585999990000',
+      })
+      const originOwnerToken = await getAuthToken('origemfiltro@empresa.com', 'Empresa123')
+
+      await app.inject({
+        method: 'POST',
+        url: '/lead/whatsapp',
+        payload: { storePhone: '5585999990000', customername: 'Lead Site A', whatsappnumber: '85911110001', origin: 'Newsletter Terzon' },
+      })
+      await app.inject({
+        method: 'POST',
+        url: '/lead/whatsapp',
+        payload: { storePhone: '5585999990000', customername: 'Lead Site B', whatsappnumber: '85911110002', origin: 'Outra origem' },
+      })
+
+      const response = await app.inject({
+        method: 'GET',
+        url: '/lead?origin=Newsletter Terzon',
+        headers: { authorization: `Bearer ${originOwnerToken}` },
+      })
+
+      expect(response.statusCode).toBe(200)
+      const body = response.json()
+      expect(body.leads).toHaveLength(1)
+      expect(body.leads[0].nome).toBe('Lead Site A')
+    })
   })
 
   describe('PUT /lead', () => {

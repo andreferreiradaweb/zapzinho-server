@@ -14,6 +14,7 @@ export interface LeadRepository {
     phone?: string,
     productId?: string,
     categoryId?: string,
+    origin?: string,
   ): Promise<number>
   filterManyByUserId(
     userId: string,
@@ -26,6 +27,7 @@ export interface LeadRepository {
     phone?: string,
     productId?: string,
     categoryId?: string,
+    origin?: string,
   ): Promise<Lead[]>
   upsertByPhone(params: { userId: string; phone: string; name: string; message: string; origin?: string }): Promise<{ lead: Lead; created: boolean }>
   delete(id: string): Promise<Lead>
