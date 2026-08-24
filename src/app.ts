@@ -23,6 +23,8 @@ import { aiRoutes } from './http/controllers/ai/routes'
 import { emailRoutes } from './http/controllers/email/routes'
 import { quizRoutes } from './http/controllers/quiz/routes'
 import { publicRoutes } from './http/controllers/public/routes'
+import { documentRoutes } from './http/controllers/document/routes'
+import { mediaAssetRoutes } from './http/controllers/media-asset/routes'
 
 export const app = fastify()
 
@@ -35,7 +37,7 @@ app.register(fastifyCors, {
     env.NODE_ENV === 'production'
       ? [env.FRONTEND_URL, ...env.WEBHOOK_CALLERS.split(',').map((s) => s.trim()).filter(Boolean), /localhost:\d+$/]
       : true,
-  methods: ['GET', 'PUT', 'POST', 'DELETE'],
+  methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
   credentials: true,
 })
 
@@ -71,6 +73,8 @@ app.register(aiRoutes)
 app.register(emailRoutes)
 app.register(quizRoutes)
 app.register(publicRoutes)
+app.register(documentRoutes)
+app.register(mediaAssetRoutes)
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {

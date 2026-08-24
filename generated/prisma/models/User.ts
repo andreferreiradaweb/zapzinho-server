@@ -54,6 +54,7 @@ export type UserMinAggregateOutputType = {
   prospectingToken: string | null
   prospectingDailyLimit: number | null
   createdAt: Date | null
+  ragAutoReplyEnabled: boolean | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -76,6 +77,7 @@ export type UserMaxAggregateOutputType = {
   prospectingToken: string | null
   prospectingDailyLimit: number | null
   createdAt: Date | null
+  ragAutoReplyEnabled: boolean | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -99,6 +101,7 @@ export type UserCountAggregateOutputType = {
   prospectingDailyLimit: number
   modules: number
   createdAt: number
+  ragAutoReplyEnabled: number
   _all: number
 }
 
@@ -131,6 +134,7 @@ export type UserMinAggregateInputType = {
   prospectingToken?: true
   prospectingDailyLimit?: true
   createdAt?: true
+  ragAutoReplyEnabled?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -153,6 +157,7 @@ export type UserMaxAggregateInputType = {
   prospectingToken?: true
   prospectingDailyLimit?: true
   createdAt?: true
+  ragAutoReplyEnabled?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -176,6 +181,7 @@ export type UserCountAggregateInputType = {
   prospectingDailyLimit?: true
   modules?: true
   createdAt?: true
+  ragAutoReplyEnabled?: true
   _all?: true
 }
 
@@ -286,6 +292,7 @@ export type UserGroupByOutputType = {
   prospectingDailyLimit: number | null
   modules: string[]
   createdAt: Date
+  ragAutoReplyEnabled: boolean
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -332,6 +339,7 @@ export type UserWhereInput = {
   prospectingDailyLimit?: Prisma.IntNullableFilter<"User"> | number | null
   modules?: Prisma.StringNullableListFilter<"User">
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFilter<"User"> | boolean
   Products?: Prisma.ProductListRelationFilter
   ProductCategories?: Prisma.ProductCategoryListRelationFilter
   Leads?: Prisma.LeadListRelationFilter
@@ -350,6 +358,8 @@ export type UserWhereInput = {
   EmailLists?: Prisma.EmailListListRelationFilter
   EmailCampaigns?: Prisma.EmailCampaignListRelationFilter
   Quizzes?: Prisma.QuizListRelationFilter
+  Documents?: Prisma.DocumentListRelationFilter
+  MediaAssets?: Prisma.MediaAssetListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -373,6 +383,7 @@ export type UserOrderByWithRelationInput = {
   prospectingDailyLimit?: Prisma.SortOrderInput | Prisma.SortOrder
   modules?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  ragAutoReplyEnabled?: Prisma.SortOrder
   Products?: Prisma.ProductOrderByRelationAggregateInput
   ProductCategories?: Prisma.ProductCategoryOrderByRelationAggregateInput
   Leads?: Prisma.LeadOrderByRelationAggregateInput
@@ -391,6 +402,8 @@ export type UserOrderByWithRelationInput = {
   EmailLists?: Prisma.EmailListOrderByRelationAggregateInput
   EmailCampaigns?: Prisma.EmailCampaignOrderByRelationAggregateInput
   Quizzes?: Prisma.QuizOrderByRelationAggregateInput
+  Documents?: Prisma.DocumentOrderByRelationAggregateInput
+  MediaAssets?: Prisma.MediaAssetOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -417,6 +430,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   prospectingDailyLimit?: Prisma.IntNullableFilter<"User"> | number | null
   modules?: Prisma.StringNullableListFilter<"User">
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFilter<"User"> | boolean
   Products?: Prisma.ProductListRelationFilter
   ProductCategories?: Prisma.ProductCategoryListRelationFilter
   Leads?: Prisma.LeadListRelationFilter
@@ -435,6 +449,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   EmailLists?: Prisma.EmailListListRelationFilter
   EmailCampaigns?: Prisma.EmailCampaignListRelationFilter
   Quizzes?: Prisma.QuizListRelationFilter
+  Documents?: Prisma.DocumentListRelationFilter
+  MediaAssets?: Prisma.MediaAssetListRelationFilter
 }, "id" | "email" | "wapiInstanceId">
 
 export type UserOrderByWithAggregationInput = {
@@ -458,6 +474,7 @@ export type UserOrderByWithAggregationInput = {
   prospectingDailyLimit?: Prisma.SortOrderInput | Prisma.SortOrder
   modules?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  ragAutoReplyEnabled?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -489,6 +506,7 @@ export type UserScalarWhereWithAggregatesInput = {
   prospectingDailyLimit?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   modules?: Prisma.StringNullableListFilter<"User">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
 }
 
 export type UserCreateInput = {
@@ -512,6 +530,7 @@ export type UserCreateInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -530,6 +549,8 @@ export type UserCreateInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -553,6 +574,7 @@ export type UserUncheckedCreateInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -571,6 +593,8 @@ export type UserUncheckedCreateInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -594,6 +618,7 @@ export type UserUpdateInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -612,6 +637,8 @@ export type UserUpdateInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -635,6 +662,7 @@ export type UserUncheckedUpdateInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -653,6 +681,8 @@ export type UserUncheckedUpdateInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -676,6 +706,7 @@ export type UserCreateManyInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
 }
 
 export type UserUpdateManyMutationInput = {
@@ -699,6 +730,7 @@ export type UserUpdateManyMutationInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -722,6 +754,7 @@ export type UserUncheckedUpdateManyInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type StringNullableListFilter<$PrismaModel = never> = {
@@ -753,6 +786,7 @@ export type UserCountOrderByAggregateInput = {
   prospectingDailyLimit?: Prisma.SortOrder
   modules?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  ragAutoReplyEnabled?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -779,6 +813,7 @@ export type UserMaxOrderByAggregateInput = {
   prospectingToken?: Prisma.SortOrder
   prospectingDailyLimit?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  ragAutoReplyEnabled?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -801,6 +836,7 @@ export type UserMinOrderByAggregateInput = {
   prospectingToken?: Prisma.SortOrder
   prospectingDailyLimit?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  ragAutoReplyEnabled?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -1113,6 +1149,34 @@ export type UserUpdateOneRequiredWithoutQuizzesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutQuizzesInput, Prisma.UserUpdateWithoutQuizzesInput>, Prisma.UserUncheckedUpdateWithoutQuizzesInput>
 }
 
+export type UserCreateNestedOneWithoutDocumentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDocumentsInput, Prisma.UserUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDocumentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDocumentsInput, Prisma.UserUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDocumentsInput
+  upsert?: Prisma.UserUpsertWithoutDocumentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDocumentsInput, Prisma.UserUpdateWithoutDocumentsInput>, Prisma.UserUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type UserCreateNestedOneWithoutMediaAssetsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMediaAssetsInput, Prisma.UserUncheckedCreateWithoutMediaAssetsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMediaAssetsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMediaAssetsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMediaAssetsInput, Prisma.UserUncheckedCreateWithoutMediaAssetsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMediaAssetsInput
+  upsert?: Prisma.UserUpsertWithoutMediaAssetsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMediaAssetsInput, Prisma.UserUpdateWithoutMediaAssetsInput>, Prisma.UserUncheckedUpdateWithoutMediaAssetsInput>
+}
+
 export type UserCreateWithoutProductCategoriesInput = {
   id?: string
   email: string
@@ -1134,6 +1198,7 @@ export type UserCreateWithoutProductCategoriesInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
@@ -1151,6 +1216,8 @@ export type UserCreateWithoutProductCategoriesInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProductCategoriesInput = {
@@ -1174,6 +1241,7 @@ export type UserUncheckedCreateWithoutProductCategoriesInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
@@ -1191,6 +1259,8 @@ export type UserUncheckedCreateWithoutProductCategoriesInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProductCategoriesInput = {
@@ -1230,6 +1300,7 @@ export type UserUpdateWithoutProductCategoriesInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
@@ -1247,6 +1318,8 @@ export type UserUpdateWithoutProductCategoriesInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProductCategoriesInput = {
@@ -1270,6 +1343,7 @@ export type UserUncheckedUpdateWithoutProductCategoriesInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
@@ -1287,6 +1361,8 @@ export type UserUncheckedUpdateWithoutProductCategoriesInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProductsInput = {
@@ -1310,6 +1386,7 @@ export type UserCreateWithoutProductsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
@@ -1327,6 +1404,8 @@ export type UserCreateWithoutProductsInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProductsInput = {
@@ -1350,6 +1429,7 @@ export type UserUncheckedCreateWithoutProductsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
@@ -1367,6 +1447,8 @@ export type UserUncheckedCreateWithoutProductsInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProductsInput = {
@@ -1406,6 +1488,7 @@ export type UserUpdateWithoutProductsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
@@ -1423,6 +1506,8 @@ export type UserUpdateWithoutProductsInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProductsInput = {
@@ -1446,6 +1531,7 @@ export type UserUncheckedUpdateWithoutProductsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
@@ -1463,6 +1549,8 @@ export type UserUncheckedUpdateWithoutProductsInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLeadsInput = {
@@ -1486,6 +1574,7 @@ export type UserCreateWithoutLeadsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
@@ -1503,6 +1592,8 @@ export type UserCreateWithoutLeadsInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLeadsInput = {
@@ -1526,6 +1617,7 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
@@ -1543,6 +1635,8 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLeadsInput = {
@@ -1582,6 +1676,7 @@ export type UserUpdateWithoutLeadsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
@@ -1599,6 +1694,8 @@ export type UserUpdateWithoutLeadsInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeadsInput = {
@@ -1622,6 +1719,7 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
@@ -1639,6 +1737,8 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLeadSalesInput = {
@@ -1662,6 +1762,7 @@ export type UserCreateWithoutLeadSalesInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -1679,6 +1780,8 @@ export type UserCreateWithoutLeadSalesInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLeadSalesInput = {
@@ -1702,6 +1805,7 @@ export type UserUncheckedCreateWithoutLeadSalesInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -1719,6 +1823,8 @@ export type UserUncheckedCreateWithoutLeadSalesInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLeadSalesInput = {
@@ -1758,6 +1864,7 @@ export type UserUpdateWithoutLeadSalesInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -1775,6 +1882,8 @@ export type UserUpdateWithoutLeadSalesInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeadSalesInput = {
@@ -1798,6 +1907,7 @@ export type UserUncheckedUpdateWithoutLeadSalesInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -1815,6 +1925,8 @@ export type UserUncheckedUpdateWithoutLeadSalesInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMessageTemplatesInput = {
@@ -1838,6 +1950,7 @@ export type UserCreateWithoutMessageTemplatesInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -1855,6 +1968,8 @@ export type UserCreateWithoutMessageTemplatesInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMessageTemplatesInput = {
@@ -1878,6 +1993,7 @@ export type UserUncheckedCreateWithoutMessageTemplatesInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -1895,6 +2011,8 @@ export type UserUncheckedCreateWithoutMessageTemplatesInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMessageTemplatesInput = {
@@ -1934,6 +2052,7 @@ export type UserUpdateWithoutMessageTemplatesInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -1951,6 +2070,8 @@ export type UserUpdateWithoutMessageTemplatesInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMessageTemplatesInput = {
@@ -1974,6 +2095,7 @@ export type UserUncheckedUpdateWithoutMessageTemplatesInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -1991,6 +2113,8 @@ export type UserUncheckedUpdateWithoutMessageTemplatesInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBroadcastsInput = {
@@ -2014,6 +2138,7 @@ export type UserCreateWithoutBroadcastsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -2031,6 +2156,8 @@ export type UserCreateWithoutBroadcastsInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBroadcastsInput = {
@@ -2054,6 +2181,7 @@ export type UserUncheckedCreateWithoutBroadcastsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -2071,6 +2199,8 @@ export type UserUncheckedCreateWithoutBroadcastsInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBroadcastsInput = {
@@ -2110,6 +2240,7 @@ export type UserUpdateWithoutBroadcastsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -2127,6 +2258,8 @@ export type UserUpdateWithoutBroadcastsInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBroadcastsInput = {
@@ -2150,6 +2283,7 @@ export type UserUncheckedUpdateWithoutBroadcastsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -2167,6 +2301,8 @@ export type UserUncheckedUpdateWithoutBroadcastsInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAutomationsInput = {
@@ -2190,6 +2326,7 @@ export type UserCreateWithoutAutomationsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -2207,6 +2344,8 @@ export type UserCreateWithoutAutomationsInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAutomationsInput = {
@@ -2230,6 +2369,7 @@ export type UserUncheckedCreateWithoutAutomationsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -2247,6 +2387,8 @@ export type UserUncheckedCreateWithoutAutomationsInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAutomationsInput = {
@@ -2286,6 +2428,7 @@ export type UserUpdateWithoutAutomationsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -2303,6 +2446,8 @@ export type UserUpdateWithoutAutomationsInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAutomationsInput = {
@@ -2326,6 +2471,7 @@ export type UserUncheckedUpdateWithoutAutomationsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -2343,6 +2489,8 @@ export type UserUncheckedUpdateWithoutAutomationsInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBroadcastBlocksInput = {
@@ -2366,6 +2514,7 @@ export type UserCreateWithoutBroadcastBlocksInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -2383,6 +2532,8 @@ export type UserCreateWithoutBroadcastBlocksInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBroadcastBlocksInput = {
@@ -2406,6 +2557,7 @@ export type UserUncheckedCreateWithoutBroadcastBlocksInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -2423,6 +2575,8 @@ export type UserUncheckedCreateWithoutBroadcastBlocksInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBroadcastBlocksInput = {
@@ -2462,6 +2616,7 @@ export type UserUpdateWithoutBroadcastBlocksInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -2479,6 +2634,8 @@ export type UserUpdateWithoutBroadcastBlocksInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBroadcastBlocksInput = {
@@ -2502,6 +2659,7 @@ export type UserUncheckedUpdateWithoutBroadcastBlocksInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -2519,6 +2677,8 @@ export type UserUncheckedUpdateWithoutBroadcastBlocksInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMessageLogsInput = {
@@ -2542,6 +2702,7 @@ export type UserCreateWithoutMessageLogsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -2559,6 +2720,8 @@ export type UserCreateWithoutMessageLogsInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMessageLogsInput = {
@@ -2582,6 +2745,7 @@ export type UserUncheckedCreateWithoutMessageLogsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -2599,6 +2763,8 @@ export type UserUncheckedCreateWithoutMessageLogsInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMessageLogsInput = {
@@ -2638,6 +2804,7 @@ export type UserUpdateWithoutMessageLogsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -2655,6 +2822,8 @@ export type UserUpdateWithoutMessageLogsInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMessageLogsInput = {
@@ -2678,6 +2847,7 @@ export type UserUncheckedUpdateWithoutMessageLogsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -2695,6 +2865,8 @@ export type UserUncheckedUpdateWithoutMessageLogsInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFlowsInput = {
@@ -2718,6 +2890,7 @@ export type UserCreateWithoutFlowsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -2735,6 +2908,8 @@ export type UserCreateWithoutFlowsInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFlowsInput = {
@@ -2758,6 +2933,7 @@ export type UserUncheckedCreateWithoutFlowsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -2775,6 +2951,8 @@ export type UserUncheckedCreateWithoutFlowsInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFlowsInput = {
@@ -2814,6 +2992,7 @@ export type UserUpdateWithoutFlowsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -2831,6 +3010,8 @@ export type UserUpdateWithoutFlowsInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFlowsInput = {
@@ -2854,6 +3035,7 @@ export type UserUncheckedUpdateWithoutFlowsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -2871,6 +3053,8 @@ export type UserUncheckedUpdateWithoutFlowsInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFlowSessionsInput = {
@@ -2894,6 +3078,7 @@ export type UserCreateWithoutFlowSessionsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -2911,6 +3096,8 @@ export type UserCreateWithoutFlowSessionsInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFlowSessionsInput = {
@@ -2934,6 +3121,7 @@ export type UserUncheckedCreateWithoutFlowSessionsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -2951,6 +3139,8 @@ export type UserUncheckedCreateWithoutFlowSessionsInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFlowSessionsInput = {
@@ -2990,6 +3180,7 @@ export type UserUpdateWithoutFlowSessionsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -3007,6 +3198,8 @@ export type UserUpdateWithoutFlowSessionsInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFlowSessionsInput = {
@@ -3030,6 +3223,7 @@ export type UserUncheckedUpdateWithoutFlowSessionsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -3047,6 +3241,8 @@ export type UserUncheckedUpdateWithoutFlowSessionsInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutContactListsInput = {
@@ -3070,6 +3266,7 @@ export type UserCreateWithoutContactListsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -3087,6 +3284,8 @@ export type UserCreateWithoutContactListsInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutContactListsInput = {
@@ -3110,6 +3309,7 @@ export type UserUncheckedCreateWithoutContactListsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -3127,6 +3327,8 @@ export type UserUncheckedCreateWithoutContactListsInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutContactListsInput = {
@@ -3166,6 +3368,7 @@ export type UserUpdateWithoutContactListsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -3183,6 +3386,8 @@ export type UserUpdateWithoutContactListsInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutContactListsInput = {
@@ -3206,6 +3411,7 @@ export type UserUncheckedUpdateWithoutContactListsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -3223,6 +3429,8 @@ export type UserUncheckedUpdateWithoutContactListsInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProspectingBroadcastsInput = {
@@ -3246,6 +3454,7 @@ export type UserCreateWithoutProspectingBroadcastsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -3263,6 +3472,8 @@ export type UserCreateWithoutProspectingBroadcastsInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProspectingBroadcastsInput = {
@@ -3286,6 +3497,7 @@ export type UserUncheckedCreateWithoutProspectingBroadcastsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -3303,6 +3515,8 @@ export type UserUncheckedCreateWithoutProspectingBroadcastsInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProspectingBroadcastsInput = {
@@ -3342,6 +3556,7 @@ export type UserUpdateWithoutProspectingBroadcastsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -3359,6 +3574,8 @@ export type UserUpdateWithoutProspectingBroadcastsInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProspectingBroadcastsInput = {
@@ -3382,6 +3599,7 @@ export type UserUncheckedUpdateWithoutProspectingBroadcastsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -3399,6 +3617,8 @@ export type UserUncheckedUpdateWithoutProspectingBroadcastsInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSerpSearchLogsInput = {
@@ -3422,6 +3642,7 @@ export type UserCreateWithoutSerpSearchLogsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -3439,6 +3660,8 @@ export type UserCreateWithoutSerpSearchLogsInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSerpSearchLogsInput = {
@@ -3462,6 +3685,7 @@ export type UserUncheckedCreateWithoutSerpSearchLogsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -3479,6 +3703,8 @@ export type UserUncheckedCreateWithoutSerpSearchLogsInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSerpSearchLogsInput = {
@@ -3518,6 +3744,7 @@ export type UserUpdateWithoutSerpSearchLogsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -3535,6 +3762,8 @@ export type UserUpdateWithoutSerpSearchLogsInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSerpSearchLogsInput = {
@@ -3558,6 +3787,7 @@ export type UserUncheckedUpdateWithoutSerpSearchLogsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -3575,6 +3805,8 @@ export type UserUncheckedUpdateWithoutSerpSearchLogsInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSerpSearchOffsetsInput = {
@@ -3598,6 +3830,7 @@ export type UserCreateWithoutSerpSearchOffsetsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -3615,6 +3848,8 @@ export type UserCreateWithoutSerpSearchOffsetsInput = {
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSerpSearchOffsetsInput = {
@@ -3638,6 +3873,7 @@ export type UserUncheckedCreateWithoutSerpSearchOffsetsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -3655,6 +3891,8 @@ export type UserUncheckedCreateWithoutSerpSearchOffsetsInput = {
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSerpSearchOffsetsInput = {
@@ -3694,6 +3932,7 @@ export type UserUpdateWithoutSerpSearchOffsetsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -3711,6 +3950,8 @@ export type UserUpdateWithoutSerpSearchOffsetsInput = {
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSerpSearchOffsetsInput = {
@@ -3734,6 +3975,7 @@ export type UserUncheckedUpdateWithoutSerpSearchOffsetsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -3751,6 +3993,8 @@ export type UserUncheckedUpdateWithoutSerpSearchOffsetsInput = {
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEmailListsInput = {
@@ -3774,6 +4018,7 @@ export type UserCreateWithoutEmailListsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -3791,6 +4036,8 @@ export type UserCreateWithoutEmailListsInput = {
   SerpSearchOffsets?: Prisma.SerpSearchOffsetCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailListsInput = {
@@ -3814,6 +4061,7 @@ export type UserUncheckedCreateWithoutEmailListsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -3831,6 +4079,8 @@ export type UserUncheckedCreateWithoutEmailListsInput = {
   SerpSearchOffsets?: Prisma.SerpSearchOffsetUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailListsInput = {
@@ -3870,6 +4120,7 @@ export type UserUpdateWithoutEmailListsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -3887,6 +4138,8 @@ export type UserUpdateWithoutEmailListsInput = {
   SerpSearchOffsets?: Prisma.SerpSearchOffsetUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailListsInput = {
@@ -3910,6 +4163,7 @@ export type UserUncheckedUpdateWithoutEmailListsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -3927,6 +4181,8 @@ export type UserUncheckedUpdateWithoutEmailListsInput = {
   SerpSearchOffsets?: Prisma.SerpSearchOffsetUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEmailCampaignsInput = {
@@ -3950,6 +4206,7 @@ export type UserCreateWithoutEmailCampaignsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -3967,6 +4224,8 @@ export type UserCreateWithoutEmailCampaignsInput = {
   SerpSearchOffsets?: Prisma.SerpSearchOffsetCreateNestedManyWithoutUserInput
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailCampaignsInput = {
@@ -3990,6 +4249,7 @@ export type UserUncheckedCreateWithoutEmailCampaignsInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -4007,6 +4267,8 @@ export type UserUncheckedCreateWithoutEmailCampaignsInput = {
   SerpSearchOffsets?: Prisma.SerpSearchOffsetUncheckedCreateNestedManyWithoutUserInput
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailCampaignsInput = {
@@ -4046,6 +4308,7 @@ export type UserUpdateWithoutEmailCampaignsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -4063,6 +4326,8 @@ export type UserUpdateWithoutEmailCampaignsInput = {
   SerpSearchOffsets?: Prisma.SerpSearchOffsetUpdateManyWithoutUserNestedInput
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailCampaignsInput = {
@@ -4086,6 +4351,7 @@ export type UserUncheckedUpdateWithoutEmailCampaignsInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -4103,6 +4369,8 @@ export type UserUncheckedUpdateWithoutEmailCampaignsInput = {
   SerpSearchOffsets?: Prisma.SerpSearchOffsetUncheckedUpdateManyWithoutUserNestedInput
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutQuizzesInput = {
@@ -4126,6 +4394,7 @@ export type UserCreateWithoutQuizzesInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -4143,6 +4412,8 @@ export type UserCreateWithoutQuizzesInput = {
   SerpSearchOffsets?: Prisma.SerpSearchOffsetCreateNestedManyWithoutUserInput
   EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutQuizzesInput = {
@@ -4166,6 +4437,7 @@ export type UserUncheckedCreateWithoutQuizzesInput = {
   prospectingDailyLimit?: number | null
   modules?: Prisma.UserCreatemodulesInput | string[]
   createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -4183,6 +4455,8 @@ export type UserUncheckedCreateWithoutQuizzesInput = {
   SerpSearchOffsets?: Prisma.SerpSearchOffsetUncheckedCreateNestedManyWithoutUserInput
   EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutQuizzesInput = {
@@ -4222,6 +4496,7 @@ export type UserUpdateWithoutQuizzesInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -4239,6 +4514,8 @@ export type UserUpdateWithoutQuizzesInput = {
   SerpSearchOffsets?: Prisma.SerpSearchOffsetUpdateManyWithoutUserNestedInput
   EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuizzesInput = {
@@ -4262,6 +4539,7 @@ export type UserUncheckedUpdateWithoutQuizzesInput = {
   prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modules?: Prisma.UserUpdatemodulesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -4279,6 +4557,384 @@ export type UserUncheckedUpdateWithoutQuizzesInput = {
   SerpSearchOffsets?: Prisma.SerpSearchOffsetUncheckedUpdateManyWithoutUserNestedInput
   EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
   EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutDocumentsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name?: string | null
+  phoneNumber?: string | null
+  address?: string | null
+  isActive: boolean
+  emailVerified?: boolean
+  Role: $Enums.Role
+  CustomerType: $Enums.CustomerType
+  Plan?: $Enums.UserPlan
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
+  wapiToken?: string | null
+  prospectingInstanceId?: string | null
+  prospectingToken?: string | null
+  prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
+  createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
+  Products?: Prisma.ProductCreateNestedManyWithoutUserInput
+  ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
+  BroadcastBlocks?: Prisma.BroadcastBlockCreateNestedManyWithoutUserInput
+  LeadSales?: Prisma.LeadSaleCreateNestedManyWithoutUserInput
+  Flows?: Prisma.FlowCreateNestedManyWithoutUserInput
+  FlowSessions?: Prisma.FlowSessionCreateNestedManyWithoutUserInput
+  ContactLists?: Prisma.ContactListCreateNestedManyWithoutUserInput
+  ProspectingBroadcasts?: Prisma.ProspectingBroadcastCreateNestedManyWithoutUserInput
+  SerpSearchLogs?: Prisma.SerpSearchLogCreateNestedManyWithoutUserInput
+  SerpSearchOffsets?: Prisma.SerpSearchOffsetCreateNestedManyWithoutUserInput
+  EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
+  EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
+  Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutDocumentsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name?: string | null
+  phoneNumber?: string | null
+  address?: string | null
+  isActive: boolean
+  emailVerified?: boolean
+  Role: $Enums.Role
+  CustomerType: $Enums.CustomerType
+  Plan?: $Enums.UserPlan
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
+  wapiToken?: string | null
+  prospectingInstanceId?: string | null
+  prospectingToken?: string | null
+  prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
+  createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
+  Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
+  ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
+  BroadcastBlocks?: Prisma.BroadcastBlockUncheckedCreateNestedManyWithoutUserInput
+  LeadSales?: Prisma.LeadSaleUncheckedCreateNestedManyWithoutUserInput
+  Flows?: Prisma.FlowUncheckedCreateNestedManyWithoutUserInput
+  FlowSessions?: Prisma.FlowSessionUncheckedCreateNestedManyWithoutUserInput
+  ContactLists?: Prisma.ContactListUncheckedCreateNestedManyWithoutUserInput
+  ProspectingBroadcasts?: Prisma.ProspectingBroadcastUncheckedCreateNestedManyWithoutUserInput
+  SerpSearchLogs?: Prisma.SerpSearchLogUncheckedCreateNestedManyWithoutUserInput
+  SerpSearchOffsets?: Prisma.SerpSearchOffsetUncheckedCreateNestedManyWithoutUserInput
+  EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
+  EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
+  Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutDocumentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDocumentsInput, Prisma.UserUncheckedCreateWithoutDocumentsInput>
+}
+
+export type UserUpsertWithoutDocumentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDocumentsInput, Prisma.UserUncheckedUpdateWithoutDocumentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDocumentsInput, Prisma.UserUncheckedCreateWithoutDocumentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDocumentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDocumentsInput, Prisma.UserUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type UserUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  Plan?: Prisma.EnumUserPlanFieldUpdateOperationsInput | $Enums.UserPlan
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
+  ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
+  BroadcastBlocks?: Prisma.BroadcastBlockUpdateManyWithoutUserNestedInput
+  LeadSales?: Prisma.LeadSaleUpdateManyWithoutUserNestedInput
+  Flows?: Prisma.FlowUpdateManyWithoutUserNestedInput
+  FlowSessions?: Prisma.FlowSessionUpdateManyWithoutUserNestedInput
+  ContactLists?: Prisma.ContactListUpdateManyWithoutUserNestedInput
+  ProspectingBroadcasts?: Prisma.ProspectingBroadcastUpdateManyWithoutUserNestedInput
+  SerpSearchLogs?: Prisma.SerpSearchLogUpdateManyWithoutUserNestedInput
+  SerpSearchOffsets?: Prisma.SerpSearchOffsetUpdateManyWithoutUserNestedInput
+  EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
+  EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
+  Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  Plan?: Prisma.EnumUserPlanFieldUpdateOperationsInput | $Enums.UserPlan
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
+  ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
+  BroadcastBlocks?: Prisma.BroadcastBlockUncheckedUpdateManyWithoutUserNestedInput
+  LeadSales?: Prisma.LeadSaleUncheckedUpdateManyWithoutUserNestedInput
+  Flows?: Prisma.FlowUncheckedUpdateManyWithoutUserNestedInput
+  FlowSessions?: Prisma.FlowSessionUncheckedUpdateManyWithoutUserNestedInput
+  ContactLists?: Prisma.ContactListUncheckedUpdateManyWithoutUserNestedInput
+  ProspectingBroadcasts?: Prisma.ProspectingBroadcastUncheckedUpdateManyWithoutUserNestedInput
+  SerpSearchLogs?: Prisma.SerpSearchLogUncheckedUpdateManyWithoutUserNestedInput
+  SerpSearchOffsets?: Prisma.SerpSearchOffsetUncheckedUpdateManyWithoutUserNestedInput
+  EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
+  EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
+  Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutMediaAssetsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name?: string | null
+  phoneNumber?: string | null
+  address?: string | null
+  isActive: boolean
+  emailVerified?: boolean
+  Role: $Enums.Role
+  CustomerType: $Enums.CustomerType
+  Plan?: $Enums.UserPlan
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
+  wapiToken?: string | null
+  prospectingInstanceId?: string | null
+  prospectingToken?: string | null
+  prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
+  createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
+  Products?: Prisma.ProductCreateNestedManyWithoutUserInput
+  ProductCategories?: Prisma.ProductCategoryCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogCreateNestedManyWithoutUserInput
+  BroadcastBlocks?: Prisma.BroadcastBlockCreateNestedManyWithoutUserInput
+  LeadSales?: Prisma.LeadSaleCreateNestedManyWithoutUserInput
+  Flows?: Prisma.FlowCreateNestedManyWithoutUserInput
+  FlowSessions?: Prisma.FlowSessionCreateNestedManyWithoutUserInput
+  ContactLists?: Prisma.ContactListCreateNestedManyWithoutUserInput
+  ProspectingBroadcasts?: Prisma.ProspectingBroadcastCreateNestedManyWithoutUserInput
+  SerpSearchLogs?: Prisma.SerpSearchLogCreateNestedManyWithoutUserInput
+  SerpSearchOffsets?: Prisma.SerpSearchOffsetCreateNestedManyWithoutUserInput
+  EmailLists?: Prisma.EmailListCreateNestedManyWithoutUserInput
+  EmailCampaigns?: Prisma.EmailCampaignCreateNestedManyWithoutUserInput
+  Quizzes?: Prisma.QuizCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutMediaAssetsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name?: string | null
+  phoneNumber?: string | null
+  address?: string | null
+  isActive: boolean
+  emailVerified?: boolean
+  Role: $Enums.Role
+  CustomerType: $Enums.CustomerType
+  Plan?: $Enums.UserPlan
+  trialExpiresAt?: Date | string | null
+  onboardingMessageSentAt?: Date | string | null
+  wapiInstanceId?: string | null
+  wapiToken?: string | null
+  prospectingInstanceId?: string | null
+  prospectingToken?: string | null
+  prospectingDailyLimit?: number | null
+  modules?: Prisma.UserCreatemodulesInput | string[]
+  createdAt?: Date | string
+  ragAutoReplyEnabled?: boolean
+  Products?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
+  ProductCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedCreateNestedManyWithoutUserInput
+  Broadcasts?: Prisma.BroadcastUncheckedCreateNestedManyWithoutUserInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutUserInput
+  MessageLogs?: Prisma.MessageLogUncheckedCreateNestedManyWithoutUserInput
+  BroadcastBlocks?: Prisma.BroadcastBlockUncheckedCreateNestedManyWithoutUserInput
+  LeadSales?: Prisma.LeadSaleUncheckedCreateNestedManyWithoutUserInput
+  Flows?: Prisma.FlowUncheckedCreateNestedManyWithoutUserInput
+  FlowSessions?: Prisma.FlowSessionUncheckedCreateNestedManyWithoutUserInput
+  ContactLists?: Prisma.ContactListUncheckedCreateNestedManyWithoutUserInput
+  ProspectingBroadcasts?: Prisma.ProspectingBroadcastUncheckedCreateNestedManyWithoutUserInput
+  SerpSearchLogs?: Prisma.SerpSearchLogUncheckedCreateNestedManyWithoutUserInput
+  SerpSearchOffsets?: Prisma.SerpSearchOffsetUncheckedCreateNestedManyWithoutUserInput
+  EmailLists?: Prisma.EmailListUncheckedCreateNestedManyWithoutUserInput
+  EmailCampaigns?: Prisma.EmailCampaignUncheckedCreateNestedManyWithoutUserInput
+  Quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutUserInput
+  Documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutMediaAssetsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMediaAssetsInput, Prisma.UserUncheckedCreateWithoutMediaAssetsInput>
+}
+
+export type UserUpsertWithoutMediaAssetsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMediaAssetsInput, Prisma.UserUncheckedUpdateWithoutMediaAssetsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMediaAssetsInput, Prisma.UserUncheckedCreateWithoutMediaAssetsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMediaAssetsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMediaAssetsInput, Prisma.UserUncheckedUpdateWithoutMediaAssetsInput>
+}
+
+export type UserUpdateWithoutMediaAssetsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  Plan?: Prisma.EnumUserPlanFieldUpdateOperationsInput | $Enums.UserPlan
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Products?: Prisma.ProductUpdateManyWithoutUserNestedInput
+  ProductCategories?: Prisma.ProductCategoryUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUpdateManyWithoutUserNestedInput
+  BroadcastBlocks?: Prisma.BroadcastBlockUpdateManyWithoutUserNestedInput
+  LeadSales?: Prisma.LeadSaleUpdateManyWithoutUserNestedInput
+  Flows?: Prisma.FlowUpdateManyWithoutUserNestedInput
+  FlowSessions?: Prisma.FlowSessionUpdateManyWithoutUserNestedInput
+  ContactLists?: Prisma.ContactListUpdateManyWithoutUserNestedInput
+  ProspectingBroadcasts?: Prisma.ProspectingBroadcastUpdateManyWithoutUserNestedInput
+  SerpSearchLogs?: Prisma.SerpSearchLogUpdateManyWithoutUserNestedInput
+  SerpSearchOffsets?: Prisma.SerpSearchOffsetUpdateManyWithoutUserNestedInput
+  EmailLists?: Prisma.EmailListUpdateManyWithoutUserNestedInput
+  EmailCampaigns?: Prisma.EmailCampaignUpdateManyWithoutUserNestedInput
+  Quizzes?: Prisma.QuizUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMediaAssetsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  CustomerType?: Prisma.EnumCustomerTypeFieldUpdateOperationsInput | $Enums.CustomerType
+  Plan?: Prisma.EnumUserPlanFieldUpdateOperationsInput | $Enums.UserPlan
+  trialExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingMessageSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wapiInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wapiToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectingInstanceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectingToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectingDailyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  modules?: Prisma.UserUpdatemodulesInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ragAutoReplyEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Products?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
+  ProductCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  MessageTemplates?: Prisma.MessageTemplateUncheckedUpdateManyWithoutUserNestedInput
+  Broadcasts?: Prisma.BroadcastUncheckedUpdateManyWithoutUserNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutUserNestedInput
+  MessageLogs?: Prisma.MessageLogUncheckedUpdateManyWithoutUserNestedInput
+  BroadcastBlocks?: Prisma.BroadcastBlockUncheckedUpdateManyWithoutUserNestedInput
+  LeadSales?: Prisma.LeadSaleUncheckedUpdateManyWithoutUserNestedInput
+  Flows?: Prisma.FlowUncheckedUpdateManyWithoutUserNestedInput
+  FlowSessions?: Prisma.FlowSessionUncheckedUpdateManyWithoutUserNestedInput
+  ContactLists?: Prisma.ContactListUncheckedUpdateManyWithoutUserNestedInput
+  ProspectingBroadcasts?: Prisma.ProspectingBroadcastUncheckedUpdateManyWithoutUserNestedInput
+  SerpSearchLogs?: Prisma.SerpSearchLogUncheckedUpdateManyWithoutUserNestedInput
+  SerpSearchOffsets?: Prisma.SerpSearchOffsetUncheckedUpdateManyWithoutUserNestedInput
+  EmailLists?: Prisma.EmailListUncheckedUpdateManyWithoutUserNestedInput
+  EmailCampaigns?: Prisma.EmailCampaignUncheckedUpdateManyWithoutUserNestedInput
+  Quizzes?: Prisma.QuizUncheckedUpdateManyWithoutUserNestedInput
+  Documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -4305,6 +4961,8 @@ export type UserCountOutputType = {
   EmailLists: number
   EmailCampaigns: number
   Quizzes: number
+  Documents: number
+  MediaAssets: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4326,6 +4984,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   EmailLists?: boolean | UserCountOutputTypeCountEmailListsArgs
   EmailCampaigns?: boolean | UserCountOutputTypeCountEmailCampaignsArgs
   Quizzes?: boolean | UserCountOutputTypeCountQuizzesArgs
+  Documents?: boolean | UserCountOutputTypeCountDocumentsArgs
+  MediaAssets?: boolean | UserCountOutputTypeCountMediaAssetsArgs
 }
 
 /**
@@ -4464,6 +5124,20 @@ export type UserCountOutputTypeCountQuizzesArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.QuizWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMediaAssetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MediaAssetWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4486,6 +5160,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   prospectingDailyLimit?: boolean
   modules?: boolean
   createdAt?: boolean
+  ragAutoReplyEnabled?: boolean
   Products?: boolean | Prisma.User$ProductsArgs<ExtArgs>
   ProductCategories?: boolean | Prisma.User$ProductCategoriesArgs<ExtArgs>
   Leads?: boolean | Prisma.User$LeadsArgs<ExtArgs>
@@ -4504,6 +5179,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   EmailLists?: boolean | Prisma.User$EmailListsArgs<ExtArgs>
   EmailCampaigns?: boolean | Prisma.User$EmailCampaignsArgs<ExtArgs>
   Quizzes?: boolean | Prisma.User$QuizzesArgs<ExtArgs>
+  Documents?: boolean | Prisma.User$DocumentsArgs<ExtArgs>
+  MediaAssets?: boolean | Prisma.User$MediaAssetsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -4528,6 +5205,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   prospectingDailyLimit?: boolean
   modules?: boolean
   createdAt?: boolean
+  ragAutoReplyEnabled?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -4551,6 +5229,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   prospectingDailyLimit?: boolean
   modules?: boolean
   createdAt?: boolean
+  ragAutoReplyEnabled?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -4574,9 +5253,10 @@ export type UserSelectScalar = {
   prospectingDailyLimit?: boolean
   modules?: boolean
   createdAt?: boolean
+  ragAutoReplyEnabled?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "phoneNumber" | "address" | "isActive" | "emailVerified" | "Role" | "CustomerType" | "Plan" | "trialExpiresAt" | "onboardingMessageSentAt" | "wapiInstanceId" | "wapiToken" | "prospectingInstanceId" | "prospectingToken" | "prospectingDailyLimit" | "modules" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "phoneNumber" | "address" | "isActive" | "emailVerified" | "Role" | "CustomerType" | "Plan" | "trialExpiresAt" | "onboardingMessageSentAt" | "wapiInstanceId" | "wapiToken" | "prospectingInstanceId" | "prospectingToken" | "prospectingDailyLimit" | "modules" | "createdAt" | "ragAutoReplyEnabled", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Products?: boolean | Prisma.User$ProductsArgs<ExtArgs>
   ProductCategories?: boolean | Prisma.User$ProductCategoriesArgs<ExtArgs>
@@ -4596,6 +5276,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   EmailLists?: boolean | Prisma.User$EmailListsArgs<ExtArgs>
   EmailCampaigns?: boolean | Prisma.User$EmailCampaignsArgs<ExtArgs>
   Quizzes?: boolean | Prisma.User$QuizzesArgs<ExtArgs>
+  Documents?: boolean | Prisma.User$DocumentsArgs<ExtArgs>
+  MediaAssets?: boolean | Prisma.User$MediaAssetsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -4622,6 +5304,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     EmailLists: Prisma.$EmailListPayload<ExtArgs>[]
     EmailCampaigns: Prisma.$EmailCampaignPayload<ExtArgs>[]
     Quizzes: Prisma.$QuizPayload<ExtArgs>[]
+    Documents: Prisma.$DocumentPayload<ExtArgs>[]
+    MediaAssets: Prisma.$MediaAssetPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4644,6 +5328,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     prospectingDailyLimit: number | null
     modules: string[]
     createdAt: Date
+    ragAutoReplyEnabled: boolean
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -5056,6 +5741,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   EmailLists<T extends Prisma.User$EmailListsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$EmailListsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   EmailCampaigns<T extends Prisma.User$EmailCampaignsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$EmailCampaignsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailCampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Quizzes<T extends Prisma.User$QuizzesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$QuizzesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuizPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Documents<T extends Prisma.User$DocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$DocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  MediaAssets<T extends Prisma.User$MediaAssetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$MediaAssetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5105,6 +5792,7 @@ export interface UserFieldRefs {
   readonly prospectingDailyLimit: Prisma.FieldRef<"User", 'Int'>
   readonly modules: Prisma.FieldRef<"User", 'String[]'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly ragAutoReplyEnabled: Prisma.FieldRef<"User", 'Boolean'>
 }
     
 
@@ -5922,6 +6610,54 @@ export type User$QuizzesArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.QuizScalarFieldEnum | Prisma.QuizScalarFieldEnum[]
+}
+
+/**
+ * User.Documents
+ */
+export type User$DocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Document
+   */
+  select?: Prisma.DocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Document
+   */
+  omit?: Prisma.DocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentInclude<ExtArgs> | null
+  where?: Prisma.DocumentWhereInput
+  orderBy?: Prisma.DocumentOrderByWithRelationInput | Prisma.DocumentOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentScalarFieldEnum | Prisma.DocumentScalarFieldEnum[]
+}
+
+/**
+ * User.MediaAssets
+ */
+export type User$MediaAssetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MediaAsset
+   */
+  select?: Prisma.MediaAssetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MediaAsset
+   */
+  omit?: Prisma.MediaAssetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaAssetInclude<ExtArgs> | null
+  where?: Prisma.MediaAssetWhereInput
+  orderBy?: Prisma.MediaAssetOrderByWithRelationInput | Prisma.MediaAssetOrderByWithRelationInput[]
+  cursor?: Prisma.MediaAssetWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MediaAssetScalarFieldEnum | Prisma.MediaAssetScalarFieldEnum[]
 }
 
 /**

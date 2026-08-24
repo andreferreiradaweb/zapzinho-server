@@ -74,7 +74,8 @@ export const MessageType = {
   AUTOMATION: 'AUTOMATION',
   MANUAL: 'MANUAL',
   FLOW: 'FLOW',
-  LEAD_NOTIFICATION: 'LEAD_NOTIFICATION'
+  LEAD_NOTIFICATION: 'LEAD_NOTIFICATION',
+  RAG_REPLY: 'RAG_REPLY'
 } as const
 
 export type MessageType = (typeof MessageType)[keyof typeof MessageType]
@@ -140,3 +141,29 @@ export const PaymentStatus = {
 } as const
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const DocumentSourceType = {
+  TEXT: 'TEXT',
+  PDF: 'PDF'
+} as const
+
+export type DocumentSourceType = (typeof DocumentSourceType)[keyof typeof DocumentSourceType]
+
+
+export const DocumentStatus = {
+  PENDING: 'PENDING',
+  PROCESSED: 'PROCESSED',
+  FAILED: 'FAILED'
+} as const
+
+export type DocumentStatus = (typeof DocumentStatus)[keyof typeof DocumentStatus]
+
+
+export const MediaType = {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO',
+  AUDIO: 'AUDIO'
+} as const
+
+export type MediaType = (typeof MediaType)[keyof typeof MediaType]

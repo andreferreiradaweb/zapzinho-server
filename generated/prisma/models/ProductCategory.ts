@@ -178,6 +178,7 @@ export type ProductCategoryWhereInput = {
   Products?: Prisma.ProductListRelationFilter
   Leads?: Prisma.LeadListRelationFilter
   Automations?: Prisma.AutomationListRelationFilter
+  MediaAssets?: Prisma.MediaAssetListRelationFilter
 }
 
 export type ProductCategoryOrderByWithRelationInput = {
@@ -189,6 +190,7 @@ export type ProductCategoryOrderByWithRelationInput = {
   Products?: Prisma.ProductOrderByRelationAggregateInput
   Leads?: Prisma.LeadOrderByRelationAggregateInput
   Automations?: Prisma.AutomationOrderByRelationAggregateInput
+  MediaAssets?: Prisma.MediaAssetOrderByRelationAggregateInput
 }
 
 export type ProductCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -203,6 +205,7 @@ export type ProductCategoryWhereUniqueInput = Prisma.AtLeast<{
   Products?: Prisma.ProductListRelationFilter
   Leads?: Prisma.LeadListRelationFilter
   Automations?: Prisma.AutomationListRelationFilter
+  MediaAssets?: Prisma.MediaAssetListRelationFilter
 }, "id">
 
 export type ProductCategoryOrderByWithAggregationInput = {
@@ -233,6 +236,7 @@ export type ProductCategoryCreateInput = {
   Products?: Prisma.ProductCreateNestedManyWithoutCategoryInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCategoryInput
   Automations?: Prisma.AutomationCreateNestedManyWithoutCategoryInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryUncheckedCreateInput = {
@@ -243,6 +247,7 @@ export type ProductCategoryUncheckedCreateInput = {
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutCategoryInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCategoryInput
   Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutCategoryInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryUpdateInput = {
@@ -253,6 +258,7 @@ export type ProductCategoryUpdateInput = {
   Products?: Prisma.ProductUpdateManyWithoutCategoryNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCategoryNestedInput
   Automations?: Prisma.AutomationUpdateManyWithoutCategoryNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryUncheckedUpdateInput = {
@@ -263,6 +269,7 @@ export type ProductCategoryUncheckedUpdateInput = {
   Products?: Prisma.ProductUncheckedUpdateManyWithoutCategoryNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCategoryNestedInput
   Automations?: Prisma.AutomationUncheckedUpdateManyWithoutCategoryNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryCreateManyInput = {
@@ -411,6 +418,22 @@ export type ProductCategoryUpdateOneWithoutAutomationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductCategoryUpdateToOneWithWhereWithoutAutomationsInput, Prisma.ProductCategoryUpdateWithoutAutomationsInput>, Prisma.ProductCategoryUncheckedUpdateWithoutAutomationsInput>
 }
 
+export type ProductCategoryCreateNestedOneWithoutMediaAssetsInput = {
+  create?: Prisma.XOR<Prisma.ProductCategoryCreateWithoutMediaAssetsInput, Prisma.ProductCategoryUncheckedCreateWithoutMediaAssetsInput>
+  connectOrCreate?: Prisma.ProductCategoryCreateOrConnectWithoutMediaAssetsInput
+  connect?: Prisma.ProductCategoryWhereUniqueInput
+}
+
+export type ProductCategoryUpdateOneWithoutMediaAssetsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductCategoryCreateWithoutMediaAssetsInput, Prisma.ProductCategoryUncheckedCreateWithoutMediaAssetsInput>
+  connectOrCreate?: Prisma.ProductCategoryCreateOrConnectWithoutMediaAssetsInput
+  upsert?: Prisma.ProductCategoryUpsertWithoutMediaAssetsInput
+  disconnect?: Prisma.ProductCategoryWhereInput | boolean
+  delete?: Prisma.ProductCategoryWhereInput | boolean
+  connect?: Prisma.ProductCategoryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductCategoryUpdateToOneWithWhereWithoutMediaAssetsInput, Prisma.ProductCategoryUpdateWithoutMediaAssetsInput>, Prisma.ProductCategoryUncheckedUpdateWithoutMediaAssetsInput>
+}
+
 export type ProductCategoryCreateWithoutUserInput = {
   id?: string
   name: string
@@ -418,6 +441,7 @@ export type ProductCategoryCreateWithoutUserInput = {
   Products?: Prisma.ProductCreateNestedManyWithoutCategoryInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCategoryInput
   Automations?: Prisma.AutomationCreateNestedManyWithoutCategoryInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryUncheckedCreateWithoutUserInput = {
@@ -427,6 +451,7 @@ export type ProductCategoryUncheckedCreateWithoutUserInput = {
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutCategoryInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCategoryInput
   Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutCategoryInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryCreateOrConnectWithoutUserInput = {
@@ -472,6 +497,7 @@ export type ProductCategoryCreateWithoutProductsInput = {
   User: Prisma.UserCreateNestedOneWithoutProductCategoriesInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCategoryInput
   Automations?: Prisma.AutomationCreateNestedManyWithoutCategoryInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryUncheckedCreateWithoutProductsInput = {
@@ -481,6 +507,7 @@ export type ProductCategoryUncheckedCreateWithoutProductsInput = {
   createdAt?: Date | string
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCategoryInput
   Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutCategoryInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryCreateOrConnectWithoutProductsInput = {
@@ -506,6 +533,7 @@ export type ProductCategoryUpdateWithoutProductsInput = {
   User?: Prisma.UserUpdateOneRequiredWithoutProductCategoriesNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCategoryNestedInput
   Automations?: Prisma.AutomationUpdateManyWithoutCategoryNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryUncheckedUpdateWithoutProductsInput = {
@@ -515,6 +543,7 @@ export type ProductCategoryUncheckedUpdateWithoutProductsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCategoryNestedInput
   Automations?: Prisma.AutomationUncheckedUpdateManyWithoutCategoryNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryCreateWithoutLeadsInput = {
@@ -524,6 +553,7 @@ export type ProductCategoryCreateWithoutLeadsInput = {
   User: Prisma.UserCreateNestedOneWithoutProductCategoriesInput
   Products?: Prisma.ProductCreateNestedManyWithoutCategoryInput
   Automations?: Prisma.AutomationCreateNestedManyWithoutCategoryInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryUncheckedCreateWithoutLeadsInput = {
@@ -533,6 +563,7 @@ export type ProductCategoryUncheckedCreateWithoutLeadsInput = {
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutCategoryInput
   Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutCategoryInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryCreateOrConnectWithoutLeadsInput = {
@@ -558,6 +589,7 @@ export type ProductCategoryUpdateWithoutLeadsInput = {
   User?: Prisma.UserUpdateOneRequiredWithoutProductCategoriesNestedInput
   Products?: Prisma.ProductUpdateManyWithoutCategoryNestedInput
   Automations?: Prisma.AutomationUpdateManyWithoutCategoryNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryUncheckedUpdateWithoutLeadsInput = {
@@ -567,6 +599,7 @@ export type ProductCategoryUncheckedUpdateWithoutLeadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutCategoryNestedInput
   Automations?: Prisma.AutomationUncheckedUpdateManyWithoutCategoryNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryCreateWithoutAutomationsInput = {
@@ -576,6 +609,7 @@ export type ProductCategoryCreateWithoutAutomationsInput = {
   User: Prisma.UserCreateNestedOneWithoutProductCategoriesInput
   Products?: Prisma.ProductCreateNestedManyWithoutCategoryInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCategoryInput
+  MediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryUncheckedCreateWithoutAutomationsInput = {
@@ -585,6 +619,7 @@ export type ProductCategoryUncheckedCreateWithoutAutomationsInput = {
   createdAt?: Date | string
   Products?: Prisma.ProductUncheckedCreateNestedManyWithoutCategoryInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCategoryInput
+  MediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type ProductCategoryCreateOrConnectWithoutAutomationsInput = {
@@ -610,6 +645,7 @@ export type ProductCategoryUpdateWithoutAutomationsInput = {
   User?: Prisma.UserUpdateOneRequiredWithoutProductCategoriesNestedInput
   Products?: Prisma.ProductUpdateManyWithoutCategoryNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCategoryNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryUncheckedUpdateWithoutAutomationsInput = {
@@ -619,6 +655,63 @@ export type ProductCategoryUncheckedUpdateWithoutAutomationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Products?: Prisma.ProductUncheckedUpdateManyWithoutCategoryNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCategoryNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutCategoryNestedInput
+}
+
+export type ProductCategoryCreateWithoutMediaAssetsInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  User: Prisma.UserCreateNestedOneWithoutProductCategoriesInput
+  Products?: Prisma.ProductCreateNestedManyWithoutCategoryInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutCategoryInput
+  Automations?: Prisma.AutomationCreateNestedManyWithoutCategoryInput
+}
+
+export type ProductCategoryUncheckedCreateWithoutMediaAssetsInput = {
+  id?: string
+  name: string
+  userId: string
+  createdAt?: Date | string
+  Products?: Prisma.ProductUncheckedCreateNestedManyWithoutCategoryInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCategoryInput
+  Automations?: Prisma.AutomationUncheckedCreateNestedManyWithoutCategoryInput
+}
+
+export type ProductCategoryCreateOrConnectWithoutMediaAssetsInput = {
+  where: Prisma.ProductCategoryWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductCategoryCreateWithoutMediaAssetsInput, Prisma.ProductCategoryUncheckedCreateWithoutMediaAssetsInput>
+}
+
+export type ProductCategoryUpsertWithoutMediaAssetsInput = {
+  update: Prisma.XOR<Prisma.ProductCategoryUpdateWithoutMediaAssetsInput, Prisma.ProductCategoryUncheckedUpdateWithoutMediaAssetsInput>
+  create: Prisma.XOR<Prisma.ProductCategoryCreateWithoutMediaAssetsInput, Prisma.ProductCategoryUncheckedCreateWithoutMediaAssetsInput>
+  where?: Prisma.ProductCategoryWhereInput
+}
+
+export type ProductCategoryUpdateToOneWithWhereWithoutMediaAssetsInput = {
+  where?: Prisma.ProductCategoryWhereInput
+  data: Prisma.XOR<Prisma.ProductCategoryUpdateWithoutMediaAssetsInput, Prisma.ProductCategoryUncheckedUpdateWithoutMediaAssetsInput>
+}
+
+export type ProductCategoryUpdateWithoutMediaAssetsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  User?: Prisma.UserUpdateOneRequiredWithoutProductCategoriesNestedInput
+  Products?: Prisma.ProductUpdateManyWithoutCategoryNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutCategoryNestedInput
+  Automations?: Prisma.AutomationUpdateManyWithoutCategoryNestedInput
+}
+
+export type ProductCategoryUncheckedUpdateWithoutMediaAssetsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Products?: Prisma.ProductUncheckedUpdateManyWithoutCategoryNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutCategoryNestedInput
+  Automations?: Prisma.AutomationUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryCreateManyUserInput = {
@@ -634,6 +727,7 @@ export type ProductCategoryUpdateWithoutUserInput = {
   Products?: Prisma.ProductUpdateManyWithoutCategoryNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCategoryNestedInput
   Automations?: Prisma.AutomationUpdateManyWithoutCategoryNestedInput
+  MediaAssets?: Prisma.MediaAssetUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryUncheckedUpdateWithoutUserInput = {
@@ -643,6 +737,7 @@ export type ProductCategoryUncheckedUpdateWithoutUserInput = {
   Products?: Prisma.ProductUncheckedUpdateManyWithoutCategoryNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCategoryNestedInput
   Automations?: Prisma.AutomationUncheckedUpdateManyWithoutCategoryNestedInput
+  MediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type ProductCategoryUncheckedUpdateManyWithoutUserInput = {
@@ -660,12 +755,14 @@ export type ProductCategoryCountOutputType = {
   Products: number
   Leads: number
   Automations: number
+  MediaAssets: number
 }
 
 export type ProductCategoryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Products?: boolean | ProductCategoryCountOutputTypeCountProductsArgs
   Leads?: boolean | ProductCategoryCountOutputTypeCountLeadsArgs
   Automations?: boolean | ProductCategoryCountOutputTypeCountAutomationsArgs
+  MediaAssets?: boolean | ProductCategoryCountOutputTypeCountMediaAssetsArgs
 }
 
 /**
@@ -699,6 +796,13 @@ export type ProductCategoryCountOutputTypeCountAutomationsArgs<ExtArgs extends r
   where?: Prisma.AutomationWhereInput
 }
 
+/**
+ * ProductCategoryCountOutputType without action
+ */
+export type ProductCategoryCountOutputTypeCountMediaAssetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MediaAssetWhereInput
+}
+
 
 export type ProductCategorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -709,6 +813,7 @@ export type ProductCategorySelect<ExtArgs extends runtime.Types.Extensions.Inter
   Products?: boolean | Prisma.ProductCategory$ProductsArgs<ExtArgs>
   Leads?: boolean | Prisma.ProductCategory$LeadsArgs<ExtArgs>
   Automations?: boolean | Prisma.ProductCategory$AutomationsArgs<ExtArgs>
+  MediaAssets?: boolean | Prisma.ProductCategory$MediaAssetsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCategoryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productCategory"]>
 
@@ -741,6 +846,7 @@ export type ProductCategoryInclude<ExtArgs extends runtime.Types.Extensions.Inte
   Products?: boolean | Prisma.ProductCategory$ProductsArgs<ExtArgs>
   Leads?: boolean | Prisma.ProductCategory$LeadsArgs<ExtArgs>
   Automations?: boolean | Prisma.ProductCategory$AutomationsArgs<ExtArgs>
+  MediaAssets?: boolean | Prisma.ProductCategory$MediaAssetsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCategoryCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductCategoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -757,6 +863,7 @@ export type $ProductCategoryPayload<ExtArgs extends runtime.Types.Extensions.Int
     Products: Prisma.$ProductPayload<ExtArgs>[]
     Leads: Prisma.$LeadPayload<ExtArgs>[]
     Automations: Prisma.$AutomationPayload<ExtArgs>[]
+    MediaAssets: Prisma.$MediaAssetPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1161,6 +1268,7 @@ export interface Prisma__ProductCategoryClient<T, Null = never, ExtArgs extends 
   Products<T extends Prisma.ProductCategory$ProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductCategory$ProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Leads<T extends Prisma.ProductCategory$LeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductCategory$LeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Automations<T extends Prisma.ProductCategory$AutomationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductCategory$AutomationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AutomationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  MediaAssets<T extends Prisma.ProductCategory$MediaAssetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductCategory$MediaAssetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1659,6 +1767,30 @@ export type ProductCategory$AutomationsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.AutomationScalarFieldEnum | Prisma.AutomationScalarFieldEnum[]
+}
+
+/**
+ * ProductCategory.MediaAssets
+ */
+export type ProductCategory$MediaAssetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MediaAsset
+   */
+  select?: Prisma.MediaAssetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MediaAsset
+   */
+  omit?: Prisma.MediaAssetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaAssetInclude<ExtArgs> | null
+  where?: Prisma.MediaAssetWhereInput
+  orderBy?: Prisma.MediaAssetOrderByWithRelationInput | Prisma.MediaAssetOrderByWithRelationInput[]
+  cursor?: Prisma.MediaAssetWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MediaAssetScalarFieldEnum | Prisma.MediaAssetScalarFieldEnum[]
 }
 
 /**

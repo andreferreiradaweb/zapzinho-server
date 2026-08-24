@@ -9,6 +9,7 @@ import { PrismaMessageLogRepository } from '@/repositories/prisma/message-log'
 import { PrismaUserRepository } from '@/repositories/prisma/user'
 import { sendWhatsAppMessageWithCredentials } from '@/services/wapi'
 import { ProcessFlowReplyFactory } from '@/factory/flow/process-flow-reply'
+import { makeSendRagReply } from '@/factory/webhook/make-send-rag-reply'
 import { prisma } from '@/lib/prisma'
 import { v4 as uuid } from 'uuid'
 
@@ -112,6 +113,25 @@ export async function whatsappWebhookController(
       }
 
       addClassificationMessage(lead.id, lead.userId, message, created)
+
+      // RAG auto-reply — dispara em paralelo, sem bloquear a resposta do webhook
+      void (async () => {
+        try {
+          const user = await prisma.user.findUnique({
+            where: { id: lead.userId },
+            select: { ragAutoReplyEnabled: true },
+          })
+          if (!user?.ragAutoReplyEnabled) return
+          await makeSendRagReply().execute({
+            userId: lead.userId,
+            leadId: lead.id,
+            phone,
+            message,
+          })
+        } catch (err) {
+          console.error('[Webhook] RAG reply error:', err)
+        }
+      })()
     }
 
     return reply.status(200).send({ ok: true, created, leadId: lead.id })

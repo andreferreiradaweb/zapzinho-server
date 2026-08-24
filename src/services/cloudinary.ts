@@ -28,19 +28,13 @@ export async function deleteFromCloudinary(url: string): Promise<void> {
   const publicId = extractPublicId(url)
   if (!publicId) return
 
-  // Tenta como image primeiro, depois como video
-  try {
-    const res = await cloudinary.uploader.destroy(publicId, {
-      resource_type: 'image',
-    })
-    if (res.result !== 'ok') {
-      await cloudinary.uploader.destroy(publicId, { resource_type: 'video' })
-    }
-  } catch {
+  // Tenta como image, depois video, depois raw (PDFs e outros arquivos)
+  for (const resourceType of ['image', 'video', 'raw'] as const) {
     try {
-      await cloudinary.uploader.destroy(publicId, { resource_type: 'video' })
+      const res = await cloudinary.uploader.destroy(publicId, { resource_type: resourceType })
+      if (res.result === 'ok') return
     } catch {
-      // silencia — arquivo pode já não existir
+      // tenta o próximo resource_type
     }
   }
 }

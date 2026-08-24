@@ -197,3 +197,13 @@ export type QuizLead = Prisma.QuizLeadModel
  * 
  */
 export type QuizAnswer = Prisma.QuizAnswerModel
+/**
+ * Model Document
+ * 
+ */
+export type Document = Prisma.DocumentModel
+/**
+ * Model MediaAsset
+ * 
+ */
+export type MediaAsset = Prisma.MediaAssetModel

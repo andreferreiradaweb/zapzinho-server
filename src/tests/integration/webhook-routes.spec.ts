@@ -3,7 +3,7 @@ import { hash } from 'bcrypt'
 
 vi.mock('@/lib/prisma', () => ({
   prisma: {
-    user: { findUnique: vi.fn() },
+    user: { findUnique: vi.fn().mockResolvedValue(null) },
     prospectingBroadcast: { findFirst: vi.fn().mockResolvedValue(null) },
     flowSession: { findFirst: vi.fn().mockResolvedValue(null) },
     messageLog: { create: vi.fn().mockResolvedValue({}) },

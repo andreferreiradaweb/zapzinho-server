@@ -210,4 +210,71 @@ describe('Rotas de usuário (HTTP)', () => {
       expect(response.statusCode).toBe(401)
     })
   })
+
+  describe('PATCH /user/rag-settings', () => {
+    async function getAuthToken(email: string, password: string): Promise<string> {
+      const response = await app.inject({
+        method: 'POST',
+        url: '/user/signin',
+        payload: { email, password },
+      })
+      return response.json().token
+    }
+
+    it('ativa o auto-reply de RAG para o usuário logado', async () => {
+      await userRepo.create({
+        id: 'u-rag',
+        email: 'rag@email.com',
+        passwordHash: await hash('Senha123', 6),
+        Role: 'CLIENT',
+        CustomerType: 'B2C',
+        isActive: true,
+        emailVerified: true,
+      })
+      const token = await getAuthToken('rag@email.com', 'Senha123')
+
+      const response = await app.inject({
+        method: 'PATCH',
+        url: '/user/rag-settings',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { ragAutoReplyEnabled: true },
+      })
+
+      expect(response.statusCode).toBe(200)
+      expect(response.json().ragAutoReplyEnabled).toBe(true)
+      expect(userRepo.items.find((u) => u.id === 'u-rag')).toHaveProperty('ragAutoReplyEnabled', true)
+    })
+
+    it('retorna 401 sem token', async () => {
+      const response = await app.inject({
+        method: 'PATCH',
+        url: '/user/rag-settings',
+        payload: { ragAutoReplyEnabled: true },
+      })
+
+      expect(response.statusCode).toBe(401)
+    })
+
+    it('retorna 400 para body inválido', async () => {
+      await userRepo.create({
+        id: 'u-rag-2',
+        email: 'rag2@email.com',
+        passwordHash: await hash('Senha123', 6),
+        Role: 'CLIENT',
+        CustomerType: 'B2C',
+        isActive: true,
+        emailVerified: true,
+      })
+      const token = await getAuthToken('rag2@email.com', 'Senha123')
+
+      const response = await app.inject({
+        method: 'PATCH',
+        url: '/user/rag-settings',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { ragAutoReplyEnabled: 'sim' },
+      })
+
+      expect(response.statusCode).toBe(400)
+    })
+  })
 })

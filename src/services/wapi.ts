@@ -141,6 +141,79 @@ export async function sendWhatsAppVideo({
   }
 }
 
+interface SendAudioParams {
+  phone: string
+  audioUrl: string
+}
+
+/**
+ * Sends a WhatsApp audio message via W-API.
+ * NOTA: endpoint/campo assumidos por analogia com send-image/send-video — validar contra o
+ * painel/documentação do W-API antes de habilitar em produção.
+ */
+export async function sendWhatsAppAudio({
+  phone,
+  audioUrl,
+}: SendAudioParams): Promise<SendMessageResult> {
+  const normalizedPhone = phone.replace(/\D/g, '')
+
+  try {
+    const url = `${env.WAPI_BASE_URL}/message/send-audio?instanceId=${env.WAPI_INSTANCE_ID}`
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${env.WAPI_TOKEN}`,
+      },
+      body: JSON.stringify({
+        phone: normalizedPhone,
+        audio: audioUrl,
+        delayMessage: 0,
+      }),
+    })
+
+    if (!response.ok) {
+      const body = await response.text()
+      return { success: false, error: `HTTP ${response.status}: ${body}` }
+    }
+
+    return { success: true }
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error)
+    console.error('[W-API] Error sending audio:', msg)
+    return { success: false, error: msg }
+  }
+}
+
+/**
+ * Sends a WhatsApp audio message using custom instance credentials.
+ */
+export async function sendWhatsAppAudioWithCredentials(
+  instanceId: string,
+  token: string,
+  phone: string,
+  audioUrl: string,
+): Promise<SendMessageResult> {
+  const normalizedPhone = phone.replace(/\D/g, '')
+  try {
+    const url = `${env.WAPI_BASE_URL}/message/send-audio?instanceId=${instanceId}`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ phone: normalizedPhone, audio: audioUrl, delayMessage: 0 }),
+    })
+    if (!response.ok) {
+      const body = await response.text()
+      return { success: false, error: `HTTP ${response.status}: ${body}` }
+    }
+    return { success: true }
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error)
+    return { success: false, error: msg }
+  }
+}
+
 /**
  * Sends a WhatsApp image using custom instance credentials.
  */

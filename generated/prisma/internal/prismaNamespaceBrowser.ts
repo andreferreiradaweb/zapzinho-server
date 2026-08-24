@@ -86,7 +86,9 @@ export const ModelName = {
   QuizQuestion: 'QuizQuestion',
   QuizOption: 'QuizOption',
   QuizLead: 'QuizLead',
-  QuizAnswer: 'QuizAnswer'
+  QuizAnswer: 'QuizAnswer',
+  Document: 'Document',
+  MediaAsset: 'MediaAsset'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -125,7 +127,8 @@ export const UserScalarFieldEnum = {
   prospectingToken: 'prospectingToken',
   prospectingDailyLimit: 'prospectingDailyLimit',
   modules: 'modules',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  ragAutoReplyEnabled: 'ragAutoReplyEnabled'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -610,6 +613,36 @@ export const QuizAnswerScalarFieldEnum = {
 } as const
 
 export type QuizAnswerScalarFieldEnum = (typeof QuizAnswerScalarFieldEnum)[keyof typeof QuizAnswerScalarFieldEnum]
+
+
+export const DocumentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  sourceType: 'sourceType',
+  content: 'content',
+  fileUrl: 'fileUrl',
+  status: 'status',
+  errorMsg: 'errorMsg',
+  createdAt: 'createdAt'
+} as const
+
+export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
+
+
+export const MediaAssetScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  url: 'url',
+  title: 'title',
+  description: 'description',
+  productId: 'productId',
+  categoryId: 'categoryId',
+  createdAt: 'createdAt'
+} as const
+
+export type MediaAssetScalarFieldEnum = (typeof MediaAssetScalarFieldEnum)[keyof typeof MediaAssetScalarFieldEnum]
 
 
 export const SortOrder = {

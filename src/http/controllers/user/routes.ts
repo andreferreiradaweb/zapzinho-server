@@ -17,6 +17,7 @@ import { VerifyResetCodeController } from './verify-reset-code'
 import { SignupUserController } from './signup-user'
 import { SendVerificationEmailController } from './send-verification-email'
 import { VerifyEmailController } from './verify-email'
+import { updateRagSettingsController } from './update-rag-settings'
 
 export async function usersRoutes(app: FastifyInstance) {
   app.post(
@@ -28,6 +29,11 @@ export async function usersRoutes(app: FastifyInstance) {
     '/user/update',
     { onRequest: [verifyJwt, verifyAdmin] },
     updateUserController,
+  )
+  app.patch(
+    '/user/rag-settings',
+    { onRequest: [verifyJwt] },
+    updateRagSettingsController,
   )
   app.delete(
     '/user/delete/:id',

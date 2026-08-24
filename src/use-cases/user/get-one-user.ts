@@ -36,6 +36,7 @@ export class GetOneUserUseCase {
       prospectingInstanceId: findedUser.prospectingInstanceId,
       prospectingToken: findedUser.prospectingToken,
       emailVerified: findedUser.emailVerified,
+      ragAutoReplyEnabled: findedUser.ragAutoReplyEnabled,
     }
 
     return { user: newUser }
