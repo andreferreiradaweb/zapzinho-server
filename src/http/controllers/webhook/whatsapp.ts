@@ -168,8 +168,11 @@ async function handleProspectingReply(instanceId: string, phone: string) {
     return
   }
 
-  if (!user.prospectingInstanceId || !user.prospectingToken) {
-    console.log(`[Prospecting] Credenciais de prospecção não configuradas para userId=${user.id}`)
+  const sendInstanceId = user.prospectingInstanceId ?? user.wapiInstanceId
+  const sendToken = user.prospectingToken ?? user.wapiToken
+
+  if (!sendInstanceId || !sendToken) {
+    console.log(`[Prospecting] Credenciais não configuradas para userId=${user.id}`)
     return
   }
 
@@ -187,8 +190,8 @@ async function handleProspectingReply(instanceId: string, phone: string) {
   })
 
   const result = await sendWhatsAppMessageWithCredentials(
-    user.prospectingInstanceId,
-    user.prospectingToken,
+    sendInstanceId,
+    sendToken,
     phone,
     broadcast.templateMessage,
   )
