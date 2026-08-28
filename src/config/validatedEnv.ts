@@ -28,7 +28,7 @@ const envSchema = z.object({
   SERP_API_KEY: z.string().default(''),
   SERP_DAILY_LIMIT: z.coerce.number().default(3),
   CONTACT_LIST_MAX: z.coerce.number().default(300),
-  PROSPECTING_DAILY_LIMIT: z.coerce.number().default(20),
+  PROSPECTING_DAILY_LIMIT: z.coerce.number().default(300),
 })
 
 const _env = envSchema.safeParse(process.env)
