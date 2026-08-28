@@ -25,7 +25,12 @@ export async function searchContactsController(
     .parse(request.query)
 
   const userId = request.user.sub
-  const dailyLimit = env.SERP_DAILY_LIMIT
+
+  const userRecord = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { serpDailyLimit: true },
+  })
+  const dailyLimit = userRecord?.serpDailyLimit ?? env.SERP_DAILY_LIMIT
 
   const startOfDay = new Date()
   startOfDay.setUTCHours(0, 0, 0, 0)

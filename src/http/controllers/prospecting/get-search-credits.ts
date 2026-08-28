@@ -7,7 +7,12 @@ export async function getSearchCreditsController(
   reply: FastifyReply,
 ) {
   const userId = request.user.sub
-  const limit = env.SERP_DAILY_LIMIT
+
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { serpDailyLimit: true },
+  })
+  const limit = user?.serpDailyLimit ?? env.SERP_DAILY_LIMIT
 
   const startOfDay = new Date()
   startOfDay.setUTCHours(0, 0, 0, 0)

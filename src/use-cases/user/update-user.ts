@@ -20,6 +20,7 @@ interface UpdateUserUseCaseRequest {
   prospectingInstanceId?: string | null
   prospectingToken?: string | null
   prospectingDailyLimit?: number | null
+  serpDailyLimit?: number | null
   modules?: string[]
 }
 
@@ -46,6 +47,7 @@ export class UpdateUserUseCase {
     prospectingInstanceId,
     prospectingToken,
     prospectingDailyLimit,
+    serpDailyLimit,
     modules,
   }: UpdateUserUseCaseRequest): Promise<UpdateUserUseCaseResponse> {
     const findedUser = await this.userRepository.findUserById(id)
@@ -85,6 +87,7 @@ export class UpdateUserUseCase {
       prospectingInstanceId: prospectingInstanceId !== undefined ? prospectingInstanceId : findedUser.prospectingInstanceId,
       prospectingToken: prospectingToken !== undefined ? prospectingToken : findedUser.prospectingToken,
       prospectingDailyLimit: prospectingDailyLimit !== undefined ? prospectingDailyLimit : findedUser.prospectingDailyLimit,
+      serpDailyLimit: serpDailyLimit !== undefined ? serpDailyLimit : findedUser.serpDailyLimit,
       modules: modules !== undefined ? modules : findedUser.modules,
     })
 

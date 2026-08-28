@@ -24,6 +24,7 @@ export async function updateUserController(
     prospectingInstanceId: z.string().optional().nullable(),
     prospectingToken: z.string().optional().nullable(),
     prospectingDailyLimit: z.number().int().positive().optional().nullable(),
+    serpDailyLimit: z.number().int().positive().optional().nullable(),
     modules: z.array(z.string()).optional(),
   })
 
@@ -42,7 +43,7 @@ export async function updateUserController(
       name: name ?? undefined,
       address: address ?? undefined,
       wapiInstanceId, wapiToken, prospectingInstanceId, prospectingToken,
-      prospectingDailyLimit, modules,
+      prospectingDailyLimit, serpDailyLimit, modules,
     })
     return reply.status(201).send(user)
   } catch (error) {
