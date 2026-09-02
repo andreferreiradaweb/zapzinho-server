@@ -18,6 +18,7 @@ import { getProspectingBroadcastController } from "./get-prospecting-broadcast";
 import { resetProspectingBroadcastController } from "./reset-prospecting-broadcast";
 import { cancelProspectingBroadcastController } from "./cancel-prospecting-broadcast";
 import { markContactStatusController } from "./mark-contact-status";
+import { renameContactListController } from "./rename-contact-list";
 
 export async function prospectingRoutes(app: FastifyInstance) {
   // Contact lists
@@ -55,6 +56,11 @@ export async function prospectingRoutes(app: FastifyInstance) {
     "/contact-list/:id",
     { onRequest: [verifyJwt] },
     deleteContactListController,
+  );
+  app.patch(
+    "/contact-list/:id",
+    { onRequest: [verifyJwt] },
+    renameContactListController,
   );
   app.post(
     "/contact-list/contact/:contactId/move-to-lead",
